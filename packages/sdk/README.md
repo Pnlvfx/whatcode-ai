@@ -20,10 +20,13 @@ npx @whatcode-ai/sdk --tailscale
 
 ### Options
 
-| Flag          | Alias | Default | Description                                          |
-| ------------- | ----- | ------- | ---------------------------------------------------- |
-| `--tailscale` | `-t`  | `false` | Expose opencode over HTTPS on your Tailscale tailnet |
-| `--help`      |       |         | Show help                                            |
+| Flag          | Alias | Default   | Description                                          |
+| ------------- | ----- | --------- | ---------------------------------------------------- |
+| `--tailscale` | `-t`  | `false`   | Expose opencode over HTTPS on your Tailscale tailnet |
+| `--hostname`  | `-H`  | `0.0.0.0` | Hostname to bind the opencode server to              |
+| `--port`      | `-p`  | `4096`    | Port to bind the opencode server to                  |
+| `--timeout`   |       |           | Timeout (ms) for the opencode server to start        |
+| `--help`      |       |           | Show help                                            |
 
 ## Programmatic usage
 
@@ -37,9 +40,13 @@ await createWhatcodeServer({
 
 ### `createWhatcodeServer(config)`
 
-| Option      | Type      | Default     | Description                                       |
-| ----------- | --------- | ----------- | ------------------------------------------------- |
-| `tailscale` | `boolean` | `undefined` | When `true`, exposes opencode via Tailscale serve |
+| Option      | Type          | Default     | Description                                              |
+| ----------- | ------------- | ----------- | -------------------------------------------------------- |
+| `tailscale` | `boolean`     | `undefined` | When `true`, exposes opencode via Tailscale serve        |
+| `hostname`  | `string`      | `0.0.0.0`   | Hostname to bind the opencode server to                  |
+| `port`      | `number`      | `4096`      | Port to bind the opencode server to                      |
+| `timeout`   | `number`      | `undefined` | Timeout in milliseconds for the opencode server to start |
+| `signal`    | `AbortSignal` | `undefined` | AbortSignal to stop the opencode server programmatically |
 
 ## How it works
 

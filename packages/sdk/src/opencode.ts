@@ -1,16 +1,17 @@
+import type { ServerOptions } from '@opencode-ai/sdk/v2';
 import { consoleColor } from '@goatjs/node/console-color';
 import { createOpencodeServer } from '@opencode-ai/sdk/v2';
 
 const HEALTH_URL = 'http://localhost:4096/global/health';
 
-export const opencode = async () => {
+export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
   const running = await isOpencodeRunning();
 
   if (running) {
     consoleColor('green', '[opencode] already running');
   } else {
     consoleColor('yellow', '[opencode] starting...');
-    await createOpencodeServer({ hostname: '0.0.0.0' });
+    await createOpencodeServer({ hostname: '0.0.0.0', ...options });
   }
 };
 
