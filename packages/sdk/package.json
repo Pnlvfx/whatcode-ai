@@ -24,13 +24,14 @@
     "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=20"
-  },
   "type": "module",
-  "bin": "./src/cli.ts",
+  "bin": {
+    "sdk": "./src/cli.ts"
+  },
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "sdk": "./src/index.ts"
+    }
   },
   "publishConfig": {
     "access": "public",
