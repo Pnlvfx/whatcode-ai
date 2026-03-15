@@ -1,7 +1,15 @@
 {
   "name": "@whatcode-ai/sdk",
-  "description": "",
+  "description": "SDK and CLI to start opencode and optionally expose it over HTTPS via Tailscale.",
   "version": "1.0.0",
+  "keywords": [
+    "opencode",
+    "tailscale",
+    "ai",
+    "cli",
+    "sdk",
+    "server"
+  ],
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
@@ -11,12 +19,26 @@
     "url": "https://github.com/Pnlvfx/whatcode-ai.git",
     "directory": "packages/sdk"
   },
+  "homepage": "https://github.com/Pnlvfx/whatcode-ai#readme",
+  "bugs": {
+    "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module",
+  "bin": {
+    "whatcode": "./src/cli.ts"
+  },
   "exports": {
     ".": "./src/index.ts"
   },
   "publishConfig": {
+    "access": "public",
+    "bin": {
+      "whatcode": "./dist/cli.js"
+    },
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -40,13 +62,15 @@
     "README.md"
   ],
   "dependencies": {
-    "@opencode-ai/sdk": "^1.2.26"
+    "@opencode-ai/sdk": "^1.2.26",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^1.47.0",
     "@goatjs/rimraf": "^1.72.0",
     "@goatjs/typescript-config": "^1.72.0",
     "@types/node": "^25.5.0",
+    "@types/yargs": "^17.0.35",
     "eslint": "^10.0.3",
     "typescript": "^5.9.3"
   }

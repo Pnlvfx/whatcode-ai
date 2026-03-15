@@ -577,6 +577,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/yargs-parser@npm:*":
+  version: 21.0.3
+  resolution: "@types/yargs-parser@npm:21.0.3"
+  checksum: 10c0/e71c3bd9d0b73ca82e10bee2064c384ab70f61034bbfb78e74f5206283fc16a6d85267b606b5c22cb2a3338373586786fed595b2009825d6a9115afba36560a0
+  languageName: node
+  linkType: hard
+
+"@types/yargs@npm:^17.0.35":
+  version: 17.0.35
+  resolution: "@types/yargs@npm:17.0.35"
+  dependencies:
+    "@types/yargs-parser": "npm:*"
+  checksum: 10c0/609557826a6b85e73ccf587923f6429850d6dc70e420b455bab4601b670bfadf684b09ae288bccedab042c48ba65f1666133cf375814204b544009f57d6eef63
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/eslint-plugin@npm:8.57.0, @typescript-eslint/eslint-plugin@npm:^8.0.0":
   version: 8.57.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.57.0"
@@ -721,13 +737,14 @@ __metadata:
     "@goatjs/ts-unused-exports": "npm:^1.72.0"
     "@goatjs/typescript-config": "npm:^1.72.0"
     "@types/node": "npm:^25.5.0"
+    "@whatcode-ai/sdk": "workspace:^"
     eslint: "npm:^10.0.3"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
 
-"@whatcode-ai/sdk@workspace:packages/sdk":
+"@whatcode-ai/sdk@workspace:^, @whatcode-ai/sdk@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@whatcode-ai/sdk@workspace:packages/sdk"
   dependencies:
@@ -736,8 +753,12 @@ __metadata:
     "@goatjs/typescript-config": "npm:^1.72.0"
     "@opencode-ai/sdk": "npm:^1.2.26"
     "@types/node": "npm:^25.5.0"
+    "@types/yargs": "npm:^17.0.35"
     eslint: "npm:^10.0.3"
     typescript: "npm:^5.9.3"
+    yargs: "npm:^18.0.0"
+  bin:
+    whatcode: ./src/cli.ts
   languageName: unknown
   linkType: soft
 
