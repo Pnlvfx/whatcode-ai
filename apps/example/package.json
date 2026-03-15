@@ -19,6 +19,9 @@
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
     "start": "node ."
   },
+  "dependencies": {
+    "@whatcode-ai/sdk": "workspace:*"
+  },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^1.47.0",
     "@goatjs/rimraf": "^1.72.0",
@@ -28,8 +31,5 @@
     "eslint": "^10.0.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@whatcode-ai/sdk": "workspace:^"
   }
 }

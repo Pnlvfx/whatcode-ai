@@ -1,7 +1,7 @@
 {
   "name": "@whatcode-ai/sdk",
   "description": "SDK and CLI to start opencode and optionally expose it over HTTPS via Tailscale.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "opencode",
     "tailscale",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pnlvfx/whatcode-ai.git",
+    "url": "git+https://github.com/Pnlvfx/whatcode-ai.git",
     "directory": "packages/sdk"
   },
   "homepage": "https://github.com/Pnlvfx/whatcode-ai#readme",
@@ -24,21 +24,11 @@
     "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=20"
-  },
   "type": "module",
-  "bin": {
-    "whatcode": "./src/cli.ts"
-  },
   "exports": {
     ".": "./src/index.ts"
   },
   "publishConfig": {
-    "access": "public",
-    "bin": {
-      "whatcode": "./dist/cli.js"
-    },
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -63,6 +53,7 @@
   ],
   "dependencies": {
     "@opencode-ai/sdk": "^1.2.26",
+    "execa": "^9.6.1",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
@@ -73,5 +64,8 @@
     "@types/yargs": "^17.0.35",
     "eslint": "^10.0.3",
     "typescript": "^5.9.3"
+  },
+  "bin": {
+    "whatcode": "dist/cli.js"
   }
 }

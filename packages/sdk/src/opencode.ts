@@ -1,6 +1,5 @@
-import type { ServerOptions } from '@opencode-ai/sdk/v2';
+import { type ServerOptions, createOpencodeServer } from '@opencode-ai/sdk/v2';
 import { consoleColor } from '@goatjs/node/console-color';
-import { createOpencodeServer } from '@opencode-ai/sdk/v2';
 
 const HEALTH_URL = 'http://localhost:4096/global/health';
 
