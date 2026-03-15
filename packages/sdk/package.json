@@ -1,0 +1,53 @@
+{
+  "name": "@whatcode-ai/sdk",
+  "description": "",
+  "version": "1.0.0",
+  "author": {
+    "email": "simonegauli@gmail.com",
+    "name": "Simone Gauli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pnlvfx/whatcode-ai.git",
+    "directory": "packages/sdk"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "unused": "node tools/unused.ts",
+    "test": "",
+    "lint": "eslint",
+    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "prepare": "yarn build",
+    "prepack": "yarn build",
+    "prepublishOnly": "yarn test && eslint"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "dependencies": {
+    "@opencode-ai/sdk": "^1.2.26"
+  },
+  "devDependencies": {
+    "@goatjs/node-monorepo-eslint": "^1.47.0",
+    "@goatjs/rimraf": "^1.72.0",
+    "@goatjs/typescript-config": "^1.72.0",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
+    "typescript": "^5.9.3"
+  }
+}

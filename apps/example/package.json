@@ -1,0 +1,32 @@
+{
+  "name": "@whatcode-ai/example",
+  "description": "Whatcode server example.",
+  "private": true,
+  "license": "MIT",
+  "author": "Simone Gauli",
+  "main": "dist/server.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pnlvfx/whatcode-ai.git",
+    "directory": "apps/example"
+  },
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "unused": "node tools/unused.ts",
+    "lint": "eslint",
+    "dev": "tsx --no-cache --env-file .env --watch src/server.ts",
+    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "start": "node ."
+  },
+  "devDependencies": {
+    "@goatjs/node-monorepo-eslint": "^1.47.0",
+    "@goatjs/rimraf": "^1.72.0",
+    "@goatjs/ts-unused-exports": "^1.72.0",
+    "@goatjs/typescript-config": "^1.72.0",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
