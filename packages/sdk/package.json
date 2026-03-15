@@ -25,17 +25,15 @@
   },
   "license": "MIT",
   "type": "module",
-  "bin": {
-    "sdk": "./src/cli.ts"
-  },
+  "bin": "./src/cli.ts",
   "exports": {
-    ".": {
-      "sdk": "./src/index.ts"
-    }
+    ".": "./src/index.ts"
   },
   "publishConfig": {
     "access": "public",
-    "bin": "./dist/cli.js",
+    "bin": {
+      "sdk": "./dist/cli.js"
+    },
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
