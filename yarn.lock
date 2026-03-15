@@ -354,6 +354,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@goatjs/dbz@npm:^1.72.0":
+  version: 1.72.0
+  resolution: "@goatjs/dbz@npm:1.72.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-1.72.0.tgz"
+  dependencies:
+    "@goatjs/node": "npm:1.72.0"
+    "@goatjs/rimraf": "npm:1.72.0"
+    "@types/cross-spawn": "npm:^6.0.6"
+    cross-spawn: "npm:^7.0.6"
+    execa: "npm:^9.6.1"
+    yargs: "npm:^18.0.0"
+  bin:
+    dbz: dist/cli.js
+  checksum: 10c0/33dafdddf10edb661da8796b3b77eadd699def65c38923ced66a58510832e0718240ec3cc74a9584794de2563d224e70b20b57069b369dbad6a2d4434fc4d066
+  languageName: node
+  linkType: hard
+
 "@goatjs/node-eslint@npm:1.47.0":
   version: 1.47.0
   resolution: "@goatjs/node-eslint@npm:1.47.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-1.47.0.tgz"
@@ -388,7 +404,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/rimraf@npm:^1.72.0":
+"@goatjs/rimraf@npm:1.72.0, @goatjs/rimraf@npm:^1.72.0":
   version: 1.72.0
   resolution: "@goatjs/rimraf@npm:1.72.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Frimraf%2F-%2F%40goatjs%2Frimraf-1.72.0.tgz"
   bin:
@@ -515,6 +531,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cross-spawn@npm:^6.0.6":
+  version: 6.0.6
+  resolution: "@types/cross-spawn@npm:6.0.6"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/e3d476bb6b3a54a8934a97fe6ee4bd13e2e5eb29073929a4be76a52466602ffaea420b20774ffe8503f9fa24f3ae34817e95e7f625689fb0d1c10404f5b2889c
+  languageName: node
+  linkType: hard
+
 "@types/esrecurse@npm:^4.3.1":
   version: 4.3.1
   resolution: "@types/esrecurse@npm:4.3.1"
@@ -543,7 +568,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^25.5.0":
+"@types/node@npm:*, @types/node@npm:^25.5.0":
   version: 25.5.0
   resolution: "@types/node@npm:25.5.0"
   dependencies:
@@ -734,7 +759,7 @@ __metadata:
     typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
   bin:
-    whatcode: dist/cli.js
+    whatcode: ./src/cli.ts
   languageName: unknown
   linkType: soft
 
@@ -4116,6 +4141,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "whatcode-ai@workspace:."
   dependencies:
+    "@goatjs/dbz": "npm:^1.72.0"
     prettier: "npm:^3.8.1"
     turbo: "npm:^2.8.17"
   languageName: unknown
