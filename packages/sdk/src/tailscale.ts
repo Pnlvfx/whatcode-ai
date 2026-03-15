@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import { execa } from 'execa';
-import { consoleColor } from '@goatjs/node/console-color';
 import { platform } from './constants.ts';
 
 export const tailscale = async () => {
@@ -7,8 +7,8 @@ export const tailscale = async () => {
   await assertDaemonReachable();
   const hostname = await getHostname();
   await startServe();
-  consoleColor('green', '[tailscale] running');
-  consoleColor('green', `[tailscale] use this URL in the app:\nhttps://${hostname.replace(/-$/, '')}`);
+  console.log('[tailscale] running');
+  console.log(`[tailscale] use this URL in the app:\nhttps://${hostname.replace(/-$/, '')}`);
 };
 
 const startServe = async (): Promise<void> => {
