@@ -1,6 +1,6 @@
 # @whatcode-ai/sdk
 
-SDK and CLI to start [opencode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com).
+SDK to start [opencode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com).
 
 ## Install
 
@@ -8,27 +8,7 @@ SDK and CLI to start [opencode](https://opencode.ai) and optionally expose it ov
 npm install @whatcode-ai/sdk
 ```
 
-## CLI
-
-```bash
-# start opencode
-npx @whatcode-ai/sdk
-
-# start opencode + expose via Tailscale
-npx @whatcode-ai/sdk --tailscale
-```
-
-### Options
-
-| Flag          | Alias | Default   | Description                                          |
-| ------------- | ----- | --------- | ---------------------------------------------------- |
-| `--tailscale` | `-t`  | `false`   | Expose opencode over HTTPS on your Tailscale tailnet |
-| `--hostname`  | `-H`  | `0.0.0.0` | Hostname to bind the opencode server to              |
-| `--port`      | `-p`  | `4096`    | Port to bind the opencode server to                  |
-| `--timeout`   |       |           | Timeout (ms) for the opencode server to start        |
-| `--help`      |       |           | Show help                                            |
-
-## Programmatic usage
+## Usage
 
 ```ts
 import { createWhatcodeServer } from '@whatcode-ai/sdk';
@@ -53,6 +33,10 @@ await createWhatcodeServer({
 1. Checks if opencode is already running on port `4096`.
 2. If not, starts the opencode server bound to `0.0.0.0`.
 3. If `tailscale: true`, verifies Tailscale is installed and authenticated, runs `tailscale serve --bg 4096`, and prints the HTTPS URL to use in your app.
+
+## CLI
+
+Looking for the CLI? Use [@whatcode-ai/whatcode](https://www.npmjs.com/package/@whatcode-ai/whatcode).
 
 ## Requirements
 
