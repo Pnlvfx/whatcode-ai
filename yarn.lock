@@ -753,13 +753,27 @@ __metadata:
     "@goatjs/typescript-config": "npm:^1.72.0"
     "@opencode-ai/sdk": "npm:^1.2.26"
     "@types/node": "npm:^25.5.0"
-    "@types/yargs": "npm:^17.0.35"
     eslint: "npm:^10.0.3"
     execa: "npm:^9.6.1"
     typescript: "npm:^5.9.3"
+  languageName: unknown
+  linkType: soft
+
+"@whatcode-ai/whatcode@workspace:*, @whatcode-ai/whatcode@workspace:packages/whatcode":
+  version: 0.0.0-use.local
+  resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
+  dependencies:
+    "@goatjs/node-monorepo-eslint": "npm:^1.47.0"
+    "@goatjs/rimraf": "npm:^1.72.0"
+    "@goatjs/typescript-config": "npm:^1.72.0"
+    "@types/node": "npm:^25.5.0"
+    "@types/yargs": "npm:^17.0.35"
+    "@whatcode-ai/sdk": "workspace:*"
+    eslint: "npm:^10.0.3"
+    typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
   bin:
-    sdk: ./src/cli.ts
+    whatcode: ./src/cli.ts
   languageName: unknown
   linkType: soft
 
@@ -4142,6 +4156,7 @@ __metadata:
   resolution: "whatcode-ai@workspace:."
   dependencies:
     "@goatjs/dbz": "npm:^1.72.0"
+    "@whatcode-ai/whatcode": "workspace:*"
     prettier: "npm:^3.8.1"
     turbo: "npm:^2.8.17"
   languageName: unknown

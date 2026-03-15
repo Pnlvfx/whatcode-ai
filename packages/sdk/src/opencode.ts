@@ -11,6 +11,7 @@ export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
   } else {
     console.log('[opencode] starting...');
     await createOpencodeServer({ hostname: '0.0.0.0', ...options });
+    console.log('[opencode] started');
   }
 };
 

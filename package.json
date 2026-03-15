@@ -18,6 +18,9 @@
     "packages/*",
     "apps/*"
   ],
+  "dependencies": {
+    "@whatcode-ai/whatcode": "workspace:*"
+  },
   "devDependencies": {
     "@goatjs/dbz": "^1.72.0",
     "prettier": "^3.8.1",

@@ -1,6 +1,6 @@
+import { createWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { createWhatcodeServer } from './index.ts';
 
 const { tailscale, hostname, port, timeout } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
@@ -29,4 +29,9 @@ const { tailscale, hostname, port, timeout } = await yargs(hideBin(process.argv)
   })
   .parseAsync();
 
-await createWhatcodeServer({ tailscale, hostname, port, timeout });
+await createWhatcodeServer({
+  tailscale,
+  ...(hostname !== undefined && { hostname }),
+  ...(port !== undefined && { port }),
+  ...(timeout !== undefined && { timeout }),
+});
