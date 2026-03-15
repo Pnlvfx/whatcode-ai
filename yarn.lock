@@ -759,7 +759,7 @@ __metadata:
     typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
   bin:
-    whatcode: ./src/cli.ts
+    sdk: ./src/cli.ts
   languageName: unknown
   linkType: soft
 

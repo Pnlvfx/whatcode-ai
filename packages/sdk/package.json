@@ -1,7 +1,7 @@
 {
   "name": "@whatcode-ai/sdk",
   "description": "SDK and CLI to start opencode and optionally expose it over HTTPS via Tailscale.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "opencode",
     "tailscale",
@@ -28,17 +28,13 @@
     "node": ">=20"
   },
   "type": "module",
-  "bin": {
-    "whatcode": "./src/cli.ts"
-  },
+  "bin": "./src/cli.ts",
   "exports": {
     ".": "./src/index.ts"
   },
   "publishConfig": {
     "access": "public",
-    "bin": {
-      "whatcode": "./dist/cli.js"
-    },
+    "bin": "./dist/cli.js",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
