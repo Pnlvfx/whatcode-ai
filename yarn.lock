@@ -496,10 +496,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.2.26":
-  version: 1.2.26
-  resolution: "@opencode-ai/sdk@npm:1.2.26"
-  checksum: 10c0/65b47870b913e518b7392c33490dd5a53e3a90e8981be8b0f972d4343019cbaf8bdad74d41db0b51a0cbc0f65ef63d3357ea36417a6b4e3df92f6f47dac31f8e
+"@opencode-ai/sdk@npm:^1.2.27":
+  version: 1.2.27
+  resolution: "@opencode-ai/sdk@npm:1.2.27"
+  checksum: 10c0/91e1022aa454535ab307062ff8f3e50f1cacce871b5a5d113f9980c4f6b8491bb459278fe3c305f4301459fa8e625777c817eb2e78ec72db44c2b7eb29dcb9eb
   languageName: node
   linkType: hard
 
@@ -528,6 +528,48 @@ __metadata:
   version: 4.0.0
   resolution: "@sindresorhus/merge-streams@npm:4.0.0"
   checksum: 10c0/482ee543629aa1933b332f811a1ae805a213681ecdd98c042b1c1b89387df63e7812248bb4df3910b02b3cc5589d3d73e4393f30e197c9dde18046ccd471fc6b
+  languageName: node
+  linkType: hard
+
+"@turbo/darwin-64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/darwin-64@npm:2.8.19"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@turbo/darwin-arm64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/darwin-arm64@npm:2.8.19"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@turbo/linux-64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/linux-64@npm:2.8.19"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@turbo/linux-arm64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/linux-arm64@npm:2.8.19"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@turbo/windows-64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/windows-64@npm:2.8.19"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@turbo/windows-arm64@npm:2.8.19":
+  version: 2.8.19
+  resolution: "@turbo/windows-arm64@npm:2.8.19"
+  conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -751,7 +793,7 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^1.47.0"
     "@goatjs/rimraf": "npm:^1.72.0"
     "@goatjs/typescript-config": "npm:^1.72.0"
-    "@opencode-ai/sdk": "npm:^1.2.26"
+    "@opencode-ai/sdk": "npm:^1.2.27"
     "@types/node": "npm:^25.5.0"
     eslint: "npm:^10.0.3"
     execa: "npm:^9.6.1"
@@ -3909,74 +3951,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-darwin-64@npm:2.8.17"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-darwin-arm64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-darwin-arm64@npm:2.8.17"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo-linux-64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-linux-64@npm:2.8.17"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-linux-arm64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-linux-arm64@npm:2.8.17"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo-windows-64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-windows-64@npm:2.8.17"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-windows-arm64@npm:2.8.17":
-  version: 2.8.17
-  resolution: "turbo-windows-arm64@npm:2.8.17"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo@npm:^2.8.17":
-  version: 2.8.17
-  resolution: "turbo@npm:2.8.17"
+"turbo@npm:^2.8.19":
+  version: 2.8.19
+  resolution: "turbo@npm:2.8.19"
   dependencies:
-    turbo-darwin-64: "npm:2.8.17"
-    turbo-darwin-arm64: "npm:2.8.17"
-    turbo-linux-64: "npm:2.8.17"
-    turbo-linux-arm64: "npm:2.8.17"
-    turbo-windows-64: "npm:2.8.17"
-    turbo-windows-arm64: "npm:2.8.17"
+    "@turbo/darwin-64": "npm:2.8.19"
+    "@turbo/darwin-arm64": "npm:2.8.19"
+    "@turbo/linux-64": "npm:2.8.19"
+    "@turbo/linux-arm64": "npm:2.8.19"
+    "@turbo/windows-64": "npm:2.8.19"
+    "@turbo/windows-arm64": "npm:2.8.19"
   dependenciesMeta:
-    turbo-darwin-64:
+    "@turbo/darwin-64":
       optional: true
-    turbo-darwin-arm64:
+    "@turbo/darwin-arm64":
       optional: true
-    turbo-linux-64:
+    "@turbo/linux-64":
       optional: true
-    turbo-linux-arm64:
+    "@turbo/linux-arm64":
       optional: true
-    turbo-windows-64:
+    "@turbo/windows-64":
       optional: true
-    turbo-windows-arm64:
+    "@turbo/windows-arm64":
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10c0/879b9dbb337097fac8f5d2fe22d200c6af80bda3c8b9edc4a45d1febcd6e4a54b5be89de082b2eac693828b5b9795e7863d4c1b92137414ce832271c20564d5d
+  checksum: 10c0/6242fb6a8a1e0a594078499d089ebf003d7748ec45d27fb17e0085710a762dc3fa9dacfeafcffd7e0e2b1ee2420a09be8ebf58e3cbc72976a3aa679b09a44f50
   languageName: node
   linkType: hard
 
@@ -4158,7 +4158,7 @@ __metadata:
     "@goatjs/dbz": "npm:^1.72.0"
     "@whatcode-ai/whatcode": "workspace:*"
     prettier: "npm:^3.8.1"
-    turbo: "npm:^2.8.17"
+    turbo: "npm:^2.8.19"
   languageName: unknown
   linkType: soft
 
