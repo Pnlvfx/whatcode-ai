@@ -28,7 +28,7 @@
     "@goatjs/ts-unused-exports": "^1.72.0",
     "@goatjs/typescript-config": "^1.72.0",
     "@types/node": "^25.5.0",
-    "eslint": "^10.0.3",
+    "eslint": "^10.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
