@@ -1,4 +1,7 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["eslint.config.js", "tools"]
+  "exclude": ["eslint.config.js", "tools"],
+  "compilerOptions": {
+    "rootDir": "src"
+  }
 }

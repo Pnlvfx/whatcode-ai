@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-properties */
 /* eslint-disable no-console */
 import { execa } from 'execa';
 import { platform } from './constants.ts';
+import * as z from 'zod';
 
 export const tailscale = async () => {
   await assertTailscaleInstalled();
@@ -17,12 +19,14 @@ const startServe = async (): Promise<void> => {
   await execa('tailscale', ['serve', '--bg', '4096'], { stdio: 'inherit' });
 };
 
+const tailscaleSchema = z.object({
+  BackendState: z.string(),
+  Self: z.object({ DNSName: z.string().optional() }).optional(),
+});
+
 const getHostname = async (): Promise<string> => {
   const { stdout } = await execa('tailscale', ['status', '--json']);
-  const data = JSON.parse(stdout) as {
-    BackendState: string;
-    Self: { DNSName: string | undefined } | undefined;
-  };
+  const data = await tailscaleSchema.parseAsync(JSON.parse(stdout));
   if (data.BackendState !== 'Running') {
     throw new Error(`[tailscale] unexpected state: ${data.BackendState} — run tailscale up to authenticate, then re-run`);
   }
