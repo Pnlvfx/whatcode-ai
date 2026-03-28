@@ -1,16 +1,15 @@
 /* eslint-disable no-restricted-properties */
-/* eslint-disable no-console */
 import { execa } from 'execa';
 import { platform } from './constants.ts';
 import * as z from 'zod';
 
-export const tailscale = async () => {
+export const tailscale = async (): Promise<string> => {
   await assertTailscaleInstalled();
   await assertDaemonReachable();
   const hostname = await getHostname();
   await startServe();
-  console.log('[tailscale] running');
-  console.log(`[tailscale] use this URL in the app:\nhttps://${hostname.replace(/-$/, '')}`);
+  const url = `https://${hostname.replace(/-$/, '')}`;
+  return url;
 };
 
 const startServe = async (): Promise<void> => {

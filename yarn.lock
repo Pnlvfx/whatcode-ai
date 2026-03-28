@@ -619,6 +619,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/qrcode-terminal@npm:^0.12.2":
+  version: 0.12.2
+  resolution: "@types/qrcode-terminal@npm:0.12.2"
+  checksum: 10c0/9d8d75f76ed2f75faaa2007850d884ce71ad25e05d8683a2b42e6b6cb6568d0d87a3ebb427e174fd77ab4264de40923806785fde2d97d81fce393f127d88931f
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 21.0.3
   resolution: "@types/yargs-parser@npm:21.0.3"
@@ -795,8 +802,10 @@ __metadata:
     "@goatjs/typescript-config": "npm:^1.78.0"
     "@opencode-ai/sdk": "npm:^1.3.3"
     "@types/node": "npm:^25.5.0"
+    "@types/qrcode-terminal": "npm:^0.12.2"
     eslint: "npm:^10.1.0"
     execa: "npm:^9.6.1"
+    qrcode-terminal: "npm:^0.12.0"
     typescript: "npm:^6.0.2"
     zod: "npm:^4.3.6"
   languageName: unknown
@@ -3384,6 +3393,15 @@ __metadata:
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
   checksum: 10c0/14f76a8206bc3464f794fb2e3d3cc665ae416c01893ad7a02b23766eb07159144ee612ad67af5e84fa4479ccfe67678c4feb126b0485651b302babf66f04f9e9
+  languageName: node
+  linkType: hard
+
+"qrcode-terminal@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "qrcode-terminal@npm:0.12.0"
+  bin:
+    qrcode-terminal: ./bin/qrcode-terminal.js
+  checksum: 10c0/1d8996a743d6c95e22056bd45fe958c306213adc97d7ef8cf1e03bc1aeeb6f27180a747ec3d761141921351eb1e3ca688f7b673ab54cdae9fa358dffaa49563c
   languageName: node
   linkType: hard
 
