@@ -3,13 +3,19 @@ import type { ServerOptions } from '@opencode-ai/sdk/v2';
 import { opencode, getLocalUrl } from './opencode.ts';
 import { tailscale } from './tailscale.ts';
 import { printQrCode } from './qrcode.ts';
+import { startNotifications } from './experimentals/notifications.ts';
+export { saveToken } from './experimentals/notifications.ts';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   tailscale?: boolean;
+  notification?: boolean;
 }
 
-export const createWhatcodeServer = async ({ tailscale: useTailscale, ...serverOptions }: WhatcodeServerConfig) => {
+export const createWhatcodeServer = async ({ tailscale: useTailscale, notification, ...serverOptions }: WhatcodeServerConfig) => {
   await opencode(serverOptions);
+  if (notification) {
+    startNotifications();
+  }
   if (useTailscale) {
     const url = await tailscale();
     console.log('[tailscale] running');

@@ -1,13 +1,16 @@
 #!/usr/bin/env node
-import { createWhatcodeServer } from '@whatcode-ai/sdk';
+import { createWhatcodeServer, saveToken } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { tailscale, hostname, port, timeout } = await yargs(hideBin(process.argv))
+const argv = yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
   .usage('$0 [options]')
+  .command('token <token>', 'Save a push notification token', (y) =>
+    y.positional('token', { type: 'string', demandOption: true, description: 'APNs device token copied from the whatcode app' }),
+  )
   .option('tailscale', {
     alias: 't',
     type: 'boolean',
@@ -28,10 +31,25 @@ const { tailscale, hostname, port, timeout } = await yargs(hideBin(process.argv)
     type: 'number',
     description: 'Timeout in milliseconds for the opencode server to start',
   })
-  .parseAsync();
+  .option('notifications', {
+    alias: 'n',
+    type: 'boolean',
+    default: false,
+    description: 'Enable push notifications (requires token registered via: whatcode token <token>)',
+  });
+
+const parsed = await argv.parseAsync();
+
+if (parsed._.includes('token')) {
+  await saveToken(parsed['token'] as string);
+  process.exit(0);
+}
+
+const { tailscale, hostname, port, timeout, notifications } = parsed;
 
 await createWhatcodeServer({
   tailscale,
+  flags: { notifications },
   ...(hostname !== undefined && { hostname }),
   ...(port !== undefined && { port }),
   ...(timeout !== undefined && { timeout }),
