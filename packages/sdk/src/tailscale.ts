@@ -7,9 +7,20 @@ export const tailscale = async (): Promise<string> => {
   await assertTailscaleInstalled();
   await assertDaemonReachable();
   const hostname = await getHostname();
-  await startServe();
+  const already = await isServeRunning();
+  if (!already) await startServe();
   const url = `https://${hostname.replace(/-$/, '')}`;
   return url;
+};
+
+const isServeRunning = async (): Promise<boolean> => {
+  try {
+    const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
+    const data = JSON.parse(stdout) as { TCP?: Record<string, unknown> };
+    return Object.keys(data.TCP ?? {}).length > 0;
+  } catch {
+    return false;
+  }
 };
 
 const startServe = async (): Promise<void> => {

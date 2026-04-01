@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { createWhatcodeServer, saveToken } from '@whatcode-ai/sdk';
+import { createWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -8,15 +8,6 @@ const { hostname, notification, tailscale, port, timeout } = await yargs(hideBin
   .help()
   .strict()
   .usage('$0 [options]')
-  .command(
-    'token <token>',
-    'Save a push notification token',
-    (y) => y.positional('token', { type: 'string', demandOption: true, description: 'APNs device token copied from the whatcode app' }),
-    async ({ token }) => {
-      await saveToken(token);
-      process.exit(0);
-    },
-  )
   .option('tailscale', {
     alias: 't',
     type: 'boolean',

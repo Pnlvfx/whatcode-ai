@@ -62,8 +62,8 @@
   },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^2.1.0",
-    "@goatjs/rimraf": "^1.78.0",
-    "@goatjs/typescript-config": "^1.78.0",
+    "@goatjs/rimraf": "^1.80.0",
+    "@goatjs/typescript-config": "^1.80.0",
     "@types/node": "^25.5.0",
     "@types/yargs": "^17.0.35",
     "eslint": "^10.1.0",
