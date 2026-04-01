@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
 import { type ServerOptions, createOpencodeServer } from '@opencode-ai/sdk/v2';
-import { networkInterfaces } from 'node:os';
-
-export const PORT = 4096;
-const HEALTH_URL = `http://localhost:${PORT.toString()}/global/health`;
+import { getLocalUrl } from './ip.ts';
 
 export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
-  const running = await isOpencodeRunning();
+  const port = options.port ?? 4096;
+  const running = await isOpencodeRunning(port);
 
   if (running) {
     console.log('[opencode] already running');
@@ -15,20 +13,13 @@ export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
     await createOpencodeServer({ hostname: '0.0.0.0', ...options });
     console.log('[opencode] started');
   }
+
+  return getLocalUrl(port);
 };
 
-export const getLocalUrl = (): string => {
-  const nets = networkInterfaces();
-  for (const iface of Object.values(nets)) {
-    for (const net of iface ?? []) {
-      if (net.family === 'IPv4' && !net.internal) return `http://${net.address}:${PORT.toString()}`;
-    }
-  }
-  return `http://localhost:${PORT.toString()}`;
-};
-
-const isOpencodeRunning = async (): Promise<boolean> => {
+const isOpencodeRunning = async (port: number): Promise<boolean> => {
   try {
+    const HEALTH_URL = `http://localhost:${port.toString()}/global/health`;
     const res = await fetch(HEALTH_URL);
     return res.ok;
   } catch {
