@@ -8,14 +8,22 @@ export const startProxy = async (config: { opencodePort: number; proxyPort: numb
   const app = express();
   app.disable('x-powered-by');
 
-  app.use(express.json());
-  app.use('/notifications', registerDeviceTokenRouter);
+  app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
   app.use(
     '/',
     createProxyMiddleware({
       target: `http://localhost:${config.opencodePort.toString()}`,
       changeOrigin: false,
+      ws: true,
+      proxyTimeout: 0,
+      timeout: 0,
+      on: {
+        proxyRes: (proxyRes) => {
+          proxyRes.headers['cache-control'] = 'no-cache';
+          proxyRes.headers['x-accel-buffering'] = 'no';
+        },
+      },
     }),
   );
 
