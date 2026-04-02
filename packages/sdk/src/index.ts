@@ -23,8 +23,7 @@ export const createWhatcodeServer = async ({
   proxy,
   ...serverOptions
 }: WhatcodeServerConfig) => {
-  const opencodeHost = proxy ? undefined : '0.0.0.0';
-  const { port: opencodePort } = await opencode({ hostname: opencodeHost, ...serverOptions });
+  const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
   const resolvedPort = proxy ? (proxyPort ?? opencodePort + 1) : opencodePort;
 
   if (proxy) {

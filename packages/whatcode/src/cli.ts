@@ -3,10 +3,11 @@ import { createWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { hostname, notification, tailscale, port, timeout, proxyPort } = await yargs(hideBin(process.argv))
+const { hostname, notification, tailscale, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
+  .version(false)
   .usage('$0 [options]')
   .option('tailscale', {
     type: 'boolean',
@@ -45,4 +46,5 @@ await createWhatcodeServer({
   ...(port !== undefined && { port }),
   ...(timeout !== undefined && { timeout }),
   ...(proxyPort !== undefined && { proxyPort }),
+  ...(proxy !== undefined && { proxy }),
 });

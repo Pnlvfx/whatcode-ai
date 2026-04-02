@@ -1,52 +1,35 @@
-import type { ProxyRoute } from '../proxy.ts';
-import http from 'node:http';
+// eslint-disable-next-line no-restricted-imports
+import { Router } from 'express';
+import * as z from 'zod';
 import { SERVER_URL } from '../config.ts';
 
-const RELAY_REGISTER_URL = `${SERVER_URL}/devices`;
+const tokenBodySchema = z.strictObject({ userId: z.uuid(), token: z.string() });
 
-export const registerDeviceTokenRoute: ProxyRoute = {
-  method: 'POST',
-  path: '/notifications/register',
-  handler: async (req: http.IncomingMessage, res: http.ServerResponse): Promise<void> => {
-    const token = await extractToken(req);
-    if (token) {
-      await forwardTokenToRelay(token);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ ok: true }));
-    } else {
-      res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'token is required' }));
-    }
-  },
-};
+export const registerDeviceTokenRouter = Router();
 
-const extractToken = async (req: http.IncomingMessage): Promise<string | undefined> => {
-  const body = await readBody(req);
-  try {
-    const parsed: unknown = JSON.parse(body);
-    const isValid = isTokenPayload(parsed);
-    return isValid ? parsed.token : undefined;
-  } catch {
-    return undefined;
+registerDeviceTokenRouter.post('/register', async (req, res) => {
+  const result = tokenBodySchema.safeParse(req.body);
+
+  if (!result.success) {
+    res.status(400).json({ message: 'token is required' });
+    return;
   }
-};
 
-const forwardTokenToRelay = async (token: string): Promise<void> => {
-  await fetch(RELAY_REGISTER_URL, {
+  const relayResponse = await fetch(`${SERVER_URL}/relay/register`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ deviceToken: token }),
-  });
-};
-
-const readBody = (req: http.IncomingMessage): Promise<string> =>
-  new Promise((resolve) => {
-    const chunks: Buffer[] = [];
-    req.on('data', (chunk: Buffer) => chunks.push(chunk));
-    req.on('end', () => {
-      resolve(Buffer.concat(chunks).toString('utf8'));
-    });
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ userId: result.data.userId, token: result.data.token }),
   });
 
-const isTokenPayload = (v: unknown): v is { token: string } =>
-  typeof v === 'object' && v !== null && 'token' in v && typeof (v as Record<string, unknown>)['token'] === 'string';
+  console.log(relayResponse.statusText, relayResponse.status);
+
+  if (!relayResponse.ok) {
+    res.status(relayResponse.status).json({ message: 'Failed to reach the relay, please retry!' });
+    return;
+  }
+
+  res.status(200).json({ ok: true });
+});
