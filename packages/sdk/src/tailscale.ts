@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-properties */
 import { execa } from 'execa';
-import { platform } from './constants.ts';
+import { platform } from './config/constants.ts';
 import * as z from 'zod';
 
 export const tailscale = async (port: number): Promise<string> => {

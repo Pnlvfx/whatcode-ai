@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-restricted-imports
 import { Router } from 'express';
 import * as z from 'zod';
-import { SERVER_URL } from '../config.ts';
+import { SERVER_URL } from '../config/config.ts';
 import { setToken } from '../token-store.ts';
+import { headers } from '../config/headers.ts';
 
 const tokenBodySchema = z.strictObject({ userId: z.uuid(), token: z.string() });
 
@@ -18,10 +19,7 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
 
   const relayResponse = await fetch(`${SERVER_URL}/relay/register`, {
     method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({ userId: result.data.userId, token: result.data.token }),
   });
 

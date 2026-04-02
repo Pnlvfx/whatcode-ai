@@ -3,7 +3,7 @@ import { createWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { hostname, notification, tailscale, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
+const { hostname, tailscale, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -33,15 +33,10 @@ const { hostname, notification, tailscale, port, timeout, proxyPort, proxy } = a
     type: 'number',
     description: 'Timeout in milliseconds for the opencode server to start',
   })
-  .option('notification', {
-    type: 'boolean',
-    description: 'Enable push notifications (requires token registered via: whatcode token <token>)',
-  })
   .parseAsync();
 
 await createWhatcodeServer({
   tailscale,
-  notification,
   ...(hostname !== undefined && { hostname }),
   ...(port !== undefined && { port }),
   ...(timeout !== undefined && { timeout }),

@@ -6,23 +6,16 @@ import { tailscale } from './tailscale.ts';
 import { printQrCode } from './qrcode.ts';
 import { getLocalUrl } from './ip.ts';
 import { startNotifications } from './experimentals/notifications.ts';
+import { featureFlags } from './config/feature-flags.ts';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   tailscale?: boolean;
-  notification?: boolean;
   password?: string;
   proxyPort?: number;
   proxy?: boolean;
 }
 
-export const createWhatcodeServer = async ({
-  tailscale: useTailscale,
-  notification,
-  password,
-  proxyPort,
-  proxy,
-  ...serverOptions
-}: WhatcodeServerConfig) => {
+export const createWhatcodeServer = async ({ tailscale: useTailscale, password, proxyPort, proxy, ...serverOptions }: WhatcodeServerConfig) => {
   const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
   const resolvedPort = proxy ? (proxyPort ?? opencodePort + 1) : opencodePort;
 
@@ -30,7 +23,7 @@ export const createWhatcodeServer = async ({
     await startProxy({ opencodePort, proxyPort: resolvedPort });
   }
 
-  if (notification) {
+  if (featureFlags.WHATCODE_NOTIFICATION && proxy) {
     startNotifications(opencodePort);
   }
 
