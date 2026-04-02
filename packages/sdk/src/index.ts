@@ -31,7 +31,7 @@ export const createWhatcodeServer = async ({
   }
 
   if (notification) {
-    startNotifications();
+    startNotifications(opencodePort);
   }
 
   const url = useTailscale ? await tailscale(resolvedPort) : getLocalUrl(resolvedPort);

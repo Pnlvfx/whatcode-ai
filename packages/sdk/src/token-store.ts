@@ -5,6 +5,8 @@ interface TokenEntry {
 
 let entry: TokenEntry | undefined;
 
+// TODO store the token
+
 export const setToken = (userId: string, token: string): void => {
   entry = { userId, token };
 };
