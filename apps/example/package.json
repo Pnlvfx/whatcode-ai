@@ -15,7 +15,7 @@
     "tsc": "tsc --noEmit",
     "unused": "node tools/unused.ts",
     "lint": "eslint",
-    "dev": "tsx --no-cache --env-file .env --watch src/server.ts",
+    "dev": "node --env-file .env --watch src/server.ts",
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
     "start": "node ."
   },
@@ -23,13 +23,12 @@
     "@whatcode-ai/sdk": "workspace:*"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.1.0",
+    "@goatjs/node-monorepo-eslint": "^2.2.0",
     "@goatjs/rimraf": "^1.80.0",
     "@goatjs/ts-unused-exports": "^1.80.0",
     "@goatjs/typescript-config": "^1.80.0",
     "@types/node": "^25.5.0",
     "eslint": "^10.1.0",
-    "tsx": "^4.21.0",
     "typescript": "^6.0.2"
   }
 }

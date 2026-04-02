@@ -61,7 +61,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.1.0",
+    "@goatjs/node-monorepo-eslint": "^2.2.0",
     "@goatjs/rimraf": "^1.80.0",
     "@goatjs/typescript-config": "^1.80.0",
     "@types/express": "^5.0.6",

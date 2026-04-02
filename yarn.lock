@@ -333,9 +333,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core-eslint@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@goatjs/core-eslint@npm:2.1.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-2.1.0.tgz"
+"@goatjs/core-eslint@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@goatjs/core-eslint@npm:2.2.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-2.2.0.tgz"
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     eslint-plugin-github: "npm:^6.0.0"
@@ -343,7 +343,7 @@ __metadata:
     eslint-plugin-sonarjs: "npm:^4.0.2"
     eslint-plugin-unicorn: "npm:^64.0.0"
     typescript-eslint: "npm:^8.58.0"
-  checksum: 10c0/f9758087a03a43f86e4b253530ebabe00867b0b70ce23eb1d098a1a1ec8a83aa725b76a7fac53d5da813c46e1e5a719861fe8f2222d39637a06df6678dffba33
+  checksum: 10c0/f4ef7abbb4278c95284c5f021a4785299f23c4d7d092f71764aac6e5368a4402d150119982d1e79e75768c7ef33a5e6597d12fbe7c9f4559199242c1c29c7866
   languageName: node
   linkType: hard
 
@@ -370,22 +370,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node-eslint@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@goatjs/node-eslint@npm:2.1.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-2.1.0.tgz"
+"@goatjs/node-eslint@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@goatjs/node-eslint@npm:2.2.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-2.2.0.tgz"
   dependencies:
-    "@goatjs/core-eslint": "npm:2.1.0"
+    "@goatjs/core-eslint": "npm:2.2.0"
     globals: "npm:^17.4.0"
-  checksum: 10c0/3eb803041d292d226622845026ba5cf821dd20229ddca59fb5080ea16f3bf77ba938225ed294547fbdb4a3622d0842889462f606c0bf7ce7e36e32d16a4d1c14
+  checksum: 10c0/7e1db94689a2fe6a79b218b6559a2f05b3f92899323053f514a8c7a84bd391b9f072bd8159b80fbe4768a02793f71e036c98e6d9eb29a544222d7b6af69bded1
   languageName: node
   linkType: hard
 
-"@goatjs/node-monorepo-eslint@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@goatjs/node-monorepo-eslint@npm:2.1.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-2.1.0.tgz"
+"@goatjs/node-monorepo-eslint@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@goatjs/node-monorepo-eslint@npm:2.2.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-2.2.0.tgz"
   dependencies:
-    "@goatjs/node-eslint": "npm:2.1.0"
-  checksum: 10c0/e9109fad8c709917d5fc01b0f3ea8e3365ee7281de0d2132ddfc13f2a3211be43b72a66e7a87173d61df58f60f6f0522d44b98309387d47ad459b7a8611c956e
+    "@goatjs/node-eslint": "npm:2.2.0"
+  checksum: 10c0/fd77880d556b39680508cac372f20650db9fc71cb1da565ef610ffc58a628edc9831a63e3b6e4fdcd236cece688e81dc6b68036be2f0a7981f73c2dcde89932b
   languageName: node
   linkType: hard
 
@@ -872,7 +872,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@whatcode-ai/example@workspace:apps/example"
   dependencies:
-    "@goatjs/node-monorepo-eslint": "npm:^2.1.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.2.0"
     "@goatjs/rimraf": "npm:^1.80.0"
     "@goatjs/ts-unused-exports": "npm:^1.80.0"
     "@goatjs/typescript-config": "npm:^1.80.0"
@@ -888,7 +888,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@whatcode-ai/sdk@workspace:packages/sdk"
   dependencies:
-    "@goatjs/node-monorepo-eslint": "npm:^2.1.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.2.0"
     "@goatjs/rimraf": "npm:^1.80.0"
     "@goatjs/typescript-config": "npm:^1.80.0"
     "@opencode-ai/sdk": "npm:^1.3.13"
@@ -909,7 +909,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
   dependencies:
-    "@goatjs/node-monorepo-eslint": "npm:^2.1.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.2.0"
     "@goatjs/rimraf": "npm:^1.80.0"
     "@goatjs/typescript-config": "npm:^1.80.0"
     "@types/node": "npm:^25.5.0"

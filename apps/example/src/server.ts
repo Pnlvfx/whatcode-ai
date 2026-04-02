@@ -1,3 +1,3 @@
 import { createWhatcodeServer } from '@whatcode-ai/sdk';
 
-await createWhatcodeServer({ tailscale: true });
+await createWhatcodeServer({ tailscale: true, proxy: true });
