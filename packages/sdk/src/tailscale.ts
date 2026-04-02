@@ -34,6 +34,15 @@ const startServe = async (port: number): Promise<void> => {
   await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
 };
 
+export const stopServe = async (port: number): Promise<void> => {
+  try {
+    // Remove only our specific port rule — avoids clobbering other users' ports
+    await execa('tailscale', ['serve', 'off', port.toString()]);
+  } catch {
+    // best-effort — if tailscale is already gone, nothing to do
+  }
+};
+
 const tailscaleSchema = z.object({
   BackendState: z.string(),
   Self: z.object({ DNSName: z.string().optional() }).optional(),
@@ -81,6 +90,7 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
 };
 
 const getCheckCommand = () => {
+  // TODO add ubuntu
   switch (platform) {
     case 'win32': {
       return 'where';

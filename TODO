@@ -1,3 +1,17 @@
 improve cli instructions for when tsilscale is enabled, but all in general.
 test all possible configs mixed
 store the token
+fetch our latest release version, if user is using an outdated version, show a warning and a command to update
+
+improve config
+
+port -> opencodePort
+proxyPort -> whatcodePort or whatcodeDPort (Daemon)
+
+proxy -> something more futuristic
+proxy default to true
+
+create a store for the configs.
+
+we can serve the project icons from a custom endpoint to avoid the issue
+of opencode service the raw image, that will also allow us to further optimize them

@@ -57,12 +57,14 @@ const getLastAssistantText = async (client: OpencodeClient, sessionID: string): 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const subscribeToEvents = async (port: number): Promise<void> => {
   const client = createOpencodeClient({ baseUrl: `http://localhost:${port.toString()}`, throwOnError: true });
+
+  // TODO add a max retry?
+
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     try {
       const events = await client.global.event<true>();
       for await (const event of events.stream) {
-        console.log('new event received', event.payload.type);
         switch (event.payload.type) {
           case 'session.idle': {
             const { sessionID } = event.payload.properties;

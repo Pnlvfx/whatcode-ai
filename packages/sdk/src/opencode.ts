@@ -9,7 +9,6 @@ export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
   if (running) {
     console.log('[opencode] already running');
   } else {
-    console.log('[opencode] starting...');
     await createOpencodeServer(options);
     console.log('[opencode] started');
   }
