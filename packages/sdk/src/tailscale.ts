@@ -3,12 +3,12 @@ import { execa } from 'execa';
 import { platform } from './constants.ts';
 import * as z from 'zod';
 
-export const tailscale = async (): Promise<string> => {
+export const tailscale = async (port: number): Promise<string> => {
   await assertTailscaleInstalled();
   await assertDaemonReachable();
   const hostname = await getHostname();
   const already = await isServeRunning();
-  if (!already) await startServe();
+  if (!already) await startServe(port);
   const url = `https://${hostname.replace(/-$/, '')}`;
   return url;
 };
@@ -28,10 +28,10 @@ const isServeRunning = async (): Promise<boolean> => {
   }
 };
 
-const startServe = async (): Promise<void> => {
-  // tailscale serve proxies localhost:4096 over HTTPS on the tailnet hostname
+const startServe = async (port: number): Promise<void> => {
+  // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
   // this runs in the background — the process exits after setting up the config
-  await execa('tailscale', ['serve', '--bg', '4096'], { stdio: 'inherit' });
+  await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
 };
 
 const tailscaleSchema = z.object({

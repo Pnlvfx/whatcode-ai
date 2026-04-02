@@ -3,7 +3,9 @@ import { createWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { hostname, notification, tailscale, port, timeout } = await yargs(hideBin(process.argv))
+// TODO add new options
+
+const { hostname, notification, tailscale, port, timeout, proxyPort } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -24,6 +26,11 @@ const { hostname, notification, tailscale, port, timeout } = await yargs(hideBin
     type: 'number',
     description: 'Port to bind the opencode server to (default: 4096)',
   })
+  .option('proxy-port', {
+    alias: 'P',
+    type: 'number',
+    description: 'Port for the whatcode proxy server (default: opencode port + 1)',
+  })
   .option('timeout', {
     type: 'number',
     description: 'Timeout in milliseconds for the opencode server to start',
@@ -42,4 +49,5 @@ await createWhatcodeServer({
   ...(hostname !== undefined && { hostname }),
   ...(port !== undefined && { port }),
   ...(timeout !== undefined && { timeout }),
+  ...(proxyPort !== undefined && { proxyPort }),
 });

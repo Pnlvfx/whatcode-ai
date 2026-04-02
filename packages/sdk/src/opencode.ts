@@ -10,11 +10,11 @@ export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
     console.log('[opencode] already running');
   } else {
     console.log('[opencode] starting...');
-    await createOpencodeServer({ hostname: '0.0.0.0', ...options });
+    await createOpencodeServer(options);
     console.log('[opencode] started');
   }
 
-  return getLocalUrl(port);
+  return { port, url: getLocalUrl(port) };
 };
 
 const isOpencodeRunning = async (port: number): Promise<boolean> => {
