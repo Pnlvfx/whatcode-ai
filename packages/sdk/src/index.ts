@@ -17,7 +17,7 @@ export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
 
 export const createWhatcodeServer = async ({ tailscale: useTailscale, password, proxyPort, proxy, ...serverOptions }: WhatcodeServerConfig) => {
   const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
-  const resolvedPort = proxy ? (proxyPort ?? opencodePort + 1) : opencodePort;
+  const resolvedPort = proxy ? (proxyPort ?? 8192) : opencodePort;
 
   if (proxy) {
     await startProxy({ opencodePort, proxyPort: resolvedPort });

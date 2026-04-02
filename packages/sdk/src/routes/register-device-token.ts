@@ -2,8 +2,8 @@
 import { Router } from 'express';
 import * as z from 'zod';
 import { SERVER_URL } from '../config/config.ts';
-import { setToken } from '../token-store.ts';
 import { headers } from '../config/headers.ts';
+import { apnTokenStore } from '../stores/apn-token.ts';
 
 const tokenBodySchema = z.strictObject({ userId: z.uuid(), token: z.string() });
 
@@ -28,6 +28,6 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
     return;
   }
 
-  setToken(result.data.userId, result.data.token);
+  await apnTokenStore.set({ userId: result.data.userId, token: result.data.token });
   res.status(200).json({ ok: true });
 });

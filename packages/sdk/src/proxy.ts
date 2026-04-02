@@ -27,9 +27,13 @@ export const startProxy = async (config: { opencodePort: number; proxyPort: numb
   );
 
   await new Promise<void>((resolve, reject) => {
-    const server = app.listen(config.proxyPort, () => {
-      console.log(`[daemon] started on port ${config.proxyPort.toString()}`);
-      resolve();
+    const server = app.listen(config.proxyPort, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(`[daemon] started on port ${config.proxyPort.toString()}`);
+        resolve();
+      }
     });
     server.on('error', reject);
   });
