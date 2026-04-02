@@ -15,7 +15,6 @@ export const startProxy = async (config: { opencodePort: number; proxyPort: numb
     createProxyMiddleware({
       target: `http://localhost:${config.opencodePort.toString()}`,
       changeOrigin: false,
-      ws: true,
       proxyTimeout: 0,
       timeout: 0,
       on: {

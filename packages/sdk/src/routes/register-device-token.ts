@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import * as z from 'zod';
 import { SERVER_URL } from '../config.ts';
+import { setToken } from '../token-store.ts';
 
 const tokenBodySchema = z.strictObject({ userId: z.uuid(), token: z.string() });
 
@@ -24,12 +25,11 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
     body: JSON.stringify({ userId: result.data.userId, token: result.data.token }),
   });
 
-  console.log(relayResponse.statusText, relayResponse.status);
-
   if (!relayResponse.ok) {
     res.status(relayResponse.status).json({ message: 'Failed to reach the relay, please retry!' });
     return;
   }
 
+  setToken(result.data.userId, result.data.token);
   res.status(200).json({ ok: true });
 });
