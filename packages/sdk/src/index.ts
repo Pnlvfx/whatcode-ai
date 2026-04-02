@@ -4,7 +4,6 @@ import { opencode } from './opencode.ts';
 import { tailscale } from './tailscale.ts';
 import { printQrCode } from './qrcode.ts';
 import { startNotifications } from './experimentals/notifications.ts';
-export { saveToken } from './experimentals/notifications.ts';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   tailscale?: boolean;
