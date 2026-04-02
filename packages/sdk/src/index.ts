@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { ServerOptions } from '@opencode-ai/sdk/v2';
+import { createOpencodeClient, type ServerOptions } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startProxy } from './proxy.ts';
 import { tailscale, stopServe } from './tailscale.ts';
@@ -20,11 +20,11 @@ export const createWhatcodeServer = async ({ tailscale: useTailscale, password, 
   const resolvedPort = proxy ? (proxyPort ?? 8192) : opencodePort;
 
   if (proxy) {
-    await startProxy({ opencodePort, proxyPort: resolvedPort });
-  }
-
-  if (featureFlags.WHATCODE_NOTIFICATION && proxy) {
-    startNotifications(opencodePort);
+    const client = createOpencodeClient({ baseUrl: `http://localhost:${opencodePort.toString()}`, throwOnError: true });
+    if (featureFlags.WHATCODE_NOTIFICATION) {
+      startNotifications(client);
+    }
+    await startProxy({ port: resolvedPort, opencodePort, client });
   }
 
   const url = useTailscale ? await tailscale(resolvedPort) : getLocalUrl(resolvedPort);

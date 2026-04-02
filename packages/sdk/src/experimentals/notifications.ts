@@ -8,8 +8,8 @@ import { apnTokenStore } from '../stores/apn-token.ts';
 
 const BODY_MAX = 178;
 
-export const startNotifications = (port: number): void => {
-  void subscribeToEvents(port);
+export const startNotifications = (client: OpencodeClient): void => {
+  void subscribeToEvents(client);
   console.log('[notifications] listening for events');
 };
 
@@ -55,9 +55,7 @@ const getLastAssistantText = async (client: OpencodeClient, sessionID: string): 
 };
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
-const subscribeToEvents = async (port: number): Promise<void> => {
-  const client = createOpencodeClient({ baseUrl: `http://localhost:${port.toString()}`, throwOnError: true });
-
+const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
   // TODO add a max retry?
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
