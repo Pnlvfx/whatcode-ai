@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import type { ServerOptions } from '@opencode-ai/sdk/v2';
-import type { ProxyRoute } from './proxy.ts';
 import { opencode } from './opencode.ts';
 import { startProxy } from './proxy.ts';
 import { tailscale } from './tailscale.ts';
@@ -13,7 +12,6 @@ export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   notification?: boolean;
   password?: string;
   proxyPort?: number;
-  routes?: ProxyRoute[];
   proxy?: boolean;
 }
 
@@ -22,7 +20,6 @@ export const createWhatcodeServer = async ({
   notification,
   password,
   proxyPort,
-  routes,
   proxy,
   ...serverOptions
 }: WhatcodeServerConfig) => {
@@ -31,7 +28,7 @@ export const createWhatcodeServer = async ({
   const resolvedPort = proxy ? (proxyPort ?? opencodePort + 1) : opencodePort;
 
   if (proxy) {
-    await startProxy({ opencodePort, proxyPort: resolvedPort, routes });
+    await startProxy({ opencodePort, proxyPort: resolvedPort });
   }
 
   if (notification) {

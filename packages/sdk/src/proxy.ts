@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import http from 'node:http';
+import { registerDeviceTokenRoute } from './routes/register-device-token.ts';
 
 export interface ProxyRoute {
   method: string;
@@ -10,15 +11,13 @@ export interface ProxyRoute {
 export interface ProxyConfig {
   opencodePort: number;
   proxyPort: number;
-  routes?: ProxyRoute[];
 }
 
-export const startProxy = (config: ProxyConfig): Promise<void> =>
-  new Promise((resolve, reject) => {
+export const startProxy = (config: ProxyConfig): Promise<void> => {
+  return new Promise((resolve, reject) => {
     const server = http.createServer((req, res) => {
-      const customRoute = (config.routes ?? []).find(
-        (r) => r.method === req.method && r.path === req.url,
-      );
+      const routes = [registerDeviceTokenRoute];
+      const customRoute = routes.find((r) => r.method === req.method && r.path === req.url);
 
       if (customRoute) {
         Promise.resolve(customRoute.handler(req, res)).catch((err: unknown) => {
@@ -39,12 +38,9 @@ export const startProxy = (config: ProxyConfig): Promise<void> =>
       resolve();
     });
   });
+};
 
-const forwardToOpencode = (
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-  opencodePort: number,
-): void => {
+const forwardToOpencode = (req: http.IncomingMessage, res: http.ServerResponse, opencodePort: number): void => {
   const options: http.RequestOptions = {
     hostname: 'localhost',
     port: opencodePort,
