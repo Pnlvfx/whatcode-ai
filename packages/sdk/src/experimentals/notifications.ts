@@ -71,7 +71,7 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const modelID = await getModelID(client, sessionID);
             const lastText = await getLastAssistantText(client, sessionID);
             const body = lastText ? trim(`${modelID}: ${lastText}`) : modelID;
-            await forwardToRelay(title, body, 'session.idle');
+            await forwardToRelay(title, body, 'session.idle', { sessionID, projectID: session.projectID, directory: session.directory });
             break;
           }
           case 'permission.asked': {
@@ -80,7 +80,11 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const title = getProjectName(session.directory);
             const modelID = await getModelID(client, sessionID);
             const target = patterns[0] ?? permission;
-            await forwardToRelay(title, trim(`${modelID} needs permission to: ${target}`), 'permission.asked');
+            await forwardToRelay(title, trim(`${modelID} needs permission to: ${target}`), 'permission.asked', {
+              sessionID,
+              projectID: session.projectID,
+              directory: session.directory,
+            });
             break;
           }
           case 'session.error': {
@@ -91,7 +95,12 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             }
             const title = session ? getProjectName(session.directory) : 'WhatCode';
             const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
-            await forwardToRelay(title, body, 'session.error');
+            await forwardToRelay(
+              title,
+              body,
+              'session.error',
+              session ? { sessionID, projectID: session.projectID, directory: session.directory } : undefined,
+            );
             break;
           }
         }
@@ -103,13 +112,28 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
   }
 };
 
-const forwardToRelay = async (title: string, body: string, event: NotificationEvent): Promise<void> => {
+interface RelayMeta {
+  readonly sessionID?: string;
+  readonly projectID?: string;
+  readonly directory?: string;
+}
+
+const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
   const entry = await apnTokenStore.get();
   if (!entry) return;
   const res = await fetch(`${SERVER_URL}/relay/push/v2`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ user_id: entry.userId, token: entry.token, title, body, event }),
+    body: JSON.stringify({
+      user_id: entry.userId,
+      token: entry.token,
+      title,
+      body,
+      event,
+      session_id: meta?.sessionID,
+      project_id: meta?.projectID,
+      worktree: meta?.directory,
+    }),
   });
 
   if (!res.ok) {

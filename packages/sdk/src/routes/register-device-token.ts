@@ -20,7 +20,7 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
   const relayResponse = await fetch(`${SERVER_URL}/relay/register`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ userId: result.data.userId, token: result.data.token }),
+    body: JSON.stringify({ user_id: result.data.userId, token: result.data.token }),
   });
 
   if (!relayResponse.ok) {

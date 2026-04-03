@@ -1,17 +1,27 @@
-improve cli instructions for when tsilscale is enabled, but all in general.
+improve cli instructions for when tsilscale is enabled, point to their docs, instruct to install ios app
+also all setups in general.
 test all possible configs mixed
-store the token
 fetch our latest release version, if user is using an outdated version, show a warning and a command to update
 
-improve config
+improve config, create a config store
 
 port -> opencodePort
 proxyPort -> whatcodePort or whatcodeDPort (Daemon)
-
 proxy -> something more futuristic
 proxy default to true
 
-create a store for the configs.
-
 we can serve the project icons from a custom endpoint to avoid the issue
-of opencode service the raw image, that will also allow us to further optimize them
+of opencode service the raw image, that will also allow us to further optimize them and use them for notifications
+
+catch all errors, here and on the ios app
+search for a security scan skill, react improvements, rn improvmenets
+
+distrubution
+skills
+add node minimum version matching sqlite support
+
+Return 204 instead of 200 after successful deletion ..
+
+What's your reply ?
+
+add analytics in app

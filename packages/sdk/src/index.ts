@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { createOpencodeClient, type ServerOptions } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
-import { startProxy } from './proxy.ts';
+import { startProxy } from './server.ts';
 import { tailscale, stopServe } from './tailscale.ts';
 import { printQrCode } from './qrcode.ts';
 import { getLocalUrl } from './ip.ts';

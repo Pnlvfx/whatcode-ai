@@ -90,7 +90,7 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
 };
 
 const getCheckCommand = () => {
-  // TODO add ubuntu
+  // TODO add ubuntu, i think the only diff is win
   switch (platform) {
     case 'win32': {
       return 'where';
