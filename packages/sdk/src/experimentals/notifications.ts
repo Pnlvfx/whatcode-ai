@@ -36,10 +36,14 @@ const getMessages = async (client: OpencodeClient, sessionID: string) => {
   return res.data;
 };
 
-const getModelID = async (client: OpencodeClient, sessionID: string): Promise<string> => {
+const getModelName = async (client: OpencodeClient, sessionID: string): Promise<string> => {
   const messages = await getMessages(client, sessionID);
   const lastUser = messages.toReversed().find((m) => m.info.role === 'user');
-  return lastUser?.info.role === 'user' ? lastUser.info.model.modelID : 'unknown';
+  if (lastUser?.info.role !== 'user') return 'unknown';
+  const { providerID, modelID } = lastUser.info.model;
+  const { data: config } = await client.config.providers<true>();
+  const provider = config.providers.find((p) => p.id === providerID);
+  return provider?.models[modelID]?.name ?? modelID;
 };
 
 const getLastAssistantText = async (client: OpencodeClient, sessionID: string): Promise<string | undefined> => {
@@ -68,9 +72,9 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const { sessionID } = event.payload.properties;
             const { data: session } = await client.session.get<true>({ sessionID });
             const title = getProjectName(session.directory);
-            const modelID = await getModelID(client, sessionID);
+            const modelName = await getModelName(client, sessionID);
             const lastText = await getLastAssistantText(client, sessionID);
-            const body = lastText ? trim(`${modelID}: ${lastText}`) : modelID;
+            const body = lastText ? trim(`${modelName}: ${lastText}`) : modelName;
             await forwardToRelay(title, body, 'session.idle', { sessionID, projectID: session.projectID, directory: session.directory });
             break;
           }
@@ -78,9 +82,9 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const { sessionID, permission, patterns } = event.payload.properties;
             const { data: session } = await client.session.get<true>({ sessionID });
             const title = getProjectName(session.directory);
-            const modelID = await getModelID(client, sessionID);
+            const modelName = await getModelName(client, sessionID);
             const target = patterns[0] ?? permission;
-            await forwardToRelay(title, trim(`${modelID} needs permission to: ${target}`), 'permission.asked', {
+            await forwardToRelay(title, trim(`${modelName} needs permission to: ${target}`), 'permission.asked', {
               sessionID,
               projectID: session.projectID,
               directory: session.directory,
