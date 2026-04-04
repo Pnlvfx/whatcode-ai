@@ -24,4 +24,8 @@ Return 204 instead of 200 after successful deletion ..
 
 What's your reply ?
 
-add analytics in app
+add analytics in app (errors only)
+
+improve notifications for errors, if an error occur both error and idle fire almost at the same time, we should decide how to handle it.
+
+READ ALL DOCS AND IMPROVE THEM.

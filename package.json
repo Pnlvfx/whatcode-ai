@@ -7,6 +7,7 @@
     "url": "https://github.com/Pnlvfx/whatcode-ai.git"
   },
   "scripts": {
+    "docs": "yarn workspace @whatcode-ai/docs",
     "tsc": "turbo run tsc",
     "unused": "turbo run unused",
     "lint": "turbo run lint",
@@ -22,7 +23,7 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@goatjs/dbz": "^1.80.0",
+    "@goatjs/dbz": "^1.81.0",
     "prettier": "^3.8.1",
     "turbo": "^2.9.3"
   },
