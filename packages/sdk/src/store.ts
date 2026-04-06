@@ -8,7 +8,7 @@ export interface StoreParams<T extends z.ZodType> {
   initial?: z.infer<T>;
 }
 
-interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>> {
+export interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>> {
   get: TParams['initial'] extends z.infer<T> ? () => Promise<z.infer<T>> : () => Promise<z.infer<T> | undefined>;
   set: (configs: Partial<z.infer<T>>) => Promise<void>;
   clear: () => Promise<void>;

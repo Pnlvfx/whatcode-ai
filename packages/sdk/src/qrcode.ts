@@ -6,6 +6,5 @@ export const printQrCode = (url: string, password?: string): void => {
   const params = new URLSearchParams({ url });
   if (password) params.set('password', password);
   const deepLink = `${CLIENT_URL}/connect?${params.toString()}`;
-  console.log(`[whatcode] scan to connect: ${deepLink}`);
   qrcode.generate(deepLink, { small: true });
 };

@@ -26,7 +26,7 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
   //   return;
   // }
 
-  const entries = (await apnTokenStore.get()) ?? [];
+  const entries = await apnTokenStore.get();
   const updated = entries.filter((e) => e.deviceId !== result.data.device_id);
   await apnTokenStore.set([...updated, { userId: result.data.user_id, deviceId: result.data.device_id, token: result.data.token }]);
   res.status(200).json({ ok: true });
@@ -42,7 +42,7 @@ registerDeviceTokenRouter.delete('/unregister', async (req, res) => {
     return;
   }
 
-  const entries = (await apnTokenStore.get()) ?? [];
+  const entries = await apnTokenStore.get();
   await apnTokenStore.set(entries.filter((e) => e.deviceId !== result.data.device_id));
   res.status(200).json({ ok: true });
 });
