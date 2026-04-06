@@ -1,16 +1,16 @@
-/* eslint-disable no-console */
 import type { Part, TextPart } from '@opencode-ai/sdk/v2';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { SERVER_URL } from '../config/config.ts';
 import { headers } from '../config/headers.ts';
 import path from 'node:path';
 import { apnTokenStore } from '../stores/apn-token.ts';
+import { logger } from '../logger.ts';
 
 const BODY_MAX = 178;
 
 export const startNotifications = (client: OpencodeClient): void => {
   void subscribeToEvents(client);
-  console.log('[notifications] listening for events');
+  logger.info('notifications', 'listening for events');
 };
 
 type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
@@ -24,7 +24,7 @@ const isTextPart = (part: Part): part is TextPart => part.type === 'text';
 const capitalize = (string: string) => {
   const firstLetter = string.at(0);
   if (!firstLetter) return string;
-  return firstLetter.toUpperCase() + string.slice(1);
+  return `${firstLetter.toUpperCase()}${string.slice(1)}`;
 };
 
 const getProjectName = (directory: string): string => {
@@ -109,9 +109,9 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
           }
         }
       }
-      console.log('[notifications] stream ended, reconnecting...');
+      logger.info('notifications', 'stream ended, reconnecting...');
     } catch (err) {
-      console.error('[notifications] stream error, reconnecting...', err);
+      logger.error('notifications', 'stream error, reconnecting...', err);
     }
   }
 };
@@ -147,17 +147,17 @@ const pushToDevice = async (
   if (!res.ok) {
     const text = await res.text();
     if (text.includes('Unregistered')) {
-      const entries = (await apnTokenStore.get()) ?? [];
+      const entries = await apnTokenStore.get();
       await apnTokenStore.set(entries.filter((e) => e.deviceId !== entry.deviceId));
-      console.warn(`[notifications] APN token unregistered for device ${entry.deviceId}, removed from store`);
+      logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, removed from store`);
     } else {
-      console.error(res.statusText, res.status);
+      logger.error('notifications', `push failed: ${res.statusText} (${res.status.toString()})`);
     }
   }
 };
 
 const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
   const entries = await apnTokenStore.get();
-  if (!entries || entries.length === 0) return;
+  if (entries.length === 0) return;
   await Promise.all(entries.map((entry) => pushToDevice(entry, title, body, event, meta)));
 };

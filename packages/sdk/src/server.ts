@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import { getLastMessageTimeByProject } from './db.ts';
 // eslint-disable-next-line no-restricted-imports
 import express, { Router, type Request, type Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { registerDeviceTokenRouter } from './routes/register-device-token.ts';
+import { logger } from './logger.ts';
 
 export interface DaemonIdentity {
   machineId: string;
@@ -70,7 +70,7 @@ export const startWhatcode = async ({
       if (err) {
         reject(err);
       } else {
-        console.log(`[daemon] started on port ${port.toString()}`);
+        logger.info('daemon', `started on port ${port.toString()}`);
         resolve();
       }
     });

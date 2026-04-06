@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import * as z from 'zod';
 import { apnTokenStore } from '../stores/apn-token.ts';
+import { logger } from '../logger.ts';
 
 const tokenBodySchema = z.strictObject({ user_id: z.uuid(), device_id: z.string(), token: z.string() });
 
@@ -26,9 +27,14 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
   //   return;
   // }
 
+  logger.debug('apn', `token received for device ${result.data.device_id}`);
+
   const entries = await apnTokenStore.get();
   const updated = entries.filter((e) => e.deviceId !== result.data.device_id);
   await apnTokenStore.set([...updated, { userId: result.data.user_id, deviceId: result.data.device_id, token: result.data.token }]);
+
+  logger.debug('apn', `token stored for device ${result.data.device_id} (user ${result.data.user_id})`);
+
   res.status(200).json({ ok: true });
 });
 
@@ -41,6 +47,8 @@ registerDeviceTokenRouter.delete('/unregister', async (req, res) => {
     res.status(400).json({ message: 'device_id is required' });
     return;
   }
+
+  logger.debug('apn', `token unregistered for device ${result.data.device_id}`);
 
   const entries = await apnTokenStore.get();
   await apnTokenStore.set(entries.filter((e) => e.deviceId !== result.data.device_id));

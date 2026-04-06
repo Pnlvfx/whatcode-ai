@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { createOpencodeClient, type ServerOptions } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
@@ -8,6 +7,7 @@ import { printQrCode } from './qrcode.ts';
 import { getLocalUrl } from './ip.ts';
 import { startNotifications } from './experimentals/notifications.ts';
 import { featureFlags } from './config/feature-flags.ts';
+import { logger } from './logger.ts';
 import mId from 'node-machine-id';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
@@ -15,9 +15,18 @@ export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   password?: string;
   proxyPort?: number;
   proxy?: boolean;
+  debug?: boolean;
 }
 
-export const createWhatcodeServer = async ({ tailscale: useTailscale, password, proxyPort, proxy, ...serverOptions }: WhatcodeServerConfig) => {
+export const createWhatcodeServer = async ({
+  tailscale: useTailscale,
+  password,
+  proxyPort,
+  proxy,
+  debug = false,
+  ...serverOptions
+}: WhatcodeServerConfig) => {
+  logger.init({ debug });
   const machineId = await mId.machineId();
   const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
   const resolvedPort = proxy ? (proxyPort ?? 8192) : opencodePort;
@@ -51,7 +60,7 @@ export const createWhatcodeServer = async ({ tailscale: useTailscale, password, 
 
   // The URL to advertise is the most capable one available
   const advertiseUrl = tailscaleUrl ?? (proxy ? daemonUrl : opencodeUrl);
-  console.log(`[whatcode] use this URL in the app: ${advertiseUrl}`);
+  logger.info('whatcode', `use this URL in the app: ${advertiseUrl}`);
   printQrCode(advertiseUrl, password);
 };
 

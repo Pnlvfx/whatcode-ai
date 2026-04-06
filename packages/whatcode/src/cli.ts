@@ -3,7 +3,7 @@ import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { hostname, tailscale, reset, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
+const { hostname, tailscale, reset, port, timeout, proxyPort, proxy, debug } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -34,6 +34,10 @@ const { hostname, tailscale, reset, port, timeout, proxyPort, proxy } = await ya
     type: 'number',
     description: 'Timeout in milliseconds for the opencode server to start',
   })
+  .option('debug', {
+    type: 'boolean',
+    description: 'Enable debug logs (APN tokens, internal events, etc.)',
+  })
   .parseAsync();
 
 if (reset) {
@@ -47,4 +51,5 @@ await createWhatcodeServer({
   ...(timeout !== undefined && { timeout }),
   ...(proxyPort !== undefined && { proxyPort }),
   ...(proxy !== undefined && { proxy }),
+  ...(debug !== undefined && { debug }),
 });
