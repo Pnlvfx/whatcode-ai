@@ -24,6 +24,9 @@
     "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "type": "module",
   "exports": {
     ".": "./src/whatcode.ts"

@@ -76,20 +76,24 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
         switch (event.payload.type) {
           case 'session.idle': {
             const { sessionID } = event.payload.properties;
+            logger.debug('notifications', `session.idle event received for session ${sessionID}`);
             const { data: session } = await client.session.get<true>({ sessionID });
             const title = getProjectName(session.directory);
             const modelName = await getModelName(client, sessionID);
             const lastText = await getLastAssistantText(client, sessionID);
             const body = lastText ? trim(`${modelName}: ${lastText}`) : modelName;
+            logger.debug('notifications', `forwarding session.idle: title=${title}, body=${body}`);
             await forwardToRelay(title, body, 'session.idle', { sessionID, projectID: session.projectID, directory: session.directory });
             break;
           }
           case 'permission.asked': {
             const { sessionID, permission, patterns } = event.payload.properties;
+            logger.debug('notifications', `permission.asked event received for session ${sessionID}, permission=${permission}`);
             const { data: session } = await client.session.get<true>({ sessionID });
             const title = getProjectName(session.directory);
             const modelName = await getModelName(client, sessionID);
             const target = patterns[0] ?? permission;
+            logger.debug('notifications', `forwarding permission.asked: title=${title}, target=${target}`);
             await forwardToRelay(title, trim(`${modelName} needs permission to: ${target}`), 'permission.asked', {
               sessionID,
               projectID: session.projectID,
@@ -99,12 +103,14 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
           }
           case 'session.error': {
             const { sessionID, error } = event.payload.properties;
+            logger.debug('notifications', `session.error event received for session ${sessionID}`);
             let session;
             if (sessionID) {
               ({ data: session } = await client.session.get<true>({ sessionID }));
             }
             const title = session ? getProjectName(session.directory) : 'WhatCode';
             const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
+            logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
             await forwardToRelay(
               title,
               body,
