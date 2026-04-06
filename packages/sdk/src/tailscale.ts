@@ -7,7 +7,7 @@ export const tailscale = async (port: number): Promise<string> => {
   await assertTailscaleInstalled();
   await assertDaemonReachable();
   const hostname = await getHostname();
-  const already = await isServeRunning();
+  const already = await isServeRunning(port);
   if (!already) await startServe(port);
   const url = `https://${hostname.replace(/-$/, '')}`;
   return url;
@@ -17,12 +17,12 @@ const serveStatusSchema = z.object({
   TCP: z.record(z.string(), z.unknown()).optional(),
 });
 
-const isServeRunning = async (): Promise<boolean> => {
+const isServeRunning = async (port: number): Promise<boolean> => {
   try {
     const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
     const result = serveStatusSchema.safeParse(JSON.parse(stdout));
     if (!result.success) return false;
-    return Object.keys(result.data.TCP ?? {}).length > 0;
+    return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
   } catch {
     return false;
   }

@@ -122,9 +122,13 @@ interface RelayMeta {
   readonly directory?: string;
 }
 
-const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
-  const entry = await apnTokenStore.get();
-  if (!entry) return;
+const pushToDevice = async (
+  entry: { userId: string; deviceId: string; token: string },
+  title: string,
+  body: string,
+  event: NotificationEvent,
+  meta?: RelayMeta,
+): Promise<void> => {
   const res = await fetch(`${SERVER_URL}/relay/push/v2`, {
     method: 'POST',
     headers,
@@ -141,7 +145,19 @@ const forwardToRelay = async (title: string, body: string, event: NotificationEv
   });
 
   if (!res.ok) {
-    // TODO [2026-04-05] if we get an invalid token error, delete the stored token, wait for the ios app to send the new one
-    console.error(res.statusText, res.status);
+    const text = await res.text();
+    if (text.includes('Unregistered')) {
+      const entries = (await apnTokenStore.get()) ?? [];
+      await apnTokenStore.set(entries.filter((e) => e.deviceId !== entry.deviceId));
+      console.warn(`[notifications] APN token unregistered for device ${entry.deviceId}, removed from store`);
+    } else {
+      console.error(res.statusText, res.status);
+    }
   }
+};
+
+const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
+  const entries = await apnTokenStore.get();
+  if (!entries || entries.length === 0) return;
+  await Promise.all(entries.map((entry) => pushToDevice(entry, title, body, event, meta)));
 };

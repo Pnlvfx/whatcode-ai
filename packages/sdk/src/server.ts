@@ -6,31 +6,44 @@ import express, { Router, type Request, type Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { registerDeviceTokenRouter } from './routes/register-device-token.ts';
 
-export const startProxy = async ({ port, opencodePort, client }: { port: number; opencodePort: number; client: OpencodeClient }): Promise<void> => {
+export interface DaemonIdentity {
+  machineId: string;
+  opencodeUrl: string;
+  daemonUrl: string;
+  tailscaleUrl?: string;
+}
+
+export const startWhatcode = async ({
+  port,
+  opencodePort,
+  client,
+  identity,
+}: {
+  port: number;
+  opencodePort: number;
+  client: OpencodeClient;
+  identity: DaemonIdentity;
+}): Promise<void> => {
   const app = express();
   app.disable('x-powered-by');
 
   app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
+  app.get('/whatcode/identity', (_req: Request, res: Response) => {
+    res.json(identity);
+  });
+
   const projectRouter = Router();
 
   projectRouter.get('/project', async (_req: Request, res: Response) => {
-    console.log('[project] fetching projects from opencode...');
     const { data: projects } = await client.project.list<true>();
-    console.log(`[project] got ${projects.length.toString()} projects`);
-
     const lastMessageTimes = getLastMessageTimeByProject();
-    console.log(`[project] got ${lastMessageTimes.size.toString()} entries from sqlite`);
 
     const patched = projects.map((project) => {
       const lastMsg = lastMessageTimes.get(project.id);
       return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
     });
 
-    console.log(`[project] returning ${patched.length.toString()} projects`);
-
-    res.setHeader('content-type', 'application/json');
-    res.setHeader('cache-control', 'no-cache');
     res.json(patched);
   });
 
