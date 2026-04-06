@@ -3,14 +3,24 @@ import type * as z from 'zod';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-// FROM @goatjs/node/store
 export interface StoreParams<T extends z.ZodType> {
   directory: string;
   initial?: z.infer<T>;
 }
 
+interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>> {
+  get: TParams['initial'] extends z.infer<T> ? () => Promise<z.infer<T>> : () => Promise<z.infer<T> | undefined>;
+  set: (configs: Partial<z.infer<T>>) => Promise<void>;
+  clear: () => Promise<void>;
+}
+
 /** This mimic the browser localStorage and allow you to store primitives on disk. */
-export const createStore = async <T extends z.ZodType>(name: string, schema: T, { directory, initial }: StoreParams<T>) => {
+export const createStore = async <T extends z.ZodType, TParams extends StoreParams<T>>(
+  name: string,
+  schema: T,
+  params: TParams,
+): Promise<StoreResult<T, TParams>> => {
+  const { directory, initial } = params;
   await fs.mkdir(directory, { recursive: true });
   type StoreType = z.infer<T>;
   const configFile = path.join(directory, `${name}.json`);
@@ -25,12 +35,24 @@ export const createStore = async <T extends z.ZodType>(name: string, schema: T, 
     }
   };
 
+  const validateStored = async () => {
+    const buf = await getBuffer();
+    if (!buf) return;
+    const result = await schema.safeParseAsync(JSON.parse(buf.toString()));
+    if (!result.success) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Found corrupted store "${name}". The stored value does not match the current schema — this can happen if you changed the schema or manually edited the file. Please reset or update the stored value to match the expected shape.`,
+      );
+      return;
+    }
+
+    currentConfig = result.data;
+  };
+
   const get = async () => {
     if (!currentConfig) {
-      const buf = await getBuffer();
-      if (!buf) return;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      currentConfig = JSON.parse(buf.toString()) as StoreType;
+      await validateStored();
     }
 
     return currentConfig;
@@ -42,13 +64,13 @@ export const createStore = async <T extends z.ZodType>(name: string, schema: T, 
     await fs.writeFile(configFile, JSON.stringify(currentConfig));
   };
 
-  if (initial) {
-    const stored = await get();
-    if (!stored) {
-      await set(initial);
-    }
+  await validateStored();
+
+  if (initial && !currentConfig) {
+    await set(initial);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return {
     get,
     set,
@@ -58,5 +80,5 @@ export const createStore = async <T extends z.ZodType>(name: string, schema: T, 
       } catch {}
       currentConfig = undefined;
     },
-  };
+  } as StoreResult<T, TParams>;
 };

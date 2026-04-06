@@ -1,14 +1,15 @@
 #!/usr/bin/env node
-import { createWhatcodeServer } from '@whatcode-ai/sdk';
+import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const { hostname, tailscale, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
+const { hostname, tailscale, reset, port, timeout, proxyPort, proxy } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
   .version(false)
   .usage('$0 [options]')
+  .option('reset', { type: 'boolean', description: 'Reset Whatcode server, disconnect all active devices.' })
   .option('tailscale', {
     type: 'boolean',
     description: 'Expose opencode via Tailscale serve (HTTPS on your tailnet)',
@@ -34,6 +35,10 @@ const { hostname, tailscale, port, timeout, proxyPort, proxy } = await yargs(hid
     description: 'Timeout in milliseconds for the opencode server to start',
   })
   .parseAsync();
+
+if (reset) {
+  await resetWhatcodeServer();
+}
 
 await createWhatcodeServer({
   tailscale,

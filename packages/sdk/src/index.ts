@@ -54,3 +54,5 @@ export const createWhatcodeServer = async ({ tailscale: useTailscale, password, 
   console.log(`[whatcode] use this URL in the app: ${advertiseUrl}`);
   printQrCode(advertiseUrl, password);
 };
+
+export { resetWhatcodeServer } from './reset.ts';
