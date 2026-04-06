@@ -1,19 +1,18 @@
-/* eslint-disable no-console */
 import { type ServerOptions, createOpencodeServer } from '@opencode-ai/sdk/v2';
-import { getLocalUrl } from './ip.ts';
+import { logger } from './logger.ts';
 
 export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
   const port = options.port ?? 4096;
   const running = await isOpencodeRunning(port);
 
   if (running) {
-    console.log('[opencode] already running');
+    logger.info('opencode', 'already running');
   } else {
     await createOpencodeServer(options);
-    console.log('[opencode] started');
+    logger.info('opencode', 'started');
   }
 
-  return { port, url: getLocalUrl(port) };
+  return { port };
 };
 
 const isOpencodeRunning = async (port: number): Promise<boolean> => {

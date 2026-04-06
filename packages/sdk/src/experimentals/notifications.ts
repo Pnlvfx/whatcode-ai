@@ -1,5 +1,6 @@
 import type { Part, TextPart } from '@opencode-ai/sdk/v2';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
+import timers from 'node:timers/promises';
 import { SERVER_URL } from '../config/config.ts';
 import { headers } from '../config/headers.ts';
 import path from 'node:path';
@@ -58,14 +59,19 @@ const getLastAssistantText = async (client: OpencodeClient, sessionID: string): 
   return undefined;
 };
 
+const BACKOFF_INITIAL_MS = 1000;
+const BACKOFF_MAX_MS = 30_000;
+const BACKOFF_MULTIPLIER = 2;
+
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
-  // TODO add a max retry?
+  let delay = BACKOFF_INITIAL_MS;
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     try {
       const events = await client.global.event<true>();
+      delay = BACKOFF_INITIAL_MS;
       for await (const event of events.stream) {
         switch (event.payload.type) {
           case 'session.idle': {
@@ -110,8 +116,11 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
         }
       }
       logger.info('notifications', 'stream ended, reconnecting...');
+      delay = BACKOFF_INITIAL_MS;
     } catch (err) {
-      logger.error('notifications', 'stream error, reconnecting...', err);
+      logger.error('notifications', `stream error, retrying in ${(delay / 1000).toString()}s...`, err);
+      await timers.setTimeout(delay);
+      delay = Math.min(delay * BACKOFF_MULTIPLIER, BACKOFF_MAX_MS);
     }
   }
 };

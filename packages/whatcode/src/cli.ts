@@ -2,6 +2,12 @@
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import updateNotifier from 'update-notifier';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const pkg = require('../package.json') as { name: string; version: string };
+updateNotifier({ pkg }).notify();
 
 const { hostname, tailscale, reset, port, timeout, proxyPort, proxy, debug } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')

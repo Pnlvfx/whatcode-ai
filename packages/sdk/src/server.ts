@@ -8,8 +8,8 @@ import { logger } from './logger.ts';
 
 export interface DaemonIdentity {
   machineId: string;
-  opencodeUrl: string;
-  daemonUrl: string;
+  opencodeUrl: string | undefined;
+  daemonUrl: string | undefined;
   tailscaleUrl?: string;
 }
 

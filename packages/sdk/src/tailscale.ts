@@ -2,6 +2,7 @@
 import { execa } from 'execa';
 import { platform } from './config/constants.ts';
 import * as z from 'zod';
+import { logger } from './logger.ts';
 
 export const tailscale = async (port: number): Promise<string> => {
   await assertTailscaleInstalled();
@@ -38,6 +39,7 @@ export const stopServe = async (port: number): Promise<void> => {
   try {
     // Remove only our specific port rule — avoids clobbering other users' ports
     await execa('tailscale', ['serve', 'off', port.toString()]);
+    logger.debug('tailscale', 'serving off');
   } catch {
     // best-effort — if tailscale is already gone, nothing to do
   }
@@ -82,24 +84,10 @@ const assertTailscaleInstalled = async (): Promise<void> => {
 
 const checkCommand = async (cmd: string): Promise<boolean> => {
   try {
-    await execa(getCheckCommand(), [cmd]);
+    await execa(cmd, ['--version']);
     return true;
-  } catch {
-    return false;
-  }
-};
-
-const getCheckCommand = () => {
-  // TODO add ubuntu, i think the only diff is win
-  switch (platform) {
-    case 'win32': {
-      return 'where';
-    }
-    case 'darwin': {
-      return 'which';
-    }
-    default: {
-      throw new Error('Unsupported platform');
-    }
+  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    return !(error instanceof Error && 'code' in error && (error as NodeJS.ErrnoException).code === 'ENOENT');
   }
 };

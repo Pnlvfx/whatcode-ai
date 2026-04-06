@@ -4,11 +4,13 @@ import { startWhatcode } from './server.ts';
 import { tailscale, stopServe } from './tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
 import { printQrCode } from './qrcode.ts';
-import { getLocalUrl } from './ip.ts';
+import { getLocalIp } from './ip.ts';
 import { startNotifications } from './experimentals/notifications.ts';
 import { featureFlags } from './config/feature-flags.ts';
 import { logger } from './logger.ts';
+import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
+import { SERVER_URL } from './config/config.ts';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   tailscale?: boolean;
@@ -27,11 +29,17 @@ export const createWhatcodeServer = async ({
   ...serverOptions
 }: WhatcodeServerConfig) => {
   logger.init({ debug });
+  const accounts = await apnTokenStore.get();
+  const accountCount = accounts.length;
+  logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
   const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
   const resolvedPort = proxy ? (proxyPort ?? 8192) : opencodePort;
-  const opencodeUrl = getLocalUrl(opencodePort);
-  const daemonUrl = getLocalUrl(resolvedPort);
+  const localIp = getLocalIp();
+  const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
+  const daemonUrl = localIp ? `http://${localIp}:${resolvedPort.toString()}` : undefined;
+
+  logger.debug('relay', SERVER_URL);
 
   let tailscaleUrl: string | undefined;
 
@@ -55,13 +63,17 @@ export const createWhatcodeServer = async ({
   }
 
   if (useTailscale && !proxy) {
+    // keep the process running
     process.stdin.resume();
   }
 
-  // The URL to advertise is the most capable one available
   const advertiseUrl = tailscaleUrl ?? (proxy ? daemonUrl : opencodeUrl);
-  logger.info('whatcode', `use this URL in the app: ${advertiseUrl}`);
-  printQrCode(advertiseUrl, password);
+  if (advertiseUrl) {
+    logger.info('whatcode', `use this URL in the app: ${advertiseUrl}`);
+    printQrCode(advertiseUrl, password);
+  } else {
+    logger.info('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
+  }
 };
 
 export { resetWhatcodeServer } from './reset.ts';
