@@ -1,18 +1,12 @@
 /* eslint-disable no-restricted-properties */
 import { execa } from 'execa';
-import { platform } from './config/constants.ts';
 import * as z from 'zod';
-import { logger } from './logger.ts';
+import { logger } from '../logger.ts';
+import { platform } from '../config/constants.ts';
 
-export const tailscale = async (port: number): Promise<string> => {
-  await assertTailscaleInstalled();
-  await assertDaemonReachable();
-  const hostname = await getHostname();
-  const already = await isServeRunning(port);
-  if (!already) await startServe(port);
-  const url = `https://${hostname.replace(/-$/, '')}`;
-  return url;
-};
+export interface TailscaleResult {
+  url: string;
+}
 
 const serveStatusSchema = z.object({
   TCP: z.record(z.string(), z.unknown()).optional(),
@@ -33,16 +27,6 @@ const startServe = async (port: number): Promise<void> => {
   // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
   // this runs in the background — the process exits after setting up the config
   await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
-};
-
-export const stopServe = async (port: number): Promise<void> => {
-  try {
-    // Remove only our specific port rule — avoids clobbering other users' ports
-    await execa('tailscale', ['serve', 'off', port.toString()]);
-    logger.debug('tailscale', 'serving off');
-  } catch {
-    // best-effort — if tailscale is already gone, nothing to do
-  }
 };
 
 const tailscaleSchema = z.object({
@@ -90,4 +74,29 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     return !(error instanceof Error && 'code' in error && (error as NodeJS.ErrnoException).code === 'ENOENT');
   }
+};
+
+export const tailscale = {
+  start: async (port: number): Promise<TailscaleResult> => {
+    await assertTailscaleInstalled();
+    await assertDaemonReachable();
+    const hostname = await getHostname();
+    logger.debug('tailscale', `checking if serve is already running on port ${port.toString()}`);
+    const isRunning = await isServeRunning(port);
+    if (isRunning) {
+      logger.debug('tailscale', `serve already running on port ${port.toString()} — skipping start`);
+    } else {
+      logger.debug('tailscale', `serve not running on port ${port.toString()} — starting`);
+      await startServe(port);
+      logger.debug('tailscale', `serve started — we own port ${port.toString()}`);
+    }
+    const url = `https://${hostname.replace(/-$/, '')}`;
+    logger.debug('tailscale', `resolved url: ${url}`);
+    return { url };
+  },
+  stop: async (port: number): Promise<void> => {
+    // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
+    // this runs in the background — the process exits after setting up the config
+    await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
+  },
 };

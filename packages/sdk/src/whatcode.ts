@@ -1,7 +1,7 @@
 import { createOpencodeClient, type ServerOptions } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
-import { tailscale, stopServe } from './tailscale.ts';
+import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
 import { printQrCode } from './qrcode.ts';
 import { getLocalIp } from './ip.ts';
@@ -11,6 +11,7 @@ import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
 import { SERVER_URL } from './config/config.ts';
+import { tailscale } from './plugins/tailscale.ts';
 
 export interface WhatcodeServerConfig extends Omit<ServerOptions, 'config'> {
   tailscale?: boolean;
@@ -27,6 +28,7 @@ export const createWhatcodeServer = async ({
   proxy,
   debug = false,
   ...serverOptions
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }: WhatcodeServerConfig) => {
   logger.init({ debug });
   const accounts = await apnTokenStore.get();
@@ -34,24 +36,15 @@ export const createWhatcodeServer = async ({
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
   const { port: opencodePort } = await opencode({ ...(proxy ? {} : { hostname: '0.0.0.0' }), ...serverOptions });
-  const resolvedPort = proxy ? (proxyPort ?? 8192) : opencodePort;
+  const daemonPort = proxyPort ?? 8192;
+  const resolvedPort = proxy ? daemonPort : opencodePort;
   const localIp = getLocalIp();
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
-  const daemonUrl = localIp ? `http://${localIp}:${resolvedPort.toString()}` : undefined;
+  const daemonUrl = localIp ? `http://${localIp}:${daemonPort.toString()}` : undefined;
 
   logger.debug('relay', SERVER_URL);
 
-  let tailscaleUrl: string | undefined;
-
-  if (useTailscale) {
-    tailscaleUrl = await tailscale(resolvedPort);
-    asyncExitHook(
-      async () => {
-        await stopServe(resolvedPort);
-      },
-      { wait: 3000 },
-    );
-  }
+  identityStore.set({ machineId, opencodeUrl, daemonUrl });
 
   if (proxy) {
     const client = createOpencodeClient({ baseUrl: `http://localhost:${opencodePort.toString()}`, throwOnError: true });
@@ -59,7 +52,19 @@ export const createWhatcodeServer = async ({
       startNotifications(client);
     }
 
-    await startWhatcode({ port: resolvedPort, opencodePort, client, identity: { machineId, opencodeUrl, daemonUrl, tailscaleUrl } });
+    await startWhatcode({ port: daemonPort, opencodePort, client });
+  }
+
+  if (useTailscale) {
+    const result = await tailscale.start(resolvedPort);
+    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
+    logger.debug('tailscale', 'we own the serve — registering exit hook to stop it');
+    asyncExitHook(
+      async () => {
+        await tailscale.stop(resolvedPort);
+      },
+      { wait: 3000 },
+    );
   }
 
   if (useTailscale && !proxy) {
@@ -67,7 +72,7 @@ export const createWhatcodeServer = async ({
     process.stdin.resume();
   }
 
-  const advertiseUrl = tailscaleUrl ?? (proxy ? daemonUrl : opencodeUrl);
+  const advertiseUrl = identityStore.get()?.tailscaleUrl ?? (proxy ? daemonUrl : opencodeUrl);
   if (advertiseUrl) {
     logger.info('whatcode', `use this URL in the app: ${advertiseUrl}`);
     printQrCode(advertiseUrl, password);

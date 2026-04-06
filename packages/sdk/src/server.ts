@@ -4,6 +4,7 @@ import { getLastMessageTimeByProject } from './db.ts';
 import express, { Router, type Request, type Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { registerDeviceTokenRouter } from './routes/register-device-token.ts';
+import { identityStore } from './stores/identity.ts';
 import { logger } from './logger.ts';
 
 export interface DaemonIdentity {
@@ -17,12 +18,10 @@ export const startWhatcode = async ({
   port,
   opencodePort,
   client,
-  identity,
 }: {
   port: number;
   opencodePort: number;
   client: OpencodeClient;
-  identity: DaemonIdentity;
 }): Promise<void> => {
   const app = express();
   app.disable('x-powered-by');
@@ -30,7 +29,7 @@ export const startWhatcode = async ({
   app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
   app.get('/whatcode/identity', (_req: Request, res: Response) => {
-    res.json(identity);
+    res.json(identityStore.get());
   });
 
   const projectRouter = Router();
