@@ -2865,26 +2865,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core@npm:1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/core@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-1.81.0.tgz"
-  checksum: 10c0/aa5670de39bbaacbfcb5d0aecc98e411b19f756c464e7249275b3bd00a0099a817436073f0d2249a7661079990ec8d968186fe8a6ebdf1502d0f87e9e06e6a3b
+"@goatjs/core@npm:1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/core@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-1.82.0.tgz"
+  checksum: 10c0/eca9fb6cfc991b1e67557762c4146b35ce6a78e01d284ac78162defc1ce8d6ad5f96519fa837ae218eea63a1a0e967ea57e85cf0c938126c989c335d3680f671
   languageName: node
   linkType: hard
 
-"@goatjs/dbz@npm:^1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/dbz@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-1.81.0.tgz"
+"@goatjs/dbz@npm:^1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/dbz@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-1.82.0.tgz"
   dependencies:
-    "@goatjs/node": "npm:1.81.0"
-    "@goatjs/rimraf": "npm:1.81.0"
+    "@goatjs/node": "npm:1.82.0"
+    "@goatjs/rimraf": "npm:1.82.0"
     "@types/cross-spawn": "npm:^6.0.6"
     cross-spawn: "npm:^7.0.6"
     execa: "npm:^9.6.1"
     yargs: "npm:^18.0.0"
   bin:
     dbz: dist/cli.js
-  checksum: 10c0/b3a148498c21c2569abdf2e4f82c949f28b3936ad36f0e49025c3f95fd5d334e7b564fceccc0bf4fcbd9f98e73c61f539689662e8ac889a3f27bfc01cf59944e
+  checksum: 10c0/8f0718d20c5e4d11172a5903e93a69054e0a59ba133157b8066eccdc75e2699aff292471ec9a94ca5594aa4b3cf6228d74da954578641fbcfc4e438e3dbe9a17
   languageName: node
   linkType: hard
 
@@ -2907,48 +2907,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node@npm:1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/node@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-1.81.0.tgz"
+"@goatjs/node@npm:1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/node@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-1.82.0.tgz"
   dependencies:
-    "@goatjs/core": "npm:1.81.0"
+    "@goatjs/core": "npm:1.82.0"
     sanitize-filename: "npm:1.6.4"
   peerDependencies:
     prettier: "*"
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 10c0/2051a15307bfd5209fb76e219db4c064f0dee39667f421ba774df055becc0adb953a818c4bb9af650e96473b6b3fed35af371d93a7e5f37ff580ae40cedf7788
+  checksum: 10c0/2a26447609907831236d96007385b584168dc9f9335ff497a37a969b4575f73f8a16233a69a96d02b1a523fa6c5d76ee6fb79906e24f7b061c201893e8945fc9
   languageName: node
   linkType: hard
 
-"@goatjs/rimraf@npm:1.81.0, @goatjs/rimraf@npm:^1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/rimraf@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Frimraf%2F-%2F%40goatjs%2Frimraf-1.81.0.tgz"
+"@goatjs/rimraf@npm:1.82.0, @goatjs/rimraf@npm:^1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/rimraf@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Frimraf%2F-%2F%40goatjs%2Frimraf-1.82.0.tgz"
   bin:
     rimraf: dist/cli/rimraf.js
-  checksum: 10c0/edecefda6924cc5ea945d1dc7325a17fd3601b0782c1a1fd02d849073c293a73dc89bcb9f446b93706cc5ff20bb4fcb5faad9884de0fc25ee1a25afa48aff1e3
+  checksum: 10c0/a9e407ee8ed68921ce79159108d19e86c1b12bc856bff67c78a35105c794886431345cc2b960931890e4a64749eae23bce95882a2998e1cdb5b0b25a4fe43221
   languageName: node
   linkType: hard
 
-"@goatjs/ts-unused-exports@npm:^1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/ts-unused-exports@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fts-unused-exports%2F-%2F%40goatjs%2Fts-unused-exports-1.81.0.tgz"
+"@goatjs/ts-unused-exports@npm:^1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/ts-unused-exports@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fts-unused-exports%2F-%2F%40goatjs%2Fts-unused-exports-1.82.0.tgz"
   dependencies:
-    "@goatjs/node": "npm:1.81.0"
+    "@goatjs/node": "npm:1.82.0"
     ts-unused-exports: "npm:^11.0.1"
   peerDependencies:
     typescript: "*"
-  checksum: 10c0/db92e3d4024605eb69c61247f7c4806e73ae1119f7ef38da2f2f405143c37558e147d1e9447463d10daebe099c9a35e6be9002643a021e0991160b54a7678c35
+  checksum: 10c0/97082a9e9459b0c0cc469a8d7b22ca594c4ca53109e0e050b38109b106eee81095667f6de3bb0204b7e40ad19255fb69bfb02c177232f86e18f91ce66e9eb95c
   languageName: node
   linkType: hard
 
-"@goatjs/typescript-config@npm:^1.81.0":
-  version: 1.81.0
-  resolution: "@goatjs/typescript-config@npm:1.81.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Ftypescript-config%2F-%2F%40goatjs%2Ftypescript-config-1.81.0.tgz"
+"@goatjs/typescript-config@npm:^1.82.0":
+  version: 1.82.0
+  resolution: "@goatjs/typescript-config@npm:1.82.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Ftypescript-config%2F-%2F%40goatjs%2Ftypescript-config-1.82.0.tgz"
   peerDependencies:
     typescript: "*"
-  checksum: 10c0/8eeefd48995ec8744876cb7c868b0a85d970d3922daa36966acc9b9771750376cae882fc18c2b630b42c052888cb38badf52a06e5def148b4c7eedc063de7e5f
+  checksum: 10c0/c01edd84a7384361835cd7d8c8bb0839b89e2bb3a700940a58167563e380663a0712f28620466517156ce06c9b060490c3050e4b15148216e218b6d49ec6f171
   languageName: node
   linkType: hard
 
@@ -3440,12 +3440,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.3.17":
-  version: 1.3.17
-  resolution: "@opencode-ai/sdk@npm:1.3.17"
+"@opencode-ai/sdk@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@opencode-ai/sdk@npm:1.4.0"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/e2fee4f05cb86b797a5d198d8b020f23d2d56e3e240984fd1bf1c7f976ac30e64330cafb117b2f0e813d33dd69b2b991f14b4365b8845831ae4a4cd041bcbe36
+  checksum: 10c0/213c668d745ae988783948b0e9c736393a13c1bebfdd4e8b5ab303acef0ab7bfcb60cd7bfaecd1da4834f9817f840fa70ab4c93325c9b0e37c767eba3a15be2c
   languageName: node
   linkType: hard
 
@@ -3876,44 +3876,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@turbo/darwin-64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/darwin-64@npm:2.9.4"
+"@turbo/darwin-64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/darwin-64@npm:2.9.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/darwin-arm64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/darwin-arm64@npm:2.9.4"
+"@turbo/darwin-arm64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/darwin-arm64@npm:2.9.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/linux-64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/linux-64@npm:2.9.4"
+"@turbo/linux-64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/linux-64@npm:2.9.5"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/linux-arm64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/linux-arm64@npm:2.9.4"
+"@turbo/linux-arm64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/linux-arm64@npm:2.9.5"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/windows-64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/windows-64@npm:2.9.4"
+"@turbo/windows-64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/windows-64@npm:2.9.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/windows-arm64@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@turbo/windows-arm64@npm:2.9.4"
+"@turbo/windows-arm64@npm:2.9.5":
+  version: 2.9.5
+  resolution: "@turbo/windows-arm64@npm:2.9.5"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -4718,9 +4718,9 @@ __metadata:
   resolution: "@whatcode-ai/example@workspace:apps/example"
   dependencies:
     "@goatjs/node-monorepo-eslint": "npm:^2.8.0"
-    "@goatjs/rimraf": "npm:^1.81.0"
-    "@goatjs/ts-unused-exports": "npm:^1.81.0"
-    "@goatjs/typescript-config": "npm:^1.81.0"
+    "@goatjs/rimraf": "npm:^1.82.0"
+    "@goatjs/ts-unused-exports": "npm:^1.82.0"
+    "@goatjs/typescript-config": "npm:^1.82.0"
     "@types/node": "npm:^25.5.2"
     "@whatcode-ai/sdk": "workspace:*"
     eslint: "npm:^10.2.0"
@@ -4733,9 +4733,9 @@ __metadata:
   resolution: "@whatcode-ai/sdk@workspace:packages/sdk"
   dependencies:
     "@goatjs/node-monorepo-eslint": "npm:^2.8.0"
-    "@goatjs/rimraf": "npm:^1.81.0"
-    "@goatjs/typescript-config": "npm:^1.81.0"
-    "@opencode-ai/sdk": "npm:^1.3.17"
+    "@goatjs/rimraf": "npm:^1.82.0"
+    "@goatjs/typescript-config": "npm:^1.82.0"
+    "@opencode-ai/sdk": "npm:^1.4.0"
     "@types/express": "npm:^5.0.6"
     "@types/node": "npm:^25.5.2"
     "@types/qrcode-terminal": "npm:^0.12.2"
@@ -4756,8 +4756,8 @@ __metadata:
   resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
   dependencies:
     "@goatjs/node-monorepo-eslint": "npm:^2.8.0"
-    "@goatjs/rimraf": "npm:^1.81.0"
-    "@goatjs/typescript-config": "npm:^1.81.0"
+    "@goatjs/rimraf": "npm:^1.82.0"
+    "@goatjs/typescript-config": "npm:^1.82.0"
     "@types/node": "npm:^25.5.2"
     "@types/update-notifier": "npm:^6.0.8"
     "@types/yargs": "npm:^17.0.35"
@@ -14863,16 +14863,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.9.4":
-  version: 2.9.4
-  resolution: "turbo@npm:2.9.4"
+"turbo@npm:^2.9.5":
+  version: 2.9.5
+  resolution: "turbo@npm:2.9.5"
   dependencies:
-    "@turbo/darwin-64": "npm:2.9.4"
-    "@turbo/darwin-arm64": "npm:2.9.4"
-    "@turbo/linux-64": "npm:2.9.4"
-    "@turbo/linux-arm64": "npm:2.9.4"
-    "@turbo/windows-64": "npm:2.9.4"
-    "@turbo/windows-arm64": "npm:2.9.4"
+    "@turbo/darwin-64": "npm:2.9.5"
+    "@turbo/darwin-arm64": "npm:2.9.5"
+    "@turbo/linux-64": "npm:2.9.5"
+    "@turbo/linux-arm64": "npm:2.9.5"
+    "@turbo/windows-64": "npm:2.9.5"
+    "@turbo/windows-arm64": "npm:2.9.5"
   dependenciesMeta:
     "@turbo/darwin-64":
       optional: true
@@ -14888,7 +14888,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10c0/a3c49374da8e2422dc4cddeec027716e62f2f8190489d8c40add2a337a236b7c06f06a1423198350c88cedecfcaacd097582a2f725b23b57432183ace8e47e74
+  checksum: 10c0/24719239927d8a662d2935c411965210618c40e5707c98699569186b525ad186cad1a22c5968e845f1b5a2ed7251c8f08a9a9dfe891f2e787042b8e951dc5482
   languageName: node
   linkType: hard
 
@@ -15613,10 +15613,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "whatcode-ai@workspace:."
   dependencies:
-    "@goatjs/dbz": "npm:^1.81.0"
+    "@goatjs/dbz": "npm:^1.82.0"
     "@whatcode-ai/whatcode": "workspace:*"
     prettier: "npm:^3.8.1"
-    turbo: "npm:^2.9.4"
+    turbo: "npm:^2.9.5"
   languageName: unknown
   linkType: soft
 

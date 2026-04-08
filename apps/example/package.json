@@ -24,9 +24,9 @@
   },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^2.8.0",
-    "@goatjs/rimraf": "^1.81.0",
-    "@goatjs/ts-unused-exports": "^1.81.0",
-    "@goatjs/typescript-config": "^1.81.0",
+    "@goatjs/rimraf": "^1.82.0",
+    "@goatjs/ts-unused-exports": "^1.82.0",
+    "@goatjs/typescript-config": "^1.82.0",
     "@types/node": "^25.5.2",
     "eslint": "^10.2.0",
     "typescript": "^6.0.2"
