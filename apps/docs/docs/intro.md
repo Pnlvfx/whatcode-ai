@@ -13,7 +13,7 @@ This documentation covers three things:
 
 - **Whatcode** — the iOS app itself: what it does, how to connect it to your machine, and how to navigate your projects and sessions.
 - **opencode** — how to install and run the opencode server that Whatcode connects to.
-- **Daemon** — the lightweight proxy that sits between the iOS app and opencode, enabling push notifications, better sorting, and optional remote access via Tailscale.
+- **Daemon** — the lightweight server that sits between the iOS app and opencode, enabling push notifications, better sorting, and optional remote access via Tailscale.
 
 ## Quick overview
 

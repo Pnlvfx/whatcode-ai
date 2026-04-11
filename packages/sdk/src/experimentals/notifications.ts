@@ -103,7 +103,7 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
           }
           case 'session.error': {
             const { sessionID, error } = event.payload.properties;
-            logger.debug('notifications', `session.error event received for session ${sessionID}`);
+            logger.debug('notifications', `session.error event received for session ${sessionID ?? 'unknown'}`);
             let session;
             if (sessionID) {
               ({ data: session } = await client.session.get<true>({ sessionID }));

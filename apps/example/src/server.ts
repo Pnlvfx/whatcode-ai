@@ -5,4 +5,4 @@ import { createWhatcodeServer } from '@whatcode-ai/sdk';
  * 2. Start tailscale, you can use the app from everywhere.
  * 3. Start our daemon, improve the experience on the app and allow you to receive notifications.
  */
-await createWhatcodeServer({ tailscale: true, proxy: true });
+await createWhatcodeServer({ tailscale: true });

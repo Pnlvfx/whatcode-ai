@@ -46,8 +46,8 @@ opencode reads its configuration from `~/.config/opencode/config.json`. You can 
 
 ## Ports
 
-By default opencode listens on port `4096`. The Whatcode daemon listens on port `8192` (proxy port) when running in proxy mode. Both ports can be changed via CLI flags:
+By default opencode listens on port `4096` and the Whatcode server listens on port `8192`. Both ports can be changed via CLI flags:
 
 ```bash
-npx @whatcode-ai/sdk --port 4096 --proxy-port 8192
+npx @whatcode-ai/sdk --opencode-port 4096 --port 8192
 ```

@@ -1,9 +1,8 @@
 import { type ServerOptions, createOpencodeServer } from '@opencode-ai/sdk/v2';
 import { logger } from './logger.ts';
 
-export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
-  const port = options.port ?? 4096;
-  const running = await isOpencodeRunning(port);
+export const opencode = async (options: Omit<ServerOptions, 'config' | 'port'> & { port: number }) => {
+  const running = await isOpencodeRunning(options.port);
 
   if (running) {
     logger.info('opencode', 'already running');
@@ -11,8 +10,6 @@ export const opencode = async (options: Omit<ServerOptions, 'config'>) => {
     await createOpencodeServer(options);
     logger.info('opencode', 'started');
   }
-
-  return { port };
 };
 
 const isOpencodeRunning = async (port: number): Promise<boolean> => {

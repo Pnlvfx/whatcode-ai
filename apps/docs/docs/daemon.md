@@ -40,14 +40,12 @@ await createWhatcodeServer({
 
 When you run the daemon:
 
-1. It starts opencode on `0.0.0.0:4096` (or reuses an existing instance).
-2. In proxy mode, it starts an Express server on port `8192` that sits in front of opencode.
+1. It starts opencode on localhost (or reuses an existing instance).
+2. It starts a Whatcode server on port `8192` that sits in front of opencode, patching responses to improve the mobile experience.
 3. It prints your local network URL and a QR code. Scan it with the app to connect.
 4. If `--tailscale` is passed, it also prints a secure HTTPS URL on your tailnet.
 
-## Proxy mode
-
-The proxy (`--proxy`) adds a thin layer between the iOS app and opencode. It currently:
+The Whatcode server layer:
 
 - **Patches project sorting** — the `/project` endpoint enriches each project with the timestamp of its most recent message, so the app can sort projects by actual activity rather than creation date.
 - **Disables caching** — forces `cache-control: no-cache` and `x-accel-buffering: no` on all proxied responses, which is important for the SSE event stream the app subscribes to.
@@ -56,7 +54,7 @@ The proxy (`--proxy`) adds a thin layer between the iOS app and opencode. It cur
 
 ## Push notifications
 
-When proxy mode is enabled and the notification feature flag is active, the daemon subscribes to the opencode event stream and watches for:
+When the notification feature flag is active, the daemon subscribes to the opencode event stream and watches for:
 
 - `session.idle` — the agent finished its turn.
 - `session.error` — the agent hit an unrecoverable error.
@@ -95,11 +93,10 @@ tailscale up
 
 ## CLI reference
 
-| Flag           | Type    | Default   | Description                        |
-| -------------- | ------- | --------- | ---------------------------------- |
-| `--tailscale`  | boolean | —         | Expose via Tailscale HTTPS         |
-| `--proxy`      | boolean | —         | Enable the Whatcode proxy layer    |
-| `--port`       | number  | `4096`    | opencode port                      |
-| `--proxy-port` | number  | `8192`    | Proxy server port                  |
-| `--hostname`   | string  | `0.0.0.0` | Hostname to bind opencode to       |
-| `--timeout`    | number  | —         | Timeout (ms) for opencode to start |
+| Flag              | Type    | Default   | Description                        |
+| ----------------- | ------- | --------- | ---------------------------------- |
+| `--tailscale`     | boolean | —         | Expose via Tailscale HTTPS         |
+| `--port`          | number  | `8192`    | Whatcode server port               |
+| `--opencode-port` | number  | `4096`    | opencode server port               |
+| `--hostname`      | string  | `0.0.0.0` | Hostname to bind opencode to       |
+| `--timeout`       | number  | —         | Timeout (ms) for opencode to start |

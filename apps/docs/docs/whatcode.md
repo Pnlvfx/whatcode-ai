@@ -36,7 +36,7 @@ See [Getting Started](/) for the full connection walkthrough. In short:
 
 If you can't scan the QR code, tap **Continue without QR** during setup and enter:
 
-- **Server URL** — the local IP printed in your terminal (e.g. `http://192.168.1.10:4096`) or your Tailscale HTTPS URL.
+- **Server URL** — the local IP printed in your terminal (e.g. `http://192.168.1.10:8192`) or your Tailscale HTTPS URL.
 - **Password** — optional, only if you started the daemon with `--password`.
 
 ## Notifications
