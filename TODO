@@ -22,3 +22,5 @@ icon / favicons on docs, email
 show qr only if there are no user connected or if --qr is explicity passed.
 
 do not send notifications for sub agent events
+
+mention whatcode reset troubleshotting

@@ -28,7 +28,6 @@ export const createWhatcodeServer = async ({
   proxy,
   debug = false,
   ...serverOptions
-  // eslint-disable-next-line sonarjs/cognitive-complexity
 }: WhatcodeServerConfig) => {
   logger.init({ debug });
   const accounts = await apnTokenStore.get();
