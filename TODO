@@ -10,9 +10,6 @@ proxyPort -> whatcodePort or whatcodeDPort (Daemon)
 proxy -> something more futuristic
 proxy default to true
 
-we can serve the project icons from a custom endpoint to avoid the issue
-of opencode service the raw image, that will also allow us to further optimize them and use them for notifications
-
 catch all errors, here and on the ios app
 search for a security scan skill, react improvements, rn improvmenets
 
@@ -23,3 +20,5 @@ READ ALL DOCS AND IMPROVE THEM.
 icon / favicons on docs, email
 
 show qr only if there are no user connected or if --qr is explicity passed.
+
+do not send notifications for sub agent events
