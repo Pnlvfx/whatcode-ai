@@ -6,29 +6,23 @@ const config: Config = {
   title: 'WhatCode AI',
   tagline: 'Documentation',
   favicon: 'img/favicon.ico',
-
-  future: {
-    v4: true,
-  },
-
-  url: 'https://docs.whatcode.ai',
+  future: { v4: true },
+  url: 'https://whatcode.app',
   baseUrl: '/',
-
   organizationName: 'Pnlvfx',
   projectName: 'whatcode-ai',
 
+  trailingSlash: true,
   onBrokenLinks: 'throw',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
   },
-
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
   presets: [
     [
       'classic',
@@ -45,7 +39,6 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,

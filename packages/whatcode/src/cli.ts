@@ -7,7 +7,7 @@ import pkg from '../package.json' with { type: 'json' };
 
 updateNotifier({ pkg }).notify();
 
-const { tailscale, reset, port, opencodePort, debug } = await yargs(hideBin(process.argv))
+const { tailscale, reset, port, opencodePort, debug, password } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -18,6 +18,7 @@ const { tailscale, reset, port, opencodePort, debug } = await yargs(hideBin(proc
   .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
   .option('opencode-port', { type: 'number', description: 'Port for the opencode server (default: 4096)' })
   .option('debug', { type: 'boolean', description: 'Enable debug logs (APN tokens, internal events, etc.)' })
+  .option('password', { type: 'string', description: 'Password to protect the Whatcode and opencode servers (HTTP Basic Auth)' })
   .parseAsync();
 
 if (reset) {
@@ -29,4 +30,5 @@ await createWhatcodeServer({
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
   ...(debug !== undefined && { debug }),
+  ...(password !== undefined && { password }),
 });

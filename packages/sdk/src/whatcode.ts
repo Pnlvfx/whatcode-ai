@@ -33,7 +33,7 @@ export const createWhatcodeServer = async ({
   const accountCount = accounts.length;
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
-  await opencode({ port: opencodePort });
+  await opencode({ port: opencodePort, password });
   const localIp = getLocalIp();
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
@@ -48,7 +48,7 @@ export const createWhatcodeServer = async ({
     startNotifications(client);
   }
 
-  await startWhatcode({ port, opencodePort: opencodePort, client });
+  await startWhatcode({ port, opencodePort: opencodePort, password, client });
 
   if (useTailscale) {
     const result = await tailscale.start(port);
