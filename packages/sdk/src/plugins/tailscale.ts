@@ -26,7 +26,7 @@ const isServeRunning = async (port: number): Promise<boolean> => {
 const startServe = async (port: number): Promise<void> => {
   // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
   // this runs in the background — the process exits after setting up the config
-  await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
+  await execa('tailscale', ['serve', '--bg', port.toString()]);
 };
 
 const tailscaleSchema = z.object({

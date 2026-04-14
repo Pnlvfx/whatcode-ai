@@ -4,8 +4,8 @@ import { logger } from '../logger.ts';
 
 try {
   process.loadEnvFile();
-} catch (err) {
-  logger.error('env', 'Failed to load env file', err);
+} catch {
+  logger.debug('env', 'Failed to load env file');
   // no .env file present, using defaults
 }
 
