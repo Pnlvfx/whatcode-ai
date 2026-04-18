@@ -169,6 +169,8 @@ const pushToDevice = async (
       logger.error('notifications', `push failed: ${res.statusText} (${res.status.toString()})`);
     }
   }
+
+  logger.debug('notifications', 'forwarded successfully.');
 };
 
 const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
