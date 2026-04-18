@@ -1,17 +1,6 @@
 improve cli instructions for when tsilscale is enabled, point to their docs, instruct to install ios app
 also all setups in general.
 test all possible configs mixed
-fetch our latest release version, if user is using an outdated version, show a warning and a command to update
-
-improve config, create a config store
-
-port -> opencodePort
-proxyPort -> whatcodePort or whatcodeDPort (Daemon)
-proxy -> something more futuristic
-proxy default to true
-
-catch all errors, here and on the ios app
-search for a security scan skill, react improvements, rn improvmenets
 
 improve notifications for errors, if an error occur both error and idle fire almost at the same time, we should decide how to handle it.
 
@@ -23,4 +12,4 @@ show qr only if there are no user connected or if --qr is explicity passed.
 
 do not send notifications for sub agent events
 
-mention whatcode reset troubleshotting
+troubleshotting: mention whatcode reset
