@@ -15,7 +15,6 @@ try {
   await spawnWithLog('yarn', ['vercel', 'pull', '--yes']);
   await spawnWithLog('yarn', ['vercel', 'build', '--prod']);
   await spawnWithLog('yarn', ['vercel', 'deploy', '--prebuilt', '--prod']);
-  await git.checkout('.yarnrc.yml');
   await execa('yarn', ['version', 'minor']);
   await git.add();
   await git.commit('RELEASE');

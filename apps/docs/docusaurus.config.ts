@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'WhatCode AI',
   tagline: 'Documentation',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
   future: { v4: true },
   url: 'https://whatcode.app',
   baseUrl: '/',
@@ -47,7 +47,8 @@ const config: Config = {
       title: 'WhatCode AI',
       logo: {
         alt: 'WhatCode AI Logo',
-        src: 'img/logo.svg',
+        src: 'img/light-logo.svg',
+        srcDark: 'img/dark-logo.svg',
       },
       items: [
         {
