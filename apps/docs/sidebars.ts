@@ -4,9 +4,10 @@ const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     { type: 'doc', id: 'intro', label: 'Introduction' },
     { type: 'doc', id: 'getting-started', label: 'Getting Started' },
-    { type: 'doc', id: 'whatcode', label: 'Whatcode' },
+    { type: 'doc', id: 'whatcode', label: 'WhatCode' },
     { type: 'doc', id: 'opencode', label: 'OpenCode' },
     { type: 'doc', id: 'daemon', label: 'Daemon' },
+    { type: 'doc', id: 'pricing', label: 'Pricing' },
     { type: 'doc', id: 'support', label: 'Support' },
     {
       type: 'category',
