@@ -2,6 +2,8 @@
 
 SDK to start [opencode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com).
 
+Full documentation at **[whatcode.app](https://whatcode.app)**.
+
 ## Install
 
 ```bash
@@ -29,21 +31,9 @@ await createWhatcodeServer({
 | `timeout`      | `number`      | `undefined` | Timeout in milliseconds for the opencode server to start |
 | `signal`       | `AbortSignal` | `undefined` | AbortSignal to stop the opencode server programmatically |
 
-## How it works
-
-1. Starts opencode on localhost (or reuses an existing instance).
-2. Starts the Whatcode server on port `8192` in front of opencode, patching responses to improve the mobile experience.
-3. If `tailscale: true`, verifies Tailscale is installed and authenticated, runs `tailscale serve --bg 8192`, and prints the HTTPS URL to use in your app.
-
 ## CLI
 
 Looking for the CLI? Use [@whatcode-ai/whatcode](https://www.npmjs.com/package/@whatcode-ai/whatcode).
-
-## Requirements
-
-- Node.js 20+
-- [opencode](https://opencode.ai) installed
-- [Tailscale](https://tailscale.com) installed and authenticated _(only for `tailscale: true`)_
 
 ## License
 

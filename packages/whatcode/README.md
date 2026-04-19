@@ -2,6 +2,8 @@
 
 CLI to start [opencode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com).
 
+Full documentation at **[whatcode.app](https://whatcode.app)**.
+
 ## Usage
 
 ```bash
@@ -22,12 +24,6 @@ npx @whatcode-ai/whatcode --tailscale
 | `--opencode-port` |       | `4096`    | Port for the opencode server                         |
 | `--timeout`       |       |           | Timeout (ms) for the opencode server to start        |
 | `--help`          |       |           | Show help                                            |
-
-## Requirements
-
-- Node.js 20+
-- [opencode](https://opencode.ai) installed
-- [Tailscale](https://tailscale.com) installed and authenticated _(only for `--tailscale`)_
 
 ## Programmatic usage
 
