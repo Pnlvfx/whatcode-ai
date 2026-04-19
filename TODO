@@ -6,7 +6,7 @@ improve notifications for errors, if an error occur both error and idle fire alm
 
 READ ALL DOCS AND IMPROVE THEM.
 
-icon / favicons on docs, email
+icon / favicons on docs, email, theme, header logo, marketing page
 
 show qr only if there are no user connected or if --qr is explicity passed.
 
