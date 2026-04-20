@@ -9,9 +9,9 @@ export interface StoreParams<T extends z.ZodType> {
 
 export interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>> {
   get: TParams['initial'] extends z.infer<T> ? () => Promise<z.infer<T>> : () => Promise<z.infer<T> | undefined>;
-  set: (value: z.infer<T>) => Promise<void>;
-  /** @experimental Shallow-merges the given partial into the current value. Avoid for arrays or nested objects. */
-  experimental_merge: (partial: Partial<z.infer<T>>) => Promise<void>;
+  set: (
+    value: z.infer<T> | ((prev: TParams['initial'] extends z.infer<T> ? z.infer<T> : z.infer<T> | undefined) => z.infer<T> | Promise<z.infer<T>>),
+  ) => Promise<z.infer<T>>;
   clear: () => Promise<void>;
 }
 
@@ -36,7 +36,7 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
   };
 
   const get = async () => {
-    if (currentConfig === undefined) {
+    if (currentConfig !== undefined) {
       const buf = await getBuffer();
       if (!buf) return currentConfig;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -46,7 +46,7 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
     return currentConfig;
   };
 
-  const set = async (value: StoreType) => {
+  const write = async (value: StoreType) => {
     currentConfig = await schema.parseAsync(value);
     await fs.writeFile(configFile, JSON.stringify(currentConfig));
   };
@@ -55,32 +55,36 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
   if (buf) {
     const parsed: unknown = JSON.parse(buf.toString());
     const result = await schema.safeParseAsync(parsed);
-    if (result.success) {
-      currentConfig = result.data;
-    } else {
-      // eslint-disable-next-line no-console
-      console.warn(
+    if (!result.success) {
+      throw new Error(
         `Found corrupted store "${name}". The stored value doesn't match the current schema — this usually happens when the schema changes or the file is edited manually. Consider resetting or migrating the stored value.`,
       );
     }
   } else if (initial !== undefined) {
-    await set(initial);
+    await write(initial);
   }
+
+  const isUpdater = (
+    v: StoreType | ((prev: StoreType | undefined) => StoreType | Promise<StoreType>),
+  ): v is (prev: StoreType | undefined) => StoreType | Promise<StoreType> => typeof v === 'function';
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return {
     get,
-    set,
-    experimental_merge: async (partial: Partial<StoreType>) => {
-      const update = currentConfig === undefined ? partial : { ...currentConfig, ...partial };
-      currentConfig = await schema.parseAsync(update);
-      await fs.writeFile(configFile, JSON.stringify(currentConfig));
+    set: async (value: StoreType | ((prev: StoreType | undefined) => StoreType | Promise<StoreType>)) => {
+      const resolved = isUpdater(value) ? await value(currentConfig) : value;
+      await write(resolved);
+      return currentConfig;
     },
     clear: async () => {
-      try {
-        await fs.rm(configFile);
-      } catch {}
-      currentConfig = undefined;
+      if (initial === undefined) {
+        try {
+          await fs.rm(configFile);
+        } catch {}
+        currentConfig = undefined;
+      } else {
+        await write(initial);
+      }
     },
   } as StoreResult<T, TParams>;
 };

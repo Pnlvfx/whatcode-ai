@@ -71,4 +71,6 @@ export const createWhatcodeServer = async ({
   }
 };
 
-export { resetWhatcodeServer } from './reset.ts';
+export const resetWhatcodeServer = async () => {
+  await apnTokenStore.clear();
+};
