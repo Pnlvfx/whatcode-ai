@@ -36,7 +36,7 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
   };
 
   const get = async () => {
-    if (currentConfig !== undefined) {
+    if (currentConfig === undefined) {
       const buf = await getBuffer();
       if (!buf) return currentConfig;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
