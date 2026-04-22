@@ -1,7 +1,7 @@
 {
   "name": "@whatcode-ai/whatcode",
   "description": "SDK and CLI to start opencode and optionally expose it over HTTPS via Tailscale.",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "keywords": [
     "opencode",
     "tailscale",
