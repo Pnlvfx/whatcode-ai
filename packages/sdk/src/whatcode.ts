@@ -27,7 +27,7 @@ export const createWhatcodeServer = async ({
   port = 8192,
   opencodePort = 4096,
   debug = false,
-}: WhatcodeServerConfig) => {
+}: WhatcodeServerConfig = {}) => {
   logger.init({ debug });
   const accounts = await apnTokenStore.get();
   const accountCount = accounts.length;
