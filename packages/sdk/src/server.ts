@@ -15,36 +15,14 @@ export interface DaemonIdentity {
   tailscaleUrl?: string;
 }
 
-const basicAuth = (password: string) => (req: Request, res: Response, next: () => void) => {
-  const header = req.headers.authorization;
-  if (!header?.startsWith('Basic ')) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
-  const encoded = header.slice('Basic '.length);
-  const decoded = Buffer.from(encoded, 'base64').toString('utf8');
-  const colonIndex = decoded.indexOf(':');
-  const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
-  if (pass !== password) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
-  next();
-};
-
-export const startWhatcode = async ({
-  port,
-  opencodePort,
-  password,
-  client,
-}: {
+interface Params {
   port: number;
   opencodePort: number;
   password?: string;
   client: OpencodeClient;
-}): Promise<void> => {
+}
+
+export const startWhatcode = async ({ port, opencodePort, password, client }: Params): Promise<void> => {
   const app = express();
   app.disable('x-powered-by');
 
@@ -110,4 +88,23 @@ export const startWhatcode = async ({
     });
     server.on('error', reject);
   });
+};
+
+const basicAuth = (password: string) => (req: Request, res: Response, next: () => void) => {
+  const header = req.headers.authorization;
+  if (!header?.startsWith('Basic ')) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+  const encoded = header.slice('Basic '.length);
+  const decoded = Buffer.from(encoded, 'base64').toString('utf8');
+  const colonIndex = decoded.indexOf(':');
+  const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
+  if (pass !== password) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+  next();
 };
