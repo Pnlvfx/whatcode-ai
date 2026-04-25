@@ -11,7 +11,7 @@ import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
 import { SERVER_URL } from './config/config.ts';
-import { tailscale } from './plugins/tailscale.ts';
+import { createTailscale } from './plugins/tailscale.ts';
 
 export interface WhatcodeServerConfig {
   tailscale?: boolean;
@@ -51,15 +51,11 @@ export const createWhatcodeServer = async ({
   await startWhatcode({ port, opencodePort: opencodePort, password, client });
 
   if (useTailscale) {
-    const result = await tailscale.start(port);
+    const tailscale = createTailscale(port);
+    const result = await tailscale.start();
     identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
     logger.debug('tailscale', 'we own the serve — registering exit hook to stop it');
-    asyncExitHook(
-      async () => {
-        await tailscale.stop(port);
-      },
-      { wait: 3000 },
-    );
+    asyncExitHook(tailscale.stop, { wait: 3000 });
   }
 
   const advertiseUrl = identityStore.get()?.tailscaleUrl ?? daemonUrl;

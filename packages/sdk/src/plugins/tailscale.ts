@@ -76,27 +76,29 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
   }
 };
 
-export const tailscale = {
-  start: async (port: number): Promise<TailscaleResult> => {
-    await assertTailscaleInstalled();
-    await assertDaemonReachable();
-    const hostname = await getHostname();
-    logger.debug('tailscale', `checking if serve is already running on port ${port.toString()}`);
-    const isRunning = await isServeRunning(port);
-    if (isRunning) {
-      logger.debug('tailscale', `serve already running on port ${port.toString()} — skipping start`);
-    } else {
-      logger.debug('tailscale', `serve not running on port ${port.toString()} — starting`);
-      await startServe(port);
-      logger.debug('tailscale', `serve started — we own port ${port.toString()}`);
-    }
-    const url = `https://${hostname.replace(/-$/, '')}`;
-    logger.debug('tailscale', `resolved url: ${url}`);
-    return { url };
-  },
-  stop: async (port: number): Promise<void> => {
-    // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
-    // this runs in the background — the process exits after setting up the config
-    await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
-  },
+export const createTailscale = (port: number) => {
+  return {
+    start: async (): Promise<TailscaleResult> => {
+      await assertTailscaleInstalled();
+      await assertDaemonReachable();
+      const hostname = await getHostname();
+      logger.debug('tailscale', `checking if serve is already running on port ${port.toString()}`);
+      const isRunning = await isServeRunning(port);
+      if (isRunning) {
+        logger.debug('tailscale', `serve already running on port ${port.toString()} — skipping start`);
+      } else {
+        logger.debug('tailscale', `serve not running on port ${port.toString()} — starting`);
+        await startServe(port);
+        logger.debug('tailscale', `serve started — we own port ${port.toString()}`);
+      }
+      const url = `https://${hostname.replace(/-$/, '')}`;
+      logger.debug('tailscale', `resolved url: ${url}`);
+      return { url };
+    },
+    stop: async (): Promise<void> => {
+      // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
+      // this runs in the background — the process exits after setting up the config
+      await execa('tailscale', ['serve', '--bg', port.toString()], { stdio: 'inherit' });
+    },
+  };
 };

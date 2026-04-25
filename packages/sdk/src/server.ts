@@ -1,4 +1,5 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { ClientRequest } from 'node:http';
 import { getLastMessageTimeByProject } from './db.ts';
 // eslint-disable-next-line no-restricted-imports
 import express, { Router, type Request, type Response } from 'express';
@@ -6,7 +7,6 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { registerDeviceTokenRouter } from './routes/register-device-token.ts';
 import { identityStore } from './stores/identity.ts';
 import { logger } from './logger.ts';
-import type { ClientRequest } from 'node:http';
 
 export interface DaemonIdentity {
   machineId: string;
