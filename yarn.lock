@@ -3363,9 +3363,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/dbz@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "@goatjs/dbz@npm:2.8.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-2.8.0.tgz"
+"@goatjs/dbz@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@goatjs/dbz@npm:2.9.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-2.9.0.tgz"
   dependencies:
     "@goatjs/node": "npm:2.6.0"
     "@goatjs/rimraf": "npm:2.2.0"
@@ -3375,7 +3375,7 @@ __metadata:
     yargs: "npm:^18.0.0"
   bin:
     dbz: dist/cli.js
-  checksum: 10c0/e88d884caf2831a0d10ce13ca2c754db6d604c287af7f526f07fd736d407b11ff2a989f4344f4f2f500d7e43fa0d1118b6e651932a7da1911b2b3686d59b5873
+  checksum: 10c0/95d6850f43aae73dc900b7a6483baea87744d27d8e40b2a8942ff1b6e73fac8d9e436d7ab2a66b0c5c8a3ca107752eb85a9ff441058d01466290a2605d6564d8
   languageName: node
   linkType: hard
 
@@ -4042,12 +4042,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.14.24":
-  version: 1.14.24
-  resolution: "@opencode-ai/sdk@npm:1.14.24"
+"@opencode-ai/sdk@npm:^1.14.25":
+  version: 1.14.25
+  resolution: "@opencode-ai/sdk@npm:1.14.25"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/5bf0e1878c3dc8275aa291f9d208ea7200c5bb74eeebd62801b9023183fef4caadb1135b0d75309ec73767f60b74a10bee5a1b36f2839528408c82a1bb698953
+  checksum: 10c0/be03dc7ea0578fdcee27d87814c375045e308cf7df7ba2694d0a0c07389d83087b1233a2f6120a265913971d85e0225952b5886ffc4142f18a5150e6cf6470a3
   languageName: node
   linkType: hard
 
@@ -6480,7 +6480,7 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^2.14.0"
     "@goatjs/rimraf": "npm:^2.2.0"
     "@goatjs/typescript-config": "npm:^2.1.0"
-    "@opencode-ai/sdk": "npm:^1.14.24"
+    "@opencode-ai/sdk": "npm:^1.14.25"
     "@types/express": "npm:^5.0.6"
     "@types/node": "npm:^25.6.0"
     "@types/qrcode-terminal": "npm:^0.12.2"
@@ -18947,7 +18947,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "whatcode-ai@workspace:."
   dependencies:
-    "@goatjs/dbz": "npm:^2.8.0"
+    "@goatjs/dbz": "npm:^2.9.0"
     "@whatcode-ai/whatcode": "workspace:*"
     prettier: "npm:^3.8.3"
     turbo: "npm:^2.9.6"

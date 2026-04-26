@@ -23,7 +23,7 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@goatjs/dbz": "^2.8.0",
+    "@goatjs/dbz": "^2.9.0",
     "prettier": "^3.8.3",
     "turbo": "^2.9.6"
   },
