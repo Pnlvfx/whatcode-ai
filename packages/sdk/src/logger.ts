@@ -28,20 +28,16 @@ export const logger = {
   init: ({ debug }: { debug: boolean }): void => {
     debugEnabled = debug;
   },
-
   debug: (scope: string, message: string): void => {
     if (!debugEnabled) return;
     console.log(`${colorize('cyan', 'debug')} ${formatScope(scope)} ${message}`);
   },
-
   info: (scope: string, message: string): void => {
     console.log(`${colorize('green', 'info')}  ${formatScope(scope)} ${message}`);
   },
-
   warn: (scope: string, message: string): void => {
     console.warn(`${colorize('yellow', 'warn')}  ${formatScope(scope)} ${message}`);
   },
-
   error: (scope: string, message: string, err?: unknown): void => {
     console.error(`${colorize('red', 'error')} ${formatScope(scope)} ${message}`, err ?? '');
   },

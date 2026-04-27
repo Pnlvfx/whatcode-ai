@@ -29,7 +29,8 @@
   },
   "type": "module",
   "exports": {
-    ".": "./src/whatcode.ts"
+    ".": "./src/whatcode.ts",
+    "./logger": "./src/logger.ts"
   },
   "publishConfig": {
     "access": "public",
@@ -56,13 +57,12 @@
     "README.md"
   ],
   "dependencies": {
-    "@opencode-ai/sdk": "^1.14.25",
+    "@opencode-ai/sdk": "^1.14.28",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
     "node-machine-id": "^1.1.12",
-    "qrcode-terminal": "^0.12.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -71,7 +71,6 @@
     "@goatjs/typescript-config": "^2.1.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.6.0",
-    "@types/qrcode-terminal": "^0.12.2",
     "eslint": "^10.2.1",
     "typescript": "^6.0.3"
   }

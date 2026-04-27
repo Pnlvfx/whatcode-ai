@@ -38,6 +38,10 @@
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
+      },
+      "./logger": {
+        "types": "./dist/logger.d.ts",
+        "import": "./dist/logger.js"
       }
     }
   },
@@ -58,6 +62,7 @@
   ],
   "dependencies": {
     "@whatcode-ai/sdk": "workspace:*",
+    "qrcode-terminal": "^0.12.0",
     "update-notifier": "^7.3.1",
     "yargs": "^18.0.0"
   },
@@ -66,6 +71,7 @@
     "@goatjs/rimraf": "^2.2.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/node": "^25.6.0",
+    "@types/qrcode-terminal": "^0.12.2",
     "@types/update-notifier": "^6.0.8",
     "@types/yargs": "^17.0.35",
     "eslint": "^10.2.1",

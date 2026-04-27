@@ -3363,6 +3363,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@goatjs/core@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@goatjs/core@npm:2.4.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-2.4.0.tgz"
+  checksum: 10c0/2169731964e60b8c50c7432de5a30f497ae2a4971d3b9d992b60fb9c1b7a80ca60620cf65f0f2853fc9823a3007a291932194da3d729421af4059108e84bd16d
+  languageName: node
+  linkType: hard
+
 "@goatjs/dbz@npm:^2.9.0":
   version: 2.9.0
   resolution: "@goatjs/dbz@npm:2.9.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-2.9.0.tgz"
@@ -3413,6 +3420,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@goatjs/node@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@goatjs/node@npm:2.8.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-2.8.0.tgz"
+  dependencies:
+    "@goatjs/core": "npm:2.4.0"
+    sanitize-filename: "npm:1.6.4"
+  peerDependencies:
+    prettier: "*"
+  peerDependenciesMeta:
+    prettier:
+      optional: true
+  checksum: 10c0/10e032dc438166ce8bd84451104b1c3ca2b812045a77ffbc37408e2e314df68f8f6c9eda5ebdb9a051199233077658206a69229d158dec691374d1b9a27eee1b
+  languageName: node
+  linkType: hard
+
 "@goatjs/rimraf@npm:2.2.0, @goatjs/rimraf@npm:^2.2.0":
   version: 2.2.0
   resolution: "@goatjs/rimraf@npm:2.2.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Frimraf%2F-%2F%40goatjs%2Frimraf-2.2.0.tgz"
@@ -3422,15 +3444,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/ts-unused-exports@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "@goatjs/ts-unused-exports@npm:2.6.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fts-unused-exports%2F-%2F%40goatjs%2Fts-unused-exports-2.6.0.tgz"
+"@goatjs/ts-unused-exports@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@goatjs/ts-unused-exports@npm:2.8.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fts-unused-exports%2F-%2F%40goatjs%2Fts-unused-exports-2.8.0.tgz"
   dependencies:
-    "@goatjs/node": "npm:2.6.0"
+    "@goatjs/node": "npm:2.8.0"
     ts-unused-exports: "npm:^11.0.1"
   peerDependencies:
     typescript: "*"
-  checksum: 10c0/f8b6448b9e78ff5c66e6b1b6ec26d9a8d3e8db96e81e6fa0c9c3334ad6c3bb4ff6d0744b700137af4663934c77625d3c4e48a97f2037df56647541564e0cf4c8
+  checksum: 10c0/c707c6bd1ec8bc6aa07a3d475f3bc13bdbcfd161bb600480ae99cbc6f8ed783bf7a58a37f9523f0452ab47a958fb411f3bb567fc9378dd2bdc08048ca10dec83
   languageName: node
   linkType: hard
 
@@ -4042,12 +4064,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.14.25":
-  version: 1.14.25
-  resolution: "@opencode-ai/sdk@npm:1.14.25"
+"@opencode-ai/sdk@npm:^1.14.28":
+  version: 1.14.28
+  resolution: "@opencode-ai/sdk@npm:1.14.28"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/be03dc7ea0578fdcee27d87814c375045e308cf7df7ba2694d0a0c07389d83087b1233a2f6120a265913971d85e0225952b5886ffc4142f18a5150e6cf6470a3
+  checksum: 10c0/d4d359628103ed14c8ae0229f01b46e94404446bddedc3a8cc491c4a9c3b291ec96c4d14285c4429659b87e50bb3c29c096e22c5fe2cc54f5da0b9e7e6dacffb
   languageName: node
   linkType: hard
 
@@ -6464,7 +6486,7 @@ __metadata:
   dependencies:
     "@goatjs/node-monorepo-eslint": "npm:^2.14.0"
     "@goatjs/rimraf": "npm:^2.2.0"
-    "@goatjs/ts-unused-exports": "npm:^2.6.0"
+    "@goatjs/ts-unused-exports": "npm:^2.8.0"
     "@goatjs/typescript-config": "npm:^2.1.0"
     "@types/node": "npm:^25.6.0"
     "@whatcode-ai/sdk": "workspace:*"
@@ -6480,17 +6502,15 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^2.14.0"
     "@goatjs/rimraf": "npm:^2.2.0"
     "@goatjs/typescript-config": "npm:^2.1.0"
-    "@opencode-ai/sdk": "npm:^1.14.25"
+    "@opencode-ai/sdk": "npm:^1.14.28"
     "@types/express": "npm:^5.0.6"
     "@types/node": "npm:^25.6.0"
-    "@types/qrcode-terminal": "npm:^0.12.2"
     eslint: "npm:^10.2.1"
     execa: "npm:^9.6.1"
     exit-hook: "npm:^5.1.0"
     express: "npm:^5.2.1"
     http-proxy-middleware: "npm:^3.0.5"
     node-machine-id: "npm:^1.1.12"
-    qrcode-terminal: "npm:^0.12.0"
     typescript: "npm:^6.0.3"
     zod: "npm:^4.3.6"
   languageName: unknown
@@ -6504,10 +6524,12 @@ __metadata:
     "@goatjs/rimraf": "npm:^2.2.0"
     "@goatjs/typescript-config": "npm:^2.1.0"
     "@types/node": "npm:^25.6.0"
+    "@types/qrcode-terminal": "npm:^0.12.2"
     "@types/update-notifier": "npm:^6.0.8"
     "@types/yargs": "npm:^17.0.35"
     "@whatcode-ai/sdk": "workspace:*"
     eslint: "npm:^10.2.1"
+    qrcode-terminal: "npm:^0.12.0"
     typescript: "npm:^6.0.3"
     update-notifier: "npm:^7.3.1"
     yargs: "npm:^18.0.0"

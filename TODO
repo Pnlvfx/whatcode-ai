@@ -11,5 +11,3 @@ icon / favicons on docs, email, theme, header logo, marketing page, check page i
 show qr only if there are no user connected or if --qr is explicity passed.
 
 do not send notifications for sub agent events
-
-troubleshotting: mention whatcode reset

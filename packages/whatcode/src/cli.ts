@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
+import { logger } from '@whatcode-ai/sdk/logger';
+import { printQrCode } from './qrcode.ts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import updateNotifier from 'update-notifier';
@@ -25,10 +27,17 @@ if (reset) {
   await resetWhatcodeServer();
 }
 
-await createWhatcodeServer({
+const { url } = await createWhatcodeServer({
   tailscale,
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
   ...(debug !== undefined && { debug }),
   ...(password !== undefined && { password }),
 });
+
+if (url) {
+  logger.info('whatcode', `use this URL in the app: ${url}`);
+  printQrCode(url, password);
+} else {
+  logger.info('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
+}

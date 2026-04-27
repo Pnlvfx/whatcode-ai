@@ -3,7 +3,6 @@ import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
 import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
-import { printQrCode } from './qrcode.ts';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './experimentals/notifications.ts';
 import { featureFlags } from './config/feature-flags.ts';
@@ -12,6 +11,10 @@ import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
 import { SERVER_URL } from './config/config.ts';
 import { createTailscale } from './plugins/tailscale.ts';
+
+export interface WhatcodeServerResult {
+  url: string | undefined;
+}
 
 export interface WhatcodeServerConfig {
   tailscale?: boolean;
@@ -27,7 +30,7 @@ export const createWhatcodeServer = async ({
   port = 8192,
   opencodePort = 4096,
   debug = false,
-}: WhatcodeServerConfig = {}) => {
+}: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ debug });
   const accounts = await apnTokenStore.get();
   const accountCount = accounts.length;
@@ -58,13 +61,8 @@ export const createWhatcodeServer = async ({
     asyncExitHook(tailscale.stop, { wait: 3000 });
   }
 
-  const advertiseUrl = identityStore.get()?.tailscaleUrl ?? daemonUrl;
-  if (advertiseUrl) {
-    logger.info('whatcode', `use this URL in the app: ${advertiseUrl}`);
-    printQrCode(advertiseUrl, password);
-  } else {
-    logger.info('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
-  }
+  const url = identityStore.get()?.tailscaleUrl ?? daemonUrl;
+  return { url };
 };
 
 export const resetWhatcodeServer = async () => {
