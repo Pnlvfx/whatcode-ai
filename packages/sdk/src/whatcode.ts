@@ -45,7 +45,12 @@ export const createWhatcodeServer = async ({
 
   identityStore.set({ machineId, opencodeUrl, daemonUrl });
 
-  const client = createOpencodeClient({ baseUrl: `http://localhost:${opencodePort.toString()}`, throwOnError: true });
+  const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
+  const client = createOpencodeClient({
+    baseUrl: `http://localhost:${opencodePort.toString()}`,
+    throwOnError: true,
+    ...(opencodeAuthHeader ? { headers: { authorization: opencodeAuthHeader } } : {}),
+  });
 
   if (featureFlags.WHATCODE_NOTIFICATION) {
     startNotifications(client);
