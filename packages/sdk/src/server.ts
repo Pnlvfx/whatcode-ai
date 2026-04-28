@@ -82,7 +82,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
       if (err) {
         reject(err);
       } else {
-        logger.info('daemon', `started on port ${port.toString()}`);
+        logger.debug('daemon', `started on port ${port.toString()}`);
         resolve();
       }
     });

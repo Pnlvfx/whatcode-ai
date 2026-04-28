@@ -1,6 +1,6 @@
 import type { Part, TextPart } from '@opencode-ai/sdk/v2';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
-import timers from 'node:timers/promises';
+import { setTimeout } from 'node:timers/promises';
 import { SERVER_URL } from '../config/config.ts';
 import { headers } from '../config/headers.ts';
 import path from 'node:path';
@@ -11,7 +11,7 @@ const BODY_MAX = 178;
 
 export const startNotifications = (client: OpencodeClient): void => {
   void subscribeToEvents(client);
-  logger.info('notifications', 'listening for events');
+  logger.debug('notifications', 'listening for events');
 };
 
 type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
@@ -121,11 +121,11 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
           }
         }
       }
-      logger.info('notifications', 'stream ended, reconnecting...');
+      logger.debug('notifications', 'stream ended, reconnecting...');
       delay = BACKOFF_INITIAL_MS;
     } catch (err) {
       logger.error('notifications', `stream error, retrying in ${(delay / 1000).toString()}s...`, err);
-      await timers.setTimeout(delay);
+      await setTimeout(delay);
       delay = Math.min(delay * BACKOFF_MULTIPLIER, BACKOFF_MAX_MS);
     }
   }

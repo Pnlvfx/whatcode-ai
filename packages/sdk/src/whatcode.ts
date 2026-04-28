@@ -4,8 +4,7 @@ import { startWhatcode } from './server.ts';
 import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
-import { startNotifications } from './experimentals/notifications.ts';
-import { featureFlags } from './config/feature-flags.ts';
+import { startNotifications } from './plugins/notifications.ts';
 import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
@@ -52,9 +51,7 @@ export const createWhatcodeServer = async ({
     ...(opencodeAuthHeader ? { headers: { authorization: opencodeAuthHeader } } : {}),
   });
 
-  if (featureFlags.WHATCODE_NOTIFICATION) {
-    startNotifications(client);
-  }
+  startNotifications(client);
 
   await startWhatcode({ port, opencodePort: opencodePort, password, client });
 

@@ -5,14 +5,14 @@ export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'co
   const running = await isOpencodeRunning(options.port);
 
   if (running) {
-    logger.info('opencode', 'already running');
+    logger.debug('opencode', 'already running');
   } else {
     if (password) {
       // eslint-disable-next-line no-restricted-properties
       process.env['OPENCODE_SERVER_PASSWORD'] = password;
     }
     await createOpencodeServer(options);
-    logger.info('opencode', 'started');
+    logger.debug('opencode', 'started');
   }
 };
 
