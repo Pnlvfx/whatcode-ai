@@ -17,17 +17,6 @@ registerDeviceTokenRouter.post('/register', async (req, res) => {
     return;
   }
 
-  // const relayResponse = await fetch(`${SERVER_URL}/relay/register`, {
-  //   method: 'POST',
-  //   headers,
-  //   body: JSON.stringify({ user_id: result.data.user_id, device_id: result.data.device_id, token: result.data.token }),
-  // });
-
-  // if (!relayResponse.ok) {
-  //   res.status(relayResponse.status).json({ message: 'Failed to reach the relay, please retry!' });
-  //   return;
-  // }
-
   logger.debug('apn', `token received for device ${result.data.device_id}`);
 
   await apnTokenStore.set((prev) => [

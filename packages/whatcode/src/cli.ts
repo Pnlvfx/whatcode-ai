@@ -7,6 +7,12 @@ import { hideBin } from 'yargs/helpers';
 import updateNotifier from 'update-notifier';
 import pkg from '../package.json' with { type: 'json' };
 
+try {
+  process.loadEnvFile();
+} catch {
+  logger.debug('env', 'no .env file present, using defaults');
+}
+
 updateNotifier({ pkg }).notify();
 
 const { tailscale, reset, port, opencodePort, debug, password } = await yargs(hideBin(process.argv))
