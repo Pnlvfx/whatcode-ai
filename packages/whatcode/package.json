@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^2.14.0",
-    "@goatjs/rimraf": "^2.2.0",
+    "@goatjs/rimraf": "^2.3.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/node": "^25.6.0",
     "@types/qrcode-terminal": "^0.12.2",
