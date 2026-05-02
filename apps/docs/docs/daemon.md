@@ -35,7 +35,7 @@ await createWhatcodeServer({
   opencodePort: 4096,
   tailscale: true,
   password: 'secret',
-  debug: false,
+  logLevel: 'none',
 });
 ```
 
@@ -75,23 +75,27 @@ await createWhatcodeServer({ password: 'your-password' });
 
 In the app, enter the password when adding a connection manually. The QR code does not embed the password.
 
-## Debug mode
+## Log level
 
-Enable verbose logging to see what the daemon is doing internally. Useful when something is not working and you need more context.
+Control how much the daemon logs. The CLI defaults to `info` (shows info, warnings, and errors). The SDK defaults to `none` (silent). Use `debug` to see everything including internal events, APN token registrations, and Tailscale state.
 
 Via CLI:
 
 ```bash
-npx @whatcode-ai/sdk --debug
+npx @whatcode-ai/sdk --log-level debug
 ```
 
 Via library:
 
 ```ts
-await createWhatcodeServer({ debug: true });
+await createWhatcodeServer({ logLevel: 'debug' });
 ```
 
-Debug mode logs events like incoming connections, notification dispatches, APN token registrations, and Tailscale state.
+| Level | Description |
+| --- | --- |
+| `none` | Silent — no output (SDK default) |
+| `info` | Info, warnings and errors (CLI default) |
+| `debug` | Everything, including internal events and APN tokens |
 
 ## Tailscale
 
@@ -128,7 +132,7 @@ await resetWhatcodeServer();
 | `opencodePort` | `number` | `4096` | Port the OpenCode server listens on. Must match what OpenCode is actually bound to. |
 | `tailscale` | `boolean` | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated. |
 | `password` | `string` | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
-| `debug` | `boolean` | `false` | Enables verbose logging. Useful for diagnosing connection or notification issues. |
+| `logLevel` | `'none' \| 'info' \| 'debug'` | `'none'` | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything. |
 
 ### `resetWhatcodeServer()`
 
@@ -141,4 +145,4 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 | `--port` | `number` | `8192` | Port for the WhatCode server. |
 | `--opencode-port` | `number` | `4096` | Port for the OpenCode server. |
 | `--tailscale` | `boolean` | - | Expose via Tailscale HTTPS. |
-| `--debug` | `boolean` | - | Enable verbose debug logging. |
+| `--log-level` | `'none' \| 'info' \| 'debug'` | `info` | Controls log verbosity. |

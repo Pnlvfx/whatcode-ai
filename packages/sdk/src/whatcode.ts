@@ -6,6 +6,7 @@ import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
 import { logger } from './logger.ts';
+import type { LogLevel } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import mId from 'node-machine-id';
 import { SERVER_URL } from './config/config.ts';
@@ -20,7 +21,7 @@ export interface WhatcodeServerConfig {
   password?: string;
   port?: number;
   opencodePort?: number;
-  debug?: boolean;
+  logLevel?: LogLevel;
 }
 
 export const createWhatcodeServer = async ({
@@ -28,9 +29,9 @@ export const createWhatcodeServer = async ({
   password,
   port = 8192,
   opencodePort = 4096,
-  debug = false,
+  logLevel = 'none',
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
-  logger.init({ debug });
+  logger.init({ logLevel });
   const accounts = await apnTokenStore.get();
   const accountCount = accounts.length;
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);

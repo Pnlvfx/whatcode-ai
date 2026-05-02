@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
-import { logger } from '@whatcode-ai/sdk/logger';
+import { logger, logLevelSchema } from '@whatcode-ai/sdk/logger';
 import { printQrCode } from './qrcode.ts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -9,7 +9,7 @@ import pkg from '../package.json' with { type: 'json' };
 
 updateNotifier({ pkg }).notify();
 
-const { tailscale, reset, port, opencodePort, debug, password } = await yargs(hideBin(process.argv))
+const { tailscale, reset, port, opencodePort, logLevel, password } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -19,7 +19,12 @@ const { tailscale, reset, port, opencodePort, debug, password } = await yargs(hi
   .option('tailscale', { type: 'boolean', description: 'Expose opencode via Tailscale serve (HTTPS on your tailnet)' })
   .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
   .option('opencode-port', { type: 'number', description: 'Port for the opencode server (default: 4096)' })
-  .option('debug', { type: 'boolean', description: 'Enable debug logs (APN tokens, internal events, etc.)' })
+  .option('log-level', {
+    type: 'string',
+    choices: ['none', 'info', 'debug'],
+    default: 'info',
+    description: 'Log level: none | info | debug (default: info)',
+  })
   .option('password', { type: 'string', description: 'Password to protect the Whatcode and opencode servers (HTTP Basic Auth)' })
   .parseAsync();
 
@@ -31,7 +36,7 @@ const { url } = await createWhatcodeServer({
   tailscale,
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
-  ...(debug !== undefined && { debug }),
+  logLevel: await logLevelSchema.parseAsync(logLevel),
   ...(password !== undefined && { password }),
 });
 

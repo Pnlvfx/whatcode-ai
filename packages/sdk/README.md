@@ -24,6 +24,7 @@ await createWhatcodeServer({
 
 | Option         | Type          | Default     | Description                                              |
 | -------------- | ------------- | ----------- | -------------------------------------------------------- |
+| `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'` | Log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything. |
 | `tailscale`    | `boolean`     | `undefined` | When `true`, exposes opencode via Tailscale serve        |
 | `hostname`     | `string`      | `0.0.0.0`   | Hostname to bind the opencode server to                  |
 | `port`         | `number`      | `8192`      | Port for the Whatcode server                             |

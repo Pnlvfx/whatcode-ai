@@ -38,8 +38,8 @@ Tap **Continue without QR** and enter your server URL manually. You can find the
 Make sure OpenCode is installed and that Node.js 20+ is available on your PATH. See the [OpenCode](/opencode) page for installation instructions.
 
 **Something looks wrong and I need more detail**
-Start the daemon with `--debug` to enable verbose logging. This shows exactly what the daemon is doing - incoming connections, APN token registration, notification dispatches, and Tailscale state.
+Start the daemon with `--log-level debug` to enable verbose logging. This shows exactly what the daemon is doing - incoming connections, APN token registration, notification dispatches, and Tailscale state.
 
 ```bash
-npx @whatcode-ai/sdk --debug
+npx @whatcode-ai/sdk --log-level debug
 ```

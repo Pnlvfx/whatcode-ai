@@ -22,7 +22,7 @@ npx @whatcode-ai/whatcode --tailscale
 | `--hostname`      | `-H`  | `0.0.0.0` | Hostname to bind the opencode server to              |
 | `--port`          | `-p`  | `8192`    | Port for the Whatcode server                         |
 | `--opencode-port` |       | `4096`    | Port for the opencode server                         |
-| `--timeout`       |       |           | Timeout (ms) for the opencode server to start        |
+| `--log-level`     |       | `info`    | Log verbosity: `none` \| `info` \| `debug`           |
 | `--help`          |       |           | Show help                                            |
 
 ## Programmatic usage

@@ -23,12 +23,12 @@
     "@whatcode-ai/sdk": "workspace:*"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.14.0",
+    "@goatjs/node-monorepo-eslint": "^2.15.0",
     "@goatjs/rimraf": "^2.3.0",
     "@goatjs/ts-unused-exports": "^2.9.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/node": "^25.6.0",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "typescript": "^6.0.3"
   }
 }
