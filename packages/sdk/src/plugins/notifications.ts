@@ -29,6 +29,10 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const { sessionID } = event.payload.properties;
             logger.debug('notifications', `session.idle event received for session ${sessionID}`);
             const { data: session } = await client.session.get<true>({ sessionID });
+            if (session.parentID) {
+              logger.debug('notifications', `skipping session.idle for subagent session ${sessionID}`);
+              break;
+            }
             const title = getProjectName(session.directory);
             const modelName = await getModelName(client, sessionID);
             const lastText = await getLastAssistantText(client, sessionID);
@@ -41,6 +45,10 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const { sessionID, permission, patterns } = event.payload.properties;
             logger.debug('notifications', `permission.asked event received for session ${sessionID}, permission=${permission}`);
             const { data: session } = await client.session.get<true>({ sessionID });
+            if (session.parentID) {
+              logger.debug('notifications', `skipping permission.asked for subagent session ${sessionID}`);
+              break;
+            }
             const title = getProjectName(session.directory);
             const modelName = await getModelName(client, sessionID);
             const target = patterns[0] ?? permission;
@@ -58,6 +66,10 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             let session;
             if (sessionID) {
               ({ data: session } = await client.session.get<true>({ sessionID }));
+            }
+            if (session?.parentID) {
+              logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
+              break;
             }
             const title = session ? getProjectName(session.directory) : 'WhatCode';
             const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
