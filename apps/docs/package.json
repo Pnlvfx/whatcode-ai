@@ -30,7 +30,7 @@
     "@docusaurus/types": "3.10.1",
     "@types/react": "^19.2.14",
     "typescript": "~6.0.3",
-    "vercel": "^53.1.0"
+    "vercel": "^53.1.1"
   },
   "browserslist": {
     "production": [

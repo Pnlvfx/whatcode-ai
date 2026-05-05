@@ -14,55 +14,6 @@ export const startNotifications = (client: OpencodeClient): void => {
   logger.debug('notifications', 'listening for events');
 };
 
-type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
-
-type OpencodeClient = ReturnType<typeof createOpencodeClient>;
-
-const trim = (text: string): string => (text.length <= BODY_MAX ? text : `${text.slice(0, BODY_MAX - 1)}…`);
-
-const isTextPart = (part: Part): part is TextPart => part.type === 'text';
-
-const capitalize = (string: string) => {
-  const firstLetter = string.at(0);
-  if (!firstLetter) return string;
-  return `${firstLetter.toUpperCase()}${string.slice(1)}`;
-};
-
-const getProjectName = (directory: string): string => {
-  return capitalize(directory === '/' ? 'root' : path.basename(directory));
-};
-
-const getMessages = async (client: OpencodeClient, sessionID: string) => {
-  const res = await client.session.messages<true>({ sessionID });
-  return res.data;
-};
-
-const getModelName = async (client: OpencodeClient, sessionID: string): Promise<string> => {
-  const messages = await getMessages(client, sessionID);
-  const lastUser = messages.toReversed().find((m) => m.info.role === 'user');
-  if (lastUser?.info.role !== 'user') return 'unknown';
-  const { providerID, modelID } = lastUser.info.model;
-  const { data: config } = await client.config.providers<true>();
-  const provider = config.providers.find((p) => p.id === providerID);
-  return provider?.models[modelID]?.name ?? modelID;
-};
-
-const getLastAssistantText = async (client: OpencodeClient, sessionID: string): Promise<string | undefined> => {
-  const messages = await getMessages(client, sessionID);
-  const assistantEntries = messages.toReversed().filter((m) => m.info.role === 'assistant');
-
-  for (const entry of assistantEntries) {
-    const textPart = entry.parts.findLast((p) => isTextPart(p));
-    if (textPart?.text) return textPart.text;
-  }
-
-  return undefined;
-};
-
-const BACKOFF_INITIAL_MS = 1000;
-const BACKOFF_MAX_MS = 30_000;
-const BACKOFF_MULTIPLIER = 2;
-
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
   let delay = BACKOFF_INITIAL_MS;
@@ -130,6 +81,55 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
     }
   }
 };
+
+type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
+
+type OpencodeClient = ReturnType<typeof createOpencodeClient>;
+
+const trim = (text: string): string => (text.length <= BODY_MAX ? text : `${text.slice(0, BODY_MAX - 1)}…`);
+
+const isTextPart = (part: Part): part is TextPart => part.type === 'text';
+
+const capitalize = (string: string) => {
+  const firstLetter = string.at(0);
+  if (!firstLetter) return string;
+  return `${firstLetter.toUpperCase()}${string.slice(1)}`;
+};
+
+const getProjectName = (directory: string): string => {
+  return capitalize(directory === '/' ? 'root' : path.basename(directory));
+};
+
+const getMessages = async (client: OpencodeClient, sessionID: string) => {
+  const res = await client.session.messages<true>({ sessionID });
+  return res.data;
+};
+
+const getModelName = async (client: OpencodeClient, sessionID: string): Promise<string> => {
+  const messages = await getMessages(client, sessionID);
+  const lastUser = messages.toReversed().find((m) => m.info.role === 'user');
+  if (lastUser?.info.role !== 'user') return 'unknown';
+  const { providerID, modelID } = lastUser.info.model;
+  const { data: config } = await client.config.providers<true>();
+  const provider = config.providers.find((p) => p.id === providerID);
+  return provider?.models[modelID]?.name ?? modelID;
+};
+
+const getLastAssistantText = async (client: OpencodeClient, sessionID: string): Promise<string | undefined> => {
+  const messages = await getMessages(client, sessionID);
+  const assistantEntries = messages.toReversed().filter((m) => m.info.role === 'assistant');
+
+  for (const entry of assistantEntries) {
+    const textPart = entry.parts.findLast((p) => isTextPart(p));
+    if (textPart?.text) return textPart.text;
+  }
+
+  return undefined;
+};
+
+const BACKOFF_INITIAL_MS = 1000;
+const BACKOFF_MAX_MS = 30_000;
+const BACKOFF_MULTIPLIER = 2;
 
 interface RelayMeta {
   readonly sessionID?: string;

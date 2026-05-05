@@ -33,7 +33,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
   app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
   app.get('/whatcode/identity', (_req: Request, res: Response) => {
-    res.json(identityStore.get());
+    res.status(200).json(identityStore.get());
   });
 
   const projectRouter = Router();
@@ -47,7 +47,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
       return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
     });
 
-    res.json(patched);
+    res.status(200).json(patched);
   });
 
   app.use(projectRouter);
