@@ -1,3 +1,4 @@
+import type { LogLevel } from './logger.ts';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
@@ -6,11 +7,11 @@ import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
 import { logger } from './logger.ts';
-import type { LogLevel } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
-import mId from 'node-machine-id';
 import { SERVER_URL } from './config/config.ts';
 import { createTailscale } from './plugins/tailscale.ts';
+import os from 'node:os';
+import mId from 'node-machine-id';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -37,13 +38,15 @@ export const createWhatcodeServer = async ({
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
   await opencode({ port: opencodePort, password });
-  const localIp = getLocalIp();
+  const localIp = await getLocalIp();
+  if (!localIp) logger.warn('whatcode', 'could not determine local IP — local URLs will be unavailable');
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
+  const accountName = os.platform();
 
   logger.debug('relay', SERVER_URL);
 
-  identityStore.set({ machineId, opencodeUrl, daemonUrl });
+  identityStore.set({ machineId, opencodeUrl, daemonUrl, name: accountName });
 
   const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
   const client = createOpencodeClient({
@@ -59,7 +62,7 @@ export const createWhatcodeServer = async ({
   if (useTailscale) {
     const tailscale = createTailscale(port);
     const result = await tailscale.start();
-    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
+    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url, name: accountName });
     logger.debug('tailscale', 'we own the serve — registering exit hook to stop it');
     asyncExitHook(tailscale.stop, { wait: 3000 });
   }

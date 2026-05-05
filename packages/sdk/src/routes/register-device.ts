@@ -5,12 +5,12 @@ import { apnTokenStore } from '../stores/apn-token.ts';
 import { logger } from '../logger.ts';
 
 const unregisterBodySchema = z.strictObject({ user_id: z.string(), device_id: z.string() });
-const tokenBodySchema = z.strictObject({ ...unregisterBodySchema.shape, token: z.string(), device_name: z.string() });
+const registerBodySchema = z.strictObject({ ...unregisterBodySchema.shape, token: z.string(), device_name: z.string() });
 
 export const registerDeviceTokenRouter = Router();
 
 registerDeviceTokenRouter.post('/register', async (req, res) => {
-  const result = await tokenBodySchema.safeParseAsync(req.body);
+  const result = await registerBodySchema.safeParseAsync(req.body);
 
   if (!result.success) {
     res.status(400).json({ message: 'token is required' });
@@ -43,3 +43,6 @@ registerDeviceTokenRouter.delete('/unregister', async (req, res) => {
   await apnTokenStore.set(entries.filter((e) => e.deviceId !== result.data.device_id));
   res.status(200).json({ ok: true });
 });
+
+export type RegisterBody = z.infer<typeof registerBodySchema>;
+export type UnregisterBody = z.infer<typeof unregisterBodySchema>;

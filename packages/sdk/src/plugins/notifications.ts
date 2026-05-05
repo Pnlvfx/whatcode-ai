@@ -71,14 +71,18 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
               logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
               break;
             }
-            const title = session ? getProjectName(session.directory) : 'WhatCode';
+            if (!session || !sessionID) {
+              logger.debug('notifications', 'skipping session.error — no session available');
+              break;
+            }
+            const title = getProjectName(session.directory);
             const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
             logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
             await forwardToRelay(
               title,
               body,
               'session.error',
-              session ? { sessionID, projectID: session.projectID, directory: session.directory } : undefined,
+              { sessionID, projectID: session.projectID, directory: session.directory },
             );
             break;
           }
@@ -144,30 +148,33 @@ const BACKOFF_MAX_MS = 30_000;
 const BACKOFF_MULTIPLIER = 2;
 
 interface RelayMeta {
-  readonly sessionID?: string;
-  readonly projectID?: string;
-  readonly directory?: string;
+  readonly sessionID: string;
+  readonly projectID: string;
+  readonly directory: string;
 }
 
-const pushToDevice = async (
-  entry: { userId: string; deviceId: string; token: string },
-  title: string,
-  body: string,
-  event: NotificationEvent,
-  meta?: RelayMeta,
-): Promise<void> => {
+interface PushPayload {
+  readonly entry: { userId: string; deviceId: string; token: string };
+  readonly title: string;
+  readonly body: string;
+  readonly event: NotificationEvent;
+  readonly meta: RelayMeta;
+}
+
+const pushToDevice = async ({ entry, title, body, event, meta }: PushPayload): Promise<void> => {
   const res = await fetch(`${SERVER_URL}/relay/push/v2`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      user_id: entry.userId,
+      account_id: entry.userId,
+      device_id: entry.deviceId,
       token: entry.token,
       title,
       body,
       event,
-      session_id: meta?.sessionID,
-      project_id: meta?.projectID,
-      worktree: meta?.directory,
+      session_id: meta.sessionID,
+      project_id: meta.projectID,
+      worktree: meta.directory,
     }),
   });
 
@@ -185,8 +192,8 @@ const pushToDevice = async (
   logger.debug('notifications', 'forwarded successfully.');
 };
 
-const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta?: RelayMeta): Promise<void> => {
+const forwardToRelay = async (title: string, body: string, event: NotificationEvent, meta: RelayMeta): Promise<void> => {
   const entries = await apnTokenStore.get();
   if (entries.length === 0) return;
-  await Promise.all(entries.map((entry) => pushToDevice(entry, title, body, event, meta)));
+  await Promise.all(entries.map((entry) => pushToDevice({ entry, title, body, event, meta })));
 };

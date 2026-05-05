@@ -4,16 +4,9 @@ import { getLastMessageTimeByProject } from './db.ts';
 // eslint-disable-next-line no-restricted-imports
 import express, { Router, type Request, type Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { registerDeviceTokenRouter } from './routes/register-device-token.ts';
+import { registerDeviceTokenRouter } from './routes/register-device.ts';
 import { identityStore } from './stores/identity.ts';
 import { logger } from './logger.ts';
-
-export interface DaemonIdentity {
-  machineId: string;
-  opencodeUrl: string | undefined;
-  daemonUrl: string | undefined;
-  tailscaleUrl?: string;
-}
 
 interface Params {
   port: number;
