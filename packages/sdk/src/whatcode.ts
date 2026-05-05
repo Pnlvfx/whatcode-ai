@@ -39,7 +39,9 @@ export const createWhatcodeServer = async ({
   const machineId = await mId.machineId();
   await opencode({ port: opencodePort, password });
   const localIp = await getLocalIp();
-  if (!localIp) logger.warn('whatcode', 'could not determine local IP — local URLs will be unavailable');
+  if (localIp) {
+    logger.debug('local ip', localIp);
+  }
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
   const accountName = os.platform();
