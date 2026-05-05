@@ -57,7 +57,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@opencode-ai/sdk": "^1.14.37",
+    "@opencode-ai/sdk": "^1.14.39",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
