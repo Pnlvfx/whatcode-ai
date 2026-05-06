@@ -26,7 +26,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
   app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
   app.get('/whatcode/identity', (_req: Request, res: Response) => {
-    res.status(200).json(identityStore.get());
+    res.status(200).json({ data: identityStore.get() });
   });
 
   const projectRouter = Router();
