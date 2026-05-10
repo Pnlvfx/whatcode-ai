@@ -2,7 +2,7 @@ import type { LogLevel } from './logger.ts';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
-import { identityStore } from './stores/identity.ts';
+import { identityStore, persistedIdentityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
@@ -44,7 +44,10 @@ export const createWhatcodeServer = async ({
   }
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
-  const accountName = os.hostname();
+
+  const persistedIdentity = await persistedIdentityStore.get();
+
+  const accountName = persistedIdentity?.name ?? os.hostname();
 
   logger.debug('relay', SERVER_URL);
 
