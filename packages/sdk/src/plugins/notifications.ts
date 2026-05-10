@@ -3,9 +3,9 @@ import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
 import { SERVER_URL } from '../config/config.ts';
 import { headers } from '../config/headers.ts';
-import path from 'node:path';
 import { apnTokenStore } from '../stores/apn-token.ts';
 import { logger } from '../logger.ts';
+import path from 'node:path';
 
 const BODY_MAX = 178;
 
@@ -78,12 +78,7 @@ const subscribeToEvents = async (client: OpencodeClient): Promise<void> => {
             const title = getProjectName(session.directory);
             const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
             logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
-            await forwardToRelay(
-              title,
-              body,
-              'session.error',
-              { sessionID, projectID: session.projectID, directory: session.directory },
-            );
+            await forwardToRelay(title, body, 'session.error', { sessionID, projectID: session.projectID, directory: session.directory });
             break;
           }
         }

@@ -5,7 +5,7 @@ import { getLastMessageTimeByProject } from './db.ts';
 import express, { Router, type Request, type Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { registerDeviceTokenRouter } from './routes/register-device.ts';
-import { identityStore } from './stores/identity.ts';
+import { identityRouter } from './routes/identity.ts';
 import { logger } from './logger.ts';
 
 interface Params {
@@ -25,9 +25,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
 
   app.use('/notifications', express.json(), registerDeviceTokenRouter);
 
-  app.get('/whatcode/identity', (_req: Request, res: Response) => {
-    res.status(200).json({ data: identityStore.get() });
-  });
+  app.use('/whatcode/identity', express.json(), identityRouter);
 
   const projectRouter = Router();
 
