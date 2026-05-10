@@ -44,7 +44,7 @@ export const createWhatcodeServer = async ({
   }
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
-  const accountName = os.platform();
+  const accountName = os.hostname();
 
   logger.debug('relay', SERVER_URL);
 

@@ -38,6 +38,10 @@
       ".": {
         "types": "./dist/whatcode.d.ts",
         "import": "./dist/whatcode.js"
+      },
+      "./logger": {
+        "types": "./dist/logger.d.ts",
+        "import": "./dist/logger.js"
       }
     }
   },
@@ -57,7 +61,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@opencode-ai/sdk": "^1.14.39",
+    "@opencode-ai/sdk": "^1.14.46",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
@@ -66,11 +70,11 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.16.0",
+    "@goatjs/node-monorepo-eslint": "^2.17.0",
     "@goatjs/rimraf": "^2.4.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/express": "^5.0.6",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.6.2",
     "eslint": "^10.3.0",
     "typescript": "^6.0.3"
   }
