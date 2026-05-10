@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-properties */
 import { execa } from 'execa';
-import * as z from 'zod';
 import { logger } from '../logger.ts';
 import { platform } from '../config/constants.ts';
+import * as z from 'zod';
 
 export interface TailscaleResult {
   url: string;
@@ -63,6 +63,9 @@ const assertTailscaleInstalled = async (): Promise<void> => {
     case 'win32': {
       throw new Error('[tailscale] tailscale is not installed — install it with: choco install tailscale, then re-run');
     }
+    default: {
+      throw new Error('[tailscale] tailscale is not installed — install it from https://tailscale.com/download, then re-run');
+    }
   }
 };
 
@@ -77,6 +80,8 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
 };
 
 export const createTailscale = (port: number) => {
+  let started = false;
+
   return {
     start: async (): Promise<TailscaleResult> => {
       await assertTailscaleInstalled();
@@ -89,6 +94,7 @@ export const createTailscale = (port: number) => {
       } else {
         logger.debug('tailscale', `serve not running on port ${port.toString()} — starting`);
         await startServe(port);
+        started = true;
         logger.debug('tailscale', `serve started — we own port ${port.toString()}`);
       }
       const url = `https://${hostname.replace(/-$/, '')}`;
@@ -96,9 +102,12 @@ export const createTailscale = (port: number) => {
       return { url };
     },
     stop: async (): Promise<void> => {
-      // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
-      // this runs in the background — the process exits after setting up the config
-      await execa('tailscale', ['serve', '--bg', port.toString()]);
+      if (!started) {
+        logger.debug('tailscale', 'serve was already running before we started — skipping teardown');
+        return;
+      }
+      await execa('tailscale', ['serve', port.toString(), 'off']);
+      logger.debug('tailscale', 'serve handler removed');
     },
   };
 };

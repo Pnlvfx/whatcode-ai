@@ -1,5 +1,6 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import type { ClientRequest } from 'node:http';
+import { timingSafeEqual } from 'node:crypto';
 import { getLastMessageTimeByProject } from './db.ts';
 // eslint-disable-next-line no-restricted-imports
 import express, { Router, type Request, type Response } from 'express';
@@ -92,10 +93,11 @@ const basicAuth = (password: string) => (req: Request, res: Response, next: () =
   const decoded = Buffer.from(encoded, 'base64').toString('utf8');
   const colonIndex = decoded.indexOf(':');
   const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
-  if (pass !== password) {
+  const passOk = pass.length === password.length && timingSafeEqual(Buffer.from(pass), Buffer.from(password));
+  if (passOk) {
+    next();
+  } else {
     res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
     res.status(401).json({ error: 'Unauthorized' });
-    return;
   }
-  next();
 };
