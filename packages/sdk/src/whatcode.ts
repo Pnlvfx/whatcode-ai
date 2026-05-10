@@ -2,7 +2,7 @@ import type { LogLevel } from './logger.ts';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
-import { identityStore, persistedIdentityStore } from './stores/identity.ts';
+import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
@@ -10,7 +10,6 @@ import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import { SERVER_URL } from './config/config.ts';
 import { createTailscale } from './plugins/tailscale.ts';
-import os from 'node:os';
 import mId from 'node-machine-id';
 
 export interface WhatcodeServerResult {
@@ -45,13 +44,9 @@ export const createWhatcodeServer = async ({
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
 
-  const persistedIdentity = await persistedIdentityStore.get();
-
-  const accountName = persistedIdentity?.name ?? os.hostname();
-
   logger.debug('relay', SERVER_URL);
 
-  identityStore.set({ machineId, opencodeUrl, daemonUrl, name: accountName });
+  identityStore.set({ machineId, opencodeUrl, daemonUrl });
 
   const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
   const client = createOpencodeClient({
@@ -67,7 +62,7 @@ export const createWhatcodeServer = async ({
   if (useTailscale) {
     const tailscale = createTailscale(port);
     const result = await tailscale.start();
-    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url, name: accountName });
+    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
     logger.debug('tailscale', 'we own the serve — registering exit hook to stop it');
     asyncExitHook(tailscale.stop, { wait: 3000 });
   }
