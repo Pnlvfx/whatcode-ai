@@ -1,12 +1,12 @@
 import os from 'node:os';
 import path from 'node:path';
-import { config } from './config.ts';
 
 export const platform = os.platform();
 
 const REAL_SERVER_URL = 'https://api.whatcode.app';
 
-export const SERVER_URL = config.WHATCODE_SERVER_URL ?? REAL_SERVER_URL;
+// eslint-disable-next-line no-restricted-properties
+export const SERVER_URL = process.env['WHATCODE_SERVER_URL'] ?? REAL_SERVER_URL;
 
 const devFolder = SERVER_URL === REAL_SERVER_URL ? '' : 'dev';
 const WHATCODE_HOME = path.join(os.homedir(), '.whatcode');

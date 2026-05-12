@@ -83,6 +83,20 @@ When any of these events fire, the daemon sends a push notification to your iPho
 
 You can protect your daemon with a password. When set, every request must include the password via HTTP Basic Auth.
 
+Via CLI, set the `WHATCODE_PASSWORD` environment variable:
+
+```bash
+WHATCODE_PASSWORD=your-password npx @whatcode-ai/sdk
+```
+
+Or add it to a `.env` file in the directory where you run the daemon:
+
+```bash
+WHATCODE_PASSWORD = your-password
+```
+
+Via library, pass it as a parameter:
+
 ```ts
 await createWhatcodeServer({ password: 'your-password' });
 ```
@@ -105,10 +119,10 @@ Via library:
 await createWhatcodeServer({ logLevel: 'debug' });
 ```
 
-| Level | Description |
-| --- | --- |
-| `none` | Silent — no output (SDK default) |
-| `info` | Info, warnings and errors (CLI default) |
+| Level   | Description                                          |
+| ------- | ---------------------------------------------------- |
+| `none`  | Silent — no output (SDK default)                     |
+| `info`  | Info, warnings and errors (CLI default)              |
 | `debug` | Everything, including internal events and APN tokens |
 
 ## Tailscale
@@ -148,13 +162,13 @@ await resetWhatcodeServer();
 
 ### `createWhatcodeServer(config)`
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `port` | `number` | `8192` | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine. |
-| `opencodePort` | `number` | `4096` | Port the OpenCode server listens on. Must match what OpenCode is actually bound to. |
-| `tailscale` | `boolean` | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated. |
-| `password` | `string` | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
-| `logLevel` | `'none' \| 'info' \| 'debug'` | `'none'` | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything. |
+| Option         | Type                          | Default     | Description                                                                                                         |
+| -------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| `port`         | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
+| `opencodePort` | `number`                      | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                 |
+| `tailscale`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
+| `password`     | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
+| `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
 ### `resetWhatcodeServer()`
 
@@ -162,16 +176,23 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 ## CLI reference
 
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--port` | `number` | `8192` | Port for the WhatCode server. |
-| `--opencode-port` | `number` | `4096` | Port for the OpenCode server. |
-| `--tailscale` | `boolean` | - | Expose via Tailscale HTTPS. |
-| `--log-level` | `'none' \| 'info' \| 'debug'` | `info` | Controls log verbosity. |
-| `--password` | `string` | - | Protect servers with HTTP Basic Auth. |
+**Flags**
+
+| Flag              | Type                          | Default | Description                   |
+| ----------------- | ----------------------------- | ------- | ----------------------------- |
+| `--port`          | `number`                      | `8192`  | Port for the WhatCode server. |
+| `--opencode-port` | `number`                      | `4096`  | Port for the OpenCode server. |
+| `--tailscale`     | `boolean`                     | -       | Expose via Tailscale HTTPS.   |
+| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.       |
+
+**Environment variables**
+
+| Variable            | Default | Description                                                                        |
+| ------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `WHATCODE_PASSWORD` | -       | Protect servers with HTTP Basic Auth. Set via environment variable or `.env` file. |
 
 ### Commands
 
-| Command | Description |
-| --- | --- |
+| Command | Description                                                                     |
+| ------- | ------------------------------------------------------------------------------- |
 | `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working. |

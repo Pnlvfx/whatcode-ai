@@ -1,15 +1,16 @@
 #!/usr/bin/env node
+import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { logger, logLevelSchema } from '@whatcode-ai/sdk/logger';
 import { printQrCode } from './qrcode.ts';
-import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import updateNotifier from 'update-notifier';
 import pkg from '../package.json' with { type: 'json' };
+import yargs from 'yargs';
 
 updateNotifier({ pkg }).notify();
 
-const { tailscale, port, opencodePort, logLevel, password } = await yargs(hideBin(process.argv))
+const { tailscale, port, opencodePort, logLevel } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
@@ -24,7 +25,6 @@ const { tailscale, port, opencodePort, logLevel, password } = await yargs(hideBi
     default: 'info',
     description: 'Log level: none | info | debug (default: info)',
   })
-  .option('password', { type: 'string', description: 'Password to protect the Whatcode and OpenCode servers (HTTP Basic Auth)' })
   .command(
     'reset',
     'Reset stored daemon data (APNs tokens). Use this if notifications stop working.',
@@ -40,12 +40,12 @@ const { url } = await createWhatcodeServer({
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
   logLevel: await logLevelSchema.parseAsync(logLevel),
-  ...(password !== undefined && { password }),
+  ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
 });
 
 if (url) {
   logger.info('whatcode', `use this URL in the app: ${url}`);
-  printQrCode(url, password);
+  printQrCode(url, config.WHATCODE_PASSWORD);
 } else {
   logger.info('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
 }
