@@ -1,5 +1,5 @@
-import { homedir } from 'node:os';
-import path from 'node:path';
+/* eslint-disable no-restricted-properties */
+import * as z from 'zod';
 import { logger } from '../logger.ts';
 
 try {
@@ -8,8 +8,10 @@ try {
   logger.debug('env', 'no .env file present, using defaults');
 }
 
-// eslint-disable-next-line no-restricted-properties
-export const SERVER_URL = process.env['WHATCODE_SERVER_URL'] ?? 'https://api.whatcode.app';
+const envSchema = z.strictObject({
+  WHATCODE_SERVER_URL: z.string().optional(),
+});
 
-const WHATCODE_HOME = path.join(homedir(), '.whatcode');
-export const WHATCODE_AUTH = path.join(WHATCODE_HOME, 'auth');
+export const config = await envSchema.parseAsync({
+  WHATCODE_SERVER_URL: process.env['WHATCODE_SERVER_URL'],
+});

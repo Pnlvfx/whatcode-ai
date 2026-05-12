@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import { createStore } from '../store.ts';
-import { WHATCODE_AUTH } from '../config/config.ts';
+import { WHATCODE_AUTH } from '../config/constants.ts';
 
 export const apnTokenStore = await createStore(
   'apn-token',

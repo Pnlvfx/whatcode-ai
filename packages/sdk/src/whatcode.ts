@@ -8,9 +8,9 @@ import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
 import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
-import { SERVER_URL } from './config/config.ts';
 import { createTailscale } from './plugins/tailscale.ts';
 import mId from 'node-machine-id';
+import { SERVER_URL } from './config/constants.ts';
 
 export interface WhatcodeServerResult {
   url: string | undefined;

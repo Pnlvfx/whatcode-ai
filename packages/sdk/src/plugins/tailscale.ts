@@ -4,10 +4,6 @@ import { logger } from '../logger.ts';
 import { platform } from '../config/constants.ts';
 import * as z from 'zod';
 
-export interface TailscaleResult {
-  url: string;
-}
-
 const serveStatusSchema = z.object({
   TCP: z.record(z.string(), z.unknown()).optional(),
 });
@@ -83,7 +79,7 @@ export const createTailscale = (port: number) => {
   let started = false;
 
   return {
-    start: async (): Promise<TailscaleResult> => {
+    start: async (): Promise<{ url: string }> => {
       await assertTailscaleInstalled();
       await assertDaemonReachable();
       const hostname = await getHostname();
