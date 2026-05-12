@@ -130,6 +130,14 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 
 If notifications stop working or device registrations get into a bad state, you can reset the daemon stored data. This clears all saved APNs tokens, which stops push notification delivery for all linked devices. After resetting, open the app and reconnect to re-register your device.
 
+Via CLI:
+
+```bash
+npx @whatcode-ai/sdk reset
+```
+
+Via library:
+
 ```ts
 import { resetWhatcodeServer } from '@whatcode-ai/sdk';
 
@@ -160,3 +168,10 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 | `--opencode-port` | `number` | `4096` | Port for the OpenCode server. |
 | `--tailscale` | `boolean` | - | Expose via Tailscale HTTPS. |
 | `--log-level` | `'none' \| 'info' \| 'debug'` | `info` | Controls log verbosity. |
+| `--password` | `string` | - | Protect servers with HTTP Basic Auth. |
+
+### Commands
+
+| Command | Description |
+| --- | --- |
+| `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working. |

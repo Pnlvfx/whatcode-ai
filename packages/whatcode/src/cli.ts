@@ -9,13 +9,12 @@ import pkg from '../package.json' with { type: 'json' };
 
 updateNotifier({ pkg }).notify();
 
-const { tailscale, reset, port, opencodePort, logLevel, password } = await yargs(hideBin(process.argv))
+const { tailscale, port, opencodePort, logLevel, password } = await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
   .version(false)
   .usage('$0 [options]')
-  .option('reset', { type: 'boolean', description: 'Reset Whatcode server, disconnect all active devices.' })
   .option('tailscale', { type: 'boolean', description: 'Expose opencode via Tailscale serve (HTTPS on your tailnet)' })
   .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
   .option('opencode-port', { type: 'number', description: 'Port for the opencode server (default: 4096)' })
@@ -26,11 +25,15 @@ const { tailscale, reset, port, opencodePort, logLevel, password } = await yargs
     description: 'Log level: none | info | debug (default: info)',
   })
   .option('password', { type: 'string', description: 'Password to protect the Whatcode and opencode servers (HTTP Basic Auth)' })
+  .command(
+    'reset',
+    'Reset stored daemon data (APNs tokens). Use this if notifications stop working.',
+    (y) => y,
+    async () => {
+      await resetWhatcodeServer();
+    },
+  )
   .parseAsync();
-
-if (reset) {
-  await resetWhatcodeServer();
-}
 
 const { url } = await createWhatcodeServer({
   tailscale,
