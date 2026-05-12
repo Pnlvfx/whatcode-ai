@@ -12,7 +12,7 @@
     "unused": "turbo run unused",
     "lint": "turbo run lint",
     "build": "turbo run build",
-    "prepare": "husky",
+    "prepare": "lefthook install",
     "update": "yarn upgrade-interactive"
   },
   "workspaces": [
@@ -23,7 +23,10 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@goatjs/dbz": "^2.15.0",
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
+    "@goatjs/dbz": "^2.16.0",
+    "lefthook": "^2.1.6",
     "prettier": "^3.8.3",
     "turbo": "^2.9.12"
   },
