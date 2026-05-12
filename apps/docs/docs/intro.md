@@ -7,6 +7,8 @@ sidebar_position: 1
 
 WhatCode is a mobile companion for [OpenCode](https://opencode.ai), the open-source AI coding agent that runs on your machine. It lets you monitor and interact with your coding sessions from your iPhone and get notified the moment an agent finishes its work.
 
+[Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
+
 ## What's in here
 
 This documentation covers three things:

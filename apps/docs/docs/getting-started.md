@@ -9,7 +9,7 @@ This guide walks you through connecting the WhatCode iOS app to your machine in 
 ## Requirements
 
 - [OpenCode](https://opencode.ai) installed and running
-- The WhatCode app installed on your iPhone
+- The WhatCode app installed on your iPhone — [download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
 ## 1. Install OpenCode
 

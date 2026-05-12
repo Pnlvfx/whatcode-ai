@@ -8,6 +8,10 @@ WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhon
 
 You start a long-running task, put your phone down, and WhatCode taps you on the shoulder when it's done.
 
+## Download
+
+[Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
+
 ## Features
 
 **Project browser** - all your OpenCode projects are listed in one place, sorted by the most recent activity. Tap a project to see its sessions.

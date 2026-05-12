@@ -58,6 +58,11 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          href: 'https://apps.apple.com/us/app/whatcode/id6760623503',
+          label: 'App Store',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/Pnlvfx/whatcode-ai',
           label: 'GitHub',
           position: 'right',
@@ -78,6 +83,10 @@ const config: Config = {
         {
           title: 'More',
           items: [
+            {
+              label: 'App Store',
+              href: 'https://apps.apple.com/us/app/whatcode/id6760623503',
+            },
             {
               label: 'GitHub',
               href: 'https://github.com/Pnlvfx/whatcode-ai',

@@ -6,6 +6,20 @@ sidebar_position: 5
 
 The WhatCode daemon (`@whatcode-ai/sdk`) is a lightweight Node.js process that runs on your machine alongside OpenCode. It serves three purposes: exposing OpenCode on your local network so the iOS app can reach it, patching certain OpenCode responses to improve the mobile experience, and delivering push notifications to your iPhone when an agent finishes.
 
+## Why do I need a daemon?
+
+When you open OpenCode via the desktop app or TUI, it starts an embedded server automatically — but that server has three limitations that make remote or persistent use impractical.
+
+**It only listens on localhost.** OpenCode does not pass `--hostname` when it starts its server, so it binds to `127.0.0.1` only. No other device on your network — let alone a remote machine — can reach it.
+
+**The port is random.** Every time OpenCode restarts, it picks a new port. If you want to connect externally you have to hunt for the new port on every restart, which makes automation or persistent connections unreliable.
+
+**The server stops when the app stops.** The embedded server is tied to the desktop or TUI process. Close the window and the server shuts down with it — no background persistence.
+
+You can work around all three by running `opencode --serve --hostname <address>` yourself. That starts a stable, exposed server that keeps running on its own. The WhatCode daemon does exactly the same thing, and on top of it adds push notifications, automatic reconnection, response patching for the mobile app, and optional Tailscale exposure.
+
+Plain OpenCode is still fully supported — the daemon just gives you a significantly better experience.
+
 ## Installation
 
 No installation required. Run it directly with npx:
