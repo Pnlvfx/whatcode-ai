@@ -15,16 +15,16 @@ const { tailscale, port, opencodePort, logLevel, password } = await yargs(hideBi
   .strict()
   .version(false)
   .usage('$0 [options]')
-  .option('tailscale', { type: 'boolean', description: 'Expose opencode via Tailscale serve (HTTPS on your tailnet)' })
+  .option('tailscale', { type: 'boolean', description: 'Expose OpenCode via Tailscale serve (HTTPS on your tailnet)' })
   .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
-  .option('opencode-port', { type: 'number', description: 'Port for the opencode server (default: 4096)' })
+  .option('opencode-port', { type: 'number', description: 'Port for the OpenCode server (default: 4096)' })
   .option('log-level', {
     type: 'string',
     choices: ['none', 'info', 'debug'],
     default: 'info',
     description: 'Log level: none | info | debug (default: info)',
   })
-  .option('password', { type: 'string', description: 'Password to protect the Whatcode and opencode servers (HTTP Basic Auth)' })
+  .option('password', { type: 'string', description: 'Password to protect the Whatcode and OpenCode servers (HTTP Basic Auth)' })
   .command(
     'reset',
     'Reset stored daemon data (APNs tokens). Use this if notifications stop working.',

@@ -1,5 +1,5 @@
 import qrcode from 'qrcode-terminal';
-import { CLIENT_URL } from './config.ts';
+import { CLIENT_URL } from './constants.ts';
 
 export const printQrCode = (url: string, password?: string): void => {
   const params = new URLSearchParams({ url });

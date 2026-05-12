@@ -11,6 +11,7 @@
     "tsc": "turbo run tsc",
     "unused": "turbo run unused",
     "lint": "turbo run lint",
+    "dev": "yarn whatcode --tailscale --log-level debug",
     "build": "turbo run build",
     "prepare": "lefthook install",
     "update": "yarn upgrade-interactive"
