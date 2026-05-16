@@ -90,4 +90,4 @@ If any provision of these Terms is found unenforceable, the remaining provisions
 
 ## 13. Contact
 
-Questions? Email us at [support@whatcode.ai](mailto:support@whatcode.ai).
+Questions? Email us at [support@whatcode.app](mailto:support@whatcode.app).

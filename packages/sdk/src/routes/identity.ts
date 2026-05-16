@@ -3,8 +3,10 @@ import { Router } from 'express';
 import { identityStore } from '../stores/identity.ts';
 import os from 'node:os';
 
-export const identityRouter = Router();
+const router = Router();
 
-identityRouter.get('/', (_req, res) => {
+router.get('/', (_req, res) => {
   res.status(200).json({ data: { ...identityStore.get(), name: os.hostname() } });
 });
+
+export { router as identityRouter };

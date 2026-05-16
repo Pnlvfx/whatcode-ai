@@ -117,7 +117,7 @@ WhatCode operates relay infrastructure and uses Apple's APNs, which may process 
 
 Depending on your jurisdiction, you may have the right to access, correct, delete, restrict, or object to the processing of your personal information, and to request portability where applicable.
 
-Because WhatCode is local-first, most of your data remains under your direct control on your own devices. For notification-related data processed by our relay, running `whatcode --reset` removes your APNs token. For any other privacy request, contact us at [support@whatcode.ai](mailto:support@whatcode.ai).
+Because WhatCode is local-first, most of your data remains under your direct control on your own devices. For notification-related data processed by our relay, running `whatcode --reset` removes your APNs token. For any other privacy request, contact us at [support@whatcode.app](mailto:support@whatcode.app).
 
 **EEA users:** You also have the right to lodge a complaint with your local data protection supervisory authority.
 
@@ -135,4 +135,4 @@ We may update this policy from time to time. Changes will be posted on this page
 
 ## 11. Contact
 
-Questions about this policy or requests to exercise your privacy rights? Email us at [support@whatcode.ai](mailto:support@whatcode.ai).
+Questions about this policy or requests to exercise your privacy rights? Email us at [support@whatcode.app](mailto:support@whatcode.app).

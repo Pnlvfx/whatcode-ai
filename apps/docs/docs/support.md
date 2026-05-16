@@ -10,7 +10,7 @@ Need help with WhatCode? We're here for you.
 
 For bug reports, feature requests, or general questions, reach out via email:
 
-**[support@whatcode.ai](mailto:support@whatcode.ai)**
+**[support@whatcode.app](mailto:support@whatcode.app)**
 
 ## GitHub
 

@@ -9,8 +9,8 @@ import { startNotifications } from './plugins/notifications.ts';
 import { logger } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import { createTailscale } from './plugins/tailscale.ts';
-import mId from 'node-machine-id';
 import { SERVER_URL } from './config/constants.ts';
+import mId from 'node-machine-id';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -25,7 +25,7 @@ export interface WhatcodeServerConfig {
 }
 
 export const createWhatcodeServer = async ({
-  tailscale: useTailscale,
+  tailscale: hasTailscale,
   password,
   port = 8192,
   opencodePort = 4096,
@@ -59,7 +59,7 @@ export const createWhatcodeServer = async ({
 
   await startWhatcode({ port, opencodePort: opencodePort, password, client });
 
-  if (useTailscale) {
+  if (hasTailscale) {
     const tailscale = createTailscale(port);
     const result = await tailscale.start();
     identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
