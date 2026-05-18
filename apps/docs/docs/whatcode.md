@@ -4,9 +4,9 @@ sidebar_position: 3
 
 # WhatCode
 
-WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an AI agent finishes its work.
-
 You start a long-running task, put your phone down, and WhatCode taps you on the shoulder when it's done.
+
+WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an agent finishes its work.
 
 ## Download
 
@@ -14,19 +14,19 @@ You start a long-running task, put your phone down, and WhatCode taps you on the
 
 ## Features
 
-**Project browser** - all your OpenCode projects are listed in one place, sorted by the most recent activity. Tap a project to see its sessions.
+**Project browser** - all your OpenCode projects in one place, sorted by most recent activity. Always know which session needs your attention next.
 
-**Session view** - read the full conversation history of any session, see what the agent did, and continue the conversation from your phone.
+**Session view** - read the full conversation history of any session, see every file the agent touched, and continue the conversation without touching your computer.
 
-**Push notifications** - get notified when:
+**Push notifications** - get notified the moment something happens:
 
 - An agent finishes a turn and goes idle
 - An agent hits an error
 - An agent needs your permission to proceed
 
-**Multiple accounts** - connect to more than one machine. Useful if you have a work computer and a personal one, or a desktop and a laptop.
+**Multiple machines** - stay connected to every machine at once. Whether you run OpenCode on a work laptop, a personal desktop, or both, they all show up in one place.
 
-**Tailscale support** - when the daemon is started with `--tailscale`, you can connect from anywhere over a secure, encrypted tunnel. No VPN configuration needed.
+**Tailscale support** - start the daemon with `--tailscale` and connect securely from anywhere, no VPN setup required.
 
 ## Setup
 

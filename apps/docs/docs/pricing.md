@@ -4,17 +4,19 @@ sidebar_position: 7
 
 # Pricing
 
-WhatCode gives you full access to OpenCode from your iPhone. Try it free for 3 days, then choose the plan that works for you.
+WhatCode gives you full access to OpenCode from your iPhone. At just $2.00 / month on the yearly plan, it pays for itself the first time you catch a finished agent from your couch instead of your desk.
+
+Try it free for 3 days, no charge until the trial ends.
 
 ## Plans
 
 | | Monthly | Yearly |
 | --- | --- | --- |
-| Price | $3.29 / month | $23.99 / year |
+| Price | $3.29 / month | $23.99 / year ($2.00 / month) |
 | Free trial | 3 days | 3 days |
 | All features | Yes | Yes |
 
-The yearly plan works out to $2.00 / month, saving you about 39% compared to monthly.
+The yearly plan saves you about 39% compared to monthly.
 
 ## What's included
 
@@ -29,6 +31,8 @@ The yearly plan works out to $2.00 / month, saving you about 39% compared to mon
 ## Free trial
 
 Both plans include a 3-day free trial for new subscribers. You will not be charged until the trial ends, and you can cancel at any time during the trial without being billed.
+
+**[Start your free trial on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)**
 
 ## Billing
 

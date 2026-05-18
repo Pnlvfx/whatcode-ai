@@ -62,6 +62,8 @@ If your camera isn't available, tap **Continue without QR** and enter the URL ma
 
 You should now see your OpenCode projects listed in the app. Tap any project to open its sessions, send messages, and receive notifications when the agent finishes a task.
 
+Not subscribed yet? Both plans include a 3-day free trial. [Start yours on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503).
+
 ## Connecting remotely with Tailscale
 
 If you want to connect from outside your local network, use the `--tailscale` flag:

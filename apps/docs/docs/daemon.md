@@ -8,17 +8,15 @@ The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process t
 
 ## Why do I need a daemon?
 
-When you open OpenCode via the desktop app or TUI, it starts an embedded server automatically, but that server has three limitations that make remote or persistent use impractical.
+The daemon gives you three things that plain OpenCode cannot provide out of the box.
 
-**It only listens on localhost.** OpenCode does not pass `--hostname` when it starts its server, so it binds to `127.0.0.1` only. No other device on your network, let alone a remote machine, can reach it.
+**Reachable from your phone.** By default, OpenCode binds to `127.0.0.1` only. The daemon exposes it on your local network (and optionally over Tailscale) so your iPhone can connect.
 
-**The port is random.** Every time OpenCode restarts, it picks a new port. If you want to connect externally you have to hunt for the new port on every restart, which makes automation or persistent connections unreliable.
+**A stable address.** OpenCode picks a random port on every restart. The daemon always listens on a fixed port (`8192`), so the app can reconnect automatically without any reconfiguration.
 
-**The server stops when the app stops.** The embedded server is tied to the desktop or TUI process. Close the window and the server shuts down with it, with no background persistence.
+**Push notifications.** The daemon watches the OpenCode event stream and sends a push to your iPhone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
 
-You can work around all three by running `opencode --serve --hostname <address>` yourself. That starts a stable, exposed server that keeps running on its own. The WhatCode daemon does exactly the same thing, and on top of it adds push notifications, automatic reconnection, response patching for the mobile app, and optional Tailscale exposure.
-
-Plain OpenCode is still fully supported. The daemon just gives you a significantly better experience.
+Under the hood, the daemon runs `opencode --serve --hostname <address>` on your behalf and layers these capabilities on top. Plain OpenCode is still fully supported. The daemon just makes the mobile experience significantly better.
 
 ## Installation
 

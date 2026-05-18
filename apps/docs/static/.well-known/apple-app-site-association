@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["CFCNN9T5KV.app.whatcode.whatcode"],
+        "components": [
+          { "/": "/connect" }
+        ]
+      }
+    ]
+  }
+}
