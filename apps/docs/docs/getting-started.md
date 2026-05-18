@@ -9,7 +9,7 @@ This guide walks you through connecting the WhatCode iOS app to your machine in 
 ## Requirements
 
 - [OpenCode](https://opencode.ai) installed and running
-- The WhatCode app installed on your iPhone — [download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
+- The WhatCode app installed on your iPhone. [Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
 ## 1. Install OpenCode
 
@@ -39,7 +39,7 @@ Refer to the [OpenCode documentation](https://opencode.ai/docs) for the full lis
 Run the following command in your terminal:
 
 ```bash
-npx @whatcode-ai/sdk
+npx @whatcode-ai/whatcode
 ```
 
 This will:
@@ -67,7 +67,7 @@ You should now see your OpenCode projects listed in the app. Tap any project to 
 If you want to connect from outside your local network, use the `--tailscale` flag:
 
 ```bash
-npx @whatcode-ai/sdk --tailscale
+npx @whatcode-ai/whatcode --tailscale
 ```
 
 This sets up a secure HTTPS tunnel over your [Tailscale](https://tailscale.com) network. The QR code will include your Tailscale URL so the app can reach your machine from anywhere. See the [Daemon](/daemon) page for more details.

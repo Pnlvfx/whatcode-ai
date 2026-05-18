@@ -32,7 +32,7 @@ You start a long-running task, put your phone down, and WhatCode taps you on the
 
 See [Getting Started](/) for the full connection walkthrough. In short:
 
-1. Run `npx @whatcode-ai/sdk` on your machine.
+1. Run `npx @whatcode-ai/whatcode` on your machine.
 2. Scan the QR code with the app.
 3. Done.
 

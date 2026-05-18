@@ -4,34 +4,34 @@ sidebar_position: 5
 
 # Daemon
 
-The WhatCode daemon (`@whatcode-ai/sdk`) is a lightweight Node.js process that runs on your machine alongside OpenCode. It serves three purposes: exposing OpenCode on your local network so the iOS app can reach it, patching certain OpenCode responses to improve the mobile experience, and delivering push notifications to your iPhone when an agent finishes.
+The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process that runs on your machine alongside OpenCode. It serves three purposes: exposing OpenCode on your local network so the iOS app can reach it, patching certain OpenCode responses to improve the mobile experience, and delivering push notifications to your iPhone when an agent finishes.
 
 ## Why do I need a daemon?
 
-When you open OpenCode via the desktop app or TUI, it starts an embedded server automatically — but that server has three limitations that make remote or persistent use impractical.
+When you open OpenCode via the desktop app or TUI, it starts an embedded server automatically, but that server has three limitations that make remote or persistent use impractical.
 
-**It only listens on localhost.** OpenCode does not pass `--hostname` when it starts its server, so it binds to `127.0.0.1` only. No other device on your network — let alone a remote machine — can reach it.
+**It only listens on localhost.** OpenCode does not pass `--hostname` when it starts its server, so it binds to `127.0.0.1` only. No other device on your network, let alone a remote machine, can reach it.
 
 **The port is random.** Every time OpenCode restarts, it picks a new port. If you want to connect externally you have to hunt for the new port on every restart, which makes automation or persistent connections unreliable.
 
-**The server stops when the app stops.** The embedded server is tied to the desktop or TUI process. Close the window and the server shuts down with it — no background persistence.
+**The server stops when the app stops.** The embedded server is tied to the desktop or TUI process. Close the window and the server shuts down with it, with no background persistence.
 
 You can work around all three by running `opencode --serve --hostname <address>` yourself. That starts a stable, exposed server that keeps running on its own. The WhatCode daemon does exactly the same thing, and on top of it adds push notifications, automatic reconnection, response patching for the mobile app, and optional Tailscale exposure.
 
-Plain OpenCode is still fully supported — the daemon just gives you a significantly better experience.
+Plain OpenCode is still fully supported. The daemon just gives you a significantly better experience.
 
 ## Installation
 
 No installation required. Run it directly with npx:
 
 ```bash
-npx @whatcode-ai/sdk
+npx @whatcode-ai/whatcode
 ```
 
 Or install it globally:
 
 ```bash
-npm install -g @whatcode-ai/sdk
+npm install -g @whatcode-ai/whatcode
 whatcode
 ```
 
@@ -86,7 +86,7 @@ You can protect your daemon with a password. When set, every request must includ
 Via CLI, set the `WHATCODE_PASSWORD` environment variable:
 
 ```bash
-WHATCODE_PASSWORD=your-password npx @whatcode-ai/sdk
+WHATCODE_PASSWORD=your-password npx @whatcode-ai/whatcode
 ```
 
 Or add it to a `.env` file in the directory where you run the daemon:
@@ -110,7 +110,7 @@ Control how much the daemon logs. The CLI defaults to `info` (shows info, warnin
 Via CLI:
 
 ```bash
-npx @whatcode-ai/sdk --log-level debug
+npx @whatcode-ai/whatcode --log-level debug
 ```
 
 Via library:
@@ -121,7 +121,7 @@ await createWhatcodeServer({ logLevel: 'debug' });
 
 | Level   | Description                                          |
 | ------- | ---------------------------------------------------- |
-| `none`  | Silent — no output (SDK default)                     |
+| `none`  | Silent, no output (SDK default)                      |
 | `info`  | Info, warnings and errors (CLI default)              |
 | `debug` | Everything, including internal events and APN tokens |
 
@@ -130,7 +130,7 @@ await createWhatcodeServer({ logLevel: 'debug' });
 Passing `--tailscale` exposes the daemon over a secure HTTPS tunnel on your [Tailscale](https://tailscale.com) network:
 
 ```bash
-npx @whatcode-ai/sdk --tailscale
+npx @whatcode-ai/whatcode --tailscale
 ```
 
 This runs `tailscale serve --bg <port>` in the background, which proxies your local port over HTTPS using your Tailscale hostname (e.g. `https://my-mac.tail1234.ts.net`). The QR code printed in the terminal includes this URL so the app connects over Tailscale automatically. When you stop the daemon (Ctrl+C), it cleans up the Tailscale serve rule automatically.
@@ -147,7 +147,7 @@ If notifications stop working or device registrations get into a bad state, you 
 Via CLI:
 
 ```bash
-npx @whatcode-ai/sdk reset
+npx @whatcode-ai/whatcode reset
 ```
 
 Via library:
