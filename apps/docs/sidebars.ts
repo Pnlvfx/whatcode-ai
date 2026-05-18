@@ -9,6 +9,7 @@ const sidebars: SidebarsConfig = {
     { type: 'doc', id: 'daemon', label: 'Daemon' },
     { type: 'doc', id: 'pricing', label: 'Pricing' },
     { type: 'doc', id: 'support', label: 'Support' },
+    { type: 'doc', id: 'about', label: 'About' },
     {
       type: 'category',
       label: 'Policies',
