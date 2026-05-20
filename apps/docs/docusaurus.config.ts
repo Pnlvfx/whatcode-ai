@@ -1,16 +1,17 @@
-import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from 'prism-react-renderer';
+import { APP_URL, APP_STORE_URL, GITHUB_REPO_URL, GITHUB_EDIT_URL, ORG_NAME, PROJECT_NAME } from './src/constants';
 
 const config: Config = {
   title: 'WhatCode AI',
   tagline: 'Documentation',
   favicon: 'favicon.ico',
   future: { v4: true },
-  url: 'https://whatcode.app',
+  url: APP_URL,
   baseUrl: '/',
-  organizationName: 'Pnlvfx',
-  projectName: 'whatcode-ai',
+  organizationName: ORG_NAME,
+  projectName: PROJECT_NAME,
 
   trailingSlash: true,
   onBrokenLinks: 'throw',
@@ -29,7 +30,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/Pnlvfx/whatcode-ai/tree/main/apps/docs/',
+          editUrl: GITHUB_EDIT_URL,
           routeBasePath: '/',
         },
         blog: false,
@@ -58,12 +59,12 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://apps.apple.com/us/app/whatcode/id6760623503',
+          href: APP_STORE_URL,
           label: 'App Store',
           position: 'right',
         },
         {
-          href: 'https://github.com/Pnlvfx/whatcode-ai',
+          href: GITHUB_REPO_URL,
           label: 'GitHub',
           position: 'right',
         },
@@ -85,11 +86,11 @@ const config: Config = {
           items: [
             {
               label: 'App Store',
-              href: 'https://apps.apple.com/us/app/whatcode/id6760623503',
+              href: APP_STORE_URL,
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/Pnlvfx/whatcode-ai',
+              href: GITHUB_REPO_URL,
             },
           ],
         },
