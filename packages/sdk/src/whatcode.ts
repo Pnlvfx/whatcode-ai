@@ -1,4 +1,3 @@
-import type { LogLevel } from './logger.ts';
 import { createOpencodeClient } from '@opencode-ai/sdk/v2';
 import { opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
@@ -6,7 +5,7 @@ import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './plugins/notifications.ts';
-import { logger } from './logger.ts';
+import { logger, type LogLevel } from './logger.ts';
 import { apnTokenStore } from './stores/apn-token.ts';
 import { createTailscale } from './plugins/tailscale.ts';
 import { SERVER_URL } from './config/constants.ts';

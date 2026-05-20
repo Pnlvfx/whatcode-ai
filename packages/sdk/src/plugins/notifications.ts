@@ -1,11 +1,10 @@
-import type { Part, TextPart } from '@opencode-ai/sdk/v2';
-import { createOpencodeClient } from '@opencode-ai/sdk/v2';
+import { createOpencodeClient, type Part, type TextPart } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
 import { headers } from '../config/headers.ts';
 import { apnTokenStore } from '../stores/apn-token.ts';
 import { logger } from '../logger.ts';
-import path from 'node:path';
 import { SERVER_URL } from '../config/constants.ts';
+import path from 'node:path';
 
 const BODY_MAX = 178;
 
