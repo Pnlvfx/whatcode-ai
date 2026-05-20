@@ -65,7 +65,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@opencode-ai/sdk": "^1.15.3",
+    "@opencode-ai/sdk": "^1.15.5",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
@@ -74,11 +74,11 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.19.0",
-    "@goatjs/rimraf": "^2.7.0",
+    "@goatjs/node-monorepo-eslint": "^2.20.0",
+    "@goatjs/rimraf": "^2.8.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/express": "^5.0.6",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.0",
     "eslint": "^10.4.0",
     "typescript": "^6.0.3"
   }
