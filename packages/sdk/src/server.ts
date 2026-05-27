@@ -51,6 +51,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
     createProxyMiddleware({
       target: `http://localhost:${opencodePort.toString()}`,
       changeOrigin: false,
+      agent: false,
       proxyTimeout: 0,
       timeout: 0,
       on: {
