@@ -70,10 +70,10 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.20.0",
+    "@goatjs/node-monorepo-eslint": "^2.21.0",
     "@goatjs/rimraf": "^2.8.0",
     "@goatjs/typescript-config": "^2.1.0",
-    "@types/node": "^25.9.0",
+    "@types/node": "^25.9.1",
     "@types/qrcode-terminal": "^0.12.2",
     "@types/update-notifier": "^6.0.8",
     "@types/yargs": "^17.0.35",

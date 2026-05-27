@@ -29,9 +29,9 @@
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "typescript": "~6.0.3",
-    "vercel": "^54.1.0"
+    "vercel": "^54.4.1"
   },
   "browserslist": {
     "production": [
