@@ -1,11 +1,11 @@
 import { rimraf } from '@goatjs/rimraf';
 import { createGitClient } from '@goatjs/node/git';
-import { checkGitStatus } from '@goatjs/dbz/git';
 import { execa } from 'execa';
 import { getPkgJSON } from '@goatjs/node/package-json';
+import { dbz } from '@goatjs/dbz';
 
 const git = createGitClient();
-await checkGitStatus();
+await dbz.checkGitStatus(git);
 
 await rimraf(['build', '.docusaurus']);
 
