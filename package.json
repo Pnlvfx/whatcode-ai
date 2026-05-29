@@ -39,7 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
-    "@goatjs/dbz": "^2.23.0",
+    "@goatjs/dbz": "^2.25.0",
     "lefthook": "^2.1.8",
     "prettier": "^3.8.3",
     "turbo": "^2.9.15"

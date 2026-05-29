@@ -1,7 +1,7 @@
 {
   "name": "@whatcode-ai/whatcode",
-  "description": "CLI to start opencode and optionally expose it over HTTPS via Tailscale — connect to your AI coding assistant from anywhere.",
   "version": "1.16.0",
+  "description": "CLI to start opencode and optionally expose it over HTTPS via Tailscale — connect to your AI coding assistant from anywhere.",
   "keywords": [
     "opencode",
     "tailscale",
@@ -13,24 +13,54 @@
     "remote",
     "whatcode"
   ],
-  "author": {
-    "email": "simonegauli@gmail.com",
-    "name": "Simone Gauli"
+  "homepage": "https://www.whatcode.app/",
+  "bugs": {
+    "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Pnlvfx/whatcode-ai.git",
     "directory": "packages/whatcode"
   },
-  "homepage": "https://www.whatcode.app/",
-  "bugs": {
-    "url": "https://github.com/Pnlvfx/whatcode-ai/issues"
-  },
   "license": "MIT",
+  "author": {
+    "email": "simonegauli@gmail.com",
+    "name": "Simone Gauli"
+  },
+  "sideEffects": false,
   "type": "module",
-  "bin": "./src/cli.ts",
   "exports": {
     ".": "./src/index.ts"
+  },
+  "bin": "./src/cli.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "lint": "eslint",
+    "prepack": "yarn build",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && eslint",
+    "tsc": "tsc --noEmit",
+    "unused": "node tools/unused.ts"
+  },
+  "dependencies": {
+    "@whatcode-ai/sdk": "workspace:*",
+    "qrcode-terminal": "^0.12.0",
+    "update-notifier": "^7.3.1",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@goatjs/node-monorepo-eslint": "^2.23.0",
+    "@goatjs/rimraf": "^2.8.0",
+    "@goatjs/typescript-config": "^2.1.0",
+    "@types/node": "^25.9.1",
+    "@types/qrcode-terminal": "^0.12.2",
+    "@types/update-notifier": "^6.0.8",
+    "@types/yargs": "^17.0.35",
+    "eslint": "^10.4.0",
+    "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public",
@@ -47,37 +77,5 @@
         "import": "./dist/logger.js"
       }
     }
-  },
-  "scripts": {
-    "tsc": "tsc --noEmit",
-    "unused": "node tools/unused.ts",
-    "test": "",
-    "lint": "eslint",
-    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
-    "prepare": "yarn build",
-    "prepack": "yarn build",
-    "prepublishOnly": "yarn test && eslint"
-  },
-  "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
-  ],
-  "dependencies": {
-    "@whatcode-ai/sdk": "workspace:*",
-    "qrcode-terminal": "^0.12.0",
-    "update-notifier": "^7.3.1",
-    "yargs": "^18.0.0"
-  },
-  "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.22.0",
-    "@goatjs/rimraf": "^2.8.0",
-    "@goatjs/typescript-config": "^2.1.0",
-    "@types/node": "^25.9.1",
-    "@types/qrcode-terminal": "^0.12.2",
-    "@types/update-notifier": "^6.0.8",
-    "@types/yargs": "^17.0.35",
-    "eslint": "^10.4.0",
-    "typescript": "^6.0.3"
   }
 }
