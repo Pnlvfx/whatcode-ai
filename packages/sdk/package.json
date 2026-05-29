@@ -43,11 +43,10 @@
     "prepack": "yarn build",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && eslint",
-    "tsc": "tsc --noEmit",
-    "unused": "node tools/unused.ts"
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode-ai/sdk": "^1.15.11",
+    "@opencode-ai/sdk": "^1.15.12",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
@@ -57,7 +56,7 @@
   },
   "devDependencies": {
     "@goatjs/node-monorepo-eslint": "^2.23.0",
-    "@goatjs/rimraf": "^2.8.0",
+    "@goatjs/rimraf": "^2.10.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",

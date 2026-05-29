@@ -34,15 +34,16 @@
     "apps/*"
   ],
   "dependencies": {
+    "@goatjs/doctor": "^2.31.0",
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
-    "@goatjs/dbz": "^2.25.0",
+    "@goatjs/dbz": "^2.28.0",
     "lefthook": "^2.1.8",
     "prettier": "^3.8.3",
-    "turbo": "^2.9.15"
+    "turbo": "^2.9.16"
   },
   "packageManager": "yarn@4.15.0+sha512.07ec708ac11e2eaa4ea2b04cfbb272812f7e74a753f1595eaef4486c663a98306a30cca3e6fc40f7a0b168dcfb3a2490b6a5e0501e20fb69cc36f563dd161c53"
 }
