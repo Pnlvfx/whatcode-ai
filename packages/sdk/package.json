@@ -46,22 +46,26 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode-ai/sdk": "^1.15.12",
+    "@opencode-ai/sdk": "^1.15.13",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
     "http-proxy-middleware": "^4.0.0",
-    "node-machine-id": "^1.1.12",
-    "zod": "^4.4.3"
+    "node-machine-id": "^1.1.12"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.23.0",
+    "@eslint/config-helpers": "^0.6.0",
+    "@goatjs/node-monorepo-eslint": "^2.27.0",
     "@goatjs/rimraf": "^2.10.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
-    "eslint": "^10.4.0",
-    "typescript": "^6.0.3"
+    "eslint": "^10.4.1",
+    "typescript": "^6.0.3",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3"
   },
   "engines": {
     "node": ">=22.5.0"

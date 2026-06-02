@@ -16,19 +16,20 @@
     "dev": "node --env-file .env --watch src/server.ts",
     "lint": "eslint",
     "start": "node .",
-    "tsc": "tsc --noEmit",
-    "unused": "node tools/unused.ts"
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@whatcode-ai/sdk": "workspace:*"
+    "@whatcode-ai/sdk": "workspace:*",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@goatjs/node-monorepo-eslint": "^2.23.0",
+    "@eslint/config-helpers": "^0.6.0",
+    "@goatjs/node-monorepo-eslint": "^2.27.0",
     "@goatjs/rimraf": "^2.10.0",
-    "@goatjs/ts-unused-exports": "^2.20.0",
+    "@goatjs/ts-unused-exports": "^2.21.0",
     "@goatjs/typescript-config": "^2.1.0",
     "@types/node": "^25.9.1",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "typescript": "^6.0.3"
   }
 }

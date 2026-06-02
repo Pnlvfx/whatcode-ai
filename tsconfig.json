@@ -1,0 +1,4 @@
+{
+  "extends": "@goatjs/typescript-config/node-library/tsconfig.json",
+  "include": ["tools", "eslint.config.js", "commitlint.config.ts", "doctor.config.ts"]
+}

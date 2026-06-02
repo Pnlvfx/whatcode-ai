@@ -22,17 +22,17 @@
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
-    "@goatjs/dbz": "^2.28.0",
-    "@types/react": "^19.2.15",
+    "@goatjs/dbz": "^2.30.0",
+    "@types/react": "^19.2.16",
     "typescript": "~6.0.3",
-    "vercel": "^54.6.0"
+    "vercel": "^54.6.1"
   },
   "browserslist": {
     "production": [
