@@ -24,11 +24,10 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/node-monorepo-eslint": "^2.27.0",
+    "@goatjs/node-monorepo-eslint": "^2.29.0",
     "@goatjs/rimraf": "^2.10.0",
-    "@goatjs/ts-unused-exports": "^2.21.0",
-    "@goatjs/typescript-config": "^2.1.0",
-    "@types/node": "^25.9.1",
+    "@goatjs/typescript-config": "^2.2.0",
+    "@types/node": "^25.9.2",
     "eslint": "^10.4.1",
     "typescript": "^6.0.3"
   }

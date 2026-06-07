@@ -9,10 +9,6 @@
       "dependsOn": ["^lint"],
       "cache": true
     },
-    "unused": {
-      "dependsOn": ["^lint"],
-      "cache": true
-    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "build/**"],

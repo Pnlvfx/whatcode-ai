@@ -2,17 +2,30 @@
   "name": "@whatcode-ai/docs",
   "version": "0.9.0",
   "private": true,
+  "description": "WhatCode Docs",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
     "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "node tools/deploy.ts",
     "clear": "docusaurus clear",
+    "deploy": "node tools/deploy.ts",
+    "docusaurus": "rimraf .docusaurus && docusaurus",
     "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
+    "start": "docusaurus start",
+    "swizzle": "docusaurus swizzle",
+    "typecheck": "tsc",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "write-translations": "docusaurus write-translations"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
@@ -29,22 +42,12 @@
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
-    "@goatjs/dbz": "^2.30.0",
-    "@types/react": "^19.2.16",
+    "@goatjs/dbz": "^2.35.0",
+    "@goatjs/rimraf": "^2.10.0",
+    "@types/react": "^19.2.17",
+    "execa": "^9.6.1",
     "typescript": "~6.0.3",
-    "vercel": "^54.6.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 3 chrome version",
-      "last 3 firefox version",
-      "last 5 safari version"
-    ]
+    "vercel": "^54.9.1"
   },
   "engines": {
     "node": ">=20.0"

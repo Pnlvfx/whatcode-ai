@@ -95,7 +95,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} WhatCode AI. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear().toString()} WhatCode AI. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
