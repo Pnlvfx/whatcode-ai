@@ -1,6 +1,6 @@
 {
   "name": "@whatcode-ai/whatcode",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "description": "CLI to start opencode and optionally expose it over HTTPS via Tailscale — connect to your AI coding assistant from anywhere.",
   "keywords": [
     "opencode",
