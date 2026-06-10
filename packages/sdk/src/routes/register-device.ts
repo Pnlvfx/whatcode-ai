@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import { apnTokenStore } from '../stores/apn-token.ts';
 import { logger } from '../logger.ts';
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 
 const unregisterBodySchema = z.strictObject({ user_id: z.string(), device_id: z.string() });
 const registerBodySchema = z.strictObject({ ...unregisterBodySchema.shape, token: z.string(), device_name: z.string() });

@@ -1,10 +1,10 @@
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 
 const identitySchema = z.strictObject({
   machineId: z.string(),
-  opencodeUrl: z.string().optional(),
-  daemonUrl: z.string().optional(),
-  tailscaleUrl: z.string().optional(),
+  opencodeUrl: z.optional(z.string()),
+  daemonUrl: z.optional(z.string()),
+  tailscaleUrl: z.optional(z.string()),
 });
 
 export type DaemonIdentity = z.infer<typeof identitySchema>;

@@ -1,13 +1,13 @@
 /* eslint-disable no-restricted-properties */
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 
 try {
   process.loadEnvFile();
 } catch {}
 
 const envSchema = z.strictObject({
-  WHATCODE_SERVER_URL: z.string().optional(),
-  WHATCODE_PASSWORD: z.string().optional(),
+  WHATCODE_SERVER_URL: z.optional(z.string()),
+  WHATCODE_PASSWORD: z.optional(z.string()),
 });
 
 export const config = await envSchema.parseAsync({

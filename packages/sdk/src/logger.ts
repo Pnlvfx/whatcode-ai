@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 
 const reset = '\u001B[0m';
 

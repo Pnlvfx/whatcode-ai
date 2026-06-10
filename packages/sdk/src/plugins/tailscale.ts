@@ -2,18 +2,22 @@
 import { execa } from 'execa';
 import { logger } from '../logger.ts';
 import { platform } from '../config/constants.ts';
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 
 const serveStatusSchema = z.object({
-  TCP: z.record(z.string(), z.unknown()).optional(),
+  TCP: z.optional(z.record(z.string(), z.unknown())),
 });
+
+const checkRunning = async (port: number) => {
+  const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
+  const result = serveStatusSchema.safeParse(JSON.parse(stdout));
+  if (!result.success) return false;
+  return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
+};
 
 const isServeRunning = async (port: number): Promise<boolean> => {
   try {
-    const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
-    const result = serveStatusSchema.safeParse(JSON.parse(stdout));
-    if (!result.success) return false;
-    return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
+    return await checkRunning(port);
   } catch {
     return false;
   }
@@ -27,7 +31,7 @@ const startServe = async (port: number): Promise<void> => {
 
 const tailscaleSchema = z.object({
   BackendState: z.string(),
-  Self: z.object({ DNSName: z.string().optional() }).optional(),
+  Self: z.optional(z.object({ DNSName: z.optional(z.string()) })),
 });
 
 const getHostname = async (): Promise<string> => {

@@ -1,13 +1,14 @@
-import type * as z from 'zod';
+import * as z from 'zod/v4/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-export interface StoreParams<T extends z.ZodType> {
+export interface StoreParams<T extends z.$ZodType> {
   directory: string;
   initial?: z.infer<T>;
+  persist?: boolean;
 }
 
-export interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>> {
+export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T>> {
   get: TParams['initial'] extends z.infer<T> ? () => Promise<z.infer<T>> : () => Promise<z.infer<T> | undefined>;
   set: (
     value: z.infer<T> | ((prev: TParams['initial'] extends z.infer<T> ? z.infer<T> : z.infer<T> | undefined) => z.infer<T> | Promise<z.infer<T>>),
@@ -16,12 +17,12 @@ export interface StoreResult<T extends z.ZodType, TParams extends StoreParams<T>
 }
 
 /** This mimic the browser localStorage and allow you to store primitives on disk. */
-export const createStore = async <T extends z.ZodType, TParams extends StoreParams<T>>(
+export const createStore = async <T extends z.$ZodType, TParams extends StoreParams<T>>(
   name: string,
   schema: T,
-  { directory, initial }: TParams,
+  { directory, initial, persist = true }: TParams,
 ): Promise<StoreResult<T, TParams>> => {
-  await fs.mkdir(directory, { recursive: true });
+  if (persist) await fs.mkdir(directory, { recursive: true });
   type StoreType = z.infer<T>;
   const configFile = path.join(directory, `${name}.json`);
   let currentConfig: StoreType | undefined;
@@ -30,27 +31,27 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
     try {
       return await fs.readFile(configFile);
     } catch (err) {
-      const fsError = err instanceof Error ? err : undefined;
-      if (fsError && 'code' in fsError && typeof fsError.code === 'string' && fsError.code === 'ENOENT') return;
+      if (err instanceof Error && 'code' in err && typeof err.code === 'string' && err.code === 'ENOENT') return;
       throw err;
     }
   };
 
   // validate prev stored
-  const buf = await getBuffer();
-  if (buf) {
-    const parsed: unknown = JSON.parse(buf.toString());
-    const result = await schema.safeParseAsync(parsed);
-    if (!result.success) {
-      throw new Error(
-        `Found corrupted store "${name}". The stored value doesn't match the current schema — this usually happens when the schema changes or the file is edited manually. Consider resetting or migrating the stored value.`,
-      );
+  if (persist) {
+    const buf = await getBuffer();
+    if (buf) {
+      const result = await z.safeParseAsync(schema, JSON.parse(buf.toString()));
+      if (!result.success) {
+        throw new Error(
+          `Found corrupted store "${name}". The stored value doesn't match the current schema — this usually happens when the schema changes or the file is edited manually. Consider resetting or migrating the stored value.`,
+        );
+      }
     }
   }
   //
 
   const get = async () => {
-    if (currentConfig === undefined) {
+    if (persist && currentConfig === undefined) {
       const buf = await getBuffer();
       if (buf) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -62,8 +63,8 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
   };
 
   const write = async (value: StoreType) => {
-    currentConfig = await schema.parseAsync(value);
-    await fs.writeFile(configFile, JSON.stringify(currentConfig));
+    currentConfig = await z.parseAsync(schema, value);
+    if (persist) await fs.writeFile(configFile, JSON.stringify(currentConfig));
   };
 
   const isUpdater = (
@@ -89,9 +90,11 @@ export const createStore = async <T extends z.ZodType, TParams extends StorePara
     },
     clear: async () => {
       if (initial === undefined) {
-        try {
-          await fs.rm(configFile);
-        } catch {}
+        if (persist) {
+          try {
+            await fs.rm(configFile);
+          } catch {}
+        }
         currentConfig = undefined;
       } else {
         await write(initial);

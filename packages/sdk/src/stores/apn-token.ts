@@ -1,4 +1,4 @@
-import * as z from 'zod';
+import * as z from 'zod/v4/mini';
 import { createStore } from '../store.ts';
 import { WHATCODE_AUTH } from '../config/constants.ts';
 
