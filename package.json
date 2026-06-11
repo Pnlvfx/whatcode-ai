@@ -39,12 +39,12 @@
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/dbz": "^2.36.0",
+    "@goatjs/dbz": "^2.37.0",
     "@goatjs/doctor": "^2.41.0",
-    "@goatjs/node-monorepo-eslint": "^2.30.0",
+    "@goatjs/node-monorepo-eslint": "^2.31.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.8.4",
-    "turbo": "^2.9.17",
+    "turbo": "^2.9.18",
     "typescript": "^6.0.3"
   },
   "packageManager": "yarn@4.16.0+sha512.5374c94eb4ef6aa8188fb112f20c1aa6569f248d676c5e576e1fd2a1a4d8d87a96df65d9dfe1c2a0252cbe38bda46cf18d955005b81b43cc7607a5c9d56fd2b6"
