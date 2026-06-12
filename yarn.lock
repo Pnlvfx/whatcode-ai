@@ -4756,12 +4756,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.17.3":
-  version: 1.17.3
-  resolution: "@opencode-ai/sdk@npm:1.17.3"
+"@opencode-ai/sdk@npm:^1.17.4":
+  version: 1.17.4
+  resolution: "@opencode-ai/sdk@npm:1.17.4"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/5de73b708545623640a03bafd0618961777201c82d542570eca65fe43a485e095ce74d687042cb290fa9a8c3c480e2ed2dba7b02a951ea2f0f3c68cdc7208560
+  checksum: 10c0/be22ce696a810fe8523ae7c209a0f651ee1cacd21a83c4c796c7d25907e6b17ba9149122e7f04e9660a8e3c38e6c861f847f412e37423a69b5c6d769adb26d9e
   languageName: node
   linkType: hard
 
@@ -7717,7 +7717,7 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
-    "@opencode-ai/sdk": "npm:^1.17.3"
+    "@opencode-ai/sdk": "npm:^1.17.4"
     "@types/express": "npm:^5.0.6"
     "@types/node": "npm:^25.9.3"
     eslint: "npm:^10.4.1"

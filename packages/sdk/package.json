@@ -46,7 +46,7 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode-ai/sdk": "^1.17.3",
+    "@opencode-ai/sdk": "^1.17.4",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",

@@ -35,24 +35,18 @@ export const createWhatcodeServer = async ({
   const accountCount = accounts.length;
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
-  await opencode({ port: opencodePort, password });
+  const { client } = await opencode({ port: opencodePort, password });
   const localIp = await getLocalIp();
   if (localIp) {
     logger.debug('local ip', localIp);
   }
+
   const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
 
   logger.debug('relay', SERVER_URL);
 
   identityStore.set({ machineId, opencodeUrl, daemonUrl });
-
-  const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
-  const client = createOpencodeClient({
-    baseUrl: `http://localhost:${opencodePort.toString()}`,
-    throwOnError: true,
-    ...(opencodeAuthHeader ? { headers: { authorization: opencodeAuthHeader } } : {}),
-  });
 
   startNotifications(client);
 

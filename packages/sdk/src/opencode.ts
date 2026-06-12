@@ -1,10 +1,18 @@
-import { type ServerOptions, createOpencodeServer } from '@opencode-ai/sdk/v2';
+import { type ServerOptions, createOpencodeClient, createOpencodeServer } from '@opencode-ai/sdk/v2';
 import { logger } from './logger.ts';
 
 export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'config' | 'port'> & { port: number; password?: string }) => {
-  const running = await isOpencodeRunning(options.port);
+  const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
 
-  if (running) {
+  const client = createOpencodeClient({
+    baseUrl: `http://localhost:${options.port.toString()}`,
+    throwOnError: true,
+    ...(opencodeAuthHeader ? { headers: { authorization: opencodeAuthHeader } } : {}),
+  });
+
+  const { data } = await client.global.health({ throwOnError: false });
+
+  if (data?.healthy) {
     logger.debug('opencode', 'already running');
   } else {
     if (password) {
@@ -14,14 +22,6 @@ export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'co
     await createOpencodeServer(options);
     logger.debug('opencode', 'started');
   }
-};
 
-const isOpencodeRunning = async (port: number): Promise<boolean> => {
-  try {
-    const HEALTH_URL = `http://localhost:${port.toString()}/global/health`;
-    const res = await fetch(HEALTH_URL);
-    return res.ok;
-  } catch {
-    return false;
-  }
+  return { client };
 };
