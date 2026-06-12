@@ -12,3 +12,5 @@ const devFolder = SERVER_URL === REAL_SERVER_URL ? '' : 'dev';
 const WHATCODE_HOME = path.join(os.homedir(), '.whatcode');
 const rootPath = path.join(WHATCODE_HOME, devFolder);
 export const WHATCODE_AUTH = path.join(rootPath, 'auth');
+
+export const OPENCODE_MIN_VERSION = '1.16.0';

@@ -1,5 +1,4 @@
-import { createOpencodeClient } from '@opencode-ai/sdk/v2';
-import { opencode } from './opencode.ts';
+import { checkOpencodeMinVersion, opencode } from './opencode.ts';
 import { startWhatcode } from './server.ts';
 import { identityStore } from './stores/identity.ts';
 import { asyncExitHook } from 'exit-hook';
@@ -35,18 +34,20 @@ export const createWhatcodeServer = async ({
   const accountCount = accounts.length;
   logger.info('whatcode', `starting — ${accountCount.toString()} account${accountCount === 1 ? '' : 's'} connected`);
   const machineId = await mId.machineId();
-  const { client } = await opencode({ port: opencodePort, password });
+  const { client, version: opencodeVersion } = await opencode({ port: opencodePort, password });
+  checkOpencodeMinVersion(opencodeVersion);
   const localIp = await getLocalIp();
+
   if (localIp) {
     logger.debug('local ip', localIp);
   }
 
-  const opencodeUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
+  const opencodePublicUrl = localIp ? `http://${localIp}:${opencodePort.toString()}` : undefined;
   const daemonUrl = localIp ? `http://${localIp}:${port.toString()}` : undefined;
 
   logger.debug('relay', SERVER_URL);
 
-  identityStore.set({ machineId, opencodeUrl, daemonUrl });
+  identityStore.set({ machineId, opencodeUrl: opencodePublicUrl, daemonUrl });
 
   startNotifications(client);
 
@@ -55,7 +56,7 @@ export const createWhatcodeServer = async ({
   if (hasTailscale) {
     const tailscale = createTailscale(port);
     const result = await tailscale.start();
-    identityStore.set({ machineId, opencodeUrl, daemonUrl, tailscaleUrl: result.url });
+    identityStore.set({ machineId, opencodeUrl: opencodePublicUrl, daemonUrl, tailscaleUrl: result.url });
     logger.debug('tailscale', 'we own the serve — registering exit hook to stop it');
     asyncExitHook(tailscale.stop, { wait: 3000 });
   }
