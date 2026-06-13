@@ -3,6 +3,8 @@ import { logger } from '@goatjs/node/logger';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
 
+export type Tailscale = Awaited<ReturnType<typeof createTailscale>>;
+
 export const createTailscale = (port: number) => {
   let started = false;
 

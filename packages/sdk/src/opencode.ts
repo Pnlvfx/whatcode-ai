@@ -13,6 +13,7 @@ export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'co
   });
 
   const { data } = await client.global.health({ throwOnError: false });
+  let server;
   let version: string | undefined;
 
   if (data?.healthy) {
@@ -23,13 +24,13 @@ export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'co
       // eslint-disable-next-line no-restricted-properties
       process.env['OPENCODE_SERVER_PASSWORD'] = password;
     }
-    await createOpencodeServer(options);
+    server = await createOpencodeServer(options);
     const { data } = await client.global.health<true>();
     version = data.version;
     logger.debug('opencode', `started on version ${data.version}`);
   }
 
-  return { client, version };
+  return { server, client, version };
 };
 
 export const checkOpencodeMinVersion = (version: string) => {

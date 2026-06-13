@@ -6,6 +6,8 @@ import { identityStore } from './stores/identity.ts';
 import { startTailscale } from './tailscale.ts';
 import pkgJson from '../package.json' with { type: 'json' };
 import { logger, type LogLevel } from '@goatjs/node/logger';
+import { createTailscale } from './plugins/tailscale/tailscale.ts';
+import { asyncExitHook } from 'exit-hook';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -29,20 +31,30 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
-  const { client, version: opencodeVersion } = await opencode({ port: opencodePort, password });
+  const { server, client, version: opencodeVersion } = await opencode({ port: opencodePort, password });
   checkOpencodeMinVersion(opencodeVersion);
   const localIp = await getLocalIp();
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
   const daemonUrl = `http://${localIp}:${port.toString()}`;
   startNotifications(client);
-  await startWhatcode({ port, opencodePort: opencodePort, password, client });
-  const tailscaleUrl = hasTailscale ? await startTailscale(port) : undefined;
+  startWhatcode({ port, opencodePort: opencodePort, password, client });
+  const tailscale = hasTailscale ? createTailscale(port) : undefined;
+  const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
 
   await identityStore.set({
     opencode: { url: opencodePublicUrl, version: opencodeVersion, available: !!hostname },
     daemon: { url: daemonUrl, version: pkgJson.version, available: true },
     tailscale: { url: tailscaleUrl, available: !!tailscaleUrl },
   });
+
+  // clean up
+  asyncExitHook(
+    async () => {
+      await tailscale?.stop();
+      server?.close();
+    },
+    { wait: 3000 },
+  );
 
   return { url: tailscaleUrl ?? daemonUrl };
 };
