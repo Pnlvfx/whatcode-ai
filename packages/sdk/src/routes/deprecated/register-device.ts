@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 // eslint-disable-next-line no-restricted-imports
 import { Router } from 'express';
 import * as z from 'zod/v4/mini';
@@ -25,21 +26,6 @@ router.post('/register', async (req, res) => {
   ]);
 
   logger.debug('apn', `token stored for device ${result.data.device_id} (user ${result.data.user_id})`);
-
-  res.status(200).json({ ok: true });
-});
-
-router.delete('/unregister', async (req, res) => {
-  const result = unregisterBodySchema.safeParse(req.body);
-
-  if (!result.success) {
-    res.status(400).json({ message: 'device_id is required' });
-    return;
-  }
-
-  logger.debug('apn', `token unregistered for device ${result.data.device_id}`);
-
-  await apnTokenStore.set((prev) => prev.filter((e) => e.deviceId !== result.data.device_id));
 
   res.status(200).json({ ok: true });
 });

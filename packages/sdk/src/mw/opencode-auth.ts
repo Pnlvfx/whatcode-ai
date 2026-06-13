@@ -1,7 +1,7 @@
 import { createMiddleware, unhautorized } from '@coraline/server';
 import { timingSafeEqual } from 'node:crypto';
 
-export const basicAuth = (password: string) => {
+export const opencodeBasicAuth = (password: string) => {
   return createMiddleware(({ headers }) => {
     const authorization = headers.authorization;
     if (!authorization?.startsWith('Basic ')) throw unhautorized();

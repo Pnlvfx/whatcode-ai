@@ -1,3 +1,10 @@
 kepp only push on the server spec, patch it on the server to only write it so we don't leak internal endpoints.
 
 remove way to add new connection on the client
+
+WHAT I KNOW ABOUT THE MIGRATION SO FAR
+
+
+ALL IOS APPS NEED TO CLEAR ALL STORAGE AND LET USER LOGIN AGAIN
+VERSION GATE SHOULD BLOCK IF THE DAEMON IS NOT ON THIS VERSION
+DAEMON ATP DON'T NEED TO CLEAR BUT IF WE ADD IT WOULD BE GOOD TO.

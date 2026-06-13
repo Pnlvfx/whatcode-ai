@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 import { apiClient } from '../client.ts';
 import { logger } from '@goatjs/node/logger';
 import { apnTokenStore } from '../stores/apn-token.ts';

@@ -1,7 +1,9 @@
-import { createRouter, jsonResponse, unhautorized } from '@coraline/server';
+import { createRouter, json, jsonResponse, unhautorized } from '@coraline/server';
 import * as z from 'zod/v4/mini';
-import { randomBytes, timingSafeEqual } from 'node:crypto';
+import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
 import { accountsStore } from '../stores/accounts.ts';
+import { pairUserBody } from '../types/user.ts';
+import { identityStore } from '../stores/identity.ts';
 
 const isTokenValid = (stored: string, incoming: string): boolean => {
   if (stored.length !== incoming.length) return false;
@@ -9,18 +11,27 @@ const isTokenValid = (stored: string, incoming: string): boolean => {
 };
 
 export const userRouter = createRouter({
+  middleware: [json()],
   handlers: (define) => ({
     pair: define({
       path: '/pair',
       method: 'post',
-      validate: { body: z.strictObject({ user_id: z.string(), device_id: z.string(), device_name: z.string() }) },
-      handler: async ({ body: { device_id, device_name, user_id } }) => {
-        const token = randomBytes(32).toString('hex');
-        await accountsStore.set((prev) => [
-          ...prev.filter((p) => p.deviceId !== device_id),
-          { userId: user_id, deviceId: device_id, deviceName: device_name, token },
-        ]);
-        return jsonResponse({ token });
+      validate: { body: pairUserBody },
+      handler: async ({ body: { device_id, device_name } }) => {
+        const accounts = await accountsStore.get();
+        let account = accounts.find((a) => a.deviceId === device_id);
+        if (!account) {
+          account = {
+            token: randomBytes(32).toString('hex'),
+            userId: randomUUID(),
+            deviceId: device_id,
+            deviceName: device_name,
+          };
+
+          /** @ts-expect-error fuck you liar */
+          await accountsStore.set((prev) => [...prev, account]);
+        }
+        return jsonResponse({ token: account.token, identity: identityStore.get() });
       },
     }),
     // getUser: define({

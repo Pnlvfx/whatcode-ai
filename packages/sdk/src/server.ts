@@ -1,7 +1,6 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import type { ClientRequest } from 'node:http';
 import { createApp, json } from '@coraline/server';
-import { basicAuth } from './mw/basic-auth.ts';
 import { getLastMessageTimeByProject } from './db.ts';
 import { getOpencodeAuthHeader } from './opencode.ts';
 import { createProxyMiddleware } from 'http-proxy-middleware';
@@ -13,6 +12,7 @@ import { Router } from 'express';
 import { logger } from '@goatjs/node/logger';
 import { NODE_ENV } from './config/constants.ts';
 import { userRouter } from './routes/user.ts';
+import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 
 interface Params {
   port: number;
@@ -50,7 +50,7 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
 
   const app = await createApp({
     port,
-    middlewares: password ? [basicAuth(password)] : [],
+    middlewares: password ? [opencodeBasicAuth(password)] : [],
     routes: {
       '/user': userRouter,
     },

@@ -12,14 +12,14 @@ const identitySchema = z.strictObject({
   tailscale: z.strictObject({ url: z.optional(z.string()), available: z.boolean() }),
 });
 
-let current: DaemonIdentityV2 | undefined;
+let current: DaemonIdentity | undefined;
 
 export const identityStore = {
-  get: (): DaemonIdentityV2 => {
+  get: (): DaemonIdentity => {
     if (!current) throw new Error('Identity not initialized');
     return current;
   },
-  set: async ({ opencode, daemon, tailscale }: Pick<DaemonIdentityV2, 'opencode' | 'daemon' | 'tailscale'>): Promise<void> => {
+  set: async ({ opencode, daemon, tailscale }: Pick<DaemonIdentity, 'opencode' | 'daemon' | 'tailscale'>): Promise<void> => {
     current = {
       name: os.hostname(),
       machineId: await mId.machineId(),
@@ -30,4 +30,4 @@ export const identityStore = {
   },
 };
 
-export type DaemonIdentityV2 = z.infer<typeof identitySchema>;
+export type DaemonIdentity = z.infer<typeof identitySchema>;
