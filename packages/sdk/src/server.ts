@@ -53,7 +53,6 @@ export const startWhatcode = async ({ port, opencodePort, password, client }: Pa
     middlewares: password ? [basicAuth(password)] : [],
     routes: {
       '/user': userRouter,
-      // '/project': projectRouter,
     },
     expressHandlers: (express) => {
       const projectRouter = Router();

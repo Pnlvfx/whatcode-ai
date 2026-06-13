@@ -7,6 +7,9 @@ const accountSchema = z.strictObject({
   deviceId: z.string(),
   apnToken: z.optional(z.string()),
   deviceName: z.string(),
+  token: z.string(),
 });
 
 export const accountsStore = await createStore('accounts', z.array(accountSchema), { directory: WHATCODE_AUTH, initial: [] });
+
+export type Account = z.infer<typeof accountSchema>;
