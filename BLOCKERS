@@ -1,0 +1,3 @@
+kepp only push on the server spec, patch it on the server to only write it so we don't leak internal endpoints.
+
+remove way to add new connection on the client

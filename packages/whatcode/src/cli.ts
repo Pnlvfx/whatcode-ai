@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
-import { logger, logLevelSchema } from '@whatcode-ai/sdk/logger';
+import { logger, type LogLevel } from '@goatjs/node/logger';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
 import updateNotifier from 'update-notifier';
@@ -39,7 +39,8 @@ const { url } = await createWhatcodeServer({
   tailscale,
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
-  logLevel: await logLevelSchema.parseAsync(logLevel),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  logLevel: logLevel as LogLevel,
   ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
 });
 

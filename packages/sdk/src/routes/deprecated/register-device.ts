@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-restricted-imports
 import { Router } from 'express';
-import { apnTokenStore } from '../stores/apn-token.ts';
-import { logger } from '../logger.ts';
 import * as z from 'zod/v4/mini';
+import { apnTokenStore } from '../../stores/apn-token.ts';
+import { logger } from '@goatjs/node/logger';
 
 const unregisterBodySchema = z.strictObject({ user_id: z.string(), device_id: z.string() });
 const registerBodySchema = z.strictObject({ ...unregisterBodySchema.shape, token: z.string(), device_name: z.string() });
@@ -40,10 +40,8 @@ router.delete('/unregister', async (req, res) => {
   logger.debug('apn', `token unregistered for device ${result.data.device_id}`);
 
   await apnTokenStore.set((prev) => prev.filter((e) => e.deviceId !== result.data.device_id));
+
   res.status(200).json({ ok: true });
 });
 
 export { router as registerDeviceTokenRouter };
-
-export type RegisterBody = z.infer<typeof registerBodySchema>;
-export type UnregisterBody = z.infer<typeof unregisterBodySchema>;

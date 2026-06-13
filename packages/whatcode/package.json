@@ -45,6 +45,7 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@goatjs/node": "file:../sdk/vendor/goatjs-node.tgz",
     "@whatcode-ai/sdk": "workspace:*",
     "qrcode-terminal": "^0.12.0",
     "update-notifier": "^7.3.1",

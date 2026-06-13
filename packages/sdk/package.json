@@ -31,11 +31,11 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./src/whatcode.ts",
-    "./logger": "./src/logger.ts"
+    ".": "./src/whatcode.ts"
   },
   "files": [
-    "dist"
+    "dist",
+    "vendor"
   ],
   "scripts": {
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
@@ -46,6 +46,11 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@coraline/client": "file:vendor/coraline-client.tgz",
+    "@coraline/server": "file:vendor/coraline-server.tgz",
+    "@goatjs/core": "file:vendor/goatjs-core.tgz",
+    "@goatjs/node": "file:vendor/goatjs-node.tgz",
+    "@goatjs/store": "file:vendor/goatjs-store.tgz",
     "@opencode-ai/sdk": "^1.17.4",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
@@ -56,7 +61,9 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.6.0",
+    "@goatjs/dbz": "^2.48.0",
     "@goatjs/node-monorepo-eslint": "^2.31.0",
+    "@goatjs/prettier": "^2.20.0",
     "@goatjs/rimraf": "^2.11.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/express": "^5.0.6",
@@ -78,10 +85,6 @@
       ".": {
         "types": "./dist/whatcode.d.ts",
         "import": "./dist/whatcode.js"
-      },
-      "./logger": {
-        "types": "./dist/logger.d.ts",
-        "import": "./dist/logger.js"
       }
     }
   }

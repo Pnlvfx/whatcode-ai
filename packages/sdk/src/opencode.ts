@@ -1,10 +1,10 @@
 import { type ServerOptions, createOpencodeClient, createOpencodeServer } from '@opencode-ai/sdk/v2';
-import { logger } from './logger.ts';
+import { logger } from '@goatjs/node/logger';
 import { lt } from 'semver';
 import { OPENCODE_MIN_VERSION } from './config/constants.ts';
 
 export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'config' | 'port'> & { port: number; password?: string }) => {
-  const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
+  const opencodeAuthHeader = password ? getOpencodeAuthHeader(password) : undefined;
 
   const client = createOpencodeClient({
     baseUrl: `http://localhost:${options.port.toString()}`,
@@ -37,3 +37,5 @@ export const checkOpencodeMinVersion = (version: string) => {
     logger.warn('opencode', `version ${version} is below minimum required version ${OPENCODE_MIN_VERSION}`);
   }
 };
+
+export const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;

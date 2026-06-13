@@ -1,7 +1,10 @@
 {
   "extends": "@goatjs/typescript-config/node-library/tsconfig.json",
-  "include": ["src", "eslint.config.js", "tools"],
+  "include": ["src", "eslint.config.js", "tools", "vendor.config.ts"],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@/server/*": ["../../../../web/api-whatcode/dist/*.d.ts"]
+    }
   }
 }

@@ -32,6 +32,14 @@
     "tsc": "turbo run tsc",
     "update": "yarn upgrade-interactive"
   },
+  "resolutions": {
+    "@goatjs/store": "file:packages/sdk/vendor/goatjs-store.tgz",
+    "@coraline/core": "file:packages/sdk/vendor/coraline-core.tgz",
+    "@coraline/client": "file:packages/sdk/vendor/coraline-client.tgz",
+    "@goatjs/core": "file:packages/sdk/vendor/goatjs-core.tgz",
+    "@coraline/server": "file:packages/sdk/vendor/coraline-server.tgz",
+    "@goatjs/node": "file:packages/sdk/vendor/goatjs-node.tgz"
+  },
   "dependencies": {
     "@whatcode-ai/whatcode": "workspace:*"
   },
@@ -39,8 +47,8 @@
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/dbz": "^2.37.0",
-    "@goatjs/doctor": "^2.41.0",
+    "@goatjs/dbz": "^2.48.0",
+    "@goatjs/doctor": "^2.42.0",
     "@goatjs/node-monorepo-eslint": "^2.31.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.8.4",

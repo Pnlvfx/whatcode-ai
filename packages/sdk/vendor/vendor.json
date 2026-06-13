@@ -1,0 +1,40 @@
+{
+  "packages": [
+    {
+      "name": "@goatjs/store",
+      "repo": "https://github.com/Pnlvfx/goatjs.git",
+      "file": "goatjs-store.tgz",
+      "commit": "5d766349a8e4922ca34b48f45bab3e3423105cb2"
+    },
+    {
+      "name": "@coraline/core",
+      "repo": "https://github.com/Pnlvfx/coraline.git",
+      "file": "coraline-core.tgz",
+      "commit": "2b15a7cede732759206d131e8f39999e28231db9"
+    },
+    {
+      "name": "@coraline/client",
+      "repo": "https://github.com/Pnlvfx/coraline.git",
+      "file": "coraline-client.tgz",
+      "commit": "2b15a7cede732759206d131e8f39999e28231db9"
+    },
+    {
+      "name": "@goatjs/core",
+      "repo": "https://github.com/Pnlvfx/goatjs.git",
+      "file": "goatjs-core.tgz",
+      "commit": "5d766349a8e4922ca34b48f45bab3e3423105cb2"
+    },
+    {
+      "name": "@coraline/server",
+      "repo": "https://github.com/Pnlvfx/coraline.git",
+      "file": "coraline-server.tgz",
+      "commit": "2b15a7cede732759206d131e8f39999e28231db9"
+    },
+    {
+      "name": "@goatjs/node",
+      "repo": "https://github.com/Pnlvfx/goatjs.git",
+      "file": "goatjs-node.tgz",
+      "commit": "5d766349a8e4922ca34b48f45bab3e3423105cb2"
+    }
+  ]
+}

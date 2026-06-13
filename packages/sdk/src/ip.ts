@@ -1,7 +1,11 @@
 import { createSocket } from 'node:dgram';
 import { networkInterfaces } from 'node:os';
 
-export const getLocalIp = async (): Promise<string | undefined> => (await getLocalIpViaDgram()) ?? getLocalIpViaNetworkInterfaces();
+export const getLocalIp = async (): Promise<string> => {
+  const ip = (await getLocalIpViaDgram()) ?? getLocalIpViaNetworkInterfaces();
+  if (!ip) throw new Error('Local ip not found!');
+  return ip;
+};
 
 const getLocalIpViaDgram = (): Promise<string | undefined> => {
   return new Promise<string | undefined>((resolve) => {

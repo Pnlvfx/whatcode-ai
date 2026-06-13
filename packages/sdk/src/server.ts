@@ -1,13 +1,18 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import type { ClientRequest } from 'node:http';
-import { timingSafeEqual } from 'node:crypto';
+import { createApp, json } from '@coraline/server';
+import { basicAuth } from './mw/basic-auth.ts';
 import { getLastMessageTimeByProject } from './db.ts';
-// eslint-disable-next-line no-restricted-imports
-import express, { Router, type Request, type Response } from 'express';
+import { getOpencodeAuthHeader } from './opencode.ts';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { registerDeviceTokenRouter } from './routes/register-device.ts';
-import { identityRouter } from './routes/identity.ts';
-import { logger } from './logger.ts';
+import { parseError } from '@goatjs/core/error';
+import { identityRouter } from './routes/deprecated/identity.ts';
+import { registerDeviceTokenRouter } from './routes/deprecated/register-device.ts';
+// eslint-disable-next-line no-restricted-imports
+import { Router } from 'express';
+import { logger } from '@goatjs/node/logger';
+import { NODE_ENV } from './config/constants.ts';
+import { userRouter } from './routes/user.ts';
 
 interface Params {
   port: number;
@@ -16,89 +21,103 @@ interface Params {
   client: OpencodeClient;
 }
 
-export const startWhatcode = async ({ port, opencodePort, password, client }: Params): Promise<void> => {
-  const app = express();
-  app.disable('x-powered-by');
+export const startWhatcode = async ({ port, opencodePort, password, client }: Params) => {
+  // project is a an opencode endpoint and is being readed from the opencode client,
+  // our server add an extra data wrapper that break it, using plain express until we patch it
+  //   const projectRouter = createRouter({
+  //     handlers: (define) => ({
+  //       project: define({
+  //         method: 'get',
+  //         path: '/',
+  //         handler: async () => {
+  //           const { data: projects } = await client.project.list<true>();
+  //           const lastMessageTimes = getLastMessageTimeByProject();
 
-  if (password) {
-    app.use(basicAuth(password));
-  }
+  //           const patched = projects.map((project) => {
+  //             const lastMsg = lastMessageTimes.get(project.id);
+  //             return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
+  //           });
 
-  app.use('/notifications', express.json(), registerDeviceTokenRouter);
+  //           return jsonResponse(patched);
+  //         },
+  //       }),
+  //     }),
+  //   });
 
-  app.use('/whatcode/identity', express.json(), identityRouter);
+  const opencodeAuthHeader = password ? getOpencodeAuthHeader(password) : undefined;
 
-  const projectRouter = Router();
+  const jsonBody = json();
 
-  projectRouter.get('/project', async (_req: Request, res: Response) => {
-    const { data: projects } = await client.project.list<true>();
-    const lastMessageTimes = getLastMessageTimeByProject();
+  const app = await createApp({
+    port,
+    middlewares: password ? [basicAuth(password)] : [],
+    routes: {
+      '/user': userRouter,
+      // '/project': projectRouter,
+    },
+    expressHandlers: (express) => {
+      const projectRouter = Router();
 
-    const patched = projects.map((project) => {
-      const lastMsg = lastMessageTimes.get(project.id);
-      return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
-    });
+      projectRouter.get('/', async (_req, res) => {
+        const { data: projects } = await client.project.list<true>();
+        const lastMessageTimes = getLastMessageTimeByProject();
 
-    res.status(200).json(patched);
+        const patched = projects.map((project) => {
+          const lastMsg = lastMessageTimes.get(project.id);
+          return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
+        });
+
+        res.status(200).json(patched);
+      });
+
+      express.use('/project', projectRouter);
+
+      // both deprecated
+      express.use('/notifications', jsonBody.handler, registerDeviceTokenRouter);
+      express.use('/whatcode/identity', jsonBody.handler, identityRouter);
+
+      express.use(
+        '/',
+        createProxyMiddleware({
+          target: `http://localhost:${opencodePort.toString()}`,
+          changeOrigin: false,
+          agent: false,
+          proxyTimeout: 0,
+          timeout: 0,
+          on: {
+            ...(opencodeAuthHeader
+              ? {
+                  proxyReq: (proxyReq: ClientRequest) => {
+                    proxyReq.setHeader('authorization', opencodeAuthHeader);
+                  },
+                }
+              : {}),
+            proxyRes: (proxyRes) => {
+              proxyRes.headers['cache-control'] = 'no-cache';
+              proxyRes.headers['x-accel-buffering'] = 'no';
+            },
+          },
+        }),
+      );
+    },
+    onError: ({ err }) => {
+      logger.error('server-error', parseError(err).message, err);
+    },
   });
 
-  app.use(projectRouter);
+  if (NODE_ENV === 'development') {
+    // eslint-disable-next-line unicorn/import-style
+    const path = await import('node:path');
+    const os = await import('node:os');
+    const { setTimeout } = await import('node:timers/promises');
+    await setTimeout(3000);
+    const home = os.homedir();
+    const desktop = path.join(home, 'Desktop');
+    const iosApp = path.join(desktop, 'apps', 'whatcode');
+    await app.generateApiSpec([{ cwd: iosApp, fullPath: path.join(iosApp, 'src', '__daemon') }]);
+  }
 
-  const opencodeAuthHeader = password ? `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}` : undefined;
-
-  app.use(
-    '/',
-    createProxyMiddleware({
-      target: `http://localhost:${opencodePort.toString()}`,
-      changeOrigin: false,
-      agent: false,
-      proxyTimeout: 0,
-      timeout: 0,
-      on: {
-        ...(opencodeAuthHeader
-          ? {
-              proxyReq: (proxyReq: ClientRequest) => {
-                proxyReq.setHeader('authorization', opencodeAuthHeader);
-              },
-            }
-          : {}),
-        proxyRes: (proxyRes) => {
-          proxyRes.headers['cache-control'] = 'no-cache';
-          proxyRes.headers['x-accel-buffering'] = 'no';
-        },
-      },
-    }),
-  );
-
-  await new Promise<void>((resolve, reject) => {
-    const server = app.listen(port, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        logger.debug('daemon', `started on port ${port.toString()}`);
-        resolve();
-      }
-    });
-    server.on('error', reject);
-  });
+  return app.__spec;
 };
 
-const basicAuth = (password: string) => (req: Request, res: Response, next: () => void) => {
-  const header = req.headers.authorization;
-  if (!header?.startsWith('Basic ')) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
-  const encoded = header.slice('Basic '.length);
-  const decoded = Buffer.from(encoded, 'base64').toString('utf8');
-  const colonIndex = decoded.indexOf(':');
-  const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
-  const passOk = pass.length === password.length && timingSafeEqual(Buffer.from(pass), Buffer.from(password));
-  if (passOk) {
-    next();
-  } else {
-    res.setHeader('WWW-Authenticate', 'Basic realm="whatcode"');
-    res.status(401).json({ error: 'Unauthorized' });
-  }
-};
+export type ApiSpec = Awaited<ReturnType<typeof startWhatcode>>;
