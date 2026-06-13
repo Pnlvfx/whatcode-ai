@@ -14,3 +14,6 @@ so send the error and BLCOCK the idle when error occur. (error fire first)
 
 end vendor configuration, currently we have togo on the sdk cwd and run yarn dbz vendor (dbz as dev dep on the sdk)
 let's improve it
+
+
+jwt

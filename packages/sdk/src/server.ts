@@ -17,7 +17,7 @@ import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 interface Params {
   port: number;
   opencodePort: number;
-  password?: string;
+  password: string | undefined;
   client: OpencodeClient;
 }
 

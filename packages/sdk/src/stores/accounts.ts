@@ -2,7 +2,7 @@ import * as z from 'zod/v4/mini';
 import { WHATCODE_AUTH } from '../config/constants.ts';
 import { createStore } from '@goatjs/store';
 
-const accountSchema = z.strictObject({
+export const accountSchema = z.strictObject({
   userId: z.string(),
   deviceId: z.string(),
   apnToken: z.optional(z.string()),

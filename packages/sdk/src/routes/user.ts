@@ -1,14 +1,10 @@
-import { createRouter, json, jsonResponse, unhautorized } from '@coraline/server';
-import * as z from 'zod/v4/mini';
-import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
+import { createRouter, json, jsonResponse } from '@coraline/server';
+import { randomBytes, randomUUID } from 'node:crypto';
 import { accountsStore } from '../stores/accounts.ts';
 import { pairUserBody } from '../types/user.ts';
 import { identityStore } from '../stores/identity.ts';
-
-const isTokenValid = (stored: string, incoming: string): boolean => {
-  if (stored.length !== incoming.length) return false;
-  return timingSafeEqual(Buffer.from(stored), Buffer.from(incoming));
-};
+import { userAuth } from '../mw/user-auth.ts';
+import * as z from 'zod/v4/mini';
 
 export const userRouter = createRouter({
   middleware: [json()],
@@ -28,9 +24,9 @@ export const userRouter = createRouter({
             deviceName: device_name,
           };
 
-          /** @ts-expect-error fuck you liar */
-          await accountsStore.set((prev) => [...prev, account]);
+          await accountsStore.set([...accounts, account]);
         }
+
         return jsonResponse({ token: account.token, identity: identityStore.get() });
       },
     }),
@@ -45,17 +41,27 @@ export const userRouter = createRouter({
     // updateUser: define({
     //   path: '/update',
     //   method: 'post',
-    //   handler: async () => {},
+    //   middleware: [userAuth] as const,
+    //   validate: { body: account },
+    //   handler: async ({ account }) => {},
     // }),
+    updateApnToken: define({
+      path: '/apn-token',
+      method: 'post',
+      middleware: [userAuth] as const,
+      validate: { body: z.strictObject({ token: z.string() }) },
+      handler: async ({ account, body: { token } }) => {
+        await accountsStore.set((prev) => prev.map((p) => (p === account.id ? { ...p, apnToken: token } : p)));
+
+        return jsonResponse({ status: 'success' });
+      },
+    }),
     logout: define({
       path: '/logout',
       method: 'post',
-      validate: { body: z.strictObject({ device_id: z.string(), token: z.string() }) },
-      handler: async ({ body: { device_id, token } }) => {
-        const accounts = await accountsStore.get();
-        const account = accounts.find((a) => a.deviceId === device_id);
-        if (!account || !isTokenValid(account.token, token)) throw unhautorized();
-        await accountsStore.set((prev) => prev.filter((p) => p.deviceId !== device_id));
+      middleware: [userAuth] as const,
+      handler: async ({ account }) => {
+        await accountsStore.set((prev) => prev.filter((p) => p.deviceId !== account.deviceId));
         return jsonResponse({ ok: true });
       },
     }),

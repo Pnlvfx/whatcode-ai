@@ -4,6 +4,7 @@ import { timingSafeEqual } from 'node:crypto';
 export const opencodeBasicAuth = (password: string) => {
   return createMiddleware(({ headers }) => {
     const authorization = headers.authorization;
+    console.log(authorization);
     if (!authorization?.startsWith('Basic ')) throw unhautorized();
     const encoded = authorization.slice('Basic '.length);
     const decoded = Buffer.from(encoded, 'base64').toString('utf8');
