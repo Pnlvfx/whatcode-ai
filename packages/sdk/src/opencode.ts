@@ -1,7 +1,7 @@
 import { type ServerOptions, createOpencodeClient, createOpencodeServer } from '@opencode-ai/sdk/v2';
-import { logger } from '@goatjs/node/logger';
 import { lt } from 'semver';
 import { OPENCODE_MIN_VERSION } from './config/constants.ts';
+import { logger } from './compiled/node/logger.ts';
 
 export const opencode = async ({ password, ...options }: Omit<ServerOptions, 'config' | 'port'> & { port: number; password?: string }) => {
   const opencodeAuthHeader = password ? getOpencodeAuthHeader(password) : undefined;

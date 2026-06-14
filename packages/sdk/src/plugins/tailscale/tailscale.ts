@@ -1,7 +1,7 @@
 import { execa } from 'execa';
-import { logger } from '@goatjs/node/logger';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
+import { logger } from '../../compiled/node/logger.ts';
 
 export type Tailscale = Awaited<ReturnType<typeof createTailscale>>;
 

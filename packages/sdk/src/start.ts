@@ -4,10 +4,10 @@ import { getLocalIp } from './ip.ts';
 import { startNotifications } from './apn/apn.ts';
 import { identityStore } from './stores/identity.ts';
 import { startTailscale } from './tailscale.ts';
-import pkgJson from '../package.json' with { type: 'json' };
-import { logger, type LogLevel } from '@goatjs/node/logger';
 import { createTailscale } from './plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
+import { logger, type LogLevel } from './compiled/node/logger.ts';
+import pkgJson from '../package.json' with { type: 'json' };
 
 export interface WhatcodeServerResult {
   url: string | undefined;

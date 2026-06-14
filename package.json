@@ -24,18 +24,14 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo build",
     "dev": "yarn whatcode --log-level debug --port 6666 --opencode-port 4099",
     "docs": "yarn workspace @whatcode-ai/docs",
-    "lint": "turbo run lint",
+    "initialize": "turbo initialize",
+    "lint": "turbo lint",
     "prepare": "lefthook install",
-    "tsc": "turbo run tsc",
+    "tsc": "turbo tsc",
     "update": "yarn upgrade-interactive"
-  },
-  "resolutions": {
-    "@goatjs/store": "file:packages/sdk/vendor/goatjs-store.tgz",
-    "@goatjs/core": "file:packages/sdk/vendor/goatjs-core.tgz",
-    "@goatjs/node": "file:packages/sdk/vendor/goatjs-node.tgz"
   },
   "dependencies": {
     "@whatcode-ai/whatcode": "workspace:*"

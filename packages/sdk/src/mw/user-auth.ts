@@ -20,9 +20,7 @@ export const userAuth = new Elysia({ name: 'user-auth' })
     const token = raw?.startsWith('Bearer ') ? raw.slice(7) : undefined;
     if (!token) throw new UnauthorizedError();
     const accounts = await accountsStore.get();
-    const account = accounts.find(
-      (a) => a.token.length === token.length && timingSafeEqual(Buffer.from(a.token), Buffer.from(token)),
-    );
+    const account = accounts.find((a) => a.token.length === token.length && timingSafeEqual(Buffer.from(a.token), Buffer.from(token)));
     if (!account) throw new UnauthorizedError();
     return { account };
   });

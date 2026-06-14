@@ -2,7 +2,7 @@
 import { Elysia } from 'elysia';
 import * as z from 'zod/v4/mini';
 import { apnTokenStore } from '../../stores/apn-token.ts';
-import { logger } from '@goatjs/node/logger';
+import { logger } from '../../compiled/node/logger.ts';
 
 const unregisterBodySchema = z.strictObject({ user_id: z.string(), device_id: z.string() });
 const registerBodySchema = z.strictObject({

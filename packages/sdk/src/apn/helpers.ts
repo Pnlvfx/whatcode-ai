@@ -1,6 +1,6 @@
 import type { Message, Part, TextPart } from '@opencode-ai/sdk/v2';
 import path from 'node:path';
-import { capitalize } from '@goatjs/core/capitalize';
+import { capitalize } from '../compiled/core/capitalize.ts';
 
 export interface OpencodeMessage {
   info: Message;

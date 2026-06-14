@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-deprecated */
 import { relayClient } from '../client.ts';
-import { logger } from '@goatjs/node/logger';
+import { parseError } from '../compiled/core/error.ts';
+import { logger } from '../compiled/node/logger.ts';
 import { apnTokenStore } from '../stores/apn-token.ts';
-import { parseError } from '@goatjs/core/error';
 
 type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
 

@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/try-complexity */
 import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
-import { logger } from '@goatjs/node/logger';
 import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, getProjectName, trim, type OpencodeMessage } from './helpers.ts';
+import { logger } from '../compiled/node/logger.ts';
 
 const BACKOFF_INITIAL_MS = 1000;
 const BACKOFF_MAX_MS = 30_000;

@@ -26,6 +26,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
     { body: pairUserBody },
   )
   .use(userAuth)
+  .get('/', ({ account }) => ({ user: account }))
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
@@ -36,5 +37,5 @@ export const userRouter = new Elysia({ prefix: '/user' })
   )
   .post('/logout', async ({ account }) => {
     await accountsStore.set((prev) => prev.filter((p) => p.deviceId !== account.deviceId));
-    return { ok: true };
+    return { status: 'success' };
   });

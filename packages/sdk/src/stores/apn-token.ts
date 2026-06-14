@@ -1,6 +1,6 @@
 import * as z from 'zod/v4/mini';
-import { createStore } from '@goatjs/store';
 import { WHATCODE_AUTH } from '../config/constants.ts';
+import { createStore } from '../compiled/store/store.ts';
 
 /** @deprecated */
 export const apnTokenStore = await createStore(

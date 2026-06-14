@@ -1,5 +1,5 @@
 import type { Tailscale } from './plugins/tailscale/tailscale.ts';
-import { logger } from '@goatjs/node/logger';
+import { logger } from './compiled/node/logger.ts';
 
 export const startTailscale = async (tailscale: Tailscale) => {
   const result = await tailscale.start();

@@ -2,13 +2,13 @@ import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
 import { getLastMessageTimeByProject } from './db.ts';
-import { parseError } from '@goatjs/core/error';
 import { identityRouter } from './routes/deprecated/identity.ts';
 import { registerDeviceTokenRouter } from './routes/deprecated/register-device.ts';
-import { logger } from '@goatjs/node/logger';
 import { userRouter } from './routes/user.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { userAuth } from './mw/user-auth.ts';
+import { parseError } from './compiled/core/error.ts';
+import { logger } from './compiled/node/logger.ts';
 
 interface Params {
   port: number;

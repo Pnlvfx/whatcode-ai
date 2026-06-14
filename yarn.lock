@@ -1599,6 +1599,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@borewit/text-codec@npm:^0.2.1":
+  version: 0.2.2
+  resolution: "@borewit/text-codec@npm:0.2.2"
+  checksum: 10c0/2d3fb132bc6a132914a8fbf8e9ff2fa1ead210ecc395b28bb7355bd7719548a5e351ffe39f21c3bee8048f6cabd99eabd404bb5cc809cad9cba25abed19d271f
+  languageName: node
+  linkType: hard
+
 "@bytecodealliance/preview2-shim@npm:0.17.6":
   version: 0.17.6
   resolution: "@bytecodealliance/preview2-shim@npm:0.17.6"
@@ -3734,10 +3741,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core@file:packages/sdk/vendor/goatjs-core.tgz::locator=whatcode-ai%40workspace%3A.":
+"@goatjs/core@npm:2.18.0":
   version: 2.18.0
-  resolution: "@goatjs/core@file:packages/sdk/vendor/goatjs-core.tgz#packages/sdk/vendor/goatjs-core.tgz::hash=64704d&locator=whatcode-ai%40workspace%3A."
-  checksum: 10c0/ba4a401c13ba10bd30948d27f55127d40e8c18a350413d1161b11d0616ea7f2e51adca7f877440cc68ae4803bba37a9b0d73cb9d3596d98d98cf6d79e4811291
+  resolution: "@goatjs/core@npm:2.18.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-2.18.0.tgz"
+  checksum: 10c0/3a19b508f0f99d993cad77802820a728d548ad0abd0a5a3081a2eb1097c6122211463d80788017d3818271f911faa1fd9e966f331a7c17fbbdabc9af98f95177
   languageName: node
   linkType: hard
 
@@ -3801,12 +3808,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node@file:packages/sdk/vendor/goatjs-node.tgz::locator=whatcode-ai%40workspace%3A.":
+"@goatjs/node@npm:2.26.0":
   version: 2.26.0
-  resolution: "@goatjs/node@file:packages/sdk/vendor/goatjs-node.tgz#packages/sdk/vendor/goatjs-node.tgz::hash=34e2f6&locator=whatcode-ai%40workspace%3A."
+  resolution: "@goatjs/node@npm:2.26.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-2.26.0.tgz"
   dependencies:
     sanitize-filename: "npm:1.6.4"
-  checksum: 10c0/1fe1da69859e7be3079762e42511cd5c446482ac02280f172401245a0a8551861f84ae4d891aaef60e032cbf0a83e105e665f7ae2340f4905e4a7c79e238af2b
+  checksum: 10c0/ee84b03a192285aece2f0a3aade48519cb7ca3f55e400f1e589a945b3413eb68762d983a9c66190f4cd556746c3fe7667a8ddff2a54a2c2f268c4f0259ea5022
   languageName: node
   linkType: hard
 
@@ -3816,15 +3823,6 @@ __metadata:
   bin:
     rimraf: dist/cli/rimraf.js
   checksum: 10c0/7587d3713e911cfaf4f30a303d4b4a903eb24585c266c3c5083ba72e422cc62f1007bc9d26259a8e1bf7eb917f394691f73ff0893ed195cae2c454481c898460
-  languageName: node
-  linkType: hard
-
-"@goatjs/store@file:packages/sdk/vendor/goatjs-store.tgz::locator=whatcode-ai%40workspace%3A.":
-  version: 2.17.0
-  resolution: "@goatjs/store@file:packages/sdk/vendor/goatjs-store.tgz#packages/sdk/vendor/goatjs-store.tgz::hash=d15e95&locator=whatcode-ai%40workspace%3A."
-  peerDependencies:
-    zod: "*"
-  checksum: 10c0/f0793c7edf4d85a3237cf6132446a66edafd517c0691d09ff6fbfcd6ff1eea099791e65d2e6159175e41c9773890f48c6d1174bf4d6727dfb047eff8fabb46e0
   languageName: node
   linkType: hard
 
@@ -6264,6 +6262,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tokenizer/inflate@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@tokenizer/inflate@npm:0.4.1"
+  dependencies:
+    debug: "npm:^4.4.3"
+    token-types: "npm:^6.1.1"
+  checksum: 10c0/9817516efe21d1ce3bdfb80a1f94efc8981064ce3873448ba79f4d81d96c0694c484c289bd042d346ae5536cf77f5aa9a367d39c3df700eb610761b7c306b4de
+  languageName: node
+  linkType: hard
+
+"@tokenizer/token@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@tokenizer/token@npm:0.3.0"
+  checksum: 10c0/7ab9a822d4b5ff3f5bca7f7d14d46bdd8432528e028db4a52be7fbf90c7f495cc1af1324691dda2813c6af8dc4b8eb29de3107d4508165f9aa5b53e7d501f155
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2.0.0":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -7789,11 +7804,8 @@ __metadata:
     "@elysia/eden": "npm:^1.4.10"
     "@elysiajs/node": "npm:^1.4.5"
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/core": "file:vendor/goatjs-core.tgz"
-    "@goatjs/node": "file:vendor/goatjs-node.tgz"
     "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
     "@goatjs/rimraf": "npm:^2.11.0"
-    "@goatjs/store": "file:vendor/goatjs-store.tgz"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@opencode-ai/sdk": "npm:^1.17.6"
     "@sinclair/typebox": "npm:^0.34.49"
@@ -7803,7 +7815,9 @@ __metadata:
     eslint: "npm:^10.5.0"
     execa: "npm:^9.6.1"
     exit-hook: "npm:^5.1.0"
+    file-type: "npm:^22.0.1"
     node-machine-id: "npm:^1.1.12"
+    openapi-types: "npm:^12.1.3"
     semver: "npm:^7.8.4"
     typescript: "npm:^6.0.3"
     zod: "npm:^4.4.3"
@@ -7817,7 +7831,6 @@ __metadata:
   resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
   dependencies:
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/node": "file:../sdk/vendor/goatjs-node.tgz"
     "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
@@ -12011,6 +12024,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-type@npm:^22.0.1":
+  version: 22.0.1
+  resolution: "file-type@npm:22.0.1"
+  dependencies:
+    "@tokenizer/inflate": "npm:^0.4.1"
+    strtok3: "npm:^10.3.5"
+    token-types: "npm:^6.1.2"
+    uint8array-extras: "npm:^1.5.0"
+  checksum: 10c0/45b70a10196d46965eadd7835ec408c1c07b4fd2ed395e9bbcc0ad63d93f7bf6d076d0e970673b754577002019c8858825bc71ccc07ca7c0e49ac0c2b7e1839f
+  languageName: node
+  linkType: hard
+
 "file-uri-to-path@npm:1.0.0":
   version: 1.0.0
   resolution: "file-uri-to-path@npm:1.0.0"
@@ -13250,6 +13275,13 @@ __metadata:
   peerDependencies:
     postcss: ^8.1.0
   checksum: 10c0/39c92936fabd23169c8611d2b5cc39e39d10b19b0d223352f20a7579f75b39d5f786114a6b8fc62bee8c5fed59ba9e0d38f7219a4db383e324fb3061664b043d
+  languageName: node
+  linkType: hard
+
+"ieee754@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "ieee754@npm:1.2.1"
+  checksum: 10c0/b0782ef5e0935b9f12883a2e2aa37baa75da6e66ce6515c168697b42160807d9330de9a32ec1ed73149aea02e0d822e572bca6f1e22bdcbd2149e13b050b17bb
   languageName: node
   linkType: hard
 
@@ -16424,6 +16456,13 @@ __metadata:
     is-docker: "npm:^2.1.1"
     is-wsl: "npm:^2.2.0"
   checksum: 10c0/bb6b3a58401dacdb0aad14360626faf3fb7fba4b77816b373495988b724fb48941cad80c1b65d62bb31a17609b2cd91c41a181602caea597ca80dfbcc27e84c9
+  languageName: node
+  linkType: hard
+
+"openapi-types@npm:^12.1.3":
+  version: 12.1.3
+  resolution: "openapi-types@npm:12.1.3"
+  checksum: 10c0/4ad4eb91ea834c237edfa6ab31394e87e00c888fc2918009763389c00d02342345195d6f302d61c3fd807f17723cd48df29b47b538b68375b3827b3758cd520f
   languageName: node
   linkType: hard
 
@@ -20026,6 +20065,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strtok3@npm:^10.3.5":
+  version: 10.3.5
+  resolution: "strtok3@npm:10.3.5"
+  dependencies:
+    "@tokenizer/token": "npm:^0.3.0"
+  checksum: 10c0/8d2477b239054c9f1f5b14a65d531147ca158ab9887fdc2d0938e77b7ec8891fb683b58254c7643afd5d98a421a59207534d491762b111f58c795071ecbe9fd1
+  languageName: node
+  linkType: hard
+
 "stubborn-fs@npm:^2.0.0":
   version: 2.0.0
   resolution: "stubborn-fs@npm:2.0.0"
@@ -20334,6 +20382,17 @@ __metadata:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 10c0/93937279934bd66cc3270016dd8d0afec14fb7c94a05c72dc57321f8bd1fa97e5bea6d1f7c89e728d077ca31ea125b78320a616a6c6cd0e6b9cb94cb864381c1
+  languageName: node
+  linkType: hard
+
+"token-types@npm:^6.1.1, token-types@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "token-types@npm:6.1.2"
+  dependencies:
+    "@borewit/text-codec": "npm:^0.2.1"
+    "@tokenizer/token": "npm:^0.3.0"
+    ieee754: "npm:^1.2.1"
+  checksum: 10c0/8786e28e3cb65b9e890bc3c38def98e6dfe4565538237f8c0e47dbe549ed8f5f00de8dc464717868308abb4729f1958f78f69e1c4c3deebbb685729113a6fee8
   languageName: node
   linkType: hard
 
@@ -20668,6 +20727,13 @@ __metadata:
   version: 1.0.0
   resolution: "uid-promise@npm:1.0.0"
   checksum: 10c0/3300c98b59144f3cf4d497b8ff1cd6bcf8d74f8451533b9b4772b2919cd7d003aa08c36ed38b61528bbc71e8a9ee953e845b4b44fb113d9848ce4bf84bb8e228
+  languageName: node
+  linkType: hard
+
+"uint8array-extras@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "uint8array-extras@npm:1.5.0"
+  checksum: 10c0/0e74641ac7dadb02eadefc1ccdadba6010e007757bda824960de3c72bbe2b04e6d3af75648441f412148c4103261d54fcb60be45a2863beb76643a55fddba3bd
   languageName: node
   linkType: hard
 
