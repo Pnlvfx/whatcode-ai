@@ -10,7 +10,6 @@ export interface OpencodeMessage {
 const BODY_MAX = 178;
 
 export const trim = (text: string) => (text.length <= BODY_MAX ? text : `${text.slice(0, BODY_MAX - 1)}…`);
-export const isTextPart = (part: Part): part is TextPart => part.type === 'text';
 export const getProjectName = (directory: string) => capitalize(directory === '/' ? 'root' : path.basename(directory));
 
 export const getLastAssistantText = (messages: OpencodeMessage[]): string | undefined => {
@@ -23,3 +22,5 @@ export const getLastAssistantText = (messages: OpencodeMessage[]): string | unde
 
   return undefined;
 };
+
+const isTextPart = (part: Part): part is TextPart => part.type === 'text';

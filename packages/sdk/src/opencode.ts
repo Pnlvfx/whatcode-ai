@@ -39,4 +39,4 @@ export const checkOpencodeMinVersion = (version: string) => {
   }
 };
 
-export const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;
+const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;

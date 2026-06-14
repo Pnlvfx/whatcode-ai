@@ -1,13 +1,27 @@
-import { createMiddleware, unhautorized } from '@coraline/server';
+import { Elysia } from 'elysia';
 import { timingSafeEqual } from 'node:crypto';
 import { accountsStore } from '../stores/accounts.ts';
 
-export const userAuth = createMiddleware(async ({ headers }) => {
-  const raw = headers['x-whatcode-auth'];
-  const token = (Array.isArray(raw) ? raw[0] : raw)?.slice(7);
-  if (!token) throw unhautorized();
-  const accounts = await accountsStore.get();
-  const account = accounts.find((a) => a.token.length === token.length && timingSafeEqual(Buffer.from(a.token), Buffer.from(token)));
-  if (!account) throw unhautorized();
-  return { account };
-});
+class UnauthorizedError extends Error {
+  override readonly name = 'UnauthorizedError';
+  readonly status = 401;
+  constructor() {
+    super('Unauthorized');
+  }
+}
+
+export const userAuth = new Elysia({ name: 'user-auth' })
+  .error({ UnauthorizedError })
+  .onError(({ code, error: err }): Response | undefined => {
+    return code === 'UnauthorizedError' ? new Response(err.message, { status: 401 }) : undefined;
+  })
+  .derive({ as: 'scoped' }, async ({ headers }) => {
+    const token = headers['x-whatcode-auth']?.slice(7);
+    if (!token) throw new UnauthorizedError();
+    const accounts = await accountsStore.get();
+    const account = accounts.find(
+      (a) => a.token.length === token.length && timingSafeEqual(Buffer.from(a.token), Buffer.from(token)),
+    );
+    if (!account) throw new UnauthorizedError();
+    return { account };
+  });

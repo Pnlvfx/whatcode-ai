@@ -1,24 +1,15 @@
 /* eslint-disable @typescript-eslint/no-deprecated */
-import { apiClient } from '../client.ts';
+import { relayClient } from '../client.ts';
 import { logger } from '@goatjs/node/logger';
 import { apnTokenStore } from '../stores/apn-token.ts';
 import { parseError } from '@goatjs/core/error';
 
-export type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
+type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
 
-export interface RelayMeta {
+interface RelayMeta {
   readonly sessionID: string;
   readonly projectID: string;
   readonly directory: string;
-}
-
-export interface PushPayload extends RelayMeta {
-  readonly userId: string;
-  readonly deviceId: string;
-  readonly token: string;
-  readonly title: string;
-  readonly body: string;
-  readonly event: NotificationEvent;
 }
 
 interface Params extends RelayMeta {
@@ -32,18 +23,16 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
 
   for (const entry of entries) {
     try {
-      await apiClient.request('pushV2', {
-        body: {
-          account_id: entry.userId,
-          device_id: entry.deviceId,
-          token: entry.token,
-          title,
-          body,
-          event,
-          session_id: sessionID,
-          project_id: projectID,
-          worktree: directory,
-        },
+      await relayClient.relay.push.v2.post({
+        account_id: entry.userId,
+        device_id: entry.deviceId,
+        token: entry.token,
+        title,
+        body,
+        event,
+        session_id: sessionID,
+        project_id: projectID,
+        worktree: directory,
       });
       logger.debug('notifications', 'forwarded successfully.');
     } catch (err) {
