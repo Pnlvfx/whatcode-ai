@@ -9,6 +9,10 @@
       "dependsOn": ["^lint"],
       "cache": true
     },
+    "initialize": {
+      "dependsOn": ["^initialize"],
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "build/**"],

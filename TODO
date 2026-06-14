@@ -1,0 +1,19 @@
+USES IDENTITY TO SYNC LOGIN / LOGOUT ECC
+
+the opencode url is available only if --hostname is used (currently not even supported)
+
+use the identity to show the available connections, remove options to add / remove them on the ios app
+
+add --hostname on cli and docs
+
+migrate opencode to v2
+
+on error both end and error fired, as of my experience sending the error is better because it send more info on the notification
+while idle try to grab last message which might be completely unrelated to the error
+so send the error and BLCOCK the idle when error occur. (error fire first)
+
+end vendor configuration, currently we have togo on the sdk cwd and run yarn dbz vendor (dbz as dev dep on the sdk)
+let's improve it
+
+
+jwt

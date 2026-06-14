@@ -1,7 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
-import { logger, logLevelSchema } from '@whatcode-ai/sdk/logger';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
 import updateNotifier from 'update-notifier';
@@ -39,13 +39,14 @@ const { url } = await createWhatcodeServer({
   tailscale,
   ...(port !== undefined && { port }),
   ...(opencodePort !== undefined && { opencodePort }),
-  logLevel: await logLevelSchema.parseAsync(logLevel),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  logLevel: logLevel as 'none',
   ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
 });
 
 if (url) {
-  logger.info('whatcode', `use this URL in the app: ${url}`);
+  console.log('whatcode', `use this URL in the app: ${url}`);
   printQrCode(url, config.WHATCODE_PASSWORD);
 } else {
-  logger.info('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
+  console.log('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
 }
