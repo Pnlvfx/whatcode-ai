@@ -46,7 +46,6 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@coraline/client": "file:vendor/coraline-client.tgz",
     "@elysia/eden": "^1.4.10",
     "@elysiajs/node": "^1.4.5",
     "@goatjs/core": "file:vendor/goatjs-core.tgz",

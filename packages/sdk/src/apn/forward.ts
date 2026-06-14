@@ -23,7 +23,7 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
 
   for (const entry of entries) {
     try {
-      await relayClient.relay.push.v2.post({
+      await relayClient.relay.push.post({
         account_id: entry.userId,
         device_id: entry.deviceId,
         token: entry.token,

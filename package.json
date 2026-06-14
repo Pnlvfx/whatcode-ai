@@ -34,8 +34,6 @@
   },
   "resolutions": {
     "@goatjs/store": "file:packages/sdk/vendor/goatjs-store.tgz",
-    "@coraline/core": "file:packages/sdk/vendor/coraline-core.tgz",
-    "@coraline/client": "file:packages/sdk/vendor/coraline-client.tgz",
     "@goatjs/core": "file:packages/sdk/vendor/goatjs-core.tgz",
     "@goatjs/node": "file:packages/sdk/vendor/goatjs-node.tgz"
   },
