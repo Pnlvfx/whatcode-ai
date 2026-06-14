@@ -9,6 +9,7 @@ import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { userAuth } from './mw/user-auth.ts';
 import { parseError } from './compiled/core/error.ts';
 import { logger } from './compiled/node/logger.ts';
+import { fetch, Headers, Response } from 'undici';
 
 interface Params {
   port: number;
@@ -47,7 +48,7 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
         const requestHeaders = new Headers(request.headers);
         requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
         requestHeaders.delete('accept-encoding');
-        const upstream = await fetch(url.toString(), { method: request.method, headers: requestHeaders, body });
+        const upstream = await fetch(url.toString(), { method: request.method, headers: requestHeaders, body, duplex: 'half' });
         const responseHeaders = new Headers(upstream.headers);
         responseHeaders.delete('content-encoding');
         responseHeaders.delete('content-length');
