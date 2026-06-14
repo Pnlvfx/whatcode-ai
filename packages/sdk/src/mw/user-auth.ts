@@ -16,7 +16,8 @@ export const userAuth = new Elysia({ name: 'user-auth' })
     return code === 'UnauthorizedError' ? new Response(err.message, { status: 401 }) : undefined;
   })
   .derive({ as: 'scoped' }, async ({ headers }) => {
-    const token = headers['x-whatcode-auth']?.slice(7);
+    const raw = headers['x-whatcode-auth'];
+    const token = raw?.startsWith('Bearer ') ? raw.slice(7) : undefined;
     if (!token) throw new UnauthorizedError();
     const accounts = await accountsStore.get();
     const account = accounts.find(
