@@ -7,10 +7,13 @@ import * as z from 'zod/v4/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+export type StoreErrorDirective = 'warn' | 'error' | 'delete';
+
 export interface StoreParams<T extends z.$ZodType> {
   directory: string;
   initial?: z.infer<T>;
   persist?: boolean;
+  onCorrupted?: StoreErrorDirective;
 }
 
 export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T>> {
@@ -21,11 +24,10 @@ export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T
   clear: () => Promise<void>;
 }
 
-/** This mimic the browser localStorage and allow you to store primitives on disk. */
 export const createStore = async <T extends z.$ZodType, TParams extends StoreParams<T>>(
   name: string,
   schema: T,
-  { directory, initial, persist = true }: TParams,
+  { directory, initial, persist = true, onCorrupted = 'error' }: TParams,
 ): Promise<StoreResult<T, TParams>> => {
   if (persist) await fs.mkdir(directory, { recursive: true });
   type StoreType = z.infer<T>;
@@ -46,11 +48,7 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
     const buf = await getBuffer();
     if (buf) {
       const result = await z.safeParseAsync(schema, JSON.parse(buf.toString()));
-      if (!result.success) {
-        throw new Error(
-          `Found corrupted store "${name}". The stored value doesn't match the current schema — this usually happens when the schema changes or the file is edited manually. Consider resetting or migrating the stored value.`,
-        );
-      }
+      if (!result.success) await handleCorrupted(onCorrupted, name, configFile);
     }
   }
   //
@@ -106,4 +104,23 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
       }
     },
   } as StoreResult<T, TParams>;
+};
+
+const handleCorrupted = async (onCorrupted: StoreErrorDirective, name: string, configFile: string) => {
+  switch (onCorrupted) {
+    case 'error': {
+      throw new Error(
+        `Found corrupted store "${name}". The stored value doesn't match the current schema — this usually happens when the schema changes or the file is edited manually. Consider resetting or migrating the stored value.`,
+      );
+    }
+    case 'warn': {
+      // eslint-disable-next-line no-console
+      console.warn(`Found corrupted store "${name}". The stored value doesn't match the current schema and will be ignored.`);
+      break;
+    }
+    case 'delete': {
+      await fs.rm(configFile);
+      break;
+    }
+  }
 };

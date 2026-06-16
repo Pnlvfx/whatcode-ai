@@ -25,13 +25,13 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "dev": "yarn whatcode --log-level debug --port 6666 --opencode-port 4099",
+    "dev": "yarn whatcode start --log-level debug --port 6666 --opencode-port 4099",
     "docs": "yarn workspace @whatcode-ai/docs",
     "initialize": "turbo initialize",
     "lint": "turbo lint",
     "prepare": "lefthook install",
     "tsc": "turbo tsc",
-    "update": "yarn upgrade-interactive"
+    "update": "yarn workspace @whatcode-ai/sdk initialize && yarn upgrade-interactive"
   },
   "dependencies": {
     "@whatcode-ai/whatcode": "workspace:*"
@@ -42,7 +42,7 @@
     "@eslint/config-helpers": "^0.6.0",
     "@goatjs/dbz": "^2.48.0",
     "@goatjs/doctor": "^2.42.0",
-    "@goatjs/node-monorepo-eslint": "^2.31.0",
+    "@goatjs/node-monorepo-eslint": "^2.32.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.8.4",
     "turbo": "^2.9.18",

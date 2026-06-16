@@ -5,6 +5,7 @@ import { identityStore } from '../stores/identity.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import * as z from 'zod/v4/mini';
+import { buildAccountResponse } from '../user.ts';
 
 export const userRouter = new Elysia({ prefix: '/user' })
   .post(
@@ -12,21 +13,23 @@ export const userRouter = new Elysia({ prefix: '/user' })
     async ({ body: { device_id, device_name } }) => {
       const accounts = await accountsStore.get();
       let account = accounts.find((a) => a.deviceId === device_id);
+      const identity = identityStore.get();
       if (!account) {
         account = {
+          name: identity.name,
           token: randomBytes(32).toString('hex'),
-          userId: randomUUID(),
+          id: randomUUID(),
           deviceId: device_id,
           deviceName: device_name,
         };
         await accountsStore.set([...accounts, account]);
       }
-      return { token: account.token, identity: identityStore.get() };
+      return { token: account.token, user: buildAccountResponse(account, identity) };
     },
     { body: pairUserBody },
   )
   .use(userAuth)
-  .get('/', ({ account }) => ({ user: account }))
+  .get('/', ({ account }) => ({ user: buildAccountResponse(account, identityStore.get()) }))
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {

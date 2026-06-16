@@ -1,4 +1,4 @@
-import { checkOpencodeMinVersion, opencode } from './opencode.ts';
+import { checkOpencodeMinVersion, opencode } from './opencode/opencode.ts';
 import { startWhatcode } from './server.ts';
 import { getLocalIp } from './ip.ts';
 import { startNotifications } from './apn/apn.ts';
@@ -31,7 +31,7 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
-  const { server, client, version: opencodeVersion } = await opencode({ port: opencodePort, password });
+  const { server: opencodeServer, client, version: opencodeVersion } = await opencode({ port: opencodePort, password, logLevel });
   checkOpencodeMinVersion(opencodeVersion);
   const localIp = await getLocalIp();
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
@@ -51,7 +51,7 @@ export const createWhatcodeServer = async ({
   asyncExitHook(
     async () => {
       await tailscale?.stop();
-      server?.close();
+      opencodeServer?.close();
     },
     { wait: 3000 },
   );

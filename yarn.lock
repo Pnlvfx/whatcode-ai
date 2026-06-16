@@ -3723,9 +3723,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core-eslint@npm:2.30.0":
-  version: 2.30.0
-  resolution: "@goatjs/core-eslint@npm:2.30.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-2.30.0.tgz"
+"@goatjs/core-eslint@npm:2.31.0":
+  version: 2.31.0
+  resolution: "@goatjs/core-eslint@npm:2.31.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-2.31.0.tgz"
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     eslint-import-resolver-typescript: "npm:^4.4.5"
@@ -3737,7 +3737,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:^65.0.1"
     globals: "npm:^17.6.0"
     typescript-eslint: "npm:^8.61.0"
-  checksum: 10c0/4fba940fa83a09e18475cd512857616644756fa5aa1c7b3354d7857fd625a85065a43b8a4111c8ddc93d79e04f6281cc0198f4c9cb85c51ba5364097bcf37575
+  checksum: 10c0/24bb0261b10b07f5ad85bed2f5c50f708f7e8df37db07cb8b0f6d08c639e993ed506c4dc20426bb2a967b99cf4fe1d15d52098da60a16388c18c4ab4c7bb9679
   languageName: node
   linkType: hard
 
@@ -3789,22 +3789,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node-eslint@npm:2.31.0":
-  version: 2.31.0
-  resolution: "@goatjs/node-eslint@npm:2.31.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-2.31.0.tgz"
+"@goatjs/node-eslint@npm:2.32.0":
+  version: 2.32.0
+  resolution: "@goatjs/node-eslint@npm:2.32.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-2.32.0.tgz"
   dependencies:
-    "@goatjs/core-eslint": "npm:2.30.0"
+    "@goatjs/core-eslint": "npm:2.31.0"
     globals: "npm:^17.6.0"
-  checksum: 10c0/b24fbae52a05bf5b1844b71ca7005a43a24a74be119e1f98bb4a55de58d019ac13eca58a4153b05a5ea62f15df7718bd636b4fd754c3ecbce9f397e369234b00
+  checksum: 10c0/5bc5168e517b94a442bbf27b960b1a29cbd2874aeff717b8e906a1b80e062fac27b3def7b68a90d21a92c2542592eb473ffe01bca3750b6f8e055fcab3583f4c
   languageName: node
   linkType: hard
 
-"@goatjs/node-monorepo-eslint@npm:^2.31.0":
-  version: 2.31.0
-  resolution: "@goatjs/node-monorepo-eslint@npm:2.31.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-2.31.0.tgz"
+"@goatjs/node-monorepo-eslint@npm:^2.32.0":
+  version: 2.32.0
+  resolution: "@goatjs/node-monorepo-eslint@npm:2.32.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-2.32.0.tgz"
   dependencies:
-    "@goatjs/node-eslint": "npm:2.31.0"
-  checksum: 10c0/fdb82d7386cf6d0331f95be14068ac1dcc2d034f5694b20f6fd4bfb08114b44ad6fc7692a43f719f875f18192923d43550a5077767f7bec2a2859bfb604a58b3
+    "@goatjs/node-eslint": "npm:2.32.0"
+  checksum: 10c0/6062da074a252a6bdb94013d30e0ee84c9be90a2d5c4127518718c0d248db49398333a57a6ada52090897bd2fd30ecb6f26c0e489bab6a4b353ccf5733a2638e
   languageName: node
   linkType: hard
 
@@ -4813,12 +4813,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.17.6":
-  version: 1.17.6
-  resolution: "@opencode-ai/sdk@npm:1.17.6"
+"@opencode-ai/sdk@npm:^1.17.7":
+  version: 1.17.7
+  resolution: "@opencode-ai/sdk@npm:1.17.7"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/257dfb71895ceadddc54b04033329476053fac1258ab9845f274cf24109578077a34e23a2ee958d1061e0d4f8985906458e23bad0860e338d71f07cc70645de9
+  checksum: 10c0/6851071cf02a26d82ad659cbd515336428aeb981d0087a8c013a7d60634a2d242f45a14287e9bdc9f60a830da919ddf28fea608f9fdeca1ea3422c335b76aacf
   languageName: node
   linkType: hard
 
@@ -7511,12 +7511,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/python@npm:6.44.1":
-  version: 6.44.1
-  resolution: "@vercel/python@npm:6.44.1"
+"@vercel/python@npm:6.45.0":
+  version: 6.45.0
+  resolution: "@vercel/python@npm:6.45.0"
   dependencies:
     "@vercel/python-analysis": "npm:0.11.1"
-  checksum: 10c0/b666c4c2c84449e644d7095f996fd5cec65e94a31cc33758f6252150e63ea2f9c54bf8d479556d23abcf0044245e4a92eeaf1bae49dc3bca637d0ccefe6673d9
+  checksum: 10c0/4be0792516abd9ec59aeaabd83b91de158bd975bc1421fb9a2116d47311a9e5c86e326eaaca2abed649327505f9999efaaee43a278996e843b04fb78fe27a774
   languageName: node
   linkType: hard
 
@@ -7777,7 +7777,7 @@ __metadata:
     react: "npm:^19.2.7"
     react-dom: "npm:^19.2.7"
     typescript: "npm:~6.0.3"
-    vercel: "npm:^54.13.0"
+    vercel: "npm:^54.14.0"
   languageName: unknown
   linkType: soft
 
@@ -7786,7 +7786,7 @@ __metadata:
   resolution: "@whatcode-ai/example@workspace:apps/example"
   dependencies:
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.32.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@types/node": "npm:^25.9.3"
@@ -7804,10 +7804,10 @@ __metadata:
     "@elysia/eden": "npm:^1.4.10"
     "@elysiajs/node": "npm:^1.4.5"
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.32.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
-    "@opencode-ai/sdk": "npm:^1.17.6"
+    "@opencode-ai/sdk": "npm:^1.17.7"
     "@sinclair/typebox": "npm:^0.34.49"
     "@types/node": "npm:^25.9.3"
     "@types/semver": "npm:^7.7.1"
@@ -7832,7 +7832,7 @@ __metadata:
   resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
   dependencies:
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.32.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@types/node": "npm:^25.9.3"
@@ -21172,9 +21172,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vercel@npm:^54.13.0":
-  version: 54.13.0
-  resolution: "vercel@npm:54.13.0"
+"vercel@npm:^54.14.0":
+  version: 54.14.0
+  resolution: "vercel@npm:54.14.0"
   dependencies:
     "@vercel/backends": "npm:0.8.14"
     "@vercel/blob": "npm:2.4.0"
@@ -21195,7 +21195,7 @@ __metadata:
     "@vercel/next": "npm:4.19.0"
     "@vercel/node": "npm:5.8.17"
     "@vercel/prepare-flags-definitions": "npm:0.3.0"
-    "@vercel/python": "npm:6.44.1"
+    "@vercel/python": "npm:6.45.0"
     "@vercel/redwood": "npm:2.5.0"
     "@vercel/remix-builder": "npm:5.9.1"
     "@vercel/ruby": "npm:2.4.0"
@@ -21213,7 +21213,7 @@ __metadata:
   bin:
     vc: dist/vc.js
     vercel: dist/vc.js
-  checksum: 10c0/52a889e993c82f8480f2d15bb07af780049f36fd4d37303f0cef78a25154259dda524fd64a311e5a391eebe2fbe9a26b2cf8268093006fe441e118cd00419775
+  checksum: 10c0/e49795d05a0a98a7882217590aad5bd791ac910de36ebc9a4c43012e0bfa0c18aa4989df3dd42c4f53b196268610739f32c826da991e534585bdc6d42c0d1b58
   languageName: node
   linkType: hard
 
@@ -21494,7 +21494,7 @@ __metadata:
     "@eslint/config-helpers": "npm:^0.6.0"
     "@goatjs/dbz": "npm:^2.48.0"
     "@goatjs/doctor": "npm:^2.42.0"
-    "@goatjs/node-monorepo-eslint": "npm:^2.31.0"
+    "@goatjs/node-monorepo-eslint": "npm:^2.32.0"
     "@whatcode-ai/whatcode": "workspace:*"
     lefthook: "npm:^2.1.9"
     prettier: "npm:^3.8.4"

@@ -1,7 +1,7 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
-import { getLastMessageTimeByProject } from './db.ts';
+import { getLastMessageTimeByProject } from './opencode/db.ts';
 import { identityRouter } from './routes/deprecated/identity.ts';
 import { registerDeviceTokenRouter } from './routes/deprecated/register-device.ts';
 import { userRouter } from './routes/user.ts';
