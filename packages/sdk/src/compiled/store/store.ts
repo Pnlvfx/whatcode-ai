@@ -32,7 +32,6 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
   if (persist) await fs.mkdir(directory, { recursive: true });
   type StoreType = z.infer<T>;
   const configFile = path.join(directory, `${name}.json`);
-  let currentConfig: StoreType | undefined;
 
   const getBuffer = async () => {
     try {
@@ -52,6 +51,8 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
     }
   }
   //
+
+  let currentConfig: StoreType | undefined;
 
   const get = async () => {
     if (persist && currentConfig === undefined) {

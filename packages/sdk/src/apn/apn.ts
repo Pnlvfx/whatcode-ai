@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/try-complexity */
 import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';

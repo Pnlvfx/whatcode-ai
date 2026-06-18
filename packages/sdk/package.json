@@ -49,20 +49,20 @@
   "dependencies": {
     "@elysia/eden": "^1.4.10",
     "@elysiajs/node": "^1.4.5",
-    "@opencode-ai/sdk": "^1.17.7",
+    "@opencode-ai/sdk": "^1.17.8",
     "@sinclair/typebox": "^0.34.49",
-    "elysia": "^1.4.28",
+    "elysia": "^1.4.29",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
     "file-type": "^22.0.1",
     "node-machine-id": "^1.1.12",
     "openapi-types": "^12.1.3",
     "semver": "^7.8.4",
-    "undici": "^8.4.1"
+    "undici": "^8.5.0"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/node-monorepo-eslint": "^2.32.0",
+    "@goatjs/node-monorepo-eslint": "^2.36.0",
     "@goatjs/rimraf": "^2.11.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^25.9.3",

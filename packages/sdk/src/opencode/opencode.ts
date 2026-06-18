@@ -14,7 +14,7 @@ export const opencode = async ({
   const client = createOpencodeClient({
     baseUrl: `http://localhost:${options.port.toString()}`,
     throwOnError: true,
-    ...(opencodeAuthHeader ? { headers: { authorization: opencodeAuthHeader } } : {}),
+    ...(opencodeAuthHeader && { headers: { authorization: opencodeAuthHeader } }),
   });
 
   const { data } = await client.global.health({ throwOnError: false });
@@ -44,4 +44,5 @@ export const checkOpencodeMinVersion = (version: string) => {
   }
 };
 
+// eslint-disable-next-line unicorn/prefer-uint8array-base64
 const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;

@@ -5,14 +5,14 @@
 
 /* eslint-disable no-console */
 
-const reset = '\u001B[0m';
+const reset = '\u{1B}[0m';
 
 const colors = {
-  gray: '\u001B[90m',
-  cyan: '\u001B[36m',
-  yellow: '\u001B[33m',
-  red: '\u001B[31m',
-  green: '\u001B[32m',
+  gray: '\u{1B}[90m',
+  cyan: '\u{1B}[36m',
+  yellow: '\u{1B}[33m',
+  red: '\u{1B}[31m',
+  green: '\u{1B}[32m',
 } as const;
 
 const colorize = (color: keyof typeof colors, text: string): string => `${colors[color]}${text}${reset}`;

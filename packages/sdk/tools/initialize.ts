@@ -5,6 +5,7 @@ import path from 'node:path';
 
 const home = homedir();
 const goatjs = path.join(home, 'Desktop', 'packages', 'goatjs', 'packages');
+const coraline = path.join(home, 'Desktop', 'packages', 'coraline', 'packages');
 
 const output = path.join('src', 'compiled');
 
@@ -23,5 +24,10 @@ await copyFilesFromFolder([
     inputFolder: path.join(goatjs, 'node', 'src'),
     outputFolder: path.join(output, 'node'),
     files: ['logger.ts'],
+  },
+  {
+    inputFolder: path.join(coraline, 'server-logger', 'src'),
+    outputFolder: path.join(output, 'server'),
+    files: ['adapters.ts'],
   },
 ]);
