@@ -24,12 +24,12 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
       logger.error('server-error', parseError(err).message, err);
     })
     .use(password ? opencodeBasicAuth(password) : new Elysia())
-    .use(userRouter)
-    .use(userAuth)
     // eslint-disable-next-line @typescript-eslint/no-deprecated
     .use(identityRouter)
     // eslint-disable-next-line @typescript-eslint/no-deprecated
     .use(registerDeviceTokenRouter)
+    .use(userRouter)
+    .use(userAuth)
     .get('/project', async () => {
       const { data: projects } = await client.project.list<true>();
       const lastMessageTimes = getLastMessageTimeByProject();
@@ -48,7 +48,7 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
         const requestHeaders = new Headers(request.headers);
         requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
         requestHeaders.delete('accept-encoding');
-        const upstream = await fetch(url.toString(), { method: request.method, headers: requestHeaders, body, duplex: 'half' });
+        const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
         const responseHeaders = new Headers(upstream.headers);
         responseHeaders.delete('content-encoding');
         responseHeaders.delete('content-length');
