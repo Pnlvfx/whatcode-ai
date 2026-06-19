@@ -33,7 +33,7 @@ export const createWhatcodeServer = async ({
   logger.init({ logLevel });
   const { server: opencodeServer, client, version: opencodeVersion } = await opencode({ port: opencodePort, password, logLevel });
   checkOpencodeMinVersion(opencodeVersion);
-  const localIp = await getLocalIp();
+  const localIp = hostname ?? (await getLocalIp());
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
   const daemonUrl = `http://${localIp}:${port.toString()}`;
   startNotifications(client);

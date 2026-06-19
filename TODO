@@ -1,9 +1,13 @@
-the opencode url is available only if --hostname is used
+
 add --hostname on cli and docs
 migrate opencode to v2
+
+change docs for cli start
+
+yarn whatcode => yarn whatcode start
+
+add logs after reset
 
 on error both end and error fired, as of my experience sending the error is better because it send more info on the notification
 while idle try to grab last message which might be completely unrelated to the error
 so send the error and BLCOCK the idle when error occur. (error fire first)
-
-jwt?

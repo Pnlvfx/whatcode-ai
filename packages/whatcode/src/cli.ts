@@ -24,13 +24,17 @@ await yargs(hideBin(process.argv))
         .option('tailscale', { type: 'boolean', description: 'Expose OpenCode via Tailscale serve (HTTPS on your tailnet)' })
         .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
         .option('opencode-port', { type: 'number', description: 'Port for the OpenCode server (default: 4096)' })
+        .option('hostname', {
+          type: 'string',
+          description: 'Hostname or IP to advertise as the OpenCode public address (overrides auto-detected local IP)',
+        })
         .option('log-level', {
           type: 'string',
           choices: ['none', 'info', 'debug'],
           default: 'info',
           description: 'Log level: none | info | debug (default: info)',
         }),
-    async ({ logLevel, opencodePort, tailscale, port }) => {
+    async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
       const { url } = await createWhatcodeServer({
         tailscale,
         ...(port !== undefined && { port }),
@@ -38,6 +42,7 @@ await yargs(hideBin(process.argv))
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         logLevel: logLevel as 'none',
         ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
+        ...(hostname !== undefined && { hostname }),
       });
 
       if (url) {

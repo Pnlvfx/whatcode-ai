@@ -162,11 +162,12 @@ await resetWhatcodeServer();
 
 | Option         | Type                          | Default     | Description                                                                                                         |
 | -------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
-| `port`         | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
-| `opencodePort` | `number`                      | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                 |
-| `tailscale`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
-| `password`     | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
-| `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
+| `port`         | `number`                          | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.                                              |
+| `opencodePort` | `number`                          | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                                                     |
+| `tailscale`    | `boolean`                         | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.                                         |
+| `password`     | `string`                          | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually.                                     |
+| `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                                                                |
+| `hostname`     | `string`                          | `undefined` | Hostname or IP to advertise as the public OpenCode address. Useful when the auto-detected local IP is incorrect, e.g. in VPN or multi-NIC environments. |
 
 ### `resetWhatcodeServer()`
 
@@ -178,10 +179,11 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 | Flag              | Type                          | Default | Description                   |
 | ----------------- | ----------------------------- | ------- | ----------------------------- |
-| `--port`          | `number`                      | `8192`  | Port for the WhatCode server. |
-| `--opencode-port` | `number`                      | `4096`  | Port for the OpenCode server. |
-| `--tailscale`     | `boolean`                     | -       | Expose via Tailscale HTTPS.   |
-| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.       |
+| `--port`          | `number`                          | `8192`  | Port for the WhatCode server.                                                       |
+| `--opencode-port` | `number`                          | `4096`  | Port for the OpenCode server.                                                       |
+| `--tailscale`     | `boolean`                         | -       | Expose via Tailscale HTTPS.                                                         |
+| `--hostname`      | `string`                          | -       | Hostname or IP to advertise as the public OpenCode address. Overrides the auto-detected local IP. |
+| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                                             |
 
 **Environment variables**
 

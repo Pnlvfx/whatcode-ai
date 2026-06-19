@@ -3,9 +3,12 @@ import { networkInterfaces } from 'node:os';
 
 export const getLocalIp = async (): Promise<string> => {
   const ip = (await getLocalIpViaDgram()) ?? getLocalIpViaNetworkInterfaces();
-  if (!ip) throw new Error('Local ip not found!');
+  if (!ip) throw new Error(LOCAL_IP_NOT_FOUND_MESSAGE);
   return ip;
 };
+
+const LOCAL_IP_NOT_FOUND_MESSAGE = `Could not automatically detect your local IP address.
+Pass it manually via the "hostname" option (CLI: --hostname <ip>), or report this issue at https://github.com/Pnlvfx/whatcode-ai/issues`;
 
 const getLocalIpViaDgram = (): Promise<string | undefined> => {
   return new Promise<string | undefined>((resolve) => {
