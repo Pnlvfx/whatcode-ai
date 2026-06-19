@@ -18,16 +18,13 @@ await yargs(hideBin(process.argv))
   .usage('$0 [options]')
   .command(
     ['$0', 'start'],
-    'Start Whatcode',
+    'Start WhatCode',
     (y) =>
       y
-        .option('tailscale', { type: 'boolean', description: 'Expose OpenCode via Tailscale serve (HTTPS on your tailnet)' })
-        .option('port', { type: 'number', description: 'Port for the Whatcode server (default: 8192)' })
+        .option('tailscale', { type: 'boolean', description: 'Expose WhatCode via Tailscale serve (HTTPS on your tailnet)' })
+        .option('port', { type: 'number', description: 'Port for the WhatCode server (default: 8192)' })
         .option('opencode-port', { type: 'number', description: 'Port for the OpenCode server (default: 4096)' })
-        .option('hostname', {
-          type: 'string',
-          description: 'Hostname or IP to advertise as the OpenCode public address (overrides auto-detected local IP)',
-        })
+        .option('hostname', { type: 'string', description: 'Hostname to listen on' })
         .option('log-level', {
           type: 'string',
           choices: ['none', 'info', 'debug'],
@@ -55,7 +52,7 @@ await yargs(hideBin(process.argv))
   )
   .command(
     'reset',
-    'Reset Whatcode.',
+    'Reset WhatCode.',
     (y) => y,
     async () => {
       try {

@@ -1,7 +1,7 @@
 {
   "name": "@whatcode-ai/example",
   "private": true,
-  "description": "Whatcode server example.",
+  "description": "WhatCode server example.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Pnlvfx/whatcode-ai.git",
