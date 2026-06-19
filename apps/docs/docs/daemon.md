@@ -175,6 +175,8 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 ## CLI reference
 
+`npx @whatcode-ai/whatcode` runs the `start` command by default, so `whatcode` and `whatcode start` are equivalent. The `reset` command must be called explicitly.
+
 **Flags**
 
 | Flag              | Type                          | Default | Description                   |
@@ -193,6 +195,7 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 ### Commands
 
-| Command | Description                                                                     |
-| ------- | ------------------------------------------------------------------------------- |
-| `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working. |
+| Command | Description                                                                       |
+| ------- | ----------------------------------------------------------------------------------- |
+| `start` | Start the daemon. This is the default command, so it also runs with no subcommand. |
+| `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working.    |

@@ -17,7 +17,7 @@ await yargs(hideBin(process.argv))
   .version(false)
   .usage('$0 [options]')
   .command(
-    'start',
+    ['$0', 'start'],
     'Start Whatcode',
     (y) =>
       y
@@ -58,7 +58,13 @@ await yargs(hideBin(process.argv))
     'Reset Whatcode.',
     (y) => y,
     async () => {
-      await resetWhatcodeServer();
+      try {
+        await resetWhatcodeServer();
+        console.log('whatcode', 'reset completed successfully');
+      } catch (err) {
+        console.log('whatcode', 'reset failed:', err);
+        throw err;
+      }
     },
   )
   .parseAsync();
