@@ -3894,31 +3894,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core@npm:2.20.0":
-  version: 2.20.0
-  resolution: "@goatjs/core@npm:2.20.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-2.20.0.tgz"
-  checksum: 10c0/c5cca791c30b656f9bc2022d8adaf4590b069d900424bed3f92b129be7997dae49970dd63ba6196b93e5071eb39961f69e46c6b67d895f09c6af7193605a90d7
+"@goatjs/core@npm:2.21.0":
+  version: 2.21.0
+  resolution: "@goatjs/core@npm:2.21.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore%2F-%2F%40goatjs%2Fcore-2.21.0.tgz"
+  checksum: 10c0/88409e3739f1b7d9d37eca6cbd1a708a7a173385c8eb590f5a7cb9bcaa1b14e1e198a3f05fc9e9c86784ac09d933cc7dfd56e57410640125089f8c2899b71912
   languageName: node
   linkType: hard
 
-"@goatjs/dbz@npm:^2.51.0":
-  version: 2.51.0
-  resolution: "@goatjs/dbz@npm:2.51.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-2.51.0.tgz"
+"@goatjs/dbz@npm:^2.52.0":
+  version: 2.52.0
+  resolution: "@goatjs/dbz@npm:2.52.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fdbz%2F-%2F%40goatjs%2Fdbz-2.52.0.tgz"
   dependencies:
-    "@goatjs/core": "npm:2.20.0"
-    "@goatjs/node": "npm:2.27.0"
+    "@goatjs/core": "npm:2.21.0"
+    "@goatjs/node": "npm:2.28.0"
     "@goatjs/rimraf": "npm:2.11.0"
     "@goatjs/zod": "npm:2.21.0"
     "@inquirer/prompts": "npm:8.5.2"
     conventional-changelog: "npm:^7.2.0"
     conventional-changelog-conventionalcommits: "npm:^9.3.1"
     execa: "npm:^9.6.1"
+    sort-package-json: "npm:4.0.0"
     typescript: "npm:^6.0.3"
     yargs: "npm:^18.0.0"
     zod: "npm:^4.4.3"
   bin:
     dbz: dist/cli.js
-  checksum: 10c0/5bb05a8cb846f9e737feeab72259adc7c536424922868b2108f1c194ddeee78834bd871d57eefe65c005dd11c68a67a1c46c2eaee540e82da705f8632c23ff4f
+  checksum: 10c0/0f1408e313eae76a174d0fc4c6f148e1f39a8aa57542a239c9b18b3f315115b61ab5dba17b192388775be73e150ef7a01d4c17a181b105d52d163063ea276d42
   languageName: node
   linkType: hard
 
@@ -3961,12 +3962,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node@npm:2.27.0":
-  version: 2.27.0
-  resolution: "@goatjs/node@npm:2.27.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-2.27.0.tgz"
+"@goatjs/node@npm:2.28.0":
+  version: 2.28.0
+  resolution: "@goatjs/node@npm:2.28.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode%2F-%2F%40goatjs%2Fnode-2.28.0.tgz"
   dependencies:
     sanitize-filename: "npm:1.6.4"
-  checksum: 10c0/cc3bcf3b0c3c34c9b7ee40f41070770ee814702b8c9a1c5c592e3a3b105b4dfebbfe33ca00af1d6c2b83f7a099b09a1c4fc728800cc8440302fc366dfcdc7f6f
+  checksum: 10c0/c98f01bb3bc588833aec3ffbd7994011769ee90e88339c065692bc1de65b2c8b74446568d23d51a31a62a9f2cd2006ddcb0be7803472b65b813e71277609bc02
   languageName: node
   linkType: hard
 
@@ -7934,7 +7935,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:3.10.1"
     "@docusaurus/tsconfig": "npm:3.10.1"
     "@docusaurus/types": "npm:3.10.1"
-    "@goatjs/dbz": "npm:^2.51.0"
+    "@goatjs/dbz": "npm:^2.52.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@mdx-js/react": "npm:^3.1.1"
     "@types/react": "npm:^19.2.17"
@@ -19832,6 +19833,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sort-package-json@npm:4.0.0":
+  version: 4.0.0
+  resolution: "sort-package-json@npm:4.0.0"
+  dependencies:
+    detect-indent: "npm:^7.0.2"
+    detect-newline: "npm:^4.0.1"
+    git-hooks-list: "npm:^4.1.1"
+    is-plain-obj: "npm:^4.1.0"
+    semver: "npm:^7.7.3"
+    sort-object-keys: "npm:^2.0.1"
+    tinyglobby: "npm:^0.2.15"
+  bin:
+    sort-package-json: cli.js
+  checksum: 10c0/81173fc152581f0c64846a651b5fc838b3660e422519bda34336845e3111f0d9744e8e24fa0a73e281c1ec9090c793ab25ebd7fdce0bfa404ae3607a2192eb1f
+  languageName: node
+  linkType: hard
+
 "sort-package-json@npm:^3.4.0":
   version: 3.6.1
   resolution: "sort-package-json@npm:3.6.1"
@@ -21688,7 +21706,7 @@ __metadata:
     "@commitlint/cli": "npm:^21.0.2"
     "@commitlint/config-conventional": "npm:^21.0.2"
     "@eslint/config-helpers": "npm:^0.6.0"
-    "@goatjs/dbz": "npm:^2.51.0"
+    "@goatjs/dbz": "npm:^2.52.0"
     "@goatjs/doctor": "npm:^2.44.0"
     "@goatjs/node-monorepo-eslint": "npm:^2.36.0"
     "@whatcode-ai/whatcode": "workspace:*"

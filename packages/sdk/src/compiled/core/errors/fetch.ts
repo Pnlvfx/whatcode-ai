@@ -23,3 +23,5 @@ export const fetchError = (message: string, { status, url }: { status: number; u
 export const isFetchError = (err: unknown) => {
   return err instanceof FetchError;
 };
+
+export type { FetchError };
