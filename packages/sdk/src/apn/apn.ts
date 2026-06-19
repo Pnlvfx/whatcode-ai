@@ -1,14 +1,16 @@
-import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, getProjectName, trim, type OpencodeMessage } from './helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
+import { createSmartNotification } from './smart.ts';
 
 const BACKOFF_INITIAL_MS = 1000;
 const BACKOFF_MAX_MS = 30_000;
 const BACKOFF_MULTIPLIER = 2;
 
 export const startNotifications = (client: OpencodeClient): void => {
+  const smart = createSmartNotification();
   const getMessages = async (sessionID: string) => {
     const { data } = await client.session.messages<true>({ sessionID });
     return data;
@@ -23,16 +25,15 @@ export const startNotifications = (client: OpencodeClient): void => {
     return provider?.models[modelID]?.name ?? modelID;
   };
 
-  const processEventStream = async (event: GlobalEvent): Promise<void> => {
-    switch (event.payload.type) {
-      case 'session.idle': {
-        const { sessionID } = event.payload.properties;
-        logger.debug('notifications', `session.idle event received for session ${sessionID}`);
-        const { data: session } = await client.session.get<true>({ sessionID });
-        if (session.parentID) {
-          logger.debug('notifications', `skipping session.idle for subagent session ${sessionID}`);
-          break;
-        }
+  const handleSessionIdle = async ({ sessionID }: EventSessionIdle['properties']): Promise<void> => {
+    logger.debug('notifications', `session.idle event received for session ${sessionID}`);
+    if (smart.unlock(sessionID)) {
+      logger.debug('notifications', `skipping session.idle for session ${sessionID}, error notification already sent`);
+    } else {
+      const { data: session } = await client.session.get<true>({ sessionID });
+      if (session.parentID) {
+        logger.debug('notifications', `skipping session.idle for subagent session ${sessionID}`);
+      } else {
         const title = getProjectName(session.directory);
         const messages = await getMessages(sessionID);
         const modelName = await getModelName(messages);
@@ -40,52 +41,61 @@ export const startNotifications = (client: OpencodeClient): void => {
         const body = lastText ? trim(`${modelName}: ${lastText}`) : modelName;
         logger.debug('notifications', `forwarding session.idle: title=${title}, body=${body}`);
         await forwardToRelay({ title, body, event: 'session.idle', sessionID, projectID: session.projectID, directory: session.directory });
-        break;
       }
-      case 'permission.asked': {
-        const { sessionID, permission, patterns } = event.payload.properties;
-        logger.debug('notifications', `permission.asked event received for session ${sessionID}, permission=${permission}`);
-        const { data: session } = await client.session.get<true>({ sessionID });
-        if (session.parentID) {
-          logger.debug('notifications', `skipping permission.asked for subagent session ${sessionID}`);
-          break;
-        }
-        const title = getProjectName(session.directory);
-        const messages = await getMessages(sessionID);
-        const modelName = await getModelName(messages);
-        const target = patterns[0] ?? permission;
-        logger.debug('notifications', `forwarding permission.asked: title=${title}, target=${target}`);
-        await forwardToRelay({
-          title,
-          body: trim(`${modelName} needs permission to: ${target}`),
-          event: 'permission.asked',
-          sessionID,
-          projectID: session.projectID,
-          directory: session.directory,
-        });
-        break;
-      }
-      case 'session.error': {
-        const { sessionID, error } = event.payload.properties;
-        logger.debug('notifications', `session.error event received for session ${sessionID ?? 'unknown'}`);
-        let session;
-        if (sessionID) {
-          ({ data: session } = await client.session.get<true>({ sessionID }));
-        }
-        if (session?.parentID) {
-          logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
-          break;
-        }
-        if (!session || !sessionID) {
-          logger.debug('notifications', 'skipping session.error — no session available');
-          break;
-        }
+    }
+  };
+
+  const handlePermissionAsked = async ({ sessionID, permission, patterns }: EventPermissionAsked['properties']): Promise<void> => {
+    logger.debug('notifications', `permission.asked event received for session ${sessionID}, permission=${permission}`);
+    const { data: session } = await client.session.get<true>({ sessionID });
+    if (session.parentID) {
+      logger.debug('notifications', `skipping permission.asked for subagent session ${sessionID}`);
+    } else {
+      const title = getProjectName(session.directory);
+      const messages = await getMessages(sessionID);
+      const modelName = await getModelName(messages);
+      const target = patterns[0] ?? permission;
+      logger.debug('notifications', `forwarding permission.asked: title=${title}, target=${target}`);
+      await forwardToRelay({
+        title,
+        body: trim(`${modelName} needs permission to: ${target}`),
+        event: 'permission.asked',
+        sessionID,
+        projectID: session.projectID,
+        directory: session.directory,
+      });
+    }
+  };
+
+  const handleSessionError = async ({ sessionID, error }: EventSessionError['properties']): Promise<void> => {
+    logger.debug('notifications', `session.error event received for session ${sessionID ?? 'unknown'}`);
+    if (sessionID) {
+      const { data: session } = await client.session.get<true>({ sessionID });
+      if (session.parentID) {
+        logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
+      } else {
+        smart.lock(sessionID);
         const title = getProjectName(session.directory);
         const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
         logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
         await forwardToRelay({ title, body, event: 'session.error', sessionID, projectID: session.projectID, directory: session.directory });
-        break;
       }
+    } else {
+      logger.debug('notifications', 'skipping session.error — no session available');
+    }
+  };
+
+  const processEventStream = async (event: GlobalEvent): Promise<void> => {
+    switch (event.payload.type) {
+      case 'session.idle':
+        await handleSessionIdle(event.payload.properties);
+        break;
+      case 'permission.asked':
+        await handlePermissionAsked(event.payload.properties);
+        break;
+      case 'session.error':
+        await handleSessionError(event.payload.properties);
+        break;
     }
   };
 
