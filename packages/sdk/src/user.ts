@@ -2,9 +2,9 @@ import type { DaemonIdentity } from './stores/identity.ts';
 import type { Account } from './stores/accounts.ts';
 
 const ENDPOINT_TYPES = ['opencode', 'daemon', 'tailscale'] as const;
-export type EndpointType = (typeof ENDPOINT_TYPES)[number];
+type EndpointType = (typeof ENDPOINT_TYPES)[number];
 
-export interface Endpoint {
+interface Endpoint {
   url?: string;
   type: EndpointType;
   available: boolean;
