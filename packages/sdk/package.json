@@ -1,6 +1,7 @@
 {
   "name": "@whatcode-ai/sdk",
-  "version": "1.17.0",
+  "version": "1.17.0-canary.87a78fe",
+  "stableVersion": "1.17.0",
   "description": "Core SDK to start opencode and optionally expose it over HTTPS via Tailscale — connect from anywhere.",
   "keywords": [
     "opencode",
@@ -25,8 +26,8 @@
   },
   "license": "MIT",
   "author": {
-    "email": "simonegauli@gmail.com",
-    "name": "Simone Gauli"
+    "name": "Simone Gauli",
+    "email": "simonegauli@gmail.com"
   },
   "sideEffects": false,
   "type": "module",

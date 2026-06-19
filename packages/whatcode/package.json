@@ -1,6 +1,7 @@
 {
   "name": "@whatcode-ai/whatcode",
-  "version": "1.17.0",
+  "version": "1.17.0-canary.87a78fe",
+  "stableVersion": "1.17.0",
   "description": "CLI to start opencode and optionally expose it over HTTPS via Tailscale — connect to your AI coding assistant from anywhere.",
   "keywords": [
     "opencode",
@@ -24,8 +25,8 @@
   },
   "license": "MIT",
   "author": {
-    "email": "simonegauli@gmail.com",
-    "name": "Simone Gauli"
+    "name": "Simone Gauli",
+    "email": "simonegauli@gmail.com"
   },
   "sideEffects": false,
   "type": "module",
