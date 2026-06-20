@@ -10,6 +10,7 @@ import { userAuth } from './mw/user-auth.ts';
 import { parseError } from './compiled/core/error.ts';
 import { logger } from './compiled/node/logger.ts';
 import { fetch, Headers, Response } from 'undici';
+import { serverError } from './compiled/server/adapters.ts';
 
 interface Params {
   port: number;
@@ -31,7 +32,8 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
     .use(userRouter)
     .use(userAuth)
     .get('/project', async () => {
-      const { data: projects } = await client.project.list<true>();
+      const { data: projects, error } = await client.project.list();
+      if (error) throw serverError(error.data.message, { status: 400 });
       const lastMessageTimes = getLastMessageTimeByProject();
       return projects.map((project) => {
         const lastMsg = lastMessageTimes.get(project.id);
