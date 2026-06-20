@@ -1,3 +1,10 @@
+## [1.17.0-canary.87a78fe-canary.8a2618b](///compare/@whatcode-ai/sdk@1.17.0-canary.87a78fe...@whatcode-ai/sdk@1.17.0-canary.87a78fe-canary.8a2618b) "@whatcode-ai/sdk" (2026-06-20)
+
+### Bug Fixes
+
+* apn not working on new store cbc6017
+* apn not working on new store 52d8ca1
+
 ## [1.17.0-canary.87a78fe](///compare/@whatcode-ai/sdk@1.17.0...@whatcode-ai/sdk@1.17.0-canary.87a78fe) "@whatcode-ai/sdk" (2026-06-19)
 
 ### Features
