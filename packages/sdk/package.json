@@ -66,7 +66,7 @@
     "@goatjs/node-monorepo-eslint": "^2.36.0",
     "@goatjs/rimraf": "^2.11.0",
     "@goatjs/typescript-config": "^2.2.0",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.0.0",
     "@types/semver": "^7.7.1",
     "eslint": "^10.5.0",
     "typescript": "^6.0.3",
