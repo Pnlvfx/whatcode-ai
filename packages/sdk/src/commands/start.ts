@@ -1,13 +1,13 @@
-import { checkOpencodeMinVersion, opencode } from './opencode/opencode.ts';
-import { startWhatcode } from './server.ts';
-import { getLocalIp } from './ip.ts';
-import { startNotifications } from './apn/apn.ts';
-import { identityStore } from './stores/identity.ts';
-import { startTailscale } from './tailscale.ts';
-import { createTailscale } from './plugins/tailscale/tailscale.ts';
+import { checkOpencodeMinVersion, opencode } from '../opencode/opencode.ts';
+import { startWhatcode } from '../server.ts';
+import { getLocalIp } from '../ip.ts';
+import { startNotifications } from '../apn/apn.ts';
+import { identityStore } from '../stores/identity.ts';
+import { startTailscale } from '../tailscale.ts';
+import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
-import { logger, type LogLevel } from './compiled/node/logger.ts';
-import pkgJson from '../package.json' with { type: 'json' };
+import { logger, type LogLevel } from '../compiled/node/logger.ts';
+import pkgJson from '../../package.json' with { type: 'json' };
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -31,7 +31,7 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
-  const { server: opencodeServer, client, version: opencodeVersion } = await opencode({ port: opencodePort, password, logLevel, hostname });
+  const { server: opencodeServer, client, version: opencodeVersion } = await opencode({ port: opencodePort, password, hostname });
   checkOpencodeMinVersion(opencodeVersion);
   const localIp = await getLocalIp();
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;

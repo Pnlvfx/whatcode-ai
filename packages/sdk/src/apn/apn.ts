@@ -4,6 +4,7 @@ import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, getProjectName, trim, type OpencodeMessage } from './helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
 import { createSmartNotification } from './smart.ts';
+import { opencodeError } from '../opencode/error.ts';
 
 const BACKOFF_INITIAL_MS = 1000;
 const BACKOFF_MAX_MS = 30_000;
@@ -11,8 +12,10 @@ const BACKOFF_MULTIPLIER = 2;
 
 export const startNotifications = (client: OpencodeClient): void => {
   const smart = createSmartNotification();
+
   const getMessages = async (sessionID: string) => {
-    const { data } = await client.session.messages<true>({ sessionID });
+    const { data, error } = await client.session.messages({ sessionID });
+    if (error) throw opencodeError(error);
     return data;
   };
 
@@ -20,7 +23,8 @@ export const startNotifications = (client: OpencodeClient): void => {
     const lastUser = messages.findLast((m) => m.info.role === 'user');
     if (lastUser?.info.role !== 'user') return 'unknown';
     const { providerID, modelID } = lastUser.info.model;
-    const { data: config } = await client.config.providers<true>();
+    const { data: config, error } = await client.config.providers();
+    if (error) throw opencodeError(error);
     const provider = config.providers.find((p) => p.id === providerID);
     return provider?.models[modelID]?.name ?? modelID;
   };
@@ -30,7 +34,8 @@ export const startNotifications = (client: OpencodeClient): void => {
     if (smart.unlock(sessionID)) {
       logger.debug('notifications', `skipping session.idle for session ${sessionID}, error notification already sent`);
     } else {
-      const { data: session } = await client.session.get<true>({ sessionID });
+      const { data: session, error } = await client.session.get({ sessionID });
+      if (error) throw opencodeError(error);
       if (session.parentID) {
         logger.debug('notifications', `skipping session.idle for subagent session ${sessionID}`);
       } else {
@@ -47,7 +52,8 @@ export const startNotifications = (client: OpencodeClient): void => {
 
   const handlePermissionAsked = async ({ sessionID, permission, patterns }: EventPermissionAsked['properties']): Promise<void> => {
     logger.debug('notifications', `permission.asked event received for session ${sessionID}, permission=${permission}`);
-    const { data: session } = await client.session.get<true>({ sessionID });
+    const { data: session, error } = await client.session.get({ sessionID });
+    if (error) throw opencodeError(error);
     if (session.parentID) {
       logger.debug('notifications', `skipping permission.asked for subagent session ${sessionID}`);
     } else {
@@ -70,7 +76,8 @@ export const startNotifications = (client: OpencodeClient): void => {
   const handleSessionError = async ({ sessionID, error }: EventSessionError['properties']): Promise<void> => {
     logger.debug('notifications', `session.error event received for session ${sessionID ?? 'unknown'}`);
     if (sessionID) {
-      const { data: session } = await client.session.get<true>({ sessionID });
+      const { data: session, error: sessionError } = await client.session.get({ sessionID });
+      if (sessionError) throw opencodeError(sessionError);
       if (session.parentID) {
         logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
       } else {
@@ -105,7 +112,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     while (true) {
       try {
-        const events = await client.global.event<true>();
+        const events = await client.global.event();
 
         for await (const event of events.stream) {
           await processEventStream(event);

@@ -1,2 +1,2 @@
-export * from './start.ts';
-export * from './reset.ts';
+export * from './commands/start.ts';
+export * from './commands/reset.ts';
