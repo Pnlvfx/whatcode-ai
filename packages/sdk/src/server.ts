@@ -6,7 +6,6 @@ import { identityRouter } from './routes/deprecated/identity.ts';
 import { registerDeviceTokenRouter } from './routes/deprecated/register-device.ts';
 import { userRouter } from './routes/user.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
-import { userAuth } from './mw/user-auth.ts';
 import { parseError } from './compiled/core/error.ts';
 import { logger } from './compiled/node/logger.ts';
 import { fetch, Headers, Response } from 'undici';
@@ -30,7 +29,7 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
     // eslint-disable-next-line @typescript-eslint/no-deprecated
     .use(registerDeviceTokenRouter)
     .use(userRouter)
-    .use(userAuth)
+    // .use(userAuth) TODO [2026-06-22] enable once released the app
     .get('/project', async () => {
       const { data: projects, error } = await client.project.list();
       if (error) throw serverError(error.data.message, { status: 400 });
