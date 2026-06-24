@@ -37,8 +37,8 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.0.2",
-    "@commitlint/config-conventional": "^21.0.2",
+    "@commitlint/cli": "^21.1.0",
+    "@commitlint/config-conventional": "^21.1.0",
     "@eslint/config-helpers": "^0.6.0",
     "@goatjs/dbz": "^2.52.0",
     "@goatjs/doctor": "^2.44.0",
@@ -48,5 +48,5 @@
     "turbo": "^2.9.18",
     "typescript": "^6.0.3"
   },
-  "packageManager": "yarn@4.16.0+sha512.5374c94eb4ef6aa8188fb112f20c1aa6569f248d676c5e576e1fd2a1a4d8d87a96df65d9dfe1c2a0252cbe38bda46cf18d955005b81b43cc7607a5c9d56fd2b6"
+  "packageManager": "yarn@4.17.0+sha512.c2957de2f9025ab14d63b24d0d8be1f1655810e22c341042c27f7ecd017b180ec12db73d69ac366d71b304ef9f069349ce462de96f04f8f1da317f4f762c95ae"
 }

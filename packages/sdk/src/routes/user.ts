@@ -6,6 +6,7 @@ import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import * as z from 'zod/v4/mini';
 import { buildAccountResponse } from '../user.ts';
+import { logger } from '../compiled/node/logger.ts';
 
 export const userRouter = new Elysia({ prefix: '/user' })
   .post(
@@ -33,7 +34,13 @@ export const userRouter = new Elysia({ prefix: '/user' })
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
-      await accountsStore.set((prev) => prev.map((p) => (p.deviceId === account.deviceId ? { ...p, apnToken: token } : p)));
+      await accountsStore.set((prev) =>
+        prev.map((p) => {
+          if (p.deviceId !== account.deviceId) return p;
+          logger.debug('apn-token', `Apn token updated for ${account.name}`);
+          return { ...p, apnToken: token };
+        }),
+      );
       return { status: 'success' };
     },
     { body: z.strictObject({ token: z.string() }) },

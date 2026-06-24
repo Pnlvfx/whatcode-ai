@@ -22,9 +22,10 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
 
   for (const entry of entries) {
     if (!entry.apnToken) {
-      logger.info('apn', `Apn token not found for ${entry.name}, skipping notification.`);
-      return;
+      logger.info('apn', `Apn token not found for [${entry.name}:${entry.deviceName}], skipping notification.`);
+      continue;
     }
+
     try {
       const { error } = await relayClient.relay.push.post({
         account_id: entry.id,
