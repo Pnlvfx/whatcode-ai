@@ -26,6 +26,15 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
       continue;
     }
 
+    const handleError = async (message: string) => {
+      if (message.includes('Unregistered')) {
+        await accountsStore.set((prev) => prev.filter((e) => e.deviceId !== entry.deviceId));
+        logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, removed from store`);
+      } else {
+        logger.error('notifications', `push failed: (${message})`);
+      }
+    };
+
     try {
       const { error } = await relayClient.relay.push.post({
         account_id: entry.id,
@@ -39,18 +48,13 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
         worktree: directory,
       });
       if (error) {
-        logger.error('notifications', error.value.message ?? 'Failed to send notification');
+        await handleError(error.value.message ?? 'Failed to send notification');
       } else {
         logger.debug('notifications', 'forwarded successfully.');
       }
     } catch (err) {
       const error = parseError(err);
-      if (error.message.includes('Unregistered')) {
-        await accountsStore.set((prev) => prev.filter((e) => e.deviceId !== entry.deviceId));
-        logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, removed from store`);
-      } else {
-        logger.error('notifications', `push failed: (${error.message})`);
-      }
+      await handleError(error.message);
     }
   }
 };
