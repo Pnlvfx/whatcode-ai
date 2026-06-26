@@ -1,5 +1,4 @@
 import { relayClient } from '../client.ts';
-import { parseError } from '../compiled/core/error.ts';
 import { logger } from '../compiled/node/logger.ts';
 import { accountsStore } from '../stores/accounts.ts';
 
@@ -26,35 +25,26 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
       continue;
     }
 
-    const handleError = async (message: string) => {
-      if (message.includes('Unregistered')) {
-        await accountsStore.set((prev) => prev.filter((e) => e.deviceId !== entry.deviceId));
-        logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, removed from store`);
+    const { error, status } = await relayClient.relay.push.post({
+      account_id: entry.id,
+      device_id: entry.deviceId,
+      token: entry.apnToken,
+      title,
+      body,
+      event,
+      session_id: sessionID,
+      project_id: projectID,
+      worktree: directory,
+    });
+    if (error) {
+      if (status === 410) {
+        await accountsStore.set((prev) => prev.map((e) => (e.deviceId === entry.deviceId ? { ...e, apnToken: undefined } : e)));
+        logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, cleared from store`);
       } else {
-        logger.error('notifications', `push failed: (${message})`);
+        logger.error('notifications', `push failed: (${error.value.message ?? 'Failed to send notification!'})`);
       }
-    };
-
-    try {
-      const { error } = await relayClient.relay.push.post({
-        account_id: entry.id,
-        device_id: entry.deviceId,
-        token: entry.apnToken,
-        title,
-        body,
-        event,
-        session_id: sessionID,
-        project_id: projectID,
-        worktree: directory,
-      });
-      if (error) {
-        await handleError(error.value.message ?? 'Failed to send notification');
-      } else {
-        logger.debug('notifications', 'forwarded successfully.');
-      }
-    } catch (err) {
-      const error = parseError(err);
-      await handleError(error.message);
+    } else {
+      logger.debug('notifications', 'forwarded successfully.');
     }
   }
 };
