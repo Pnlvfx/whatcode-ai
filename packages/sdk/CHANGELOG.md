@@ -1,3 +1,5 @@
+## [1.19.0](///compare/@whatcode-ai/sdk@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf...@whatcode-ai/sdk@1.19.0) "@whatcode-ai/sdk" (2026-06-27)
+
 ## [1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf](///compare/@whatcode-ai/sdk@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee...@whatcode-ai/sdk@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf) "@whatcode-ai/sdk" (2026-06-27)
 
 ### Bug Fixes
