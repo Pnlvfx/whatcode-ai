@@ -50,7 +50,7 @@
   "dependencies": {
     "@elysia/eden": "^1.4.10",
     "@elysiajs/node": "^1.4.5",
-    "@opencode-ai/sdk": "^1.17.9",
+    "@opencode-ai/sdk": "^1.17.11",
     "@sinclair/typebox": "^0.34.49",
     "elysia": "^1.4.29",
     "execa": "^9.6.1",
@@ -63,10 +63,10 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/node-monorepo-eslint": "^2.37.0",
+    "@goatjs/node-monorepo-eslint": "^2.39.0",
     "@goatjs/rimraf": "^2.11.0",
     "@goatjs/typescript-config": "^2.2.0",
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.0.1",
     "@types/semver": "^7.7.1",
     "eslint": "^10.5.0",
     "typescript": "^6.0.3",

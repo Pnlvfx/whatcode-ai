@@ -42,10 +42,10 @@
     "@eslint/config-helpers": "^0.6.0",
     "@goatjs/dbz": "^2.52.0",
     "@goatjs/doctor": "^2.44.0",
-    "@goatjs/node-monorepo-eslint": "^2.37.0",
+    "@goatjs/node-monorepo-eslint": "^2.39.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.8.4",
-    "turbo": "^2.9.18",
+    "turbo": "^2.10.0",
     "typescript": "^6.0.3"
   },
   "packageManager": "yarn@4.17.0+sha512.c2957de2f9025ab14d63b24d0d8be1f1655810e22c341042c27f7ecd017b180ec12db73d69ac366d71b304ef9f069349ce462de96f04f8f1da317f4f762c95ae"
