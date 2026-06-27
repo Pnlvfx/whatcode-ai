@@ -1,3 +1,5 @@
+## [1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf](///compare/@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee...@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf) "@whatcode-ai/whatcode" (2026-06-27)
+
 ## [1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee](///compare/@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b...@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee) "@whatcode-ai/whatcode" (2026-06-21)
 
 ## [1.17.0-canary.87a78fe-canary.8a2618b](///compare/@whatcode-ai/whatcode@1.17.0-canary.87a78fe...@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b) "@whatcode-ai/whatcode" (2026-06-20)
