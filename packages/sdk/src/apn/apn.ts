@@ -1,14 +1,10 @@
 import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
-import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, getProjectName, trim, type OpencodeMessage } from './helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
 import { createSmartNotification } from './smart.ts';
 import { opencodeError } from '../opencode/error.ts';
-
-const BACKOFF_INITIAL_MS = 1000;
-const BACKOFF_MAX_MS = 30_000;
-const BACKOFF_MULTIPLIER = 2;
+import { registerEventHandler } from '../opencode/event-subscription.ts';
 
 export const startNotifications = (client: OpencodeClient): void => {
   const smart = createSmartNotification();
@@ -92,7 +88,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     }
   };
 
-  const processEventStream = async (event: GlobalEvent): Promise<void> => {
+  registerEventHandler(async (event: GlobalEvent): Promise<void> => {
     switch (event.payload.type) {
       case 'session.idle':
         await handleSessionIdle(event.payload.properties);
@@ -104,31 +100,7 @@ export const startNotifications = (client: OpencodeClient): void => {
         await handleSessionError(event.payload.properties);
         break;
     }
-  };
-
-  const subscribeToEvents = async (): Promise<void> => {
-    let delay = BACKOFF_INITIAL_MS;
-
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    while (true) {
-      try {
-        const events = await client.global.event();
-
-        for await (const event of events.stream) {
-          await processEventStream(event);
-        }
-
-        delay = BACKOFF_INITIAL_MS;
-        logger.debug('notifications', 'stream ended, reconnecting...');
-      } catch (err) {
-        logger.error('notifications', `stream error, retrying in ${(delay / 1000).toString()}s...`, err);
-        await setTimeout(delay);
-        delay = Math.min(delay * BACKOFF_MULTIPLIER, BACKOFF_MAX_MS);
-      }
-    }
-  };
-
-  void subscribeToEvents();
+  });
 
   logger.debug('notifications', 'listening for events');
 };

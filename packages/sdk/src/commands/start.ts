@@ -2,6 +2,8 @@ import { checkOpencodeMinVersion, opencode } from '../opencode/opencode.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
+import { startNotificationTracker } from '../notification/tracker.ts';
+import { startEventSubscription } from '../opencode/event-subscription.ts';
 import { identityStore } from '../stores/identity.ts';
 import { startTailscale } from '../tailscale.ts';
 import { createTailscale } from '../plugins/tailscale/tailscale.ts';
@@ -36,7 +38,9 @@ export const createWhatcodeServer = async ({
   const localIp = await getLocalIp();
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
   const daemonUrl = `http://${localIp}:${port.toString()}`;
+  startEventSubscription(client);
   startNotifications(client);
+  startNotificationTracker(client);
   startWhatcode({ port, opencodePort: opencodePort, password, client });
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
