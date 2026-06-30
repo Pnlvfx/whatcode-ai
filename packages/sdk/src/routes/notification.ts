@@ -17,8 +17,8 @@ export const notificationRouter = new Elysia({ prefix: '/notification' })
   .post(
     '/active-session',
     ({ body: { sessionID } }) => {
-      setActiveSession(sessionID ?? undefined);
+      setActiveSession(sessionID);
       return { status: 'success' };
     },
-    { body: z.strictObject({ sessionID: z.nullable(z.string()) }) },
+    { body: z.strictObject({ sessionID: z.optional(z.string()) }) },
   );

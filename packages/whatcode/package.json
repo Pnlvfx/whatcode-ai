@@ -53,14 +53,14 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/node-monorepo-eslint": "^2.39.0",
+    "@goatjs/node-monorepo-eslint": "^2.41.0",
     "@goatjs/rimraf": "^2.11.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.0.1",
     "@types/qrcode-terminal": "^0.12.2",
     "@types/update-notifier": "^6.0.8",
     "@types/yargs": "^17.0.35",
-    "eslint": "^10.5.0",
+    "eslint": "^10.6.0",
     "typescript": "^6.0.3"
   },
   "publishConfig": {

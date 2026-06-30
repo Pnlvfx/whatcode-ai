@@ -177,6 +177,8 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 `npx @whatcode-ai/whatcode` runs the `start` command by default, so `whatcode` and `whatcode start` are equivalent. The `reset` command must be called explicitly.
 
+Run `npx @whatcode-ai/whatcode --version` to print the installed version without starting the daemon.
+
 **Flags**
 
 | Flag              | Type                          | Default | Description                   |
@@ -186,6 +188,7 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 | `--tailscale`     | `boolean`                         | -       | Expose via Tailscale HTTPS.                                                         |
 | `--hostname`      | `string`                          | -       | Hostname or IP to advertise as the public OpenCode address. Overrides the auto-detected local IP. |
 | `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                                             |
+| `--version`       | `boolean`                          | -       | Print the installed version of `@whatcode-ai/whatcode` and exit.                    |
 
 **Environment variables**
 

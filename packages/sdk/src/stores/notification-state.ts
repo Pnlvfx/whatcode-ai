@@ -12,6 +12,8 @@ export const sessionStateSchema = z.strictObject({
   unseenCount: z.number(),
   unseenMessages: z.number(),
   lastEventAt: z.number(),
+  lastAssistantText: z.optional(z.string()),
+  lastErrorText: z.optional(z.string()),
 });
 
 export type SessionState = z.infer<typeof sessionStateSchema>;

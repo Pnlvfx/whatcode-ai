@@ -2,6 +2,7 @@ import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { notificationStateStore, type SessionState } from '../stores/notification-state.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { opencodeError } from '../opencode/error.ts';
+import { getLastAssistantText } from '../apn/helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
 
 let activeSessionID: string | undefined;
@@ -56,6 +57,8 @@ export const startNotificationTracker = (client: OpencodeClient): void => {
         const current = await notificationStateStore.get();
         const meta = await getOrFetchSession(client, sessionID, current);
         const isActive = sessionID === activeSessionID;
+        const { data: messagesData, error: messagesError } = await client.session.messages({ sessionID });
+        const lastAssistantText = messagesError ? undefined : getLastAssistantText(messagesData);
         await mutate(
           sessionID,
           (prev) => ({
@@ -63,6 +66,8 @@ export const startNotificationTracker = (client: OpencodeClient): void => {
             isBusy: false,
             hasPendingPermission: false,
             unseenCount: isActive ? prev.unseenCount : prev.unseenCount + 1,
+            lastAssistantText,
+            lastErrorText: undefined,
             lastEventAt: Date.now(),
           }),
           { sessionID, ...meta, isBusy: false, hasPendingPermission: false, hasError: false },
@@ -75,9 +80,11 @@ export const startNotificationTracker = (client: OpencodeClient): void => {
         if (!sessionID) return;
         const current = await notificationStateStore.get();
         const meta = await getOrFetchSession(client, sessionID, current);
+        const errorMessage = payload.properties.error?.data.message;
+        const lastErrorText = typeof errorMessage === 'string' ? errorMessage : 'An unexpected error occurred';
         await mutate(
           sessionID,
-          (prev) => ({ ...prev, isBusy: false, hasError: true, lastEventAt: Date.now() }),
+          (prev) => ({ ...prev, isBusy: false, hasError: true, lastErrorText, lastAssistantText: undefined, lastEventAt: Date.now() }),
           { sessionID, ...meta, isBusy: false, hasPendingPermission: false, hasError: true },
         );
         break;

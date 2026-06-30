@@ -14,7 +14,7 @@ await yargs(hideBin(process.argv))
   .scriptName('whatcode')
   .help()
   .strict()
-  .version(false)
+  .version(pkg.version)
   .usage('$0 [options]')
   .command(
     ['$0', 'start'],
