@@ -37,15 +37,15 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.1.0",
-    "@commitlint/config-conventional": "^21.1.0",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "@eslint/config-helpers": "^0.6.0",
     "@goatjs/dbz": "^2.53.0",
     "@goatjs/doctor": "^2.45.0",
-    "@goatjs/node-monorepo-eslint": "^2.41.0",
+    "@goatjs/node-monorepo-eslint": "^2.42.0",
     "lefthook": "^2.1.9",
-    "prettier": "^3.9.1",
-    "turbo": "^2.10.0",
+    "prettier": "^3.9.4",
+    "turbo": "^2.10.2",
     "typescript": "^6.0.3"
   },
   "packageManager": "yarn@4.17.0+sha512.c2957de2f9025ab14d63b24d0d8be1f1655810e22c341042c27f7ecd017b180ec12db73d69ac366d71b304ef9f069349ce462de96f04f8f1da317f4f762c95ae"
