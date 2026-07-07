@@ -2,7 +2,7 @@ import * as z from 'zod/v4/mini';
 import { WHATCODE_AUTH } from '../config/constants.ts';
 import { createStore } from '../compiled/store/store.ts';
 
-export const sessionStateSchema = z.strictObject({
+const sessionStateSchema = z.strictObject({
   sessionID: z.string(),
   projectID: z.string(),
   directory: z.string(),
