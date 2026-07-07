@@ -5022,12 +5022,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.17.13":
-  version: 1.17.13
-  resolution: "@opencode-ai/sdk@npm:1.17.13"
+"@opencode-ai/sdk@npm:^1.17.14":
+  version: 1.17.14
+  resolution: "@opencode-ai/sdk@npm:1.17.14"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/12060cacc117497699faa298853416ad0845e14fd139bb5262eaa199a24f1a9f763b987aaf3036596821dddca0c2cb1921b7b3eb3b8275978d95e5586f934738
+  checksum: 10c0/465205ae75bd9861648f39da04cce7979782031f305bf198b7e86808d8de15bad159b87b0b1281e4685ed8be7001acfc83491cd641eeacfaf898647d4ea8e2c0
   languageName: node
   linkType: hard
 
@@ -6521,44 +6521,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@turbo/darwin-64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/darwin-64@npm:2.10.2"
+"@turbo/darwin-64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/darwin-64@npm:2.10.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/darwin-arm64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/darwin-arm64@npm:2.10.2"
+"@turbo/darwin-arm64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/darwin-arm64@npm:2.10.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/linux-64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/linux-64@npm:2.10.2"
+"@turbo/linux-64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/linux-64@npm:2.10.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/linux-arm64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/linux-arm64@npm:2.10.2"
+"@turbo/linux-arm64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/linux-arm64@npm:2.10.3"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/windows-64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/windows-64@npm:2.10.2"
+"@turbo/windows-64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/windows-64@npm:2.10.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/windows-arm64@npm:2.10.2":
-  version: 2.10.2
-  resolution: "@turbo/windows-arm64@npm:2.10.2"
+"@turbo/windows-arm64@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@turbo/windows-arm64@npm:2.10.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -8017,7 +8017,7 @@ __metadata:
     react: "npm:^19.2.7"
     react-dom: "npm:^19.2.7"
     typescript: "npm:~6.0.3"
-    vercel: "npm:^54.20.0"
+    vercel: "npm:^54.20.1"
   languageName: unknown
   linkType: soft
 
@@ -8047,7 +8047,7 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^2.42.0"
     "@goatjs/rimraf": "npm:^2.11.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
-    "@opencode-ai/sdk": "npm:^1.17.13"
+    "@opencode-ai/sdk": "npm:^1.17.14"
     "@sinclair/typebox": "npm:^0.34.49"
     "@types/node": "npm:^26.1.0"
     "@types/semver": "npm:^7.7.1"
@@ -8060,7 +8060,7 @@ __metadata:
     openapi-types: "npm:^12.1.3"
     semver: "npm:^7.8.5"
     typescript: "npm:^6.0.3"
-    undici: "npm:^8.6.0"
+    undici: "npm:^8.7.0"
     zod: "npm:^4.4.3"
   peerDependencies:
     zod: ^4.4.3
@@ -20773,16 +20773,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.10.2":
-  version: 2.10.2
-  resolution: "turbo@npm:2.10.2"
+"turbo@npm:^2.10.3":
+  version: 2.10.3
+  resolution: "turbo@npm:2.10.3"
   dependencies:
-    "@turbo/darwin-64": "npm:2.10.2"
-    "@turbo/darwin-arm64": "npm:2.10.2"
-    "@turbo/linux-64": "npm:2.10.2"
-    "@turbo/linux-arm64": "npm:2.10.2"
-    "@turbo/windows-64": "npm:2.10.2"
-    "@turbo/windows-arm64": "npm:2.10.2"
+    "@turbo/darwin-64": "npm:2.10.3"
+    "@turbo/darwin-arm64": "npm:2.10.3"
+    "@turbo/linux-64": "npm:2.10.3"
+    "@turbo/linux-arm64": "npm:2.10.3"
+    "@turbo/windows-64": "npm:2.10.3"
+    "@turbo/windows-arm64": "npm:2.10.3"
   dependenciesMeta:
     "@turbo/darwin-64":
       optional: true
@@ -20798,7 +20798,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10c0/e462a0c83b206a1e467c3111805307ef781b8036ed0643207abed69a68746b40ac7e7d83a9e4c9ac3897267208c4ff3823febfd0b4843109b763a1a3ef313935
+  checksum: 10c0/83b32baceedbceb04b4d24ab56633874ed298d1a6d856b8c335351817be581cd07cdee3b62cf9c88b4b4d09d74b9b3debe62e73f00f824e97f0b5183883bc072
   languageName: node
   linkType: hard
 
@@ -21047,10 +21047,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "undici@npm:8.6.0"
-  checksum: 10c0/1d3c72ab9712fe242e30dadcf539aa990b3848308af360f3a09336d1d27f8c8e896db3c5483ac002494f609f17976bc83bb4eaf5bbb5eb7878d801219ec1ae15
+"undici@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "undici@npm:8.7.0"
+  checksum: 10c0/b7e5ecb4de82fa4f905011a77544fe7ba4da06f27167ff99313a7ae2869f3cb233d676dcd085533bc69f36989bc40871f5ae6ea6e4c9b91db92616b9e91b579d
   languageName: node
   linkType: hard
 
@@ -21425,9 +21425,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vercel@npm:^54.20.0":
-  version: 54.20.0
-  resolution: "vercel@npm:54.20.0"
+"vercel@npm:^54.20.1":
+  version: 54.20.1
+  resolution: "vercel@npm:54.20.1"
   dependencies:
     "@vercel/backends": "npm:0.8.21"
     "@vercel/blob": "npm:2.4.0"
@@ -21467,7 +21467,7 @@ __metadata:
   bin:
     vc: dist/vc.js
     vercel: dist/vc.js
-  checksum: 10c0/e3e1da46b202a68f64637b63046786fd1387699c0244c783ffa406b7b59d365c3e2d5f833ba1e56b7fbadf6e4fb7fb2e85ca7e04fee84d534d57d37420ff34ee
+  checksum: 10c0/36e15c20cff0179ee4d7b8669f03900862b565a4037397abb77ee9dd2819263eb0a90527603c0602d65f3ac8789f903da0b9b87cdbcc81fe6f718da1b5e362df
   languageName: node
   linkType: hard
 
@@ -21752,7 +21752,7 @@ __metadata:
     "@whatcode-ai/whatcode": "workspace:*"
     lefthook: "npm:^2.1.9"
     prettier: "npm:^3.9.4"
-    turbo: "npm:^2.10.2"
+    turbo: "npm:^2.10.3"
     typescript: "npm:^6.0.3"
   languageName: unknown
   linkType: soft

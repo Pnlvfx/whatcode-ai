@@ -8,7 +8,10 @@ import updateNotifier from 'update-notifier';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
 
-updateNotifier({ pkg }).notify();
+const notifier = updateNotifier({ pkg });
+if (notifier.update) {
+  console.warn('whatcode', `update available: ${notifier.update.current} -> ${notifier.update.latest} (run: npm install -g ${pkg.name}@latest)`);
+}
 
 await yargs(hideBin(process.argv))
   .scriptName('whatcode')
