@@ -47,5 +47,4 @@ export const checkOpencodeMinVersion = (version: string) => {
   }
 };
 
-// eslint-disable-next-line unicorn/prefer-uint8array-base64
 const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;

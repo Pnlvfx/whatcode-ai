@@ -42,12 +42,12 @@
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
-    "@goatjs/dbz": "^2.53.0",
-    "@goatjs/rimraf": "^2.11.0",
+    "@goatjs/dbz": "^2.54.0",
+    "@goatjs/rimraf": "^2.12.0",
     "@types/react": "^19.2.17",
     "execa": "^9.6.1",
     "typescript": "~6.0.3",
-    "vercel": "^54.20.1"
+    "vercel": "^54.21.1"
   },
   "engines": {
     "node": ">=20.0"
