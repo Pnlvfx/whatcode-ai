@@ -37,13 +37,13 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.0",
+    "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/config-helpers": "^0.6.0",
-    "@goatjs/dbz": "^2.54.0",
-    "@goatjs/doctor": "^2.46.0",
-    "@goatjs/node-monorepo-eslint": "^2.43.0",
-    "lefthook": "^2.1.9",
+    "@goatjs/dbz": "^2.55.0",
+    "@goatjs/doctor": "^2.47.0",
+    "@goatjs/node-monorepo-eslint": "^3.0.0",
+    "lefthook": "^2.1.10",
     "prettier": "^3.9.4",
     "turbo": "^2.10.4",
     "typescript": "^6.0.3"
