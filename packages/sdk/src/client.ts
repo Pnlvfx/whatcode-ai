@@ -5,5 +5,4 @@ import type { App } from '@/server/server';
 import { treaty } from '@elysia/eden/treaty2';
 import { SERVER_URL } from './config/constants.ts';
 
-/** @ts-expect-err type mismatch */
 export const relayClient = treaty<App>(SERVER_URL);
