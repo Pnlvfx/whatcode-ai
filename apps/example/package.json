@@ -28,7 +28,7 @@
     "@goatjs/rimraf": "^2.12.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.1.1",
-    "eslint": "^10.6.0",
+    "eslint": "^10.7.0",
     "typescript": "^6.0.3"
   }
 }

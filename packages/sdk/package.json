@@ -49,8 +49,8 @@
   "dependencies": {
     "@elysia/eden": "^1.4.10",
     "@elysiajs/node": "^1.4.5",
-    "@opencode-ai/sdk": "^1.17.16",
-    "@sinclair/typebox": "^0.34.49",
+    "@opencode-ai/sdk": "^1.17.18",
+    "@sinclair/typebox": "^0.34.51",
     "elysia": "^1.4.29",
     "execa": "^9.6.1",
     "exit-hook": "^5.1.0",
@@ -67,7 +67,7 @@
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.1.1",
     "@types/semver": "^7.7.1",
-    "eslint": "^10.6.0",
+    "eslint": "^10.7.0",
     "typescript": "^6.0.3",
     "zod": "^4.4.3"
   },
