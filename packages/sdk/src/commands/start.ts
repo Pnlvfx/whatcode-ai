@@ -2,7 +2,6 @@ import { checkOpencodeMinVersion, opencode } from '../opencode/opencode.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
-import { startNotificationTracker } from '../notification/tracker.ts';
 import { startEventSubscription } from '../opencode/event-subscription.ts';
 import { identityStore } from '../stores/identity.ts';
 import { startTailscale } from '../tailscale.ts';
@@ -10,6 +9,7 @@ import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
 import { logger, type LogLevel } from '../compiled/node/logger.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
+import { parseError } from '../compiled/core/error.ts';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -40,7 +40,7 @@ export const createWhatcodeServer = async ({
   const daemonUrl = `http://${localIp}:${port.toString()}`;
   startEventSubscription(client);
   startNotifications(client);
-  startNotificationTracker(client);
+  // startNotificationTracker(client);
   startWhatcode({ port, opencodePort: opencodePort, password, client });
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
@@ -54,8 +54,12 @@ export const createWhatcodeServer = async ({
   // clean up
   asyncExitHook(
     async () => {
-      await tailscale?.stop();
-      opencodeServer?.close();
+      try {
+        await tailscale?.stop();
+        opencodeServer?.close();
+      } catch (err) {
+        logger.error('exit-hook', parseError(err).message, err);
+      }
     },
     { wait: 3000 },
   );
