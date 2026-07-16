@@ -1,6 +1,6 @@
 {
   "name": "@whatcode-ai/sdk",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Core SDK to start opencode and optionally expose it over HTTPS via Tailscale — connect from anywhere.",
   "keywords": [
     "opencode",

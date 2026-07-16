@@ -1,3 +1,13 @@
+## [1.20.0](compare/%40whatcode-ai%2Fwhatcode%401.19.0...%40whatcode-ai%2Fwhatcode%401.20.0) "@whatcode-ai/whatcode" (2026-07-16)
+
+### Features
+
+* add --version command and improve notification tracker fe5513b
+
+### Bug Fixes
+
+* update notifier log 66f2c7f
+
 ## [1.19.0](///compare/@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf...@whatcode-ai/whatcode@1.19.0) "@whatcode-ai/whatcode" (2026-06-27)
 
 ## [1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf](///compare/@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee...@whatcode-ai/whatcode@1.17.0-canary.87a78fe-canary.8a2618b-canary.30d09ee-canary.f852dcf) "@whatcode-ai/whatcode" (2026-06-27)
