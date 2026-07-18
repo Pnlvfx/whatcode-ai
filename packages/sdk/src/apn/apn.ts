@@ -72,12 +72,13 @@ export const startNotifications = (client: OpencodeClient): void => {
   const handleSessionError = async ({ sessionID, error }: EventSessionError['properties']): Promise<void> => {
     logger.debug('notifications', `session.error event received for session ${sessionID ?? 'unknown'}`);
     if (sessionID) {
+      smart.lock(sessionID);
       const { data: session, error: sessionError } = await client.session.get({ sessionID });
       if (sessionError) throw opencodeError(sessionError);
       if (session.parentID) {
+        smart.unlock(sessionID);
         logger.debug('notifications', `skipping session.error for subagent session ${session.id}`);
       } else {
-        smart.lock(sessionID);
         const title = getProjectName(session.directory);
         const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
         logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
