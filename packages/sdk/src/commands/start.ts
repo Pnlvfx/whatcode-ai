@@ -1,4 +1,4 @@
-import { checkOpencodeMinVersion, opencode } from '../opencode/opencode.ts';
+import { opencode } from '../opencode/opencode.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
@@ -10,6 +10,8 @@ import { asyncExitHook } from 'exit-hook';
 import { logger, type LogLevel } from '../compiled/node/logger.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
 import { parseError } from '../compiled/core/error.ts';
+import { startNotificationTracker } from '../notification/tracker.ts';
+import { getFeatureFlags } from '../feature-flags.ts';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -33,14 +35,22 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
-  const { server: opencodeServer, client, version: opencodeVersion } = await opencode({ port: opencodePort, password, hostname });
-  checkOpencodeMinVersion(opencodeVersion);
-  const localIp = await getLocalIp();
+
+  const [{ server: opencodeServer, client, version: opencodeVersion }, localIp, flags] = await Promise.all([
+    opencode({ port: opencodePort, password, hostname }),
+    getLocalIp(),
+    getFeatureFlags(),
+  ]);
+
+  // checkOpencodeMinVersion(opencodeVersion);
   const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
   const daemonUrl = `http://${localIp}:${port.toString()}`;
   startEventSubscription(client);
   startNotifications(client);
-  // startNotificationTracker(client);
+  if (flags?.WHATCODE_NOTIFICATION_V2) {
+    startNotificationTracker(client);
+  }
+
   startWhatcode({ port, opencodePort: opencodePort, password, client });
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
