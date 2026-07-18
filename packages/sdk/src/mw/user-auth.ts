@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { timingSafeEqual } from 'node:crypto';
 import { accountsStore } from '../stores/accounts.ts';
-import { unauthorized } from '../compiled/server/adapters.ts';
+import { unauthorized } from '../compiled/server/errors.ts';
 
 export const userAuth = new Elysia({ name: 'user-auth' }).derive({ as: 'scoped' }, async ({ headers }) => {
   const authorization = headers['x-whatcode-auth'];

@@ -10,7 +10,7 @@ import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { parseError } from './compiled/core/error.ts';
 import { logger } from './compiled/node/logger.ts';
 import { fetch, Headers, Response } from 'undici';
-import { serverError } from './compiled/server/adapters.ts';
+import { serverError } from './compiled/server/errors.ts';
 
 interface Params {
   port: number;

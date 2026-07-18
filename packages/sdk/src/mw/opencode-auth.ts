@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { timingSafeEqual } from 'node:crypto';
-import { unauthorized } from '../compiled/server/adapters.ts';
+import { unauthorized } from '../compiled/server/errors.ts';
 
 export const opencodeBasicAuth = (password: string) =>
   new Elysia({ name: 'opencode-basic-auth' }).onBeforeHandle(({ headers: { authorization } }) => {

@@ -36,6 +36,6 @@ await copyFilesFromFolder([
   {
     inputFolder: path.join(coraline, 'server-logger', 'src'),
     outputFolder: path.join(output, 'server'),
-    files: ['adapters.ts'],
+    files: ['errors.ts'],
   },
 ]);
