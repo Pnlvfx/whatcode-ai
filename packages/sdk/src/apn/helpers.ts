@@ -12,6 +12,13 @@ const BODY_MAX = 178;
 export const trim = (text: string) => (text.length <= BODY_MAX ? text : `${text.slice(0, BODY_MAX - 1)}…`);
 export const getProjectName = (directory: string) => capitalize(directory === '/' ? 'root' : path.basename(directory));
 
+export const getLastUserModel = (messages: OpencodeMessage[]): string | undefined => {
+  const lastUser = messages.findLast((m) => m.info.role === 'user');
+  if (lastUser?.info.role !== 'user') return undefined;
+  const { providerID, modelID } = lastUser.info.model;
+  return `${providerID}/${modelID}`;
+};
+
 export const getLastAssistantText = (messages: OpencodeMessage[]): string | undefined => {
   const assistantEntries = messages.toReversed().filter((m) => m.info.role === 'assistant');
 

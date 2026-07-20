@@ -2,7 +2,7 @@ import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { notificationStateStore, type SessionState } from '../stores/notification-state.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { opencodeError } from '../opencode/error.ts';
-import { getLastAssistantText } from '../apn/helpers.ts';
+import { getLastAssistantText, getLastUserModel } from '../apn/helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
 
 let activeSessionID: string | undefined;
@@ -55,6 +55,7 @@ const handleSessionIdle = async (client: OpencodeClient, sessionID: string): Pro
   const shouldCount = sessionID !== activeSessionID;
   const { data: messagesData, error: messagesError } = await client.session.messages({ sessionID });
   const lastAssistantText = messagesError ? undefined : getLastAssistantText(messagesData);
+  const lastModel = messagesError ? undefined : getLastUserModel(messagesData);
   await mutate(
     sessionID,
     (prev) => ({
@@ -63,6 +64,7 @@ const handleSessionIdle = async (client: OpencodeClient, sessionID: string): Pro
       hasPendingPermission: false,
       unseenCount: shouldCount ? prev.unseenCount + 1 : prev.unseenCount,
       lastAssistantText,
+      lastModel,
       lastErrorText: undefined,
       lastEventAt: Date.now(),
     }),
