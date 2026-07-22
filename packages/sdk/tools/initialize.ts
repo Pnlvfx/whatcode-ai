@@ -21,7 +21,7 @@ await copyFilesFromFolder([
   {
     inputFolder: path.join(goatjs, 'core', 'src', 'errors'),
     outputFolder: path.join(output, 'core', 'errors'),
-    files: ['fetch.ts'],
+    files: ['fetch.ts', 'code.ts'],
   },
   {
     inputFolder: path.join(goatjs, 'store', 'src'),
@@ -32,6 +32,11 @@ await copyFilesFromFolder([
     inputFolder: path.join(goatjs, 'node', 'src'),
     outputFolder: path.join(output, 'node'),
     files: ['logger.ts'],
+  },
+  {
+    inputFolder: path.join(goatjs, 'zod', 'src'),
+    outputFolder: path.join(output, 'zod'),
+    files: ['parse.ts', 'error.ts'],
   },
   {
     inputFolder: path.join(coraline, 'server-logger', 'src'),

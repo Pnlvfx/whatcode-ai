@@ -6,6 +6,8 @@
 import * as z from 'zod/v4/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { isErrorWithCode } from '../core/errors/code.ts';
+import { parseAsync } from '../zod/parse.ts';
 
 export type StoreErrorDirective = 'warn' | 'error' | 'delete';
 
@@ -37,7 +39,7 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
     try {
       return await fs.readFile(configFile);
     } catch (err) {
-      if (err instanceof Error && 'code' in err && typeof err.code === 'string' && err.code === 'ENOENT') return;
+      if (isErrorWithCode(err) && err.code === 'ENOENT') return;
       throw err;
     }
   };
@@ -67,7 +69,7 @@ export const createStore = async <T extends z.$ZodType, TParams extends StorePar
   };
 
   const write = async (value: StoreType) => {
-    currentConfig = await z.parseAsync(schema, value);
+    currentConfig = await parseAsync(schema, value);
     if (persist) await fs.writeFile(configFile, JSON.stringify(currentConfig));
   };
 

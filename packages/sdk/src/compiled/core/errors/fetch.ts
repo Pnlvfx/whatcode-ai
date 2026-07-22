@@ -3,11 +3,13 @@
  * Do not modify it manually
  */
 
+export type FetchErrorStatus = number | 'fetch failed';
+
 class FetchError extends Error {
-  status: number;
+  status: FetchErrorStatus;
   url: string;
 
-  constructor(message: string, status: number, url: string) {
+  constructor(message: string, status: FetchErrorStatus, url: string) {
     super(message);
     this.status = status;
     this.name = 'FetchError';
@@ -16,7 +18,7 @@ class FetchError extends Error {
   }
 }
 
-export const fetchError = (message: string, { status, url }: { status: number; url: string }) => {
+export const fetchError = (message: string, { status, url }: { status: FetchErrorStatus; url: string }) => {
   return new FetchError(message, status, url);
 };
 

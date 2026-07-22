@@ -1,5 +1,4 @@
 import type { Message, Part, TextPart } from '@opencode-ai/sdk/v2';
-import path from 'node:path';
 import { capitalize } from '../compiled/core/capitalize.ts';
 
 export interface OpencodeMessage {
@@ -10,7 +9,13 @@ export interface OpencodeMessage {
 const BODY_MAX = 178;
 
 export const trim = (text: string) => (text.length <= BODY_MAX ? text : `${text.slice(0, BODY_MAX - 1)}…`);
-export const getProjectName = (directory: string) => capitalize(directory === '/' ? 'root' : path.basename(directory));
+
+export const getProjectName = (worktree: string): string => {
+  const sep = worktree.includes('/') ? '/' : '\\';
+  if (worktree === '/') return 'Root';
+  const name = worktree.split(sep).at(-1) ?? '';
+  return name.split(/[-_]/).map(capitalize).join(' ');
+};
 
 export const getLastUserModel = (messages: OpencodeMessage[]): string | undefined => {
   const lastUser = messages.findLast((m) => m.info.role === 'user');
