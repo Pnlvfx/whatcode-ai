@@ -1,3 +1,9 @@
+## [1.21.0](compare/%40whatcode-ai%2Fwhatcode%401.20.0...%40whatcode-ai%2Fwhatcode%401.21.0) "@whatcode-ai/whatcode" (2026-07-23)
+
+### Features
+
+* enable notification tracker under feature flag 1117eed
+
 ## [1.20.0](compare/%40whatcode-ai%2Fwhatcode%401.19.0...%40whatcode-ai%2Fwhatcode%401.20.0) "@whatcode-ai/whatcode" (2026-07-16)
 
 ### Features

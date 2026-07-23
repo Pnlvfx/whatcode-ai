@@ -1,3 +1,16 @@
+## [1.21.0](compare/%40whatcode-ai%2Fsdk%401.20.0...%40whatcode-ai%2Fsdk%401.21.0) "@whatcode-ai/sdk" (2026-07-23)
+
+### Features
+
+* enable notification tracker under a feature flag 77ded2e
+* enable notification tracker under feature flag 1117eed
+* improve error handling 4f74633
+
+### Bug Fixes
+
+* bad imports 81e3d0c
+* lock notification earlier to prevent race 2c808a7
+
 ## [1.20.0](compare/%40whatcode-ai%2Fsdk%401.19.0...%40whatcode-ai%2Fsdk%401.20.0) "@whatcode-ai/sdk" (2026-07-16)
 
 ### Features
