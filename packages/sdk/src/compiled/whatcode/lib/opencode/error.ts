@@ -41,7 +41,6 @@ export const isOpencodeError = (err: unknown): err is OpencodeError => {
   return false;
 };
 
-/** @ts-expect-error cause will be added soon */
 export const opencodeError = (err: OpencodeError): Error => new Error(getOpencodeErrorMessage(err), { cause: err });
 
 export const getOpencodeErrorMessage = (err: OpencodeError): string => ('name' in err ? err.data.message : getRequestErrorMessage(err));
