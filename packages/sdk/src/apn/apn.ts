@@ -1,10 +1,11 @@
 import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { forwardToRelay } from './forward.ts';
-import { getLastAssistantText, getProjectName, trim, type OpencodeMessage } from './helpers.ts';
+import { getLastAssistantText, trim, type OpencodeMessage } from './helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
 import { createSmartNotification } from './smart.ts';
-import { opencodeError } from '../opencode/error.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
+import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
+import { getProjectName } from '../compiled/whatcode/lib/project.ts';
 
 export const startNotifications = (client: OpencodeClient): void => {
   const smart = createSmartNotification();
