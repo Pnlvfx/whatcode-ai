@@ -8,13 +8,14 @@ import { startTailscale } from '../tailscale.ts';
 import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
 import { logger, type LogLevel } from '../compiled/node/logger.ts';
-import pkgJson from '../../package.json' with { type: 'json' };
 import { parseError } from '../compiled/core/error.ts';
 import { startNotificationTracker } from '../notification/tracker.ts';
 import { getFeatureFlags } from '../feature-flags.ts';
+import pkgJson from '../../package.json' with { type: 'json' };
 
 export interface WhatcodeServerResult {
   url: string | undefined;
+  version: string;
 }
 
 export interface WhatcodeServerConfig {
@@ -35,6 +36,7 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
+  logger.debug('whatcode', `started on version ${pkgJson.version}`);
 
   const [{ server: opencodeServer, client, version: opencodeVersion }, localIp, flags] = await Promise.all([
     opencode({ port: opencodePort, password, hostname }),
@@ -74,5 +76,5 @@ export const createWhatcodeServer = async ({
     { wait: 3000 },
   );
 
-  return { url: tailscaleUrl ?? daemonUrl };
+  return { url: tailscaleUrl ?? daemonUrl, version: pkgJson.version };
 };

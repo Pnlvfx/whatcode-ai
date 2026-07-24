@@ -2,8 +2,6 @@ import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
 import { getLastMessageTimeByProject } from './opencode/db.ts';
-import { identityRouter } from './routes/deprecated/identity.ts';
-import { registerDeviceTokenRouter } from './routes/deprecated/register-device.ts';
 import { userRouter } from './routes/user.ts';
 import { notificationRouter } from './routes/notification.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
@@ -26,10 +24,6 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
       logger.error('server-error', `An error occured at ${url}`, error);
     })
     .use(password ? opencodeBasicAuth(password) : new Elysia())
-    // eslint-disable-next-line @typescript-eslint/no-deprecated
-    .use(identityRouter)
-    // eslint-disable-next-line @typescript-eslint/no-deprecated
-    .use(registerDeviceTokenRouter)
     .use(userRouter)
     .use(notificationRouter)
     // .use(userAuth) TODO [2026-06-22] enable once released the app
