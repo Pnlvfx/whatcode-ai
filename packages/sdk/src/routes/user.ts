@@ -1,18 +1,17 @@
 import { Elysia } from 'elysia';
 import { randomBytes, randomUUID } from 'node:crypto';
-import { accountsStore } from '../stores/accounts.ts';
+import { addAccount, deleteAccount, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
 import { identityStore } from '../stores/identity.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import { buildAccountResponse } from '../user.ts';
-import { logger } from '../compiled/node/logger.ts';
 import * as z from 'zod/v4/mini';
 
 export const userRouter = new Elysia({ prefix: '/user' })
   .post(
     '/pair',
     async ({ body: { device_id, device_name } }) => {
-      const accounts = await accountsStore.get();
+      const accounts = await getAccounts();
       let account = accounts.find((a) => a.deviceId === device_id);
       const identity = identityStore.get();
       if (!account) {
@@ -23,7 +22,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
           deviceId: device_id,
           deviceName: device_name,
         };
-        await accountsStore.set([...accounts, account]);
+        await addAccount(account);
       }
       return { token: account.token, user: buildAccountResponse(account, identity) };
     },
@@ -34,18 +33,12 @@ export const userRouter = new Elysia({ prefix: '/user' })
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
-      await accountsStore.set((prev) =>
-        prev.map((p) => {
-          if (p.deviceId !== account.deviceId) return p;
-          logger.debug('apn-token', `Apn token updated for ${account.name}`);
-          return { ...p, apnToken: token };
-        }),
-      );
+      await updateAccountApnToken({ deviceId: account.deviceId, apnToken: token });
       return { status: 'success' };
     },
     { body: z.strictObject({ token: z.string() }) },
   )
   .post('/logout', async ({ account }) => {
-    await accountsStore.set((prev) => prev.filter((p) => p.deviceId !== account.deviceId));
+    await deleteAccount({ deviceId: account.deviceId });
     return { status: 'success' };
   });

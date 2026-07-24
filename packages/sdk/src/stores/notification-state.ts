@@ -1,6 +1,6 @@
 import * as z from 'zod/v4/mini';
 import { WHATCODE_AUTH } from '../config/constants.ts';
-import { createStore } from '../compiled/store/store.ts';
+import { createStore2 } from '../compiled/store/store2.ts';
 
 const sessionStateSchema = z.strictObject({
   sessionID: z.string(),
@@ -21,8 +21,33 @@ export type SessionState = z.infer<typeof sessionStateSchema>;
 
 const notificationStateSchema = z.record(z.string(), sessionStateSchema);
 
-export const notificationStateStore = await createStore('notification-state', notificationStateSchema, {
+const notificationStateStore = createStore2('notification-state', notificationStateSchema, {
   directory: WHATCODE_AUTH,
   initial: {},
-  onCorrupted: 'delete',
 });
+
+export const getNotificationState = async () => {
+  const { error, data } = await notificationStateStore.get();
+  if (error) {
+    await notificationStateStore.clear();
+  }
+
+  return data ?? {};
+};
+
+export const updateNotificationState = async (
+  sessionID: string,
+  updater: (prev: SessionState) => SessionState,
+  fallback: Omit<SessionState, 'unseenCount' | 'unseenMessages' | 'lastEventAt'>,
+): Promise<void> => {
+  await notificationStateStore.set((prev) => {
+    const existing = prev[sessionID] ?? { ...fallback, unseenCount: 0, unseenMessages: 0, lastEventAt: Date.now() };
+    return { ...prev, [sessionID]: updater(existing) };
+  });
+};
+
+export const resetNotificationState = notificationStateStore.clear;
+
+// export const getNotificationState = async (): Promise<Record<string, SessionState>> => {
+//   return notificationStateStore.get();
+// };

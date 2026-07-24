@@ -27,7 +27,7 @@ await copyFilesFromFolder([
   {
     inputFolder: path.join(goatjs, 'store', 'src'),
     outputFolder: path.join(output, 'store'),
-    files: ['store.ts'],
+    files: ['store2.ts'],
   },
   {
     inputFolder: path.join(goatjs, 'node', 'src'),

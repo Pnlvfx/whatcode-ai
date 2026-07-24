@@ -1,6 +1,6 @@
 import { relayClient } from '../client.ts';
 import { logger } from '../compiled/node/logger.ts';
-import { accountsStore } from '../stores/accounts.ts';
+import { deleteAccount, getAccounts } from '../stores/accounts.ts';
 
 type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
 
@@ -17,7 +17,7 @@ interface Params extends RelayMeta {
 }
 
 export const forwardToRelay = async ({ body, event, directory, projectID, sessionID, title }: Params): Promise<void> => {
-  const entries = await accountsStore.get();
+  const entries = await getAccounts();
 
   for (const entry of entries) {
     if (!entry.apnToken) {
@@ -38,7 +38,7 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
     });
     if (error) {
       if (status === 410) {
-        await accountsStore.set((prev) => prev.map((e) => (e.deviceId === entry.deviceId ? { ...e, apnToken: undefined } : e)));
+        await deleteAccount({ deviceId: entry.deviceId });
         logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, cleared from store`);
       } else {
         logger.error('notifications', `push failed: (${error.value.message ?? 'Failed to send notification!'})`);

@@ -1,5 +1,5 @@
 import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
-import { notificationStateStore, type SessionState } from '../stores/notification-state.ts';
+import { getNotificationState, updateNotificationState, type SessionState } from '../stores/notification-state.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getLastAssistantText, getLastUserModel } from '../apn/helpers.ts';
 import { logger } from '../compiled/node/logger.ts';
@@ -26,22 +26,11 @@ const getOrFetchSession = async (
   return { projectID: data.projectID, directory: data.directory };
 };
 
-const mutate = async (
-  sessionID: string,
-  updater: (prev: SessionState) => SessionState,
-  fallback: Omit<SessionState, 'unseenCount' | 'unseenMessages' | 'lastEventAt'>,
-): Promise<void> => {
-  await notificationStateStore.set((prev) => {
-    const existing = prev[sessionID] ?? { ...fallback, unseenCount: 0, unseenMessages: 0, lastEventAt: Date.now() };
-    return { ...prev, [sessionID]: updater(existing) };
-  });
-};
-
 const handleSessionStatus = async (client: OpencodeClient, sessionID: string): Promise<void> => {
-  const current = await notificationStateStore.get();
+  const current = await getNotificationState();
   const meta = await getOrFetchSession(client, sessionID, current);
   if (!meta) return;
-  await mutate(sessionID, (prev) => ({ ...prev, isBusy: true, hasError: false, lastEventAt: Date.now() }), {
+  await updateNotificationState(sessionID, (prev) => ({ ...prev, isBusy: true, hasError: false, lastEventAt: Date.now() }), {
     sessionID,
     ...meta,
     isBusy: true,
@@ -51,14 +40,14 @@ const handleSessionStatus = async (client: OpencodeClient, sessionID: string): P
 };
 
 const handleSessionIdle = async (client: OpencodeClient, sessionID: string): Promise<void> => {
-  const current = await notificationStateStore.get();
+  const current = await getNotificationState();
   const meta = await getOrFetchSession(client, sessionID, current);
   if (!meta) return;
   const shouldCount = sessionID !== activeSessionID;
   const { data: messagesData, error: messagesError } = await client.session.messages({ sessionID });
   const lastAssistantText = messagesError ? undefined : getLastAssistantText(messagesData);
   const lastModel = messagesError ? undefined : getLastUserModel(messagesData);
-  await mutate(
+  await updateNotificationState(
     sessionID,
     (prev) => ({
       ...prev,
@@ -75,11 +64,11 @@ const handleSessionIdle = async (client: OpencodeClient, sessionID: string): Pro
 };
 
 const handleSessionError = async (client: OpencodeClient, sessionID: string, errorMessage: string | undefined): Promise<void> => {
-  const current = await notificationStateStore.get();
+  const current = await getNotificationState();
   const meta = await getOrFetchSession(client, sessionID, current);
   if (!meta) return;
   const lastErrorText = typeof errorMessage === 'string' ? errorMessage : 'An unexpected error occurred';
-  await mutate(
+  await updateNotificationState(
     sessionID,
     (prev) => ({ ...prev, isBusy: false, hasError: true, lastErrorText, lastAssistantText: undefined, lastEventAt: Date.now() }),
     { sessionID, ...meta, isBusy: false, hasPendingPermission: false, hasError: true },
@@ -87,11 +76,11 @@ const handleSessionError = async (client: OpencodeClient, sessionID: string, err
 };
 
 const handlePermissionAsked = async (client: OpencodeClient, sessionID: string): Promise<void> => {
-  const current = await notificationStateStore.get();
+  const current = await getNotificationState();
   const meta = await getOrFetchSession(client, sessionID, current);
   if (!meta) return;
   const shouldCount = sessionID !== activeSessionID;
-  await mutate(
+  await updateNotificationState(
     sessionID,
     (prev) => ({
       ...prev,
@@ -163,8 +152,4 @@ export const markSessionViewed = async (sessionID: string): Promise<void> => {
     if (!existing) return prev;
     return { ...prev, [sessionID]: { ...existing, unseenCount: 0, unseenMessages: 0 } };
   });
-};
-
-export const getNotificationState = async (): Promise<Record<string, SessionState>> => {
-  return notificationStateStore.get();
 };
