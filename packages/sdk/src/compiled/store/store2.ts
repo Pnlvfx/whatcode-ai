@@ -18,7 +18,6 @@ export interface StoreParams<T extends z.$ZodType> {
   directory: string;
   initial?: z.infer<T>;
   persist?: boolean;
-  onError?: (error: StoreError) => void;
 }
 
 export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T>> {
@@ -32,7 +31,7 @@ export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T
 export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T>>(
   name: string,
   schema: T,
-  { directory, initial, onError, persist = true }: TParams,
+  { directory, initial, persist = true }: TParams,
 ): StoreResult<T, TParams> => {
   let isInitialized = false;
   type StoreType = z.infer<T>;
@@ -72,27 +71,19 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
   const get = async (): Promise<StoreOpResult<StoreType | undefined>> => {
     if (!isInitialized) {
       const { data, error } = await initialize();
-      if (error) {
-        onError?.(error);
-        return { error };
-      }
+      if (error) return { error };
       isInitialized = data;
     }
     if (persist && currentConfig === undefined) {
       const bufferData = await getBuffer();
-      if (bufferData.error) {
-        onError?.(bufferData.error);
-        return { error: bufferData.error };
-      }
+      if (bufferData.error) return { error: bufferData.error };
       if (!bufferData.data) return { data: undefined };
       const raw = bufferData.data.toString();
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         currentConfig = JSON.parse(raw) as StoreType;
       } catch (err) {
-        const error = { type: 'json', message: parseError(err).message, raw } as const;
-        onError?.(error);
-        return { error };
+        return { error: { type: 'json' as const, message: parseError(err).message, raw } };
       }
     }
 
@@ -102,9 +93,7 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
   const write = async (value: StoreType): Promise<StoreOpResult<StoreType>> => {
     const result = await z.safeParseAsync(schema, value);
     if (!result.success) {
-      const error = { type: 'validation', message: result.error.message, data: value } as const;
-      onError?.(error);
-      return { error };
+      return { error: { type: 'validation' as const, message: result.error.message, data: value } };
     }
 
     currentConfig = result.data;

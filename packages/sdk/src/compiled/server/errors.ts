@@ -3,16 +3,16 @@
  * Do not modify it manually
  */
 
-export interface ServerErrorParams {
-  readonly status: number;
+export interface ServerErrorParams<S extends number = number> {
+  readonly status: S;
   readonly cause?: unknown;
 }
 
-export class ServerError extends Error {
-  readonly status: number;
+export class ServerError<S extends number = number> extends Error {
+  readonly status: S;
   readonly log: boolean;
 
-  constructor(message: string, status = 500, { cause, log = true }: { cause?: unknown; log?: boolean } = {}) {
+  constructor(message: string, status: S, { cause, log = true }: { cause?: unknown; log?: boolean } = {}) {
     super(message);
     this.status = status;
     this.cause = cause;
@@ -25,21 +25,22 @@ export class ServerError extends Error {
 type PreErrorParams = Omit<ServerErrorParams, 'status'> & { log?: boolean; message?: string };
 
 export const isServerError = (err: unknown): err is ServerError => err instanceof ServerError;
-export const serverError = (message: string, p: ServerErrorParams & { log?: boolean }) => new ServerError(message, p.status, p);
+export const serverError = <S extends number>(message: string, p: ServerErrorParams<S> & { log?: boolean }) =>
+  new ServerError(message, p.status, p);
 
 // 4xx client errors
-export const badRequest = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Bad Request', 400, p);
-export const unauthorized = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unauthorized', 401, p);
-export const forbidden = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Forbidden', 403, p);
-export const notFound = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Not Found', 404, p);
-export const conflict = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Conflict', 409, p);
-export const gone = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Gone', 410, p);
-export const unprocessableEntity = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unprocessable Entity', 422, p);
-export const tooManyRequests = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Too Many Requests', 429, p);
+export const badRequest = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Bad Request', 400 as const, p);
+export const unauthorized = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unauthorized', 401 as const, p);
+export const forbidden = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Forbidden', 403 as const, p);
+export const notFound = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Not Found', 404 as const, p);
+export const conflict = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Conflict', 409 as const, p);
+export const gone = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Gone', 410 as const, p);
+export const unprocessableEntity = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unprocessable Entity', 422 as const, p);
+export const tooManyRequests = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Too Many Requests', 429 as const, p);
 
 // 5xx server errors
-export const internalServerError = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Internal Server Error', 500, p);
-export const notImplemented = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Not Implemented', 501, p);
-export const badGateway = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Bad Gateway', 502, p);
-export const serviceUnavailable = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Service Unavailable', 503, p);
-export const gatewayTimeout = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Gateway Timeout', 504, p);
+export const internalServerError = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Internal Server Error', 500 as const, p);
+export const notImplemented = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Not Implemented', 501 as const, p);
+export const badGateway = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Bad Gateway', 502 as const, p);
+export const serviceUnavailable = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Service Unavailable', 503 as const, p);
+export const gatewayTimeout = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Gateway Timeout', 504 as const, p);
