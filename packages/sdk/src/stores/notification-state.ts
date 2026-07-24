@@ -46,8 +46,28 @@ export const updateNotificationState = async (
   });
 };
 
-export const resetNotificationState = notificationStateStore.clear;
+export const clearPendingPermission = async (sessionID: string): Promise<void> => {
+  await notificationStateStore.set((prev) => {
+    const existing = prev[sessionID];
+    if (!existing) return prev;
+    return { ...prev, [sessionID]: { ...existing, hasPendingPermission: false, lastEventAt: Date.now() } };
+  });
+};
 
-// export const getNotificationState = async (): Promise<Record<string, SessionState>> => {
-//   return notificationStateStore.get();
-// };
+export const incrementUnseenMessages = async (sessionID: string): Promise<void> => {
+  await notificationStateStore.set((prev) => {
+    const existing = prev[sessionID];
+    if (!existing) return prev;
+    return { ...prev, [sessionID]: { ...existing, unseenMessages: existing.unseenMessages + 1, lastEventAt: Date.now() } };
+  });
+};
+
+export const markSessionSeen = async (sessionID: string): Promise<void> => {
+  await notificationStateStore.set((prev) => {
+    const existing = prev[sessionID];
+    if (!existing) return prev;
+    return { ...prev, [sessionID]: { ...existing, unseenCount: 0, unseenMessages: 0 } };
+  });
+};
+
+export const resetNotificationState = notificationStateStore.clear;
