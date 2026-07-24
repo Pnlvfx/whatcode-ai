@@ -4,9 +4,9 @@ import { accountsStore } from '../stores/accounts.ts';
 import { identityStore } from '../stores/identity.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
-import * as z from 'zod/v4/mini';
 import { buildAccountResponse } from '../user.ts';
 import { logger } from '../compiled/node/logger.ts';
+import * as z from 'zod/v4/mini';
 
 export const userRouter = new Elysia({ prefix: '/user' })
   .post(

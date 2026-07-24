@@ -7,7 +7,6 @@ import { registerDeviceTokenRouter } from './routes/deprecated/register-device.t
 import { userRouter } from './routes/user.ts';
 import { notificationRouter } from './routes/notification.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
-import { parseError } from './compiled/core/error.ts';
 import { logger } from './compiled/node/logger.ts';
 import { fetch, Headers, Response } from 'undici';
 import { serverError } from './compiled/server/errors.ts';
@@ -21,8 +20,10 @@ interface Params {
 
 export const startWhatcode = ({ port, opencodePort, password, client }: Params) => {
   const app = new Elysia({ adapter: node() })
-    .onError(({ error: err }) => {
-      logger.error('server-error', parseError(err).message, err);
+    .onError(({ error, request }) => {
+      const { pathname, search } = new URL(request.url);
+      const url = `${pathname}${search}`;
+      logger.error('server-error', `An error occured at ${url}`, error);
     })
     .use(password ? opencodeBasicAuth(password) : new Elysia())
     // eslint-disable-next-line @typescript-eslint/no-deprecated

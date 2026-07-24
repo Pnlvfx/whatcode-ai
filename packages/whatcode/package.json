@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "initialize": "node tools/initialize.ts",
     "lint": "eslint",
     "prepack": "yarn build",
     "prepare": "yarn build",
@@ -47,7 +48,6 @@
   "dependencies": {
     "@whatcode-ai/sdk": "workspace:*",
     "qrcode-terminal": "^0.12.0",
-    "update-notifier": "^7.3.1",
     "yargs": "^18.0.0",
     "zod": "^4.4.3"
   },
@@ -58,7 +58,6 @@
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.1.1",
     "@types/qrcode-terminal": "^0.12.2",
-    "@types/update-notifier": "^6.0.8",
     "@types/yargs": "^17.0.35",
     "eslint": "^10.7.0",
     "typescript": "^6.0.3"

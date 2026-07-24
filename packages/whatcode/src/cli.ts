@@ -1,17 +1,11 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
-import updateNotifier from 'update-notifier';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
-
-const notifier = updateNotifier({ pkg });
-if (notifier.update) {
-  console.warn('whatcode', `update available: ${notifier.update.current} -> ${notifier.update.latest} (run: npm install -g ${pkg.name}@latest)`);
-}
+import { logger, type LogLevel } from './compiled/node/logger.ts';
 
 await yargs(hideBin(process.argv))
   .scriptName('whatcode')
@@ -35,21 +29,23 @@ await yargs(hideBin(process.argv))
           description: 'Log level: none | info | debug (default: info)',
         }),
     async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      const level = logLevel as LogLevel;
+      logger.init({ logLevel: level });
       const { url } = await createWhatcodeServer({
         tailscale,
         ...(port !== undefined && { port }),
         ...(opencodePort !== undefined && { opencodePort }),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-        logLevel: logLevel as 'none',
+        logLevel: level,
         ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
         ...(hostname !== undefined && { hostname }),
       });
 
       if (url) {
-        console.log('whatcode', `use this URL in the app: ${url}`);
+        logger.info('whatcode', `use this URL in the app: ${url}`);
         printQrCode(url, config.WHATCODE_PASSWORD);
       } else {
-        console.log('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
+        logger.warn('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
       }
     },
   )
@@ -60,9 +56,9 @@ await yargs(hideBin(process.argv))
     async () => {
       try {
         await resetWhatcodeServer();
-        console.log('whatcode', 'reset completed successfully');
+        logger.info('whatcode', 'reset completed successfully');
       } catch (err) {
-        console.log('whatcode', 'reset failed:', err);
+        logger.error('whatcode', 'reset failed:', err);
         throw err;
       }
     },

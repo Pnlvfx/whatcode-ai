@@ -13,19 +13,18 @@ export const createTailscale = (port: number) => {
       await assertTailscaleInstalled();
       await assertDaemonReachable();
       const hostname = await getHostname();
-      logger.debug('tailscale', `checking if serve is already running on port ${port.toString()}`);
+      logger.debug('tailscale', `checking if tailscale is already running on port ${port.toString()}`);
       const isRunning = await isServeRunning(port);
       if (isRunning) {
-        logger.debug('tailscale', `serve already running on port ${port.toString()} — skipping start`);
+        logger.debug('tailscale', `serve already running on port ${port.toString()}`);
       } else {
-        logger.debug('tailscale', `serve not running on port ${port.toString()} — starting`);
+        logger.debug('tailscale', `starting on port ${port.toString()}`);
         await startServe(port);
         started = true;
-        logger.debug('tailscale', `serve started — we own port ${port.toString()}`);
+        logger.debug('tailscale', `started on port ${port.toString()}`);
       }
-      const url = `https://${hostname.replace(/-$/, '')}`;
-      logger.debug('tailscale', `resolved url: ${url}`);
-      return { url };
+
+      return { url: `https://${hostname.replace(/-$/, '')}` };
     },
     stop: async (): Promise<void> => {
       if (!started) {
