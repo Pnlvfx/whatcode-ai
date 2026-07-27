@@ -1,0 +1,2 @@
+add max items on notification state and delete olds to avoid the object to grow infinitely
+when assigning the name add also account number like computername_account-number

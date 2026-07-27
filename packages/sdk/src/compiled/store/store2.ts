@@ -92,10 +92,7 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
 
   const write = async (value: StoreType): Promise<StoreOpResult<StoreType>> => {
     const result = await z.safeParseAsync(schema, value);
-    if (!result.success) {
-      return { error: { type: 'validation' as const, message: result.error.message, data: value } };
-    }
-
+    if (!result.success) return { error: { type: 'validation' as const, message: result.error.message, data: value } };
     currentConfig = result.data;
     if (persist) await fs.writeFile(configFile, JSON.stringify(currentConfig));
     return { data: currentConfig };

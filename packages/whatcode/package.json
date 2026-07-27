@@ -48,7 +48,7 @@
   "dependencies": {
     "@whatcode-ai/sdk": "workspace:*",
     "qrcode-terminal": "^0.12.0",
-    "yargs": "^18.0.0",
+    "yargs": "^18.1.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "@types/node": "^26.1.1",
     "@types/qrcode-terminal": "^0.12.2",
     "@types/yargs": "^17.0.35",
-    "eslint": "^10.7.0",
+    "eslint": "^10.8.0",
     "typescript": "^6.0.3"
   },
   "publishConfig": {

@@ -12,6 +12,7 @@ import { parseError } from '../compiled/core/error.ts';
 import { startNotificationTracker } from '../notification/tracker.ts';
 import { getFeatureFlags } from '../feature-flags.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
+import { isProd } from '../config/constants.ts';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -36,7 +37,7 @@ export const createWhatcodeServer = async ({
   hostname,
 }: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
   logger.init({ logLevel });
-  logger.debug('whatcode', `started on version ${pkgJson.version}`);
+  logger.debug('whatcode', `started WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}`);
 
   const [{ server: opencodeServer, client, version: opencodeVersion }, localIp, flags] = await Promise.all([
     opencode({ port: opencodePort, password, hostname }),

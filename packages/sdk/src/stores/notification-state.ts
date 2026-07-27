@@ -1,5 +1,5 @@
 import * as z from 'zod/v4/mini';
-import { WHATCODE_AUTH } from '../config/constants.ts';
+import { WHATCODE_ROOT } from '../config/constants.ts';
 import { createStore2 } from '../compiled/store/store2.ts';
 
 const sessionStateSchema = z.strictObject({
@@ -22,7 +22,7 @@ export type SessionState = z.infer<typeof sessionStateSchema>;
 const notificationStateSchema = z.record(z.string(), sessionStateSchema);
 
 const notificationStateStore = createStore2('notification-state', notificationStateSchema, {
-  directory: WHATCODE_AUTH,
+  directory: WHATCODE_ROOT,
   initial: {},
 });
 

@@ -3,12 +3,18 @@
  * Do not modify it manually
  */
 
-export interface ServerErrorParams<S extends number = number> {
+import { includes } from '../core/array.ts';
+
+const knownStatuses = [400, 401, 403, 404, 409, 410, 416, 418, 422, 429, 451, 500, 501, 502, 503, 504] as const;
+
+export type ServerErrorStatus = (typeof knownStatuses)[number];
+
+export interface ServerErrorParams<S extends ServerErrorStatus = ServerErrorStatus> {
   readonly status: S;
   readonly cause?: unknown;
 }
 
-export class ServerError<S extends number = number> extends Error {
+export class ServerError<S extends ServerErrorStatus = ServerErrorStatus> extends Error {
   readonly status: S;
   readonly log: boolean;
 
@@ -25,8 +31,16 @@ export class ServerError<S extends number = number> extends Error {
 type PreErrorParams = Omit<ServerErrorParams, 'status'> & { log?: boolean; message?: string };
 
 export const isServerError = (err: unknown): err is ServerError => err instanceof ServerError;
-export const serverError = <S extends number>(message: string, p: ServerErrorParams<S> & { log?: boolean }) =>
-  new ServerError(message, p.status, p);
+
+export const serverError = <S extends ServerErrorStatus>(message: string, p: ServerErrorParams<S> & { log?: boolean }) => {
+  return new ServerError(message, p.status, p);
+};
+
+export const fromHttpStatus = (status: number): ServerErrorStatus => {
+  if (includes(knownStatuses, status)) return status;
+  if (status >= 400 && status < 500) return 400;
+  return 500;
+};
 
 // 4xx client errors
 export const badRequest = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Bad Request', 400 as const, p);
@@ -37,6 +51,8 @@ export const conflict = (p?: PreErrorParams) => new ServerError(p?.message ?? 'C
 export const gone = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Gone', 410 as const, p);
 export const unprocessableEntity = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unprocessable Entity', 422 as const, p);
 export const tooManyRequests = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Too Many Requests', 429 as const, p);
+export const imATeapot = (p?: PreErrorParams) => new ServerError(p?.message ?? "I'm a Teapot", 418 as const, p);
+export const unavailableForLegalReasons = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Unavailable For Legal Reasons', 451 as const, p);
 
 // 5xx server errors
 export const internalServerError = (p?: PreErrorParams) => new ServerError(p?.message ?? 'Internal Server Error', 500 as const, p);
