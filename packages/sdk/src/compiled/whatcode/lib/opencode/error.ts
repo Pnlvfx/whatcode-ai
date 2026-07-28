@@ -32,6 +32,7 @@ const OPENCODE_TAGS = new Set([
   'QuestionNotFoundError',
   'InvalidCursorError',
 ]);
+
 const OPENCODE_NAMES = new Set(['BadRequest', 'NotFoundError']);
 
 export const isOpencodeError = (err: unknown): err is OpencodeError => {
