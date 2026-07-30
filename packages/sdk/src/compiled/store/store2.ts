@@ -123,7 +123,9 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
         if (persist) {
           try {
             await fs.rm(configFile);
-          } catch {}
+          } catch {
+            /* empty */
+          }
         }
         currentConfig = undefined;
       } else {

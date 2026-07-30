@@ -3,7 +3,9 @@ import * as z from 'zod/v4/mini';
 
 try {
   process.loadEnvFile();
-} catch {}
+} catch {
+  /* empty */
+}
 
 const envSchema = z.strictObject({
   WHATCODE_SERVER_URL: z.optional(z.string()),
