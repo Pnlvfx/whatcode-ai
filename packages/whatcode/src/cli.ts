@@ -1,11 +1,13 @@
 #!/usr/bin/env node
+import { createLogger, type LogLevel } from './compiled/node/logger.ts';
 import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
-import { logger, type LogLevel } from './compiled/node/logger.ts';
+
+const logger = createLogger();
 
 await yargs(hideBin(process.argv))
   .scriptName('whatcode')

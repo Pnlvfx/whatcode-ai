@@ -28,7 +28,8 @@ const getLocalIpViaNetworkInterfaces = (): string | undefined => {
   const candidates: string[] = [];
 
   for (const iface of Object.values(nets)) {
-    for (const net of iface ?? []) {
+    if (!iface) continue;
+    for (const net of iface) {
       if (net.family === 'IPv4' && !net.internal) candidates.push(net.address);
     }
   }

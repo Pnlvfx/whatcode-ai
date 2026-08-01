@@ -1,11 +1,11 @@
 import { Elysia } from 'elysia';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { addAccount, deleteAccount, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
-import { identityStore } from '../stores/identity.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import { buildAccountResponse } from '../user.ts';
 import * as z from 'zod/v4/mini';
+import { getIdentity } from '../stores/identity.ts';
 
 export const userRouter = new Elysia({ prefix: '/user' })
   .post(
@@ -13,7 +13,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
     async ({ body: { device_id, device_name } }) => {
       const accounts = await getAccounts();
       let account = accounts.find((a) => a.deviceId === device_id);
-      const identity = identityStore.get();
+      const identity = await getIdentity();
       if (!account) {
         account = {
           name: identity.name,
@@ -29,7 +29,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
     { body: pairUserBody },
   )
   .use(userAuth)
-  .get('/', ({ account }) => ({ user: buildAccountResponse(account, identityStore.get()) }))
+  .get('/', async ({ account }) => ({ user: buildAccountResponse(account, await getIdentity()) }))
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {

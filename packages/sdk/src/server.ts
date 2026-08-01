@@ -5,9 +5,9 @@ import { getLastMessageTimeByProject } from './opencode/db.ts';
 import { userRouter } from './routes/user.ts';
 import { notificationRouter } from './routes/notification.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
-import { logger } from './compiled/node/logger.ts';
 import { fetch, Headers, Response } from 'undici';
-import { serverError } from './compiled/server/errors.ts';
+import { logger } from './logger.ts';
+import { status } from 'elysia/error';
 
 interface Params {
   port: number;
@@ -28,8 +28,8 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
     .use(notificationRouter)
     // .use(userAuth) TODO [2026-06-22] enable once released the app
     .get('/project', async () => {
-      const { data: projects, error } = await client.project.list();
-      if (error) throw serverError(error.data.message, { status: 400 });
+      const { data: projects, error, response } = await client.project.list();
+      if (error) return status(response.status);
       const lastMessageTimes = getLastMessageTimeByProject();
       return projects.map((project) => {
         const lastMsg = lastMessageTimes.get(project.id);

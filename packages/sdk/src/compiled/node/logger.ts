@@ -5,18 +5,6 @@
 
 /* eslint-disable no-console */
 
-const reset = '\u{1B}[0m';
-
-const colors = {
-  gray: '\u{1B}[90m',
-  cyan: '\u{1B}[36m',
-  yellow: '\u{1B}[33m',
-  red: '\u{1B}[31m',
-  green: '\u{1B}[32m',
-} as const;
-
-const colorize = (color: keyof typeof colors, text: string): string => `${colors[color]}${text}${reset}`;
-
 export type LogLevel = 'none' | 'info' | 'debug';
 
 interface Logger {
@@ -27,40 +15,57 @@ interface Logger {
   init: (options: { logLevel: LogLevel }) => void;
 }
 
-let currentLevel: LogLevel = 'none';
-let initialized = false;
+const reset = '\u{1B}[0m';
+
+const colors = {
+  gray: '\u{1B}[90m',
+  cyan: '\u{1B}[36m',
+  yellow: '\u{1B}[33m',
+  red: '\u{1B}[31m',
+  green: '\u{1B}[32m',
+} as const;
+
+export const createLogger = () => {
+  let currentLevel: LogLevel = 'none';
+  let initialized = false;
+
+  const warnUninitialized = (method: string): void => {
+    if (!initialized) {
+      console.warn(`${colorize('yellow', 'warn')} ${formatScope('logger')} logger.${method}() called before logger.init() -- logs may be suppressed`);
+    }
+  };
+
+  return {
+    init: ({ logLevel }: { logLevel: LogLevel }): void => {
+      currentLevel = logLevel;
+      initialized = true;
+    },
+    debug: (scope: string, message: string): void => {
+      warnUninitialized('debug');
+      if (currentLevel !== 'debug') return;
+      console.log(`${colorize('cyan', 'debug')} ${formatScope(scope)} ${message}`);
+    },
+    info: (scope: string, message: string): void => {
+      warnUninitialized('info');
+      if (currentLevel === 'none') return;
+      console.log(`${colorize('green', 'info')} ${formatScope(scope)} ${message}`);
+    },
+    warn: (scope: string, message: string): void => {
+      warnUninitialized('warn');
+      if (currentLevel === 'none') return;
+      console.warn(`${colorize('yellow', 'warn')} ${formatScope(scope)} ${message}`);
+    },
+    error: (scope: string, message: string, err?: unknown): void => {
+      warnUninitialized('error');
+      if (currentLevel === 'none') return;
+      console.error(`${colorize('red', 'error')} ${formatScope(scope)} ${message}`, err ?? '');
+    },
+  } satisfies Logger;
+};
 
 const formatScope = (scope: string): string => colorize('gray', `[${scope}]`);
 
-const warnUninitialized = (method: string): void => {
-  if (!initialized) {
-    console.warn(`${colorize('yellow', 'warn')} ${formatScope('logger')} logger.${method}() called before logger.init() -- logs may be suppressed`);
-  }
-};
+const colorize = (color: keyof typeof colors, text: string): string => `${colors[color]}${text}${reset}`;
 
-export const logger = {
-  init: ({ logLevel }: { logLevel: LogLevel }): void => {
-    currentLevel = logLevel;
-    initialized = true;
-  },
-  debug: (scope: string, message: string): void => {
-    warnUninitialized('debug');
-    if (currentLevel !== 'debug') return;
-    console.log(`${colorize('cyan', 'debug')} ${formatScope(scope)} ${message}`);
-  },
-  info: (scope: string, message: string): void => {
-    warnUninitialized('info');
-    if (currentLevel === 'none') return;
-    console.log(`${colorize('green', 'info')} ${formatScope(scope)} ${message}`);
-  },
-  warn: (scope: string, message: string): void => {
-    warnUninitialized('warn');
-    if (currentLevel === 'none') return;
-    console.warn(`${colorize('yellow', 'warn')} ${formatScope(scope)} ${message}`);
-  },
-  error: (scope: string, message: string, err?: unknown): void => {
-    warnUninitialized('error');
-    if (currentLevel === 'none') return;
-    console.error(`${colorize('red', 'error')} ${formatScope(scope)} ${message}`, err ?? '');
-  },
-} satisfies Logger;
+/** @deprecated use createLogger */
+export const logger = createLogger();

@@ -1,7 +1,7 @@
 import { execa } from 'execa';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
-import { logger } from '../../compiled/node/logger.ts';
+import { logger } from '../../logger.ts';
 
 export type Tailscale = Awaited<ReturnType<typeof createTailscale>>;
 

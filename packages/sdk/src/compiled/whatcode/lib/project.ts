@@ -9,5 +9,8 @@ export const getProjectName = (worktree: string): string => {
   const sep = worktree.includes('/') ? '/' : '\\';
   if (worktree === '/') return 'Root';
   const name = worktree.split(sep).at(-1) ?? '';
-  return name.split(/[-_]/).map(capitalize).join(' ');
+  return name
+    .split(/[-_]/)
+    .map((c) => capitalize(c))
+    .join(' ');
 };

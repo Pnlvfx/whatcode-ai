@@ -1,5 +1,5 @@
 import { relayClient } from '../client.ts';
-import { logger } from '../compiled/node/logger.ts';
+import { logger } from '../logger.ts';
 import { deleteAccount, getAccounts } from '../stores/accounts.ts';
 
 type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';

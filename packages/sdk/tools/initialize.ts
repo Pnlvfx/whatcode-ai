@@ -6,7 +6,6 @@ import { rimraf } from '@goatjs/rimraf';
 
 const home = homedir();
 const goatjs = path.join(home, 'Desktop', 'packages', 'goatjs', 'packages');
-const coraline = path.join(home, 'Desktop', 'packages', 'coraline', 'packages');
 const whatcode = path.join(home, 'Desktop', 'apps', 'whatcode');
 
 const output = path.join('src', 'compiled');
@@ -38,11 +37,6 @@ await copyFilesFromFolder([
     inputFolder: path.join(goatjs, 'zod', 'src'),
     outputFolder: path.join(output, 'zod'),
     files: ['parse.ts', 'error.ts'],
-  },
-  {
-    inputFolder: path.join(coraline, 'server-logger', 'src'),
-    outputFolder: path.join(output, 'server'),
-    files: ['errors.ts'],
   },
   {
     inputFolder: path.join(whatcode, 'src', 'lib'),

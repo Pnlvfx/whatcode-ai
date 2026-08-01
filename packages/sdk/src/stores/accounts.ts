@@ -1,7 +1,7 @@
 import * as z from 'zod/v4/mini';
 import { WHATCODE_AUTH } from '../config/constants.ts';
 import { createStore2 } from '../compiled/store/store2.ts';
-import { logger } from '../compiled/node/logger.ts';
+import { logger } from '../logger.ts';
 
 const accountSchema = z.strictObject({
   id: z.string(),

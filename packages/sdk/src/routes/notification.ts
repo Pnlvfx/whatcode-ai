@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import * as z from 'zod/v4/mini';
 import { getNotificationState, markSessionSeen } from '../stores/notification-state.ts';
-import { setActiveSession } from '../notification/tracker.ts';
+import { activeSessionTracker } from '../notification/active.ts';
 
 export const notificationRouter = new Elysia({ prefix: '/notification' })
   .get('/state', async () => {
@@ -18,7 +18,7 @@ export const notificationRouter = new Elysia({ prefix: '/notification' })
   .post(
     '/active-session',
     ({ body: { sessionID } }) => {
-      setActiveSession(sessionID);
+      activeSessionTracker.setActiveSession(sessionID);
       return { status: 'success' };
     },
     { body: z.strictObject({ sessionID: z.optional(z.string()) }) },

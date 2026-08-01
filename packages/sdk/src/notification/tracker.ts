@@ -3,14 +3,9 @@ import type { SessionState } from '../stores/notification-state.ts';
 import { getNotificationState, updateNotificationState, clearPendingPermission, incrementUnseenMessages } from '../stores/notification-state.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getLastAssistantText, getLastUserModel } from '../apn/helpers.ts';
-import { logger } from '../compiled/node/logger.ts';
 import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
-
-let activeSessionID: string | undefined;
-
-export const setActiveSession = (sessionID: string | undefined): void => {
-  activeSessionID = sessionID;
-};
+import { logger } from '../logger.ts';
+import { activeSessionTracker } from './active.ts';
 
 type SessionMeta = Pick<SessionState, 'projectID' | 'directory'>;
 
@@ -40,7 +35,7 @@ export const startNotificationTracker = (client: OpencodeClient) => {
   const handleSessionIdle = async (sessionID: string): Promise<void> => {
     const meta = await getOrFetchSession(sessionID);
     if (!meta) return;
-    const shouldCount = sessionID !== activeSessionID;
+    const shouldCount = sessionID !== activeSessionTracker.getActiveSession();
     const { data: messagesData, error: messagesError } = await client.session.messages({ sessionID });
     const lastAssistantText = messagesError ? undefined : getLastAssistantText(messagesData);
     const lastModel = messagesError ? undefined : getLastUserModel(messagesData);
@@ -74,7 +69,7 @@ export const startNotificationTracker = (client: OpencodeClient) => {
   const handlePermissionAsked = async (sessionID: string): Promise<void> => {
     const meta = await getOrFetchSession(sessionID);
     if (!meta) return;
-    const shouldCount = sessionID !== activeSessionID;
+    const shouldCount = sessionID !== activeSessionTracker.getActiveSession();
     await updateNotificationState(
       sessionID,
       (prev) => ({
@@ -90,33 +85,38 @@ export const startNotificationTracker = (client: OpencodeClient) => {
   const handleEvent = async (event: GlobalEvent): Promise<void> => {
     const payload = event.payload;
     switch (payload.type) {
-      case 'session.status':
+      case 'session.status': {
         if (payload.properties.status.type !== 'busy' && payload.properties.status.type !== 'retry') return;
         await handleSessionStatus(payload.properties.sessionID);
         break;
-      case 'session.idle':
+      }
+      case 'session.idle': {
         await handleSessionIdle(payload.properties.sessionID);
         break;
+      }
       case 'session.error': {
         if (!payload.properties.sessionID) return;
         const rawMessage = payload.properties.error?.data.message;
         await handleSessionError(payload.properties.sessionID, typeof rawMessage === 'string' ? rawMessage : undefined);
         break;
       }
-      case 'permission.asked':
+      case 'permission.asked': {
         await handlePermissionAsked(payload.properties.sessionID);
         break;
-      case 'permission.replied':
+      }
+      case 'permission.replied': {
         await clearPendingPermission(payload.properties.sessionID);
         break;
+      }
       case 'message.updated': {
         const msg = payload.properties.info;
-        if (msg.role !== 'assistant' || msg.time.completed === undefined || msg.sessionID === activeSessionID) return;
+        if (msg.role !== 'assistant' || msg.time.completed === undefined || msg.sessionID === activeSessionTracker.getActiveSession()) return;
         await incrementUnseenMessages(msg.sessionID);
         break;
       }
-      default:
+      default: {
         break;
+      }
     }
   };
 

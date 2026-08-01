@@ -12,7 +12,7 @@ export const arrayMove = (arr: unknown[], fromIndex: number, toIndex: number) =>
 };
 
 export const getUniqueArrayByKey = <T extends Record<K, string>, K extends keyof T>(arr: T[], key: K): T[] => {
-  return [...new Map(arr.map((item) => [item[key], item])).values()];
+  return new Map(arr.map((item) => [item[key], item])).values().toArray();
 };
 
 export const shuffleArray = (array: unknown[]) => {

@@ -1,6 +1,6 @@
 import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { setTimeout } from 'node:timers/promises';
-import { logger } from '../compiled/node/logger.ts';
+import { logger } from '../logger.ts';
 
 type EventHandler = (event: GlobalEvent) => Promise<void> | void;
 

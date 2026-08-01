@@ -1,7 +1,7 @@
 import { type ServerOptions, createOpencodeClient, createOpencodeServer } from '@opencode-ai/sdk/v2';
 import { lt } from 'semver';
 import { OPENCODE_MIN_VERSION } from '../config/constants.ts';
-import { logger } from '../compiled/node/logger.ts';
+import { logger } from '../logger.ts';
 
 type OpencodeServerOptions = Omit<ServerOptions, 'config' | 'port'> & { port: number; password?: string };
 
@@ -35,7 +35,7 @@ export const opencode = async ({ password, port, hostname, signal, timeout }: Op
     const { data, error } = await client.global.health();
     if (error) throw new Error('Failed to start OpenCode, please check your ~/.local/share/opencode/ folder to check the logs', { cause: error });
     version = data.version;
-    logger.debug('opencode', `started on version ${data.version}`);
+    logger.debug('opencode', `started OpenCode on version ${data.version}`);
   }
 
   return { server, client, version };

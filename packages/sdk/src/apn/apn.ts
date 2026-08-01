@@ -1,11 +1,11 @@
 import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, trim, type OpencodeMessage } from './helpers.ts';
-import { logger } from '../compiled/node/logger.ts';
 import { createSmartNotification } from './smart.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
+import { logger } from '../logger.ts';
 
 export const startNotifications = (client: OpencodeClient): void => {
   const smart = createSmartNotification();
@@ -92,15 +92,18 @@ export const startNotifications = (client: OpencodeClient): void => {
 
   registerEventHandler(async (event: GlobalEvent): Promise<void> => {
     switch (event.payload.type) {
-      case 'session.idle':
+      case 'session.idle': {
         await handleSessionIdle(event.payload.properties);
         break;
-      case 'permission.asked':
+      }
+      case 'permission.asked': {
         await handlePermissionAsked(event.payload.properties);
         break;
-      case 'session.error':
+      }
+      case 'session.error': {
         await handleSessionError(event.payload.properties);
         break;
+      }
     }
   });
 

@@ -1,18 +1,19 @@
+import type { LogLevel } from '../compiled/node/logger.ts';
+import { parseError } from '../compiled/core/error.ts';
 import { opencode } from '../opencode/opencode.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
 import { startEventSubscription } from '../opencode/event-subscription.ts';
-import { identityStore } from '../stores/identity.ts';
+import { createIdentity } from '../stores/identity.ts';
 import { startTailscale } from '../tailscale.ts';
 import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
-import { logger, type LogLevel } from '../compiled/node/logger.ts';
-import { parseError } from '../compiled/core/error.ts';
 import { startNotificationTracker } from '../notification/tracker.ts';
 import { getFeatureFlags } from '../feature-flags.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
 import { isProd } from '../config/constants.ts';
+import { logger } from '../logger.ts';
 
 export interface WhatcodeServerResult {
   url: string | undefined;
@@ -58,7 +59,7 @@ export const createWhatcodeServer = async ({
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
 
-  await identityStore.set({
+  await createIdentity({
     opencode: { url: opencodePublicUrl, version: opencodeVersion, available: !!hostname },
     daemon: { url: daemonUrl, version: pkgJson.version, available: true },
     tailscale: { url: tailscaleUrl, available: !!tailscaleUrl },
