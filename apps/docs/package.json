@@ -42,7 +42,7 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
-    "@goatjs/dbz": "^2.63.0",
+    "@goatjs/dbz": "^2.64.0",
     "@goatjs/rimraf": "^2.12.0",
     "@types/react": "^19.2.18",
     "execa": "^10.0.1",
