@@ -1,7 +1,8 @@
 import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
+import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
 import { getLastAssistantText, trim, type OpencodeMessage } from './helpers.ts';
-import { createSmartNotification } from './smart.ts';
+import { createSmartNotification, IDLE_DELAY_MS } from './smart.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
@@ -28,7 +29,10 @@ export const startNotifications = (client: OpencodeClient): void => {
 
   const handleSessionIdle = async ({ sessionID }: EventSessionIdle['properties']): Promise<void> => {
     logger.debug('notifications', `session.idle event received for session ${sessionID}`);
-    if (smart.unlock(sessionID)) {
+    // Delay slightly so a concurrent session.error handler has time to set the lock before we check it.
+    await setTimeout(IDLE_DELAY_MS);
+    if (smart.isLocked(sessionID)) {
+      smart.unlock(sessionID);
       logger.debug('notifications', `skipping session.idle for session ${sessionID}, error notification already sent`);
     } else {
       const { data: session, error } = await client.session.get({ sessionID });

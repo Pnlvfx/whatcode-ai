@@ -44,10 +44,10 @@
     "@docusaurus/types": "3.10.2",
     "@goatjs/dbz": "^2.63.0",
     "@goatjs/rimraf": "^2.12.0",
-    "@types/react": "^19.2.17",
-    "execa": "^10.0.0",
+    "@types/react": "^19.2.18",
+    "execa": "^10.0.1",
     "typescript": "^6.0.3",
-    "vercel": "^58.4.0"
+    "vercel": "^58.4.4"
   },
   "engines": {
     "node": ">=20.0"
