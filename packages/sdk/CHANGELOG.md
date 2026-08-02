@@ -1,3 +1,12 @@
+## [1.21.1-canary.9ca4a38](compare/%40whatcode-ai%2Fsdk%401.21.0...%40whatcode-ai%2Fsdk%401.21.1-canary.9ca4a38) "@whatcode-ai/sdk" (2026-08-02)
+
+### Bug Fixes
+
+* better error handling c85f398
+* **breaking:** issues while writing and reading on store, better error handling and trusted results 253d901
+* double notification fire on error (again) 943e81c
+* improve notification tracker 8c2a964
+
 ## [1.21.0](compare/%40whatcode-ai%2Fsdk%401.20.0...%40whatcode-ai%2Fsdk%401.21.0) "@whatcode-ai/sdk" (2026-07-23)
 
 ### Features
