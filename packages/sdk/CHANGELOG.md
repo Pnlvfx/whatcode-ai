@@ -1,3 +1,5 @@
+## [1.23.0](compare/%40whatcode-ai%2Fsdk%401.22.0...%40whatcode-ai%2Fsdk%401.23.0) "@whatcode-ai/sdk" (2026-08-05)
+
 ## [1.22.0](compare/%40whatcode-ai%2Fsdk%401.21.1-canary.9ca4a38...%40whatcode-ai%2Fsdk%401.22.0) "@whatcode-ai/sdk" (2026-08-05)
 
 ## [1.21.1-canary.9ca4a38](compare/%40whatcode-ai%2Fsdk%401.21.0...%40whatcode-ai%2Fsdk%401.21.1-canary.9ca4a38) "@whatcode-ai/sdk" (2026-08-02)
