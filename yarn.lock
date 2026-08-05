@@ -4970,12 +4970,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opencode-ai/sdk@npm:^1.18.11":
-  version: 1.18.11
-  resolution: "@opencode-ai/sdk@npm:1.18.11"
+"@opencode-ai/sdk@npm:^1.18.12":
+  version: 1.18.12
+  resolution: "@opencode-ai/sdk@npm:1.18.12"
   dependencies:
     cross-spawn: "npm:7.0.6"
-  checksum: 10c0/69f55c34369eb66cc75b8ba031a78e2b37df433e488ef58b9a803d00295203bfcbdac8ad6ef3a4c94546f9edd39db229642d9f75d1fb0c29ef355e9d26cb97d5
+  checksum: 10c0/05717989617d212de13b8ff06d1e736fe599e5f8a497c2647404d107bb1a7e1387d2b7d8fdb7109b5b9bda6952be77a912aa6fe1297b03a30244da525abc0128
   languageName: node
   linkType: hard
 
@@ -6885,10 +6885,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/semver@npm:^7.7.1":
-  version: 7.7.1
-  resolution: "@types/semver@npm:7.7.1"
-  checksum: 10c0/c938aef3bf79a73f0f3f6037c16e2e759ff40c54122ddf0b2583703393d8d3127130823facb880e694caa324eb6845628186aac1997ee8b31dc2d18fafe26268
+"@types/semver@npm:^7.8.0":
+  version: 7.8.0
+  resolution: "@types/semver@npm:7.8.0"
+  checksum: 10c0/46a1f38e36013448b279798e8b134e7e8de3b3630b1f40683903b9d57d36dd1d70838515570ed9a149fa09e9c381b9e39319b58d7b9f3b929b42ae2becff7aa3
   languageName: node
   linkType: hard
 
@@ -7953,10 +7953,10 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^3.12.0"
     "@goatjs/rimraf": "npm:^2.12.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
-    "@opencode-ai/sdk": "npm:^1.18.11"
+    "@opencode-ai/sdk": "npm:^1.18.12"
     "@sinclair/typebox": "npm:^0.34.52"
     "@types/node": "npm:^26.1.2"
-    "@types/semver": "npm:^7.7.1"
+    "@types/semver": "npm:^7.8.0"
     elysia: "npm:^1.4.29"
     eslint: "npm:^10.8.0"
     execa: "npm:^10.0.1"

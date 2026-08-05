@@ -8,6 +8,7 @@ import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
 import { status } from 'elysia/error';
+import { MIN_APP_VERSION } from './config/constants.ts';
 
 interface Params {
   port: number;
@@ -24,12 +25,13 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
       logger.error('server-error', `An error occured at ${url}`, error);
     })
     .use(password ? opencodeBasicAuth(password) : new Elysia())
+    .get('/version', { app: { min: MIN_APP_VERSION } })
     .use(userRouter)
     .use(notificationRouter)
     // .use(userAuth) TODO [2026-06-22] enable once released the app
     .get('/project', async () => {
       const { data: projects, error, response } = await client.project.list();
-      if (error) return status(response.status);
+      if (error) return status(response.status, { message: error.data.message });
       const lastMessageTimes = getLastMessageTimeByProject();
       const data = projects.map((project) => {
         const lastMsg = lastMessageTimes.get(project.id);

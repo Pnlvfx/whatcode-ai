@@ -42,9 +42,9 @@ export const isOpencodeError = (err: unknown): err is OpencodeError => {
   return false;
 };
 
-export const opencodeError = (err: unknown): Error => new Error(getOpencodeErrorMessage(err), { cause: err });
+export const opencodeError = (err: OpencodeError): Error => new Error(getOpencodeErrorMessage(err), { cause: err });
 
-export const getOpencodeErrorMessage = (err: unknown): string => {
+export const getOpencodeErrorMessage = (err: OpencodeError): string => {
   if (err instanceof Error) return err.message;
   if (!isOpencodeError(err)) return 'An unexpected error occurred';
   return 'name' in err ? err.data.message : getRequestErrorMessage(err);
