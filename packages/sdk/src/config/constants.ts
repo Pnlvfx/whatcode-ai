@@ -13,6 +13,4 @@ const devFolder = isProd ? '' : 'dev';
 const WHATCODE_HOME = path.join(os.homedir(), '.whatcode');
 export const WHATCODE_ROOT = path.join(WHATCODE_HOME, devFolder);
 export const WHATCODE_AUTH = path.join(WHATCODE_ROOT, 'auth');
-
-export const OPENCODE_MIN_VERSION = '1.16.0';
 export const MIN_APP_VERSION = '1.5.2';

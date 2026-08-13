@@ -1,6 +1,6 @@
-import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { AssistantMessage, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
 import type { SessionState } from '../stores/notification-state.ts';
-import { getNotificationState, updateNotificationState, clearPendingPermission, incrementUnseenMessages } from '../stores/notification-state.ts';
+import { getNotificationState, updateNotificationState, clearPendingPermission } from '../stores/notification-state.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getLastAssistantText, getLastUserModel } from '../apn/helpers.ts';
 import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
@@ -110,11 +110,8 @@ export const startNotificationTracker = (client: OpencodeClient) => {
       }
       case 'message.updated': {
         const msg = payload.properties.info;
-        if (msg.role !== 'assistant' || msg.time.completed === undefined || msg.sessionID === activeSessionTracker.getActiveSession()) return;
-        await incrementUnseenMessages(msg.sessionID);
-        break;
-      }
-      default: {
+        if (msg.role !== 'assistant' || msg.time.completed === undefined) return;
+        await handleMessageUpdated(msg);
         break;
       }
     }
@@ -122,4 +119,30 @@ export const startNotificationTracker = (client: OpencodeClient) => {
 
   registerEventHandler(handleEvent);
   logger.debug('notification-tracker', 'started');
+};
+
+const extractAssistantErrorText = (msg: AssistantMessage): string | undefined => {
+  if (!msg.error) return undefined;
+  const raw = msg.error.data.message;
+  return typeof raw === 'string' ? raw : 'An unexpected error occurred';
+};
+
+const handleMessageUpdated = async (msg: AssistantMessage): Promise<void> => {
+  const current = await getNotificationState();
+  const existing = current[msg.sessionID];
+  if (!existing) return;
+  const isActive = msg.sessionID === activeSessionTracker.getActiveSession();
+  const lastModel = `${msg.providerID}/${msg.modelID}`;
+  const errorText = extractAssistantErrorText(msg);
+  await updateNotificationState(
+    msg.sessionID,
+    (prev) => ({
+      ...prev,
+      lastModel,
+      ...(errorText !== undefined && { hasError: true, lastErrorText: errorText }),
+      ...(!isActive && { unseenMessages: prev.unseenMessages + 1 }),
+      lastEventAt: Date.now(),
+    }),
+    existing,
+  );
 };

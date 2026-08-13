@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-import { createLogger, type LogLevel } from './compiled/node/logger.ts';
+import { checkForUpdate } from './update.ts';
 import { config } from './config.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
+import { logger } from '@whatcode-ai/sdk/internals/logger';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
-
-const logger = createLogger();
 
 await yargs(hideBin(process.argv))
   .scriptName('whatcode')
@@ -26,19 +25,17 @@ await yargs(hideBin(process.argv))
         .option('hostname', { type: 'string', description: 'Hostname to listen on' })
         .option('log-level', {
           type: 'string',
-          choices: ['none', 'info', 'debug'],
-          default: 'info',
+          choices: ['none', 'info', 'debug'] as const,
+          default: 'info' as const,
           description: 'Log level: none | info | debug (default: info)',
         }),
     async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      const level = logLevel as LogLevel;
-      logger.init({ logLevel: level });
+      await checkForUpdate(pkg.version);
       const { url } = await createWhatcodeServer({
         tailscale,
         ...(port !== undefined && { port }),
         ...(opencodePort !== undefined && { opencodePort }),
-        logLevel: level,
+        logLevel,
         ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
         ...(hostname !== undefined && { hostname }),
       });
@@ -56,13 +53,9 @@ await yargs(hideBin(process.argv))
     'Reset WhatCode.',
     (y) => y,
     async () => {
-      try {
-        await resetWhatcodeServer();
-        logger.info('whatcode', 'reset completed successfully');
-      } catch (err) {
-        logger.error('whatcode', 'reset failed:', err);
-        throw err;
-      }
+      logger.init({ logLevel: 'info' });
+      await resetWhatcodeServer();
+      logger.info('whatcode', 'reset completed successfully');
     },
   )
   .parseAsync();
