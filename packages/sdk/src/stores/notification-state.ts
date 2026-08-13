@@ -17,8 +17,6 @@ const sessionStateSchema = z.strictObject({
   lastModel: z.optional(z.string()),
 });
 
-export type SessionState = z.infer<typeof sessionStateSchema>;
-
 const notificationStateSchema = z.record(z.string(), sessionStateSchema);
 
 const notificationStateStore = createStore2('notification-state', notificationStateSchema, {
@@ -71,3 +69,5 @@ export const markSessionSeen = async (sessionID: string): Promise<void> => {
 };
 
 export const resetNotificationState = notificationStateStore.clear;
+
+export type SessionState = z.infer<typeof sessionStateSchema>;
