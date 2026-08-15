@@ -1785,31 +1785,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^21.2.1":
-  version: 21.2.1
-  resolution: "@commitlint/cli@npm:21.2.1"
+"@commitlint/cli@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/cli@npm:21.2.2"
   dependencies:
-    "@commitlint/config-conventional": "npm:^21.2.0"
-    "@commitlint/format": "npm:^21.2.0"
-    "@commitlint/lint": "npm:^21.2.0"
-    "@commitlint/load": "npm:^21.2.0"
+    "@commitlint/config-conventional": "npm:^21.2.2"
+    "@commitlint/format": "npm:^21.2.2"
+    "@commitlint/lint": "npm:^21.2.2"
+    "@commitlint/load": "npm:^21.2.2"
     "@commitlint/read": "npm:^21.2.1"
     "@commitlint/types": "npm:^21.2.0"
     tinyexec: "npm:^1.0.0"
     yargs: "npm:^18.0.0"
   bin:
     commitlint: cli.js
-  checksum: 10c0/fdf47a00c6cb134caba32ced096547d7148b9dec3be93414266b7e4693b0a9c48434a84e857a416c89339d9c8a93a850dfc9e3b8b5b1b322456f6fa734eb5343
+  checksum: 10c0/fb57c853f5c4dcd4d5f70fb681e41661b39efc30f938256984974617665ad745879ac41227e8f0aca4fc4f951fdf79d8e2650cd76966b6e18e5299a7e8d2d6a3
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/config-conventional@npm:21.2.0"
+"@commitlint/config-conventional@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/config-conventional@npm:21.2.2"
   dependencies:
     "@commitlint/types": "npm:^21.2.0"
     conventional-changelog-conventionalcommits: "npm:^10.0.0"
-  checksum: 10c0/4d091563201c6f5f1033bb9ed8a7c22ac3453ae585cc2f3331e85ffc71ac485392a1e230322365697e5ebf0047153b8826cb732aec5eda167ede15f32c3a0260
+  checksum: 10c0/f99a51875953b7779a7e585be10c7fe3653c962833bbf29eff1f7696b3013bd7aca484613e79659bd9f7c8e03bdf6a410c22b41df1189e5bd24a10086071bff0
   languageName: node
   linkType: hard
 
@@ -1840,52 +1840,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/format@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/format@npm:21.2.0"
+"@commitlint/format@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/format@npm:21.2.2"
   dependencies:
     "@commitlint/types": "npm:^21.2.0"
     picocolors: "npm:^1.1.1"
-  checksum: 10c0/8d1722e5f92cd20a96fd03d09400ba80661c7172024773b6fd50f19556bf39f7a14ffc0f82963ffc12b4825ecc676c1e5130e61a709dd7284bbf65cc5d7a6f25
+  checksum: 10c0/ba741ce7d250995169a0b3c14748d8352206bb9fb4411aa11c6f54523a47f7c7c8644b5e06e4bba8f91541ca7bd4862ebcda71d082993e87b2f5ed814ecd3b9c
   languageName: node
   linkType: hard
 
-"@commitlint/is-ignored@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/is-ignored@npm:21.2.0"
+"@commitlint/is-ignored@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/is-ignored@npm:21.2.2"
   dependencies:
     "@commitlint/types": "npm:^21.2.0"
     semver: "npm:^7.6.0"
-  checksum: 10c0/a547e99ec1abb9cdb8e854b021f1884486707bb391f57ffa706fd66b003271d72122b0e62319be0cf5b83d619212286b28a6a528f9be2a8438d2840f63a2e9b6
+  checksum: 10c0/478ae6a0ff6e9be2513bf4817d8ea560848454552c0ba7bed281bfac779776402bf2a7e5cb25d7bb2c33dcaa54b29c70b85dccf219fc53b0ade04197cb19fa8a
   languageName: node
   linkType: hard
 
-"@commitlint/lint@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/lint@npm:21.2.0"
+"@commitlint/lint@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/lint@npm:21.2.2"
   dependencies:
-    "@commitlint/is-ignored": "npm:^21.2.0"
-    "@commitlint/parse": "npm:^21.2.0"
-    "@commitlint/rules": "npm:^21.2.0"
+    "@commitlint/is-ignored": "npm:^21.2.2"
+    "@commitlint/parse": "npm:^21.2.2"
+    "@commitlint/rules": "npm:^21.2.2"
     "@commitlint/types": "npm:^21.2.0"
-  checksum: 10c0/a0810af7ab0c12166c5cae9a6c663764f8b5ba7c49e6e2f368da9864d55c7d48cb09373c132ffc503b517e0d7c7bdc07b6b9ce5f8a3d409448c49e1534a50ee3
+  checksum: 10c0/c9a1f14e2d49f42d5e2680185fd21962536d308745016d57897d68f8ea52c570ae41e6f0150b63c691c376dd729e0fb677097a0be28742a33cee7a70481d4d96
   languageName: node
   linkType: hard
 
-"@commitlint/load@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/load@npm:21.2.0"
+"@commitlint/load@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/load@npm:21.2.2"
   dependencies:
     "@commitlint/config-validator": "npm:^21.2.0"
     "@commitlint/execute-rule": "npm:^21.0.1"
-    "@commitlint/resolve-extends": "npm:^21.2.0"
+    "@commitlint/resolve-extends": "npm:^21.2.2"
     "@commitlint/types": "npm:^21.2.0"
     cosmiconfig: "npm:^9.0.1"
     cosmiconfig-typescript-loader: "npm:^6.1.0"
     es-toolkit: "npm:^1.46.0"
     is-plain-obj: "npm:^4.1.0"
     picocolors: "npm:^1.1.1"
-  checksum: 10c0/e39080f3495ef4d2dc5e80d00e362d902e7ce487e3eed178a68098902f536f9fd68a2b061d879a1a6a487cfc1600f0cf019169d179925d226fedb661a7eefe59
+  checksum: 10c0/62ffdc1bcd5593baff0d8c5b592b41ab594ea08c7e1e4fee970ae63e2787232cdcf8e0a1c77ba922ec2adedca0b0017cc4d51d67b13208f477b80da4f36c3317
   languageName: node
   linkType: hard
 
@@ -1896,14 +1896,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/parse@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/parse@npm:21.2.0"
+"@commitlint/parse@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/parse@npm:21.2.2"
   dependencies:
     "@commitlint/types": "npm:^21.2.0"
     conventional-changelog-angular: "npm:^9.0.0"
     conventional-commits-parser: "npm:^7.0.0"
-  checksum: 10c0/0d109d9d08b4f94e4be93934f2619b17d245f72f3f473c9298554ef4479fd9129624c11e5822a7d173a06ea558ed2858ff3ca3e2cb2a7f84043a271e03d802f2
+  checksum: 10c0/823a10e695beca526a7eec02e79635c9f4095c74984d21e2543de001ad335c5389512f1e634daa11da5bd76964d042d0a4af5390f62276ccaa150783dbd40a78
   languageName: node
   linkType: hard
 
@@ -1919,28 +1919,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/resolve-extends@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/resolve-extends@npm:21.2.0"
+"@commitlint/resolve-extends@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/resolve-extends@npm:21.2.2"
   dependencies:
     "@commitlint/config-validator": "npm:^21.2.0"
     "@commitlint/types": "npm:^21.2.0"
     es-toolkit: "npm:^1.46.0"
     global-directory: "npm:^5.0.0"
     resolve-from: "npm:^5.0.0"
-  checksum: 10c0/2267b98f36c7c5168b1768ce8a0b4a753bccf09731f010ce73cc171acb685759ca2feaef77c7e53f2914d728c496f7813b2d8e05e5f7423f6ce3ebb050b834dc
+  checksum: 10c0/0b6b39eabf21dc790b8c418e800a23e9d5ffeb73103552a8a0ba46bf3de5847727e10bbf2975acdf5f9cd620e96847892dd1fb656919148b644082368a6de8b5
   languageName: node
   linkType: hard
 
-"@commitlint/rules@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/rules@npm:21.2.0"
+"@commitlint/rules@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/rules@npm:21.2.2"
   dependencies:
     "@commitlint/ensure": "npm:^21.2.0"
     "@commitlint/message": "npm:^21.2.0"
     "@commitlint/to-lines": "npm:^21.0.1"
     "@commitlint/types": "npm:^21.2.0"
-  checksum: 10c0/9c77cbbdeba1c4a49e3d1b86eda45be958ad6b305d6499853b9e0e39c21fb53812d74cf6d33375fef427a592c43d18ac09d13bb43b94cc09ff1c3246b7027eab
+  checksum: 10c0/5b1ddf0f455f334640b22bb22adef3f472988083bd677a2a53a942287efcb71891ea40592f69ac32f1ad30bacbedc8d7916b45a8c53c536bd2d53c2a28e161b8
   languageName: node
   linkType: hard
 
@@ -3879,9 +3879,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/core-eslint@npm:3.19.0":
-  version: 3.19.0
-  resolution: "@goatjs/core-eslint@npm:3.19.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-3.19.0.tgz"
+"@goatjs/core-eslint@npm:3.20.0":
+  version: 3.20.0
+  resolution: "@goatjs/core-eslint@npm:3.20.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fcore-eslint%2F-%2F%40goatjs%2Fcore-eslint-3.20.0.tgz"
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     "@typescript-eslint/utils": "npm:^8.67.0"
@@ -3891,9 +3891,9 @@ __metadata:
     eslint-plugin-package-json: "npm:^1.7.1"
     eslint-plugin-sonarjs: "npm:^4.2.0"
     eslint-plugin-unicorn: "npm:^73.0.0"
-    globals: "npm:^17.9.0"
+    globals: "npm:^17.11.0"
     typescript-eslint: "npm:^8.67.0"
-  checksum: 10c0/39dacabbc9b2d60f0708b00b902e65d75adad3715aa64237647914155d7310e3fbf5a082bb08ac0481857e5f8795337345ea6c56fe45bc20ee5b5bb69b79e00e
+  checksum: 10c0/51fc2dac46d6e30d2cff93acd825b24ef9368eeeb2137ff59d39094c04395770d617808f36412d3e3dc64db211090f14a351b03a2581a5b44b3b3c622cb11605
   languageName: node
   linkType: hard
 
@@ -3946,22 +3946,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@goatjs/node-eslint@npm:3.19.0":
-  version: 3.19.0
-  resolution: "@goatjs/node-eslint@npm:3.19.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-3.19.0.tgz"
+"@goatjs/node-eslint@npm:3.20.0":
+  version: 3.20.0
+  resolution: "@goatjs/node-eslint@npm:3.20.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-eslint%2F-%2F%40goatjs%2Fnode-eslint-3.20.0.tgz"
   dependencies:
-    "@goatjs/core-eslint": "npm:3.19.0"
-    globals: "npm:^17.9.0"
-  checksum: 10c0/82f12a80fb3952b1454b20881841f7b0576ee33d59b2eaaf2772c7ead09e006db0fd45ab7e322c00514a56fbb75f074e28a65914261b4d723aa78aee781c04bb
+    "@goatjs/core-eslint": "npm:3.20.0"
+    globals: "npm:^17.11.0"
+  checksum: 10c0/0584e693adb5086d19cb4f301a6aa5b718e9f9534bd6a61428cb3b94bb8f5ff8183ddaf2d78f9a3282b4369fa8a39be0ba3cc6aad90a0db744605dfbec431049
   languageName: node
   linkType: hard
 
-"@goatjs/node-monorepo-eslint@npm:^3.19.0":
-  version: 3.19.0
-  resolution: "@goatjs/node-monorepo-eslint@npm:3.19.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-3.19.0.tgz"
+"@goatjs/node-monorepo-eslint@npm:^3.20.0":
+  version: 3.20.0
+  resolution: "@goatjs/node-monorepo-eslint@npm:3.20.0::__archiveUrl=https%3A%2F%2Feurope-west8-npm.pkg.dev%2Fopen-gto-2%2Fgoat%2F%40goatjs%2Fnode-monorepo-eslint%2F-%2F%40goatjs%2Fnode-monorepo-eslint-3.20.0.tgz"
   dependencies:
-    "@goatjs/node-eslint": "npm:3.19.0"
-  checksum: 10c0/401cf9c769ba3fdab2d744adca5f536ea4b47a70279e2dd11dcebd7b6db2b910c306d389f987f32d127ec5363959c18f4bd98a5c0f0b1b39480ebcc81a47e0d2
+    "@goatjs/node-eslint": "npm:3.20.0"
+  checksum: 10c0/782fdc69b0b87da0c43e332eca3e0ad67dd49b4a215ce69e730af8a51d2132daa2e14d6fedee7078b4deedda0466c5a4cedf90bd3b84d50ddd70c7cd5171f474
   languageName: node
   linkType: hard
 
@@ -7341,16 +7341,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/blob@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@vercel/blob@npm:2.4.0"
+"@vercel/blob@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@vercel/blob@npm:2.8.0"
   dependencies:
+    "@vercel/oidc": "npm:^3.6.1"
     async-retry: "npm:^1.3.3"
     is-buffer: "npm:^2.0.5"
     is-node-process: "npm:^1.2.0"
     throttleit: "npm:^2.1.0"
     undici: "npm:^6.23.0"
-  checksum: 10c0/cc8c6dc6203ec2bb09094e64d5751246e16413fd8607f512a6e8b6f03b5a2286f4e87f4809ba340027e7b7eadc030580f16b70a6342c90164ae09c4abcfd5471
+  checksum: 10c0/86eb4d90b3716229259003954c8f7ddd65a32162b0d541aec84635846ff1ced3ab9160095453fe0efa4820e38a3a3d290db7c8f031bed7b832d73dc486cda888
   languageName: node
   linkType: hard
 
@@ -7399,10 +7400,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/container@npm:0.1.1":
-  version: 0.1.1
-  resolution: "@vercel/container@npm:0.1.1"
-  checksum: 10c0/53f2215a19884f8aa7320a62ad2bfeb37ff22af8fed9c5ce2eb2a1a02593d1b019fd58cc4ed7c8c36068a2bb322373221f0ecbf038169452a6913bd409bcd4f1
+"@vercel/cli-exec@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@vercel/cli-exec@npm:1.0.1"
+  dependencies:
+    execa: "npm:5.1.1"
+  checksum: 10c0/4063e59898e5984249a933ace889b152e392f64640fe4d9f6edb8b9bf4c76d43216f561c3774e30a0fe17248ff2732b44dfed017bd73de79a3a245bb0769f0ea
+  languageName: node
+  linkType: hard
+
+"@vercel/container@npm:0.2.0":
+  version: 0.2.0
+  resolution: "@vercel/container@npm:0.2.0"
+  checksum: 10c0/0b0fff2f9630742f382202737571b09a4ecfc61cc3aa0552293f0fbcc9bd1c35d1348b718bef45b845579e2f18dff8632647237987de9d5e998911a52ce40e9b
   languageName: node
   linkType: hard
 
@@ -7634,6 +7644,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/oidc@npm:^3.6.1":
+  version: 3.8.4
+  resolution: "@vercel/oidc@npm:3.8.4"
+  dependencies:
+    "@vercel/cli-config": "npm:0.2.3"
+    "@vercel/cli-exec": "npm:1.0.1"
+    jose: "npm:^5.9.6"
+  checksum: 10c0/215fdbc814b54e4cf2be3a61d85ec84d62af09a01c37806de1774fc0d22a80e044aaf316e6088e255e7a40080ea6fda45b22296d9c15fd7e31777f20b426ebeb
+  languageName: node
+  linkType: hard
+
 "@vercel/prepare-flags-definitions@npm:0.3.0":
   version: 0.3.0
   resolution: "@vercel/prepare-flags-definitions@npm:0.3.0"
@@ -7656,12 +7677,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/python@npm:6.56.1":
-  version: 6.56.1
-  resolution: "@vercel/python@npm:6.56.1"
+"@vercel/python@npm:6.56.2":
+  version: 6.56.2
+  resolution: "@vercel/python@npm:6.56.2"
   dependencies:
     "@vercel/python-analysis": "npm:0.13.2"
-  checksum: 10c0/960a1d7bd7f85744eef8270b3a4d406aca77b070cbc63eb00091d834742e291fedbbbf7a65d3d5b644ff2323ab76b4ad495a8bf65becd485304da0f8f8bff4ea
+  checksum: 10c0/43c0005d6817cd213950d3488e390848b27c023876d7061bfca8cd4d6f9af7eabf8d42214dcd107b8bdccc057618f443f24dabf61fa230f7c820d8cd3538157b
   languageName: node
   linkType: hard
 
@@ -7698,14 +7719,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/rust@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@vercel/rust@npm:1.4.1"
+"@vercel/rust@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@vercel/rust@npm:1.4.2"
   dependencies:
     execa: "npm:5"
     get-port: "npm:5.1.1"
     smol-toml: "npm:1.5.2"
-  checksum: 10c0/63e9b74cd1a3fcdcc41c2cdd17efb11ff4c9d74daed843832d6c93493ff734958c16f03d8fe5698b1e53abe31093b19241136cbefe8e04782bb07862e523b382
+  checksum: 10c0/257918029bb38f1e81f0763ad2c62b1179bdd28cda6ef084a04252cec0ebe8c7c13b76d84a63fd17699f8290b5e8c25ef45b7580716f2c7081ddfdfc6355264a
   languageName: node
   linkType: hard
 
@@ -7751,30 +7772,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/vc-native-darwin-arm64@npm:58.9.4":
-  version: 58.9.4
-  resolution: "@vercel/vc-native-darwin-arm64@npm:58.9.4"
+"@vercel/vc-native-darwin-arm64@npm:58.11.0":
+  version: 58.11.0
+  resolution: "@vercel/vc-native-darwin-arm64@npm:58.11.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@vercel/vc-native-darwin-x64@npm:58.9.4":
-  version: 58.9.4
-  resolution: "@vercel/vc-native-darwin-x64@npm:58.9.4"
+"@vercel/vc-native-darwin-x64@npm:58.11.0":
+  version: 58.11.0
+  resolution: "@vercel/vc-native-darwin-x64@npm:58.11.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@vercel/vc-native-linux-arm64@npm:58.9.4":
-  version: 58.9.4
-  resolution: "@vercel/vc-native-linux-arm64@npm:58.9.4"
+"@vercel/vc-native-linux-arm64@npm:58.11.0":
+  version: 58.11.0
+  resolution: "@vercel/vc-native-linux-arm64@npm:58.11.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@vercel/vc-native-linux-x64@npm:58.9.4":
-  version: 58.9.4
-  resolution: "@vercel/vc-native-linux-x64@npm:58.9.4"
+"@vercel/vc-native-linux-x64@npm:58.11.0":
+  version: 58.11.0
+  resolution: "@vercel/vc-native-linux-x64@npm:58.11.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -7951,7 +7972,7 @@ __metadata:
     react: "npm:^19.2.8"
     react-dom: "npm:^19.2.8"
     typescript: "npm:^6.0.3"
-    vercel: "npm:^58.9.4"
+    vercel: "npm:^58.11.0"
   languageName: unknown
   linkType: soft
 
@@ -7960,7 +7981,7 @@ __metadata:
   resolution: "@whatcode-ai/example@workspace:apps/example"
   dependencies:
     "@eslint/config-helpers": "npm:^0.7.0"
-    "@goatjs/node-monorepo-eslint": "npm:^3.19.0"
+    "@goatjs/node-monorepo-eslint": "npm:^3.20.0"
     "@goatjs/rimraf": "npm:^2.12.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@types/node": "npm:^26.2.0"
@@ -7978,7 +7999,7 @@ __metadata:
     "@elysia/eden": "npm:^1.4.10"
     "@elysiajs/node": "npm:^1.4.5"
     "@eslint/config-helpers": "npm:^0.7.0"
-    "@goatjs/node-monorepo-eslint": "npm:^3.19.0"
+    "@goatjs/node-monorepo-eslint": "npm:^3.20.0"
     "@goatjs/rimraf": "npm:^2.12.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@opencode-ai/sdk": "npm:^1.18.18"
@@ -8004,7 +8025,7 @@ __metadata:
   resolution: "@whatcode-ai/whatcode@workspace:packages/whatcode"
   dependencies:
     "@eslint/config-helpers": "npm:^0.7.0"
-    "@goatjs/node-monorepo-eslint": "npm:^3.19.0"
+    "@goatjs/node-monorepo-eslint": "npm:^3.20.0"
     "@goatjs/rimraf": "npm:^2.12.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
     "@types/node": "npm:^26.2.0"
@@ -11522,7 +11543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:5, execa@npm:^5.1.1":
+"execa@npm:5, execa@npm:5.1.1, execa@npm:^5.1.1":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
   dependencies:
@@ -12359,10 +12380,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.7.0, globals@npm:^17.9.0":
-  version: 17.9.0
-  resolution: "globals@npm:17.9.0"
-  checksum: 10c0/776116bffb916e462d548c26a44c9a5d8f4e551935a883991e9f5d68cbcb21b63e4c688e36bbc564f97d3025e304d8b2bb0a611ecf944825aeee164898dcfbdd
+"globals@npm:^17.11.0, globals@npm:^17.7.0":
+  version: 17.11.0
+  resolution: "globals@npm:17.11.0"
+  checksum: 10c0/5e1be3d816e04d4d0d01b1cdd40e46b5fb6b5e9f15aece9a5919b060e0fb1b3f1b9e7327dce97ef19e05513a6d65872e0834999ddea251557556dddd0f5fde30
   languageName: node
   linkType: hard
 
@@ -13807,6 +13828,13 @@ __metadata:
   version: 6.2.3
   resolution: "jose@npm:6.2.3"
   checksum: 10c0/aa91bccba22cc84d86308f833749bcb0b00441e35c24e0ac79abeac5f76dc62d47bdef9c1da6a0c609f5da6478595f52b252085888b89dbdb163861e40ea4188
+  languageName: node
+  linkType: hard
+
+"jose@npm:^5.9.6":
+  version: 5.10.0
+  resolution: "jose@npm:5.10.0"
+  checksum: 10c0/e20d9fc58d7e402f2e5f04e824b8897d5579aae60e64cb88ebdea1395311c24537bf4892f7de413fab1acf11e922797fb1b42269bc8fc65089a3749265ccb7b0
   languageName: node
   linkType: hard
 
@@ -20710,16 +20738,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vercel@npm:^58.9.4":
-  version: 58.9.4
-  resolution: "vercel@npm:58.9.4"
+"vercel@npm:^58.11.0":
+  version: 58.11.0
+  resolution: "vercel@npm:58.11.0"
   dependencies:
     "@vercel/backends": "npm:0.8.36"
-    "@vercel/blob": "npm:2.4.0"
+    "@vercel/blob": "npm:2.8.0"
     "@vercel/build-utils": "npm:14.0.5"
     "@vercel/cli-auth": "npm:0.3.4"
     "@vercel/cli-config": "npm:0.2.3"
-    "@vercel/container": "npm:0.1.1"
+    "@vercel/container": "npm:0.2.0"
     "@vercel/detect-agent": "npm:1.2.5"
     "@vercel/elysia": "npm:0.1.113"
     "@vercel/express": "npm:0.1.127"
@@ -20734,16 +20762,16 @@ __metadata:
     "@vercel/next": "npm:4.21.3"
     "@vercel/node": "npm:5.9.9"
     "@vercel/prepare-flags-definitions": "npm:0.3.0"
-    "@vercel/python": "npm:6.56.1"
+    "@vercel/python": "npm:6.56.2"
     "@vercel/redwood": "npm:2.5.1"
     "@vercel/remix-builder": "npm:5.9.4"
     "@vercel/ruby": "npm:2.5.1"
-    "@vercel/rust": "npm:1.4.1"
+    "@vercel/rust": "npm:1.4.2"
     "@vercel/static-build": "npm:2.12.5"
-    "@vercel/vc-native-darwin-arm64": "npm:58.9.4"
-    "@vercel/vc-native-darwin-x64": "npm:58.9.4"
-    "@vercel/vc-native-linux-arm64": "npm:58.9.4"
-    "@vercel/vc-native-linux-x64": "npm:58.9.4"
+    "@vercel/vc-native-darwin-arm64": "npm:58.11.0"
+    "@vercel/vc-native-darwin-x64": "npm:58.11.0"
+    "@vercel/vc-native-linux-arm64": "npm:58.11.0"
+    "@vercel/vc-native-linux-x64": "npm:58.11.0"
     chokidar: "npm:4.0.0"
     esbuild: "npm:0.27.0"
     jose: "npm:5.9.6"
@@ -20766,7 +20794,7 @@ __metadata:
   bin:
     vc: dist/vc.js
     vercel: dist/vc.js
-  checksum: 10c0/53893fd6b783f6336aa85d31fe38daf6a02507a8018396f27433fc275ddba9ee0720c55bec6b9b88424c71c9c78f3e59d04e3867901249f0eeabd57956d49510
+  checksum: 10c0/c36dd904a74f6e5b43ebf42b27eadf9db2184764aaaad786e2d696b633b2fe8872118a9ce0ec7b9bfb12537f64a84384d5e9b809d5fc78cfbb2882a151811c54
   languageName: node
   linkType: hard
 
@@ -21049,12 +21077,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "whatcode-ai@workspace:."
   dependencies:
-    "@commitlint/cli": "npm:^21.2.1"
-    "@commitlint/config-conventional": "npm:^21.2.0"
+    "@commitlint/cli": "npm:^21.2.2"
+    "@commitlint/config-conventional": "npm:^21.2.2"
     "@eslint/config-helpers": "npm:^0.7.0"
     "@goatjs/dbz": "npm:^2.64.0"
     "@goatjs/doctor": "npm:^2.50.0"
-    "@goatjs/node-monorepo-eslint": "npm:^3.19.0"
+    "@goatjs/node-monorepo-eslint": "npm:^3.20.0"
     "@whatcode-ai/whatcode": "workspace:*"
     lefthook: "npm:^2.1.10"
     prettier: "npm:^3.9.6"

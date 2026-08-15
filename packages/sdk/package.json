@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/node-monorepo-eslint": "^3.19.0",
+    "@goatjs/node-monorepo-eslint": "^3.20.0",
     "@goatjs/rimraf": "^2.12.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.2.0",

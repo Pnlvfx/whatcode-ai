@@ -37,4 +37,5 @@ const getLocalIpViaNetworkInterfaces = (): string | undefined => {
 };
 
 const isPrivate = (v: string) => v.startsWith('192.168.') || v.startsWith('10.') || (v.startsWith('172.') && second(v) >= 16 && second(v) <= 31);
+// eslint-disable-next-line no-restricted-syntax
 const second = (v: string) => Math.trunc(Number(v.split('.', 2)[1] ?? '0'));

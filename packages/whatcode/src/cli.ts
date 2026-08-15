@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { checkForUpdate } from './update.ts';
 import { config } from './config.ts';
+import { checkForUpdate } from './update.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';

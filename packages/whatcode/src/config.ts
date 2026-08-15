@@ -4,7 +4,7 @@ import * as z from 'zod/v4/mini';
 try {
   process.loadEnvFile();
 } catch {
-  /* empty */
+  /* no env */
 }
 
 const envSchema = z.strictObject({
@@ -12,7 +12,7 @@ const envSchema = z.strictObject({
   WHATCODE_PASSWORD: z.optional(z.string()),
 });
 
-export const config = await envSchema.parseAsync({
+export const config = envSchema.parse({
   WHATCODE_SERVER_URL: process.env['WHATCODE_SERVER_URL'],
   WHATCODE_PASSWORD: process.env['WHATCODE_PASSWORD'],
 });
