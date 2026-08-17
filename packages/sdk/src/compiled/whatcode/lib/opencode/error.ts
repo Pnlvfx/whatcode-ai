@@ -45,12 +45,7 @@ export const isOpencodeError = (err: unknown): err is OpencodeError => {
 export const opencodeError = (err: OpencodeError): Error => new Error(getOpencodeErrorMessage(err), { cause: err });
 
 export const getOpencodeErrorMessage = (err: OpencodeError): string => {
-  if (err instanceof Error) {
-    if (err.message === 'Network request failed') {
-      return 'Server unreachable.\nIs the OpenCode server running?';
-    }
-    return err.message;
-  }
+  if (err instanceof Error) return err.message === 'Network request failed' ? 'Server unreachable.\nIs the OpenCode server running?' : err.message;
   if (!isOpencodeError(err)) return 'An unexpected error occurred';
   return 'name' in err ? err.data.message : getRequestErrorMessage(err);
 };
