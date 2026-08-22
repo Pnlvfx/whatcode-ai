@@ -1,3 +1,5 @@
+## [1.26.0](compare/%40whatcode-ai%2Fsdk%401.25.0...%40whatcode-ai%2Fsdk%401.26.0) "@whatcode-ai/sdk" (2026-08-22)
+
 ## [1.25.0](compare/%40whatcode-ai%2Fsdk%401.24.0...%40whatcode-ai%2Fsdk%401.25.0) "@whatcode-ai/sdk" (2026-08-22)
 
 ### Bug Fixes
