@@ -1,3 +1,4 @@
+/* eslint-disable parallelize/no-sequential-await */
 import { rimraf } from '@goatjs/rimraf';
 import { createGitClient } from '@goatjs/node/git';
 import { execa } from 'execa';

@@ -31,8 +31,8 @@ export const startNotifications = (client: OpencodeClient): void => {
     logger.debug('notifications', `session.idle event received for session ${sessionID}`);
     // Delay slightly so a concurrent session.error handler has time to set the lock before we check it.
     await setTimeout(IDLE_DELAY_MS);
+    logger.debug('notifications', `skipping session.idle for session ${sessionID}, error notification already sent`);
     if (smart.isLocked(sessionID)) {
-      smart.unlock(sessionID);
       logger.debug('notifications', `skipping session.idle for session ${sessionID}, error notification already sent`);
     } else {
       const { data: session, error } = await client.session.get({ sessionID });
