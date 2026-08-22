@@ -52,7 +52,7 @@ export const updateAccountApnToken = async ({ deviceId, apnToken }: { deviceId: 
   return { data, error };
 };
 
-export const deleteAccount = async ({ deviceId }: { deviceId: string }) => {
+export const deleteAccountApnToken = async ({ deviceId }: { deviceId: string }) => {
   const { error, data } = await accountsStore.set((prev) => prev.map((e) => (e.deviceId === deviceId ? { ...e, apnToken: undefined } : e)));
 
   // if (error) {

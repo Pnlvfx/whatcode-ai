@@ -23,14 +23,14 @@ Under the hood, the daemon runs `opencode --serve --hostname <address>` on your 
 No installation required. Run it directly with npx:
 
 ```bash
-npx @whatcode-ai/whatcode
+npx @whatcode-ai/whatcode start
 ```
 
 Or install it globally:
 
 ```bash
 npm install -g @whatcode-ai/whatcode
-whatcode
+whatcode start
 ```
 
 Or use it as a library in your own Node.js project:
@@ -84,7 +84,7 @@ You can protect your daemon with a password. When set, every request must includ
 Via CLI, set the `WHATCODE_PASSWORD` environment variable:
 
 ```bash
-WHATCODE_PASSWORD=your-password npx @whatcode-ai/whatcode
+WHATCODE_PASSWORD=your-password npx @whatcode-ai/whatcode start
 ```
 
 Or add it to a `.env` file in the directory where you run the daemon:
@@ -108,7 +108,7 @@ Control how much the daemon logs. The CLI defaults to `info` (shows info, warnin
 Via CLI:
 
 ```bash
-npx @whatcode-ai/whatcode --log-level debug
+npx @whatcode-ai/whatcode start --log-level debug
 ```
 
 Via library:
@@ -128,7 +128,7 @@ await createWhatcodeServer({ logLevel: 'debug' });
 Passing `--tailscale` exposes the daemon over a secure HTTPS tunnel on your [Tailscale](https://tailscale.com) network:
 
 ```bash
-npx @whatcode-ai/whatcode --tailscale
+npx @whatcode-ai/whatcode start --tailscale
 ```
 
 This runs `tailscale serve --bg <port>` in the background, which proxies your local port over HTTPS using your Tailscale hostname (e.g. `https://my-mac.tail1234.ts.net`). The QR code printed in the terminal includes this URL so the app connects over Tailscale automatically. When you stop the daemon (Ctrl+C), it cleans up the Tailscale serve rule automatically.
@@ -160,14 +160,14 @@ await resetWhatcodeServer();
 
 ### `createWhatcodeServer(config)`
 
-| Option         | Type                          | Default     | Description                                                                                                         |
-| -------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
-| `port`         | `number`                          | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.                                              |
-| `opencodePort` | `number`                          | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                                                     |
-| `tailscale`    | `boolean`                         | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.                                         |
-| `password`     | `string`                          | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually.                                     |
+| Option         | Type                          | Default     | Description                                                                                                                                             |
+| -------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `port`         | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.                                              |
+| `opencodePort` | `number`                      | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                                                     |
+| `tailscale`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.                                         |
+| `password`     | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually.                                     |
 | `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                                                                |
-| `hostname`     | `string`                          | `undefined` | Hostname or IP to advertise as the public OpenCode address. Useful when the auto-detected local IP is incorrect, e.g. in VPN or multi-NIC environments. |
+| `hostname`     | `string`                      | `undefined` | Hostname or IP to advertise as the public OpenCode address. Useful when the auto-detected local IP is incorrect, e.g. in VPN or multi-NIC environments. |
 
 ### `resetWhatcodeServer()`
 
@@ -175,20 +175,20 @@ Clears all stored APNs device tokens. Use this if notifications stop working or 
 
 ## CLI reference
 
-`npx @whatcode-ai/whatcode` runs the `start` command by default, so `whatcode` and `whatcode start` are equivalent. The `reset` command must be called explicitly.
+`npx @whatcode-ai/whatcode start` runs the `start` command by default, so `whatcode` and `whatcode start` are equivalent. The `reset` command must be called explicitly.
 
 Run `npx @whatcode-ai/whatcode --version` to print the installed version without starting the daemon.
 
 **Flags**
 
-| Flag              | Type                          | Default | Description                   |
-| ----------------- | ----------------------------- | ------- | ----------------------------- |
-| `--port`          | `number`                          | `8192`  | Port for the WhatCode server.                                                       |
-| `--opencode-port` | `number`                          | `4096`  | Port for the OpenCode server.                                                       |
-| `--tailscale`     | `boolean`                         | -       | Expose via Tailscale HTTPS.                                                         |
-| `--hostname`      | `string`                          | -       | Hostname or IP to advertise as the public OpenCode address. Overrides the auto-detected local IP. |
-| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                                             |
-| `--version`       | `boolean`                          | -       | Print the installed version of `@whatcode-ai/whatcode` and exit.                    |
+| Flag              | Type                          | Default | Description                                                                                       |
+| ----------------- | ----------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| `--port`          | `number`                      | `8192`  | Port for the WhatCode server.                                                                     |
+| `--opencode-port` | `number`                      | `4096`  | Port for the OpenCode server.                                                                     |
+| `--tailscale`     | `boolean`                     | -       | Expose via Tailscale HTTPS.                                                                       |
+| `--hostname`      | `string`                      | -       | Hostname or IP to advertise as the public OpenCode address. Overrides the auto-detected local IP. |
+| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                                                           |
+| `--version`       | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit.                                  |
 
 **Environment variables**
 
@@ -198,7 +198,7 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 
 ### Commands
 
-| Command | Description                                                                       |
-| ------- | ----------------------------------------------------------------------------------- |
+| Command | Description                                                                        |
+| ------- | ---------------------------------------------------------------------------------- |
 | `start` | Start the daemon. This is the default command, so it also runs with no subcommand. |
 | `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working.    |

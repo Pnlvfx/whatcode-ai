@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { randomBytes, randomUUID } from 'node:crypto';
-import { addAccount, deleteAccount, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
+import { addAccount, deleteAccountApnToken, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import { buildAccountResponse } from '../user.ts';
@@ -15,13 +15,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
       let account = accounts.find((a) => a.deviceId === device_id);
       const identity = await getIdentity();
       if (!account) {
-        account = {
-          name: identity.name,
-          token: randomBytes(32).toString('hex'),
-          id: randomUUID(),
-          deviceId: device_id,
-          deviceName: device_name,
-        };
+        account = { name: identity.name, token: randomBytes(32).toString('hex'), id: randomUUID(), deviceId: device_id, deviceName: device_name };
         await addAccount(account);
       }
       return { token: account.token, user: buildAccountResponse(account, identity) };
@@ -39,6 +33,6 @@ export const userRouter = new Elysia({ prefix: '/user' })
     { body: z.strictObject({ token: z.string() }) },
   )
   .post('/logout', async ({ account }) => {
-    await deleteAccount({ deviceId: account.deviceId });
+    await deleteAccountApnToken({ deviceId: account.deviceId });
     return { status: 'success' };
   });

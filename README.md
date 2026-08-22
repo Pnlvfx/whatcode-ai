@@ -9,18 +9,18 @@ Full docs, API reference, and guides live at **[whatcode.app](https://whatcode.a
 ## Quick start
 
 ```bash
-npx @whatcode-ai/whatcode
+npx @whatcode-ai/whatcode start
 # or with Tailscale
-npx @whatcode-ai/whatcode --tailscale
+npx @whatcode-ai/whatcode start --tailscale
 ```
 
 ## Packages
 
-| Package | Description |
-| ------- | ----------- |
-| [`@whatcode-ai/whatcode`](./packages/whatcode) | `whatcode` CLI |
-| [`@whatcode-ai/sdk`](./packages/sdk) | Core SDK (programmatic usage) |
-| [`@whatcode-ai/example`](./apps/example) | Minimal usage example |
+| Package                                        | Description                   |
+| ---------------------------------------------- | ----------------------------- |
+| [`@whatcode-ai/whatcode`](./packages/whatcode) | `whatcode` CLI                |
+| [`@whatcode-ai/sdk`](./packages/sdk)           | Core SDK (programmatic usage) |
+| [`@whatcode-ai/example`](./apps/example)       | Minimal usage example         |
 
 ## Development
 

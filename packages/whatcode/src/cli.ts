@@ -30,15 +30,17 @@ await yargs(hideBin(process.argv))
           description: 'Log level: none | info | debug (default: info)',
         }),
     async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
-      await checkForUpdate(pkg.version);
-      const { url } = await createWhatcodeServer({
-        tailscale,
-        ...(port !== undefined && { port }),
-        ...(opencodePort !== undefined && { opencodePort }),
-        logLevel,
-        ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
-        ...(hostname !== undefined && { hostname }),
-      });
+      const [{ url }] = await Promise.all([
+        createWhatcodeServer({
+          tailscale,
+          ...(port !== undefined && { port }),
+          ...(opencodePort !== undefined && { opencodePort }),
+          logLevel,
+          ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
+          ...(hostname !== undefined && { hostname }),
+        }),
+        checkForUpdate(pkg.version),
+      ]);
 
       if (url) {
         logger.info('whatcode', `use this URL in the app: ${url}`);

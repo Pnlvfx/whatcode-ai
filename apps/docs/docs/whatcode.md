@@ -32,7 +32,7 @@ WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhon
 
 See [Getting Started](/) for the full connection walkthrough. In short:
 
-1. Run `npx @whatcode-ai/whatcode` on your machine.
+1. Run `npx @whatcode-ai/whatcode start` on your machine.
 2. Scan the QR code with the app.
 3. Done.
 

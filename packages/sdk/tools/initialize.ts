@@ -1,3 +1,4 @@
+/* eslint-disable parallelize/no-sequential-await */
 /* eslint-disable import/no-extraneous-dependencies */
 import { copyFilesFromFolder } from '@goatjs/node/copy-files-from-folder';
 import { homedir } from 'node:os';

@@ -7,7 +7,7 @@ Full documentation at **[whatcode.app](https://whatcode.app)**.
 ## Usage
 
 ```bash
-npx @whatcode-ai/whatcode
+npx @whatcode-ai/whatcode start
 ```
 
 ## Programmatic usage

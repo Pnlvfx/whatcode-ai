@@ -39,7 +39,7 @@ Refer to the [OpenCode documentation](https://opencode.ai/docs) for the full lis
 Run the following command in your terminal:
 
 ```bash
-npx @whatcode-ai/whatcode
+npx @whatcode-ai/whatcode start
 ```
 
 This will:
@@ -69,7 +69,7 @@ Not subscribed yet? Both plans include a 3-day free trial. [Start yours on the A
 If you want to connect from outside your local network, use the `--tailscale` flag:
 
 ```bash
-npx @whatcode-ai/whatcode --tailscale
+npx @whatcode-ai/whatcode start --tailscale
 ```
 
 This sets up a secure HTTPS tunnel over your [Tailscale](https://tailscale.com) network. The QR code will include your Tailscale URL so the app can reach your machine from anywhere. See the [Daemon](/daemon) page for more details.
