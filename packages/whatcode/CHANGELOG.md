@@ -1,3 +1,10 @@
+## [1.25.0](compare/%40whatcode-ai%2Fwhatcode%401.24.0...%40whatcode-ai%2Fwhatcode%401.25.0) "@whatcode-ai/whatcode" (2026-08-22)
+
+### Bug Fixes
+
+* docs command and improve perf 7d732c1
+* race on env loading 10955fd
+
 ## [1.24.0](compare/%40whatcode-ai%2Fwhatcode%401.23.0...%40whatcode-ai%2Fwhatcode%401.24.0) "@whatcode-ai/whatcode" (2026-08-13)
 
 ### Features
