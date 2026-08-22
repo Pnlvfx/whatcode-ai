@@ -49,7 +49,6 @@
   "dependencies": {
     "@elysia/eden": "^1.4.10",
     "@elysiajs/node": "^1.4.5",
-    "@opencode-ai/client": "0.0.0-next-17444",
     "@opencode-ai/sdk": "^1.18.21",
     "@sinclair/typebox": "^0.34.52",
     "elysia": "^1.4.29",

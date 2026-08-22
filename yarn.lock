@@ -4756,48 +4756,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@msgpackr-extract/msgpackr-extract-darwin-arm64@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-darwin-arm64@npm:3.0.4"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@msgpackr-extract/msgpackr-extract-darwin-x64@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-darwin-x64@npm:3.0.4"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@msgpackr-extract/msgpackr-extract-linux-arm64@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-linux-arm64@npm:3.0.4"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@msgpackr-extract/msgpackr-extract-linux-arm@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-linux-arm@npm:3.0.4"
-  conditions: os=linux & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@msgpackr-extract/msgpackr-extract-linux-x64@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-linux-x64@npm:3.0.4"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@msgpackr-extract/msgpackr-extract-win32-x64@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@msgpackr-extract/msgpackr-extract-win32-x64@npm:3.0.4"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@napi-rs/keyring-darwin-arm64@npm:1.2.0":
   version: 1.2.0
   resolution: "@napi-rs/keyring-darwin-arm64@npm:1.2.0"
@@ -5010,41 +4968,6 @@ __metadata:
   version: 4.0.0
   resolution: "@npmcli/redact@npm:4.0.0"
   checksum: 10c0/a1e9ba9c70a6b40e175bda2c3dd8cfdaf096e6b7f7a132c855c083c8dfe545c3237cd56702e2e6627a580b1d63373599d49a1192c4078a85bf47bbde824df31c
-  languageName: node
-  linkType: hard
-
-"@opencode-ai/client@npm:0.0.0-next-17444":
-  version: 0.0.0-next-17444
-  resolution: "@opencode-ai/client@npm:0.0.0-next-17444"
-  dependencies:
-    "@opencode-ai/protocol": "npm:0.0.0-next-17444"
-    "@opencode-ai/schema": "npm:0.0.0-next-17444"
-  peerDependencies:
-    effect: 4.0.0-beta.101
-  peerDependenciesMeta:
-    effect:
-      optional: true
-  checksum: 10c0/c507d13089155cf87cefb293c67c473199de638833644048a4d7e91a98e13553705e6da8cda94658bb8bd991062b8612802be86b1bae2b1f452b5598fc418088
-  languageName: node
-  linkType: hard
-
-"@opencode-ai/protocol@npm:0.0.0-next-17444":
-  version: 0.0.0-next-17444
-  resolution: "@opencode-ai/protocol@npm:0.0.0-next-17444"
-  dependencies:
-    "@opencode-ai/schema": "npm:0.0.0-next-17444"
-    effect: "npm:4.0.0-beta.101"
-  checksum: 10c0/fe81f7bc1f5dfcc69bf363843c7cc89e4e3fca3c177b8e3ff8a8d89ce35f739db83703fe70e243329a2785dfc3cab4cf17f2a7ed298f5ab1901030360c5e540d
-  languageName: node
-  linkType: hard
-
-"@opencode-ai/schema@npm:0.0.0-next-17444":
-  version: 0.0.0-next-17444
-  resolution: "@opencode-ai/schema@npm:0.0.0-next-17444"
-  dependencies:
-    "@standard-schema/spec": "npm:1.1.0"
-    effect: "npm:4.0.0-beta.101"
-  checksum: 10c0/e2bd4758026e47eb8ee36551b80f5c4312110efb77fb550cdb79cc456977513ea3acfa7f6f66f86e073e410b3b64dfdcbdb304ac71487743cd629dfa8b461941
   languageName: node
   linkType: hard
 
@@ -6050,13 +5973,6 @@ __metadata:
     micromark-util-character: "npm:^1.1.0"
     micromark-util-symbol: "npm:^1.0.1"
   checksum: 10c0/b8da9d8f560740959c421d3ce5be43952eace1c95cb65402d9473a15e66463346a37fb5f121a6b22a83af51e8845b0b4ff3c321f14ce31bd58fb126acf6c8ed9
-  languageName: node
-  linkType: hard
-
-"@standard-schema/spec@npm:1.1.0, @standard-schema/spec@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@standard-schema/spec@npm:1.1.0"
-  checksum: 10c0/d90f55acde4b2deb983529c87e8025fa693de1a5e8b49ecc6eb84d1fd96328add0e03d7d551442156c7432fd78165b2c26ff561b970a9a881f046abb78d6a526
   languageName: node
   linkType: hard
 
@@ -8096,7 +8012,6 @@ __metadata:
     "@goatjs/node-monorepo-eslint": "npm:^3.21.0"
     "@goatjs/rimraf": "npm:^2.12.0"
     "@goatjs/typescript-config": "npm:^2.2.0"
-    "@opencode-ai/client": "npm:0.0.0-next-17444"
     "@opencode-ai/sdk": "npm:^1.18.21"
     "@sinclair/typebox": "npm:^0.34.52"
     "@types/node": "npm:^26.2.0"
@@ -10343,7 +10258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-libc@npm:^2.0.0, detect-libc@npm:^2.0.1, detect-libc@npm:^2.0.3":
+"detect-libc@npm:^2.0.0, detect-libc@npm:^2.0.3":
   version: 2.1.2
   resolution: "detect-libc@npm:2.1.2"
   checksum: 10c0/acc675c29a5649fa1fb6e255f993b8ee829e510b6b56b0910666949c80c364738833417d0edb5f90e4e46be17228b0f2b66a010513984e18b15deeeac49369c4
@@ -10582,24 +10497,6 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 10c0/b5bb125ee93161bc16bfe6e56c6b04de5ad2aa44234d8f644813cc95d861a6910903132b05093706de2b706599367c4130eb6d170f6b46895686b95f87d017b7
-  languageName: node
-  linkType: hard
-
-"effect@npm:4.0.0-beta.101":
-  version: 4.0.0-beta.101
-  resolution: "effect@npm:4.0.0-beta.101"
-  dependencies:
-    "@standard-schema/spec": "npm:^1.1.0"
-    fast-check: "npm:^4.9.0"
-    find-my-way-ts: "npm:^0.1.6"
-    ini: "npm:^7.0.0"
-    kubernetes-types: "npm:^1.30.0"
-    msgpackr: "npm:^2.0.4"
-    multipasta: "npm:^0.2.8"
-    toml: "npm:^4.1.2"
-    uuid: "npm:^14.0.1"
-    yaml: "npm:^2.9.0"
-  checksum: 10c0/49759bf3e2af18b835965d7e972fbab0563ce926e1f40b736d41a37ddede3422d795c83b12d2a5514a7331993ab8d711118305e6d0ca2047bd6867bf5dfeb181
   languageName: node
   linkType: hard
 
@@ -11777,15 +11674,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-check@npm:^4.9.0":
-  version: 4.9.0
-  resolution: "fast-check@npm:4.9.0"
-  dependencies:
-    pure-rand: "npm:^8.0.0"
-  checksum: 10c0/d31e6cf7b4ef01dc654193ea7c34a894c51b1553b6781f22a50808d5535d825c2ff2adff23a7c2f14d0452c90917bd20a84c1e807d1f8064aa4d984a21e72788
-  languageName: node
-  linkType: hard
-
 "fast-decode-uri-component@npm:^1.0.1":
   version: 1.0.1
   resolution: "fast-decode-uri-component@npm:1.0.1"
@@ -12043,13 +11931,6 @@ __metadata:
     common-path-prefix: "npm:^3.0.0"
     pkg-dir: "npm:^7.0.0"
   checksum: 10c0/0faa7956974726c8769671de696d24c643ca1e5b8f7a2401283caa9e07a5da093293e0a0f4bd18c920ec981d2ef945c7f5b946cde268dfc9077d833ad0293cff
-  languageName: node
-  linkType: hard
-
-"find-my-way-ts@npm:^0.1.6":
-  version: 0.1.6
-  resolution: "find-my-way-ts@npm:0.1.6"
-  checksum: 10c0/16ad4b15275b56ee0ec361d0c61afbdff4c75bd0ac04112f6910f188cb1058096ba63529c2363914da6bb60266aa4def1025af04af26368ff87eb0df52f2862f
   languageName: node
   linkType: hard
 
@@ -13281,13 +13162,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ini@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "ini@npm:7.0.0"
-  checksum: 10c0/7520cae38bd5587e1cbca4637bb5fc0e157f38e0816522756456010ef703772d0018f9f4987cb9977bf3b10c1feccaad7800744dd1f5d85fb435e58a1baa9754
-  languageName: node
-  linkType: hard
-
 "inline-style-parser@npm:0.2.7":
   version: 0.2.7
   resolution: "inline-style-parser@npm:0.2.7"
@@ -14190,13 +14064,6 @@ __metadata:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
   checksum: 10c0/e3f706099a3bc2ba21687bc836d1f5b0cbe441b3515e3d0b0a6c7c941005d8efcd7e2d326e6236874124e8888a45597579538990f2a1089b01f13172019ea1e3
-  languageName: node
-  linkType: hard
-
-"kubernetes-types@npm:^1.30.0":
-  version: 1.30.0
-  resolution: "kubernetes-types@npm:1.30.0"
-  checksum: 10c0/de3641e4f50cfc123c4102a73c12932e1db8e51783c7cae4ea8ad3561bd56fab0f1c2346801f84a4c36aae8cea0b25d21e9514cc0fcecd4d64b1314043263076
   languageName: node
   linkType: hard
 
@@ -15819,49 +15686,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msgpackr-extract@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "msgpackr-extract@npm:3.0.4"
-  dependencies:
-    "@msgpackr-extract/msgpackr-extract-darwin-arm64": "npm:3.0.4"
-    "@msgpackr-extract/msgpackr-extract-darwin-x64": "npm:3.0.4"
-    "@msgpackr-extract/msgpackr-extract-linux-arm": "npm:3.0.4"
-    "@msgpackr-extract/msgpackr-extract-linux-arm64": "npm:3.0.4"
-    "@msgpackr-extract/msgpackr-extract-linux-x64": "npm:3.0.4"
-    "@msgpackr-extract/msgpackr-extract-win32-x64": "npm:3.0.4"
-    node-gyp: "npm:latest"
-    node-gyp-build-optional-packages: "npm:5.2.2"
-  dependenciesMeta:
-    "@msgpackr-extract/msgpackr-extract-darwin-arm64":
-      optional: true
-    "@msgpackr-extract/msgpackr-extract-darwin-x64":
-      optional: true
-    "@msgpackr-extract/msgpackr-extract-linux-arm":
-      optional: true
-    "@msgpackr-extract/msgpackr-extract-linux-arm64":
-      optional: true
-    "@msgpackr-extract/msgpackr-extract-linux-x64":
-      optional: true
-    "@msgpackr-extract/msgpackr-extract-win32-x64":
-      optional: true
-  bin:
-    download-msgpackr-prebuilds: bin/download-prebuilds.js
-  checksum: 10c0/582a9d17abbf3019e600e948736695056280ce401fd0235ee2474e95f9952208b9f6cce4d0e355b03b7d3c5630e6c3d11fe5fc27fdedb2311cce48de464338d8
-  languageName: node
-  linkType: hard
-
-"msgpackr@npm:^2.0.4":
-  version: 2.0.5
-  resolution: "msgpackr@npm:2.0.5"
-  dependencies:
-    msgpackr-extract: "npm:^3.0.4"
-  dependenciesMeta:
-    msgpackr-extract:
-      optional: true
-  checksum: 10c0/7ac9820cecd44d24d2ef07994405a277509f004d4fb0a77d04e10e9071d0599e86ad53a9daf673e801518230774bdaca72b1fdcff2b516584ab58bd19362e6ad
-  languageName: node
-  linkType: hard
-
 "multicast-dns@npm:^7.2.5":
   version: 7.2.5
   resolution: "multicast-dns@npm:7.2.5"
@@ -15871,13 +15695,6 @@ __metadata:
   bin:
     multicast-dns: cli.js
   checksum: 10c0/5120171d4bdb1577764c5afa96e413353bff530d1b37081cb29cccc747f989eb1baf40574fe8e27060fc1aef72b59c042f72b9b208413de33bcf411343c69057
-  languageName: node
-  linkType: hard
-
-"multipasta@npm:^0.2.8":
-  version: 0.2.8
-  resolution: "multipasta@npm:0.2.8"
-  checksum: 10c0/f645415c27736db1db5f0b8e05248c0a6589d265d1ee277eb5fa50b7be268479b64aa29dc27f968acdb2191907691ba6ebad7631e375acaeb39785acf5f21377
   languageName: node
   linkType: hard
 
@@ -16002,19 +15819,6 @@ __metadata:
     encoding:
       optional: true
   checksum: 10c0/b55786b6028208e6fbe594ccccc213cab67a72899c9234eb59dba51062a299ea853210fcf526998eaa2867b0963ad72338824450905679ff0fa304b8c5093ae8
-  languageName: node
-  linkType: hard
-
-"node-gyp-build-optional-packages@npm:5.2.2":
-  version: 5.2.2
-  resolution: "node-gyp-build-optional-packages@npm:5.2.2"
-  dependencies:
-    detect-libc: "npm:^2.0.1"
-  bin:
-    node-gyp-build-optional-packages: bin.js
-    node-gyp-build-optional-packages-optional: optional.js
-    node-gyp-build-optional-packages-test: build-test.js
-  checksum: 10c0/c81128c6f91873381be178c5eddcbdf66a148a6a89a427ce2bcd457593ce69baf2a8662b6d22cac092d24aa9c43c230dec4e69b3a0da604503f4777cd77e282b
   languageName: node
   linkType: hard
 
@@ -18069,13 +17873,6 @@ __metadata:
   dependencies:
     escape-goat: "npm:^4.0.0"
   checksum: 10c0/9707e0a7f00e5922d47527d1c8d88d4224b1e86502da2fca27943eb0e9bb218121c91fa0af6c30531a2ee5ade0c326b5d33c40fdf61bc593c4224027412fd9b7
-  languageName: node
-  linkType: hard
-
-"pure-rand@npm:^8.0.0":
-  version: 8.4.2
-  resolution: "pure-rand@npm:8.4.2"
-  checksum: 10c0/4b2ef2a2e68a258fb311efd26b65305b4865856e28d6b40ff61f7d65bb6a39b4f8ebbcf7dfc843193b3cfe54e7501dbc2c7aba0ecdb97d13cd634db709df83fd
   languageName: node
   linkType: hard
 
@@ -20200,13 +19997,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"toml@npm:^4.1.2":
-  version: 4.3.0
-  resolution: "toml@npm:4.3.0"
-  checksum: 10c0/4a0ad64d4ef0b47f672a7b6bd7e776b9e03ad845998968fb105f8d561c3648eaff0217baca3f562d17e865e5bd7393441a8e54528920f0c171e41fdc8dfb39d6
-  languageName: node
-  linkType: hard
-
 "totalist@npm:^3.0.0":
   version: 3.0.1
   resolution: "totalist@npm:3.0.1"
@@ -20924,7 +20714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:14.0.1, uuid@npm:^14.0.1":
+"uuid@npm:14.0.1":
   version: 14.0.1
   resolution: "uuid@npm:14.0.1"
   bin:
