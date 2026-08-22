@@ -17,7 +17,7 @@ await execa('yarn', ['vercel', 'deploy', '--prebuilt', '--prod'], { stdio: 'inhe
 
 try {
   await execa('yarn', ['version', 'minor']);
-  const packageJson = await getPkgJSON(path.resolve('.'));
+  const packageJson = await getPkgJSON(path.resolve('.', 'package.json'));
   if (!packageJson.version) throw new Error('Deploy error');
   await git.add();
   await git.commit(`chore(release): publish ${packageJson.name}`);
