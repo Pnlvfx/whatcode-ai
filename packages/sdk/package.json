@@ -65,7 +65,7 @@
     "@goatjs/rimraf": "^2.12.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.2.0",
-    "eslint": "^10.8.1",
+    "eslint": "^10.9.0",
     "typescript": "^6.0.3",
     "zod": "^4.4.3"
   },
