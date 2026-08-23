@@ -1,3 +1,9 @@
+## [1.27.0](compare/%40whatcode-ai%2Fsdk%401.26.0...%40whatcode-ai%2Fsdk%401.27.0) "@whatcode-ai/sdk" (2026-08-23)
+
+### Bug Fixes
+
+* version check silently skipped e9d1685
+
 ## [1.26.0](compare/%40whatcode-ai%2Fsdk%401.25.0...%40whatcode-ai%2Fsdk%401.26.0) "@whatcode-ai/sdk" (2026-08-22)
 
 ## [1.25.0](compare/%40whatcode-ai%2Fsdk%401.24.0...%40whatcode-ai%2Fsdk%401.25.0) "@whatcode-ai/sdk" (2026-08-22)
