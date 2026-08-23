@@ -24,6 +24,7 @@ export const opencode = async ({ password, port, hostname, signal, timeout }: Op
       process.env['OPENCODE_SERVER_PASSWORD'] = password;
     }
 
+    // eslint-disable-next-line parallelize/no-sequential-await -- health check must follow server creation to verify the server that was just started
     server = await createOpencodeServer({
       port,
       ...(hostname !== undefined && { hostname }),

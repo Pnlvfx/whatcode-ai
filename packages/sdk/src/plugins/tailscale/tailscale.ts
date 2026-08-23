@@ -10,6 +10,7 @@ export const createTailscale = (port: number) => {
 
   return {
     start: async (): Promise<{ url: string }> => {
+      // eslint-disable-next-line parallelize/no-sequential-await -- prerequisite chain: installed → daemon reachable → hostname; each step only makes sense if the prior succeeded
       await assertTailscaleInstalled();
       await assertDaemonReachable();
       const hostname = await getHostname();
