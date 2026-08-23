@@ -50,6 +50,9 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
         requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
         requestHeaders.delete('accept-encoding');
         const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
+        if (!upstream.ok) {
+          logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
+        }
         const responseHeaders = new Headers(upstream.headers);
         responseHeaders.delete('content-encoding');
         responseHeaders.delete('content-length');
