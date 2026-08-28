@@ -27,8 +27,8 @@ npx @whatcode-ai/whatcode start --tailscale
 ```bash
 git clone https://github.com/Pnlvfx/whatcode-ai.git
 cd whatcode-ai
-yarn install
-yarn build
+pnpm install
+pnpm build
 ```
 
 ## License

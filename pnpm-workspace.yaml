@@ -1,0 +1,21 @@
+nodeLinker: hoisted
+
+fetchRetries: 0
+
+fetchTimeout: 900000
+
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - '@goatjs/*'
+
+allowBuilds:
+  '@swc/core': true
+  core-js: true
+  esbuild: true
+  lefthook: true
+  unrs-resolver: true

@@ -41,9 +41,6 @@
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
     "initialize": "node tools/initialize.ts",
     "lint": "eslint",
-    "prepack": "yarn build",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test && eslint",
     "tsc": "tsc --noEmit"
   },
   "dependencies": {

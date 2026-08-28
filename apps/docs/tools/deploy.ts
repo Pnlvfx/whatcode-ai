@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable parallelize/no-sequential-await */
 import { rimraf } from '@goatjs/rimraf';
 import { createGitClient } from '@goatjs/node/git';
@@ -11,12 +12,12 @@ await dbz.checkGitStatus(git);
 
 await rimraf(['build', '.docusaurus']);
 
-await execa('yarn', ['vercel', 'pull', '--yes'], { stdio: 'inherit' });
-await execa('yarn', ['vercel', 'build', '--prod'], { stdio: 'inherit' });
-await execa('yarn', ['vercel', 'deploy', '--prebuilt', '--prod'], { stdio: 'inherit' });
+await execa('pnpm', ['vercel', 'pull', '--yes'], { stdio: 'inherit' });
+await execa('pnpm', ['vercel', 'build', '--prod'], { stdio: 'inherit' });
+await execa('pnpm', ['vercel', 'deploy', '--prebuilt', '--prod'], { stdio: 'inherit' });
 
 try {
-  await execa('yarn', ['version', 'minor']);
+  await dbz.bumpVersion(path.resolve('.'), 'minor');
   const packageJson = await getPkgJSON(path.resolve('.', 'package.json'));
   if (!packageJson.version) throw new Error('Deploy error');
   await git.add();

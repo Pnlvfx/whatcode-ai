@@ -25,13 +25,13 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "dev": "yarn whatcode start --log-level debug --port 6666 --opencode-port 4099 --hostname 0.0.0.0",
-    "docs": "yarn workspace @whatcode-ai/docs",
+    "dev": "pnpm whatcode start --log-level debug --port 6666 --opencode-port 4099 --hostname 0.0.0.0",
+    "docs": "pnpm --filter @whatcode-ai/docs",
     "initialize": "turbo initialize",
     "lint": "turbo lint",
+    "ncu": "pnpm --filter @whatcode-ai/sdk initialize && pnpm update --interactive --latest --recursive",
     "prepare": "lefthook install",
-    "tsc": "turbo tsc",
-    "update": "yarn workspace @whatcode-ai/sdk initialize && yarn upgrade-interactive"
+    "tsc": "turbo tsc"
   },
   "dependencies": {
     "@whatcode-ai/whatcode": "workspace:*"
@@ -48,5 +48,5 @@
     "turbo": "^2.10.11",
     "typescript": "^6.0.3"
   },
-  "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
+  "packageManager": "pnpm@11.24.0"
 }

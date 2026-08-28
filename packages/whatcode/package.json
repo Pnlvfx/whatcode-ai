@@ -39,9 +39,6 @@
   "scripts": {
     "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
     "lint": "eslint",
-    "prepack": "yarn build",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test && eslint",
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
