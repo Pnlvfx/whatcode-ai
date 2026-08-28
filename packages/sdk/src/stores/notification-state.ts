@@ -61,11 +61,14 @@ export const incrementUnseenMessages = async (sessionID: string): Promise<void> 
 };
 
 export const markSessionSeen = async (sessionID: string): Promise<void> => {
-  await notificationStateStore.set((prev) => {
+  const { error } = await notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     if (!existing) return prev;
     return { ...prev, [sessionID]: { ...existing, unseenCount: 0, unseenMessages: 0 } };
   });
+  if (error) {
+    await notificationStateStore.clear();
+  }
 };
 
 export const resetNotificationState = notificationStateStore.clear;

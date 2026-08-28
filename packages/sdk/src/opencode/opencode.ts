@@ -3,7 +3,7 @@ import { logger } from '../logger.ts';
 
 type OpencodeServerOptions = Omit<ServerOptions, 'config' | 'port'> & { port: number; password?: string };
 
-export const opencode = async ({ password, port, hostname, signal, timeout }: OpencodeServerOptions) => {
+export const createOpencode = async ({ password, port, hostname, signal, timeout }: OpencodeServerOptions) => {
   const opencodeAuthHeader = password ? getOpencodeAuthHeader(password) : undefined;
 
   const client = createOpencodeClient({
@@ -32,12 +32,18 @@ export const opencode = async ({ password, port, hostname, signal, timeout }: Op
       ...(timeout !== undefined && { timeout }),
     });
     const { data, error } = await client.global.health();
-    if (error) throw new Error('Failed to start OpenCode, please check your ~/.local/share/opencode/ folder to check the logs', { cause: error });
+    if (error)
+      return {
+        error: {
+          type: 'opencode' as const,
+          message: 'Failed to start OpenCode, please check your ~/.local/share/opencode/ folder to check the logs',
+        },
+      };
     version = data.version;
     logger.info('opencode', `started OpenCode on version ${data.version}`);
   }
 
-  return { server, client, version };
+  return { data: { server, client, version } };
 };
 
 const getOpencodeAuthHeader = (password: string) => `Basic ${Buffer.from(`opencode:${password}`).toString('base64')}`;

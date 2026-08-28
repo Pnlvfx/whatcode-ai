@@ -1,14 +1,14 @@
 import { createSocket } from 'node:dgram';
 import { networkInterfaces } from 'node:os';
 
-export const getLocalIp = async (): Promise<string> => {
+export const getLocalIp = async () => {
   const ip = (await getLocalIpViaDgram()) ?? getLocalIpViaNetworkInterfaces();
-  if (!ip) throw new Error('Local ip not found!');
-  return ip;
+  if (!ip) return { error: { type: 'invalid-ip' as const, message: 'Local ip not found!' } };
+  return { data: ip };
 };
 
-const getLocalIpViaDgram = (): Promise<string | undefined> => {
-  return new Promise<string | undefined>((resolve) => {
+const getLocalIpViaDgram = () => {
+  return new Promise<string | undefined>((resolve, reject) => {
     const socket = createSocket('udp4');
     // eslint-disable-next-line sonarjs/no-hardcoded-ip
     socket.connect(80, '8.8.8.8', () => {
@@ -16,9 +16,9 @@ const getLocalIpViaDgram = (): Promise<string | undefined> => {
       socket.close();
       resolve(address);
     });
-    socket.on('error', () => {
+    socket.on('error', (error) => {
       socket.close();
-      resolve(undefined);
+      reject(error);
     });
   });
 };

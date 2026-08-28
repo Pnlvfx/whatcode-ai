@@ -1,6 +1,5 @@
 import type { LogLevel } from '../compiled/node/logger.ts';
 import { parseError } from '../compiled/core/error.ts';
-import { opencode } from '../opencode/opencode.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
@@ -14,11 +13,7 @@ import { getFeatureFlags } from '../feature-flags.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
 import { isProd } from '../config/constants.ts';
 import { logger } from '../logger.ts';
-
-export interface WhatcodeServerResult {
-  url: string | undefined;
-  version: string;
-}
+import { createOpencode } from '../opencode/opencode.ts';
 
 export interface WhatcodeServerConfig {
   tailscale?: boolean;
@@ -36,19 +31,24 @@ export const createWhatcodeServer = async ({
   opencodePort = 4096,
   logLevel = 'none',
   hostname,
-}: WhatcodeServerConfig = {}): Promise<WhatcodeServerResult> => {
+}: WhatcodeServerConfig = {}) => {
   logger.init({ logLevel });
   logger.info('whatcode', `started WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}`);
 
-  const [{ server: opencodeServer, client, version: opencodeVersion }, localIp, flags] = await Promise.all([
-    opencode({ port: opencodePort, password, hostname }),
+  const [opencodeData, ipData, flags] = await Promise.all([
+    createOpencode({ port: opencodePort, password, hostname }),
     getLocalIp(),
     getFeatureFlags(),
   ]);
 
+  if (opencodeData.error) return { error: opencodeData.error };
+  if (ipData.error) return { error: ipData.error };
+
+  const { server: opencodeServer, client, version: opencodeVersion } = opencodeData.data;
+
   // checkOpencodeMinVersion(opencodeVersion);
-  const opencodePublicUrl = `http://${localIp}:${opencodePort.toString()}`;
-  const daemonUrl = `http://${localIp}:${port.toString()}`;
+  const opencodePublicUrl = `http://${ipData.data}:${opencodePort.toString()}`;
+  const daemonUrl = `http://${ipData.data}:${port.toString()}`;
   startEventSubscription(client);
   startNotifications(client);
   if (flags?.WHATCODE_NOTIFICATION_V2) {
@@ -78,5 +78,5 @@ export const createWhatcodeServer = async ({
     { wait: 3000 },
   );
 
-  return { url: tailscaleUrl ?? daemonUrl, version: pkgJson.version };
+  return { data: { url: tailscaleUrl ?? daemonUrl, version: pkgJson.version } };
 };

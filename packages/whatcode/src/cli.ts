@@ -30,7 +30,7 @@ await yargs(hideBin(process.argv))
           description: 'Log level: none | info | debug (default: info)',
         }),
     async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
-      const [{ url }] = await Promise.all([
+      const [server] = await Promise.all([
         createWhatcodeServer({
           tailscale,
           ...(port !== undefined && { port }),
@@ -42,11 +42,11 @@ await yargs(hideBin(process.argv))
         checkForUpdate(pkg.version),
       ]);
 
-      if (url) {
-        logger.info('whatcode', `use this URL in the app: ${url}`);
-        printQrCode(url, config.WHATCODE_PASSWORD);
+      if (server.error) {
+        logger.error('whatcode', server.error.message, server.error);
       } else {
-        logger.warn('whatcode', 'could not determine local IP — find your machine IP in your network settings and connect manually');
+        logger.info('whatcode', `use this URL in the app: ${server.data.url}`);
+        printQrCode(server.data.url, config.WHATCODE_PASSWORD);
       }
     },
   )

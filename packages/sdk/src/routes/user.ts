@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia';
+import { Elysia, status } from 'elysia';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { addAccount, deleteAccountApnToken, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
 import { userAuth } from '../mw/user-auth.ts';
@@ -13,17 +13,28 @@ export const userRouter = new Elysia({ prefix: '/user' })
     async ({ body: { device_id, device_name } }) => {
       const accounts = await getAccounts();
       let account = accounts.find((a) => a.deviceId === device_id);
-      const identity = await getIdentity();
+      const identityData = await getIdentity();
+      if (identityData.error) return status(400, { message: identityData.error.message });
       if (!account) {
-        account = { name: identity.name, token: randomBytes(32).toString('hex'), id: randomUUID(), deviceId: device_id, deviceName: device_name };
+        account = {
+          name: identityData.data.name,
+          token: randomBytes(32).toString('hex'),
+          id: randomUUID(),
+          deviceId: device_id,
+          deviceName: device_name,
+        };
         await addAccount(account);
       }
-      return { token: account.token, user: buildAccountResponse(account, identity) };
+      return { token: account.token, user: buildAccountResponse(account, identityData.data) };
     },
     { body: pairUserBody },
   )
   .use(userAuth)
-  .get('/', async ({ account }) => ({ user: buildAccountResponse(account, await getIdentity()) }))
+  .get('/', async ({ account }) => {
+    const identityData = await getIdentity();
+    if (identityData.error) return status(400, { message: identityData.error.message });
+    return { user: buildAccountResponse(account, identityData.data) };
+  })
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
