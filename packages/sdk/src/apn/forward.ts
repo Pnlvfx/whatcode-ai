@@ -40,7 +40,7 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
             await deleteAccountApnToken({ deviceId: entry.deviceId });
             logger.warn('notifications', `APN token unregistered for device ${entry.deviceId}, cleared from store`);
           } else {
-            logger.error('notifications', `push failed: (${error.value.message ?? 'Failed to send notification!'})`);
+            logger.error('notifications', `push failed: (${error.value.message})`);
           }
         } else {
           logger.debug('notifications', 'forwarded successfully.');
