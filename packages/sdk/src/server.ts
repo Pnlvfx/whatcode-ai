@@ -41,7 +41,7 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
     })
     .all(
       '/*',
-      async ({ request }) => {
+      async ({ request, set }) => {
         const requestUrl = new URL(request.url);
         const url = new URL(`http://localhost:${opencodePort.toString()}${requestUrl.pathname}${requestUrl.search}`);
         const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
@@ -58,6 +58,10 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
         responseHeaders.delete('content-length');
         responseHeaders.set('cache-control', 'no-cache');
         responseHeaders.set('x-accel-buffering', 'no');
+        // Pre-populate set.headers with content-type so Elysia's stream handler
+        // doesn't override it with 'text/plain' when rewriting chunked responses.
+        const contentType = upstream.headers.get('content-type');
+        if (contentType) set.headers['content-type'] = contentType;
         return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
       },
       { parse: 'none' },
