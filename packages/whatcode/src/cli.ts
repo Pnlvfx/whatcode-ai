@@ -47,6 +47,7 @@ await yargs(hideBin(process.argv))
       } else {
         logger.info('whatcode', `use this URL in the app: ${server.data.url}`);
         printQrCode(server.data.url, config.WHATCODE_PASSWORD);
+        logger.warn('whatcode', 'keep this terminal running, closing it will disconnect the app');
       }
     },
   )
