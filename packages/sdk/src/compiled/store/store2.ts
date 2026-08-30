@@ -6,8 +6,8 @@
 import * as z from 'zod/v4/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { isErrorWithCode } from '../core/errors/code.ts';
-import { parseError } from '../core/error.ts';
+import { isErrorWithCode } from '@goatjs/core/errors/code';
+import { parseError } from '@goatjs/core/error';
 
 export type StoreError =
   { type: 'validation'; message: string; data: unknown } | { type: 'fs'; message: string } | { type: 'json'; message: string; raw: string };

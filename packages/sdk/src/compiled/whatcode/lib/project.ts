@@ -3,7 +3,7 @@
  * Do not modify it manually
  */
 
-import { capitalize } from '../../core/capitalize.ts';
+import { capitalize } from '@goatjs/core/capitalize';
 
 export const getProjectName = (worktree: string): string => {
   const sep = worktree.includes('/') ? '/' : '\\';
