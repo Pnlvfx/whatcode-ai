@@ -22,8 +22,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/dbz':
-        specifier: ^2.73.0
-        version: 2.73.0(@types/node@26.4.0)
+        specifier: ^2.74.0
+        version: 2.74.0(@types/node@26.4.0)
       '@goatjs/doctor':
         specifier: ^2.54.0
         version: 2.54.0(supports-color@8.1.1)
@@ -83,8 +83,8 @@ importers:
         specifier: 3.10.2
         version: 3.10.2(@swc/core@1.16.1)(@swc/html@1.16.1)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.27.7)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@goatjs/dbz':
-        specifier: ^2.73.0
-        version: 2.73.0(@types/node@26.4.0)
+        specifier: ^2.74.0
+        version: 2.74.0(@types/node@26.4.0)
       '@goatjs/rimraf':
         specifier: ^2.12.0
         version: 2.13.0
@@ -2062,8 +2062,8 @@ packages:
   '@goatjs/core@2.34.0':
     resolution: {integrity: sha512-4VI5Krl+49S/4mAi+BepBBaVAFlPQZO84lpvI9Qicdp8UdtIyKz1wDAKjm5u6pBkr7fW7KxeVOs5g7FhaaQ/6g==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.34.0.tgz}
 
-  '@goatjs/dbz@2.73.0':
-    resolution: {integrity: sha512-QpC1JOKSx+LjirTnCR2jeo+Hx4bQa7TTrIg5RmPRGKGT5/C8ThvX9/klh1X1JmpaID6SbA+2sL9W5qkL+VW5SQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.73.0.tgz}
+  '@goatjs/dbz@2.74.0':
+    resolution: {integrity: sha512-mG8qDg0vSFNN7nPgug21K9epMlJmWlpLGUJhUihe8rd//PGuPmyFAnrY017sZaWd5PXr9LUv5Oz2B9VuRrjCUA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.74.0.tgz}
     hasBin: true
 
   '@goatjs/doctor@2.54.0':
@@ -12349,7 +12349,7 @@ snapshots:
 
   '@goatjs/core@2.34.0': {}
 
-  '@goatjs/dbz@2.73.0(@types/node@26.4.0)':
+  '@goatjs/dbz@2.74.0(@types/node@26.4.0)':
     dependencies:
       '@goatjs/core': 2.34.0
       '@goatjs/node': 2.34.0
