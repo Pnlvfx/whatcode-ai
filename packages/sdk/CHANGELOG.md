@@ -1,3 +1,15 @@
+## [1.28.0](compare/%40whatcode-ai%2Fsdk%401.27.0...%40whatcode-ai%2Fsdk%401.28.0) "@whatcode-ai/sdk" (2026-08-30)
+
+### Bug Fixes
+
+* copy eb7568f
+* elysia bug db99967
+* release token 16082bc
+
+### Performance Improvements
+
+* improve 9c26c81
+
 ## [1.27.0](compare/%40whatcode-ai%2Fsdk%401.26.0...%40whatcode-ai%2Fsdk%401.27.0) "@whatcode-ai/sdk" (2026-08-23)
 
 ### Bug Fixes
