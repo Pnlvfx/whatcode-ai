@@ -42,7 +42,7 @@
     "@eslint/config-helpers": "^0.7.0",
     "@goatjs/dbz": "^2.74.0",
     "@goatjs/doctor": "^2.54.0",
-    "@goatjs/node-monorepo-eslint": "^3.25.0",
+    "@goatjs/node-monorepo-eslint": "^3.26.0",
     "lefthook": "^2.1.10",
     "prettier": "^3.9.6",
     "turbo": "^2.10.11",
