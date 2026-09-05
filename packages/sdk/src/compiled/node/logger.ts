@@ -66,6 +66,3 @@ export const createLogger = () => {
 const formatScope = (scope: string): string => colorize('gray', `[${scope}]`);
 
 const colorize = (color: keyof typeof colors, text: string): string => `${colors[color]}${text}${reset}`;
-
-/** @deprecated use createLogger */
-export const logger = createLogger();
