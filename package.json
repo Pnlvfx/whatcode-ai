@@ -40,13 +40,13 @@
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/dbz": "^2.75.0",
-    "@goatjs/doctor": "^2.55.0",
-    "@goatjs/node-monorepo-eslint": "^3.28.0",
+    "@goatjs/dbz": "^2.76.0",
+    "@goatjs/doctor": "^2.56.0",
+    "@goatjs/node-monorepo-eslint": "^3.29.0",
     "lefthook": "^2.1.10",
     "prettier": "^3.9.6",
     "turbo": "^2.10.11",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@12.3.4"
 }
