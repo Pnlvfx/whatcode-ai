@@ -8,6 +8,27 @@ export type Tailscale = Awaited<ReturnType<typeof createTailscale>>;
 export const createTailscale = (port: number) => {
   let started = false;
 
+  const startServe = async (): Promise<void> => {
+    // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
+    // this runs in the background — the process exits after setting up the config
+    await execa('tailscale', ['serve', '--bg', port.toString()]);
+  };
+
+  const isServeRunning = async (): Promise<boolean> => {
+    try {
+      return await checkRunning();
+    } catch {
+      return false;
+    }
+  };
+
+  const checkRunning = async () => {
+    const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
+    const result = serveStatusSchema.safeParse(JSON.parse(stdout));
+    if (!result.success) return false;
+    return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
+  };
+
   return {
     start: async (): Promise<{ url: string }> => {
       // eslint-disable-next-line parallelize/no-sequential-await -- prerequisite chain: installed → daemon reachable → hostname; each step only makes sense if the prior succeeded
@@ -15,17 +36,20 @@ export const createTailscale = (port: number) => {
       await assertDaemonReachable();
       const hostname = await getHostname();
       logger.debug('tailscale', `checking if tailscale is already running on port ${port.toString()}`);
-      const isRunning = await isServeRunning(port);
+      const isRunning = await isServeRunning();
       if (isRunning) {
         logger.debug('tailscale', `serve already running on port ${port.toString()}`);
       } else {
         logger.debug('tailscale', `starting on port ${port.toString()}`);
-        await startServe(port);
+        await startServe();
         started = true;
         logger.debug('tailscale', `started on port ${port.toString()}`);
       }
 
-      return { url: `https://${hostname.replace(/-$/, '')}` };
+      const url = `https://${hostname.replace(/-$/, '')}`;
+      logger.debug('tailscale', `url: ${url}`);
+
+      return { url };
     },
     stop: async (): Promise<void> => {
       if (!started) {
@@ -81,25 +105,4 @@ const getHostname = async (): Promise<string> => {
   const hostname = data.Self?.DNSName?.replace(/\.$/, '');
   if (!hostname) throw new Error('[tailscale] could not determine hostname — run tailscale status');
   return hostname;
-};
-
-const startServe = async (port: number): Promise<void> => {
-  // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
-  // this runs in the background — the process exits after setting up the config
-  await execa('tailscale', ['serve', '--bg', port.toString()]);
-};
-
-const isServeRunning = async (port: number): Promise<boolean> => {
-  try {
-    return await checkRunning(port);
-  } catch {
-    return false;
-  }
-};
-
-const checkRunning = async (port: number) => {
-  const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
-  const result = serveStatusSchema.safeParse(JSON.parse(stdout));
-  if (!result.success) return false;
-  return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
 };

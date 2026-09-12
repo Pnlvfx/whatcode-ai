@@ -35,8 +35,8 @@
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
@@ -44,10 +44,10 @@
     "@docusaurus/types": "3.10.2",
     "@goatjs/dbz": "^2.76.0",
     "@goatjs/rimraf": "^2.14.0",
-    "@types/react": "^19.2.18",
+    "@types/react": "^19.3.0",
     "execa": "^10.0.1",
     "typescript": "^6.0.3",
-    "vercel": "^59.11.7"
+    "vercel": "^59.15.1"
   },
   "engines": {
     "node": ">=20.0"

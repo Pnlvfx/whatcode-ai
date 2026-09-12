@@ -5,7 +5,6 @@ import { getLocalIp } from '../ip.ts';
 import { startNotifications } from '../apn/apn.ts';
 import { startEventSubscription } from '../opencode/event-subscription.ts';
 import { createIdentity } from '../stores/identity.ts';
-import { startTailscale } from '../tailscale.ts';
 import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { asyncExitHook } from 'exit-hook';
 import { startNotificationTracker } from '../notification/tracker.ts';
@@ -57,12 +56,12 @@ export const createWhatcodeServer = async ({
 
   startWhatcode({ port, opencodePort: opencodePort, password, client });
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
-  const tailscaleUrl = tailscale ? await startTailscale(tailscale) : undefined;
+  const tailscaleServer = tailscale ? await tailscale.start() : undefined;
 
   await createIdentity({
     opencode: { url: opencodePublicUrl, version: opencodeVersion, available: !!hostname },
     daemon: { url: daemonUrl, version: pkgJson.version, available: true },
-    tailscale: { url: tailscaleUrl, available: !!tailscaleUrl },
+    tailscale: { url: tailscaleServer?.url, available: !!tailscaleServer },
   });
 
   // clean up
@@ -78,5 +77,5 @@ export const createWhatcodeServer = async ({
     { wait: 3000 },
   );
 
-  return { data: { url: tailscaleUrl ?? daemonUrl, version: pkgJson.version } };
+  return { data: { url: tailscaleServer?.url ?? daemonUrl, version: pkgJson.version } };
 };
