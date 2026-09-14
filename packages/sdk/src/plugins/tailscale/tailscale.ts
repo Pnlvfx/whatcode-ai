@@ -1,11 +1,10 @@
 import { execa } from 'execa';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
-import { logger } from '../../logger.ts';
-
-export type Tailscale = Awaited<ReturnType<typeof createTailscale>>;
+import { createLogger } from '../../compiled/node/logger.ts';
 
 export const createTailscale = (port: number) => {
+  const logger = createLogger();
   let started = false;
 
   const startServe = async (): Promise<void> => {
@@ -16,17 +15,13 @@ export const createTailscale = (port: number) => {
 
   const isServeRunning = async (): Promise<boolean> => {
     try {
-      return await checkRunning();
+      const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
+      const result = serveStatusSchema.safeParse(JSON.parse(stdout));
+      if (!result.success) return false;
+      return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
     } catch {
       return false;
     }
-  };
-
-  const checkRunning = async () => {
-    const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
-    const result = serveStatusSchema.safeParse(JSON.parse(stdout));
-    if (!result.success) return false;
-    return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
   };
 
   return {
@@ -106,3 +101,5 @@ const getHostname = async (): Promise<string> => {
   if (!hostname) throw new Error('[tailscale] could not determine hostname — run tailscale status');
   return hostname;
 };
+
+export type Tailscale = ReturnType<typeof createTailscale>;
