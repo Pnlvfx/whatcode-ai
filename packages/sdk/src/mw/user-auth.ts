@@ -8,7 +8,9 @@ export const userAuth = new Elysia({ name: 'user-auth' }).derive({ as: 'scoped' 
   if (!authorization?.startsWith('Bearer ')) return status(401, { message: 'Unauthorized' });
   const token = authorization.startsWith('Bearer ') ? authorization.slice(7) : undefined;
   if (!token) return status(401, { message: 'Unauthorized' });
-  const accounts = await getAccounts();
+  const accountsResult = await getAccounts();
+  if (accountsResult.error) return status(500, { message: accountsResult.error.message });
+  const accounts = accountsResult.data;
   const account = accounts.find((a) => a.token.length === token.length && timingSafeEqual(Buffer.from(a.token), Buffer.from(token)));
   if (!account) return status(401, { message: 'Unauthorized' });
   return { account };

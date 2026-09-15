@@ -11,7 +11,9 @@ export const userRouter = new Elysia({ prefix: '/user' })
   .post(
     '/pair',
     async ({ body: { device_id, device_name } }) => {
-      const accounts = await getAccounts();
+      const accountsResult = await getAccounts();
+      if (accountsResult.error) return status(500, { message: accountsResult.error.message });
+      const accounts = accountsResult.data;
       let account = accounts.find((a) => a.deviceId === device_id);
       const identityData = await getIdentity();
       if (identityData.error) return status(400, { message: identityData.error.message });
@@ -23,7 +25,8 @@ export const userRouter = new Elysia({ prefix: '/user' })
           deviceId: device_id,
           deviceName: device_name,
         };
-        await addAccount(account);
+        const { error } = await addAccount(account);
+        if (error) return status(500, { message: error.message });
       }
       return { token: account.token, user: buildAccountResponse(account, identityData.data) };
     },
@@ -38,12 +41,14 @@ export const userRouter = new Elysia({ prefix: '/user' })
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
-      await updateAccountApnToken({ deviceId: account.deviceId, apnToken: token });
+      const { error } = await updateAccountApnToken({ deviceId: account.deviceId, apnToken: token });
+      if (error) return status(400, { message: error.message });
       return { status: 'success' };
     },
     { body: z.strictObject({ token: z.string() }) },
   )
   .post('/logout', async ({ account }) => {
-    await deleteAccountApnToken({ deviceId: account.deviceId });
+    const { error } = await deleteAccountApnToken({ deviceId: account.deviceId });
+    if (error) return status(400, { message: error.message });
     return { status: 'success' };
   });

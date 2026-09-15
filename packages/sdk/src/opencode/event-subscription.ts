@@ -12,6 +12,7 @@ const handlers = new Set<EventHandler>();
 
 export const registerEventHandler = (handler: EventHandler): (() => void) => {
   handlers.add(handler);
+
   return () => {
     handlers.delete(handler);
   };
@@ -28,12 +29,8 @@ export const startEventSubscription = (client: OpencodeClient): void => {
 
         for await (const event of events.stream) {
           for (const handler of handlers) {
-            try {
-              // eslint-disable-next-line parallelize/no-sequential-await -- handlers must run sequentially: each processes the same event in registration order to avoid concurrent state mutations
-              await handler(event);
-            } catch (err) {
-              logger.error('event-subscription', 'handler error', err);
-            }
+            // eslint-disable-next-line parallelize/no-sequential-await -- handlers must run sequentially: each processes the same event in registration order to avoid concurrent state mutations
+            await handler(event);
           }
         }
 

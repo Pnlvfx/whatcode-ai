@@ -58,11 +58,13 @@ export const createWhatcodeServer = async ({
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleServer = tailscale ? await tailscale.start() : undefined;
 
-  await createIdentity({
+  const iResult = await createIdentity({
     opencode: { url: opencodePublicUrl, version: opencodeVersion, available: !!hostname },
     daemon: { url: daemonUrl, version: pkgJson.version, available: true },
     tailscale: { url: tailscaleServer?.url, available: !!tailscaleServer },
   });
+
+  if (iResult.error) return { error: iResult.error };
 
   // clean up
   asyncExitHook(

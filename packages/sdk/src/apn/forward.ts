@@ -16,11 +16,12 @@ interface Params extends RelayMeta {
   event: NotificationEvent;
 }
 
-export const forwardToRelay = async ({ body, event, directory, projectID, sessionID, title }: Params): Promise<void> => {
-  const entries = await getAccounts();
+export const forwardToRelay = async ({ body, event, directory, projectID, sessionID, title }: Params) => {
+  const accountsResult = await getAccounts();
+  if (accountsResult.error) return { error: accountsResult.error };
 
   await Promise.all(
-    entries
+    accountsResult.data
       .filter((e) => e.apnToken)
       .map(async (entry) => {
         const { error, status } = await relayClient.relay.push.post({
@@ -47,4 +48,6 @@ export const forwardToRelay = async ({ body, event, directory, projectID, sessio
         }
       }),
   );
+
+  return { data: { status: 'success' } };
 };

@@ -25,6 +25,7 @@ export interface StoreResult<T extends z.$ZodType, TParams extends StoreParams<T
   set: (
     value: z.infer<T> | ((prev: TParams['initial'] extends z.infer<T> ? z.infer<T> : z.infer<T> | undefined) => z.infer<T> | Promise<z.infer<T>>),
   ) => Promise<StoreOpResult<z.infer<T>>>;
+  validate: () => Promise<StoreOpResult<z.infer<T> | undefined>>;
   clear: () => Promise<void>;
 }
 
@@ -105,6 +106,14 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return {
     get,
+    validate: async (): Promise<StoreOpResult<StoreType | undefined>> => {
+      const { data, error } = await get();
+      if (error) return { error };
+      if (data === undefined) return { data: undefined };
+      const result = await z.safeParseAsync(schema, data);
+      if (result.error) return { error: { type: 'validation' as const, message: result.error.message, data } };
+      return { data: result.data };
+    },
     set: async (value: StoreType | ((prev: StoreType | undefined) => StoreType | Promise<StoreType>)) => {
       let resolved;
       if (isUpdater(value)) {

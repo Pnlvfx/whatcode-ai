@@ -14,52 +14,28 @@ const accountSchema = z.strictObject({
 
 const accountsStore = createStore2('accounts', z.array(accountSchema), { directory: WHATCODE_AUTH, initial: [] });
 
-export const getAccounts = async () => {
-  const { data, error } = await accountsStore.get();
+const validationResult = await accountsStore.validate();
+if (validationResult.error) {
+  logger.warn('accounts', 'Accounts schema changed, resetting...');
+  await accountsStore.clear();
+}
 
-  if (error) {
-    await accountsStore.clear();
-  }
-
-  return data ?? [];
-};
-
+export const getAccounts = accountsStore.get;
 export const resetAccounts = accountsStore.clear;
-
-export const addAccount = async (account: Account) => {
-  const { error, data } = await accountsStore.set((prev) => [...prev, account]);
-
-  // if (error) {
-  //   await accountsStore.clear();
-  // }
-
-  return { error, data };
-};
+export const addAccount = (account: Account) => accountsStore.set((prev) => [...prev, account]);
 
 export const updateAccountApnToken = async ({ deviceId, apnToken }: { deviceId: string; apnToken: string }) => {
-  const { data, error } = await accountsStore.set((prev) =>
+  return accountsStore.set((prev) =>
     prev.map((p) => {
       if (p.deviceId !== deviceId) return p;
       logger.debug('apn-token', `Apn token updated for ${deviceId}`);
       return { ...p, apnToken };
     }),
   );
-
-  // if (error) {
-  //   await accountsStore.clear();
-  // }
-
-  return { data, error };
 };
 
 export const deleteAccountApnToken = async ({ deviceId }: { deviceId: string }) => {
-  const { error, data } = await accountsStore.set((prev) => prev.map((e) => (e.deviceId === deviceId ? { ...e, apnToken: undefined } : e)));
-
-  // if (error) {
-  //   await accountsStore.clear();
-  // }
-
-  return { data, error };
+  return accountsStore.set((prev) => prev.map((e) => (e.deviceId === deviceId ? { ...e, apnToken: undefined } : e)));
 };
 
 export type Account = z.infer<typeof accountSchema>;

@@ -1,6 +1,7 @@
 import * as z from 'zod/v4/mini';
 import { WHATCODE_ROOT } from '../config/constants.ts';
 import { createStore2 } from '../compiled/store/store2.ts';
+import { logger } from '../logger.ts';
 
 const sessionStateSchema = z.strictObject({
   sessionID: z.string(),
@@ -24,53 +25,48 @@ const notificationStateStore = createStore2('notification-state', notificationSt
   initial: {},
 });
 
-export const getNotificationState = async () => {
-  const { error, data } = await notificationStateStore.get();
-  if (error) {
-    await notificationStateStore.clear();
-  }
+const validationResult = await notificationStateStore.validate();
+if (validationResult.error) {
+  logger.warn('notification', 'Notification schema changed, resetting...');
+  await notificationStateStore.clear();
+}
 
-  return data ?? {};
-};
+export const getNotificationState = notificationStateStore.get;
+export const resetNotificationState = notificationStateStore.clear;
 
 export const updateNotificationState = async (
   sessionID: string,
   updater: (prev: SessionState) => SessionState,
   fallback: Omit<SessionState, 'unseenCount' | 'unseenMessages' | 'lastEventAt'>,
-): Promise<void> => {
-  await notificationStateStore.set((prev) => {
+) => {
+  return notificationStateStore.set((prev) => {
     const existing = prev[sessionID] ?? { ...fallback, unseenCount: 0, unseenMessages: 0, lastEventAt: Date.now() };
     return { ...prev, [sessionID]: updater(existing) };
   });
 };
 
-export const clearPendingPermission = async (sessionID: string): Promise<void> => {
-  await notificationStateStore.set((prev) => {
+export const clearPendingPermission = async (sessionID: string) => {
+  return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     if (!existing) return prev;
     return { ...prev, [sessionID]: { ...existing, hasPendingPermission: false, lastEventAt: Date.now() } };
   });
 };
 
-export const incrementUnseenMessages = async (sessionID: string): Promise<void> => {
-  await notificationStateStore.set((prev) => {
+export const incrementUnseenMessages = async (sessionID: string) => {
+  return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     if (!existing) return prev;
     return { ...prev, [sessionID]: { ...existing, unseenMessages: existing.unseenMessages + 1, lastEventAt: Date.now() } };
   });
 };
 
-export const markSessionSeen = async (sessionID: string): Promise<void> => {
-  const { error } = await notificationStateStore.set((prev) => {
+export const markSessionSeen = async (sessionID: string) => {
+  return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     if (!existing) return prev;
     return { ...prev, [sessionID]: { ...existing, unseenCount: 0, unseenMessages: 0 } };
   });
-  if (error) {
-    await notificationStateStore.clear();
-  }
 };
-
-export const resetNotificationState = notificationStateStore.clear;
 
 export type SessionState = z.infer<typeof sessionStateSchema>;
