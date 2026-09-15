@@ -3,7 +3,6 @@ import { getNotificationState, updateNotificationState, clearPendingPermission }
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getLastAssistantText, getLastUserModel } from '../apn/helpers.ts';
 import { logger } from '../logger.ts';
-import { activeSessionTracker } from './active.ts';
 import { opencodeError, type OpencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
 import type { StoreError } from '../compiled/store/store2.ts';
 
@@ -49,7 +48,6 @@ export const startNotificationTracker = (client: OpencodeClient) => {
     if (sessionResult.error) {
       logger.error(loggerName, tSessionError(sessionResult.error).message);
     } else if (sessionResult.data) {
-      const shouldCount = sessionID !== activeSessionTracker.getActiveSession();
       const { data: messagesData, error: messagesError } = await client.session.messages({ sessionID });
       const lastAssistantText = messagesError ? undefined : getLastAssistantText(messagesData);
       const lastModel = messagesError ? undefined : getLastUserModel(messagesData);
@@ -59,7 +57,7 @@ export const startNotificationTracker = (client: OpencodeClient) => {
           ...prev,
           isBusy: false,
           hasPendingPermission: false,
-          unseenCount: shouldCount ? prev.unseenCount + 1 : prev.unseenCount,
+          unseenCount: prev.unseenCount + 1,
           lastAssistantText,
           lastModel,
           lastErrorText: undefined,
@@ -97,13 +95,12 @@ export const startNotificationTracker = (client: OpencodeClient) => {
     if (sessionResult.error) {
       logger.error(loggerName, tSessionError(sessionResult.error).message);
     } else if (sessionResult.data) {
-      const shouldCount = sessionID !== activeSessionTracker.getActiveSession();
       const result = await updateNotificationState(
         sessionID,
         (prev) => ({
           ...prev,
           hasPendingPermission: true,
-          unseenCount: shouldCount ? prev.unseenCount + 1 : prev.unseenCount,
+          unseenCount: prev.unseenCount + 1,
           lastEventAt: Date.now(),
         }),
         { sessionID, ...sessionResult.data, isBusy: true, hasPendingPermission: true, hasError: false },
@@ -161,7 +158,6 @@ const handleMessageUpdated = async (msg: AssistantMessage): Promise<void> => {
   } else {
     const existing = currentResult.data[msg.sessionID];
     if (!existing) return;
-    const isActive = msg.sessionID === activeSessionTracker.getActiveSession();
     const lastModel = `${msg.providerID}/${msg.modelID}`;
     const errorText = extractAssistantErrorText(msg);
     const result = await updateNotificationState(
@@ -170,7 +166,7 @@ const handleMessageUpdated = async (msg: AssistantMessage): Promise<void> => {
         ...prev,
         lastModel,
         ...(errorText !== undefined && { hasError: true, lastErrorText: errorText }),
-        ...(!isActive && { unseenMessages: prev.unseenMessages + 1 }),
+        unseenMessages: prev.unseenMessages + 1,
         lastEventAt: Date.now(),
       }),
       existing,
