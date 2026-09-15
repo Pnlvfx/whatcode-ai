@@ -54,7 +54,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     const lastText = getLastAssistantText(messagesResult.data);
     const body = lastText ? trim(`${modelNameResult.data}: ${lastText}`) : modelNameResult.data;
     logger.debug('notifications', `forwarding session.idle: title=${title}, body=${body}`);
-    const result = await forwardToRelay({
+    const forwardResult = await forwardToRelay({
       title,
       body,
       event: 'session.idle',
@@ -62,6 +62,9 @@ export const startNotifications = (client: OpencodeClient): void => {
       projectID: session.projectID,
       directory: session.directory,
     });
+    if (forwardResult.error) {
+      logger.error(loggerName, forwardResult.error.message);
+    }
   };
 
   const handlePermissionAsked = async ({ sessionID, permission, patterns }: EventPermissionAsked['properties']): Promise<void> => {
@@ -89,7 +92,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     }
     const target = patterns[0] ?? permission;
     logger.debug('notifications', `forwarding permission.asked: title=${title}, target=${target}`);
-    const result = await forwardToRelay({
+    const forwardResult = await forwardToRelay({
       title,
       body: trim(`${modelNameResult.data} needs permission to: ${target}`),
       event: 'permission.asked',
@@ -97,6 +100,9 @@ export const startNotifications = (client: OpencodeClient): void => {
       projectID: session.projectID,
       directory: session.directory,
     });
+    if (forwardResult.error) {
+      logger.error(loggerName, forwardResult.error.message);
+    }
   };
 
   const handleSessionError = async ({ sessionID, error }: EventSessionError['properties']): Promise<void> => {
@@ -120,7 +126,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     const title = getProjectName(sessionResult.data.directory);
     const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
     logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
-    const result = await forwardToRelay({
+    const forwardResult = await forwardToRelay({
       title,
       body,
       event: 'session.error',
@@ -128,6 +134,9 @@ export const startNotifications = (client: OpencodeClient): void => {
       projectID: sessionResult.data.projectID,
       directory: sessionResult.data.directory,
     });
+    if (forwardResult.error) {
+      logger.error(loggerName, forwardResult.error.message);
+    }
   };
 
   registerEventHandler(async (event: GlobalEvent): Promise<void> => {
