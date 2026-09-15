@@ -28,8 +28,9 @@
     "dev": "pnpm whatcode start --log-level debug --port 6666 --opencode-port 4099 --hostname 0.0.0.0",
     "docs": "pnpm --filter @whatcode-ai/docs",
     "initialize": "turbo initialize",
+    "postinstall": "pnpm initialize",
     "lint": "turbo lint",
-    "ncu": "pnpm --filter @whatcode-ai/sdk initialize && pnpm update --interactive --latest --recursive",
+    "ncu": "pnpm update --interactive --latest --recursive",
     "prepare": "lefthook install",
     "tsc": "turbo tsc"
   },
@@ -43,7 +44,7 @@
     "@goatjs/dbz": "^2.76.0",
     "@goatjs/doctor": "^2.56.0",
     "@goatjs/node-monorepo-eslint": "^3.30.0",
-    "lefthook": "^2.1.10",
+    "lefthook": "^2.1.14",
     "prettier": "^3.9.6",
     "turbo": "^2.10.11",
     "typescript": "^6.0.3"

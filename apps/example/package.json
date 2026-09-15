@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@whatcode-ai/sdk": "workspace:*",
-    "zod": "^4.6.4"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",

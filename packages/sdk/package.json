@@ -38,7 +38,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && eslint",
     "initialize": "node tools/initialize.ts",
     "lint": "eslint",
     "tsc": "tsc --noEmit"
@@ -64,7 +64,7 @@
     "@types/node": "^26.5.1",
     "eslint": "^10.10.0",
     "typescript": "^6.0.3",
-    "zod": "^4.6.4"
+    "zod": "^4.6.5"
   },
   "peerDependencies": {
     "zod": "^4.4.3"

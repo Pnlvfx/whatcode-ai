@@ -1,5 +1,10 @@
 nodeLinker: hoisted
 
+registries:
+  https://europe-west8-npm.pkg.dev/open-gto-2/goat/:
+    scopes:
+      - '@goatjs'
+
 fetchRetries: 0
 
 fetchTimeout: 900000
