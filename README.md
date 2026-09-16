@@ -1,5 +1,11 @@
 # whatcode-ai
 
+[![npm version](https://img.shields.io/npm/v/@whatcode-ai/whatcode)](https://www.npmjs.com/package/@whatcode-ai/whatcode)
+[![npm version](https://img.shields.io/npm/v/@whatcode-ai/sdk?label=%40whatcode-ai%2Fsdk)](https://www.npmjs.com/package/@whatcode-ai/sdk)
+[![npm downloads](https://img.shields.io/npm/dm/@whatcode-ai/whatcode)](https://www.npmjs.com/package/@whatcode-ai/whatcode)
+[![npm downloads](https://img.shields.io/npm/dm/@whatcode-ai/sdk?label=sdk%20downloads)](https://www.npmjs.com/package/@whatcode-ai/sdk)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 Monorepo that provides a one-script setup to start [opencode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com), so you can connect to it from anywhere (e.g. a private iOS app).
 
 ## Documentation
