@@ -1,3 +1,10 @@
+## [1.29.0](compare/%40whatcode-ai%2Fsdk%401.28.0...%40whatcode-ai%2Fsdk%401.29.0) "@whatcode-ai/sdk" (2026-09-16)
+
+### Bug Fixes
+
+* remove unused endpoint and improve notifications 3c1e478
+* **security:** enforce WHATCODE_PASSWORD on all routes by using global scope for onBeforeHandle 0203864
+
 ## [1.28.0](compare/%40whatcode-ai%2Fsdk%401.27.0...%40whatcode-ai%2Fsdk%401.28.0) "@whatcode-ai/sdk" (2026-08-30)
 
 ### Bug Fixes
