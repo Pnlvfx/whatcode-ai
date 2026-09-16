@@ -4,7 +4,7 @@ import { rimraf } from '@goatjs/rimraf';
 import { createGitClient } from '@goatjs/node/git';
 import { execa } from 'execa';
 import { dbz } from '@goatjs/dbz';
-import { getPkgJSON } from '@goatjs/zod/helpers/package-json';
+import { getPkgJSON } from '@goatjs/zod/package-json';
 import path from 'node:path';
 
 const git = createGitClient();

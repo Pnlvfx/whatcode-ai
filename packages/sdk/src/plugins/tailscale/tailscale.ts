@@ -1,10 +1,9 @@
 import { execa } from 'execa';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
-import { createLogger } from '../../compiled/node/logger.ts';
+import { logger } from '../../logger.ts';
 
 export const createTailscale = (port: number) => {
-  const logger = createLogger();
   let started = false;
 
   const startServe = async (): Promise<void> => {
