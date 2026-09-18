@@ -43,8 +43,9 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
       const data = await fs.readFile(configFile);
       return { data };
     } catch (err) {
-      if (isErrorWithCode(err) && err.code === 'ENOENT') return { data: undefined };
-      return { error: { type: 'fs' as const, message: parseError(err).message } };
+      return isErrorWithCode(err) && err.code === 'ENOENT'
+        ? { data: undefined }
+        : { error: { type: 'fs' as const, message: parseError(err).message } };
     }
   };
 
@@ -111,8 +112,7 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
       if (error) return { error };
       if (data === undefined) return { data: undefined };
       const result = await z.safeParseAsync(schema, data);
-      if (result.error) return { error: { type: 'validation' as const, message: result.error.message, data } };
-      return { data: result.data };
+      return result.error ? { error: { type: 'validation' as const, message: result.error.message, data } } : { data: result.data };
     },
     set: async (value: StoreType | ((prev: StoreType | undefined) => StoreType | Promise<StoreType>)) => {
       let resolved;

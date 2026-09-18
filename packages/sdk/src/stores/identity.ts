@@ -25,8 +25,7 @@ if (validationResult.error) {
 export const getIdentity = async () => {
   const identity = await identityStore.get();
   if (identity.error) return { error: identity.error };
-  if (!identity.data) return { error: { type: 'identity-init' as const, message: 'Identity not initialized!' } };
-  return { data: identity.data };
+  return identity.data ? { data: identity.data } : { error: { type: 'identity-init' as const, message: 'Identity not initialized!' } };
 };
 
 export const createIdentity = async ({ opencode, daemon, tailscale }: Pick<DaemonIdentity, 'opencode' | 'daemon' | 'tailscale'>) => {

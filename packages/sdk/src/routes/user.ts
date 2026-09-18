@@ -35,20 +35,17 @@ export const userRouter = new Elysia({ prefix: '/user' })
   .use(userAuth)
   .get('/', async ({ account }) => {
     const identityData = await getIdentity();
-    if (identityData.error) return status(400, { message: identityData.error.message });
-    return { user: buildAccountResponse(account, identityData.data) };
+    return identityData.error ? status(400, { message: identityData.error.message }) : { user: buildAccountResponse(account, identityData.data) };
   })
   .post(
     '/apn-token',
     async ({ body: { token }, account }) => {
       const { error } = await updateAccountApnToken({ deviceId: account.deviceId, apnToken: token });
-      if (error) return status(400, { message: error.message });
-      return { status: 'success' };
+      return error ? status(400, { message: error.message }) : { status: 'success' };
     },
     { body: z.strictObject({ token: z.string() }) },
   )
   .post('/logout', async ({ account }) => {
     const { error } = await deleteAccountApnToken({ deviceId: account.deviceId });
-    if (error) return status(400, { message: error.message });
-    return { status: 'success' };
+    return error ? status(400, { message: error.message }) : { status: 'success' };
   });

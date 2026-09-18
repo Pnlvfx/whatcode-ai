@@ -51,15 +51,15 @@
     "elysia": "^1.4.29",
     "execa": "^10.0.1",
     "exit-hook": "^5.1.0",
-    "file-type": "^22.1.0",
+    "file-type": "^22.1.1",
     "node-machine-id": "^1.1.12",
     "openapi-types": "^12.1.3",
     "undici": "^8.10.2"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/node-monorepo-eslint": "^3.31.0",
-    "@goatjs/rimraf": "^2.14.0",
+    "@goatjs/node-monorepo-eslint": "^3.32.0",
+    "@goatjs/rimraf": "^2.15.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.6.1",
     "eslint": "^10.10.0",

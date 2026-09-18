@@ -30,17 +30,14 @@ await yargs(hideBin(process.argv))
           description: 'Log level: none | info | debug (default: info)',
         }),
     async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
-      const [server] = await Promise.all([
-        createWhatcodeServer({
-          tailscale,
-          ...(port !== undefined && { port }),
-          ...(opencodePort !== undefined && { opencodePort }),
-          logLevel,
-          ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
-          ...(hostname !== undefined && { hostname }),
-        }),
-        checkForUpdate(pkg.version),
-      ]);
+      const server = await createWhatcodeServer({
+        tailscale,
+        ...(port !== undefined && { port }),
+        ...(opencodePort !== undefined && { opencodePort }),
+        logLevel,
+        ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
+        ...(hostname !== undefined && { hostname }),
+      });
 
       if (server.error) {
         logger.error('whatcode', server.error.message, server.error);
@@ -49,6 +46,8 @@ await yargs(hideBin(process.argv))
         printQrCode(server.data.url, config.WHATCODE_PASSWORD);
         logger.warn('whatcode', 'keep this terminal running, closing it will disconnect the app');
       }
+
+      await checkForUpdate(pkg.version);
     },
   )
   .command(
