@@ -3,8 +3,7 @@ import { networkInterfaces } from 'node:os';
 
 export const getLocalIp = async () => {
   const ip = (await getLocalIpViaDgram()) ?? getLocalIpViaNetworkInterfaces();
-  if (!ip) return { error: { type: 'invalid-ip' as const, message: 'Local ip not found!' } };
-  return { data: ip };
+  return ip ? { data: ip } : { error: { type: 'invalid-ip' as const, message: 'Local ip not found!' } };
 };
 
 const getLocalIpViaDgram = () => {

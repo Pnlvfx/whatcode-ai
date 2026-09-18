@@ -52,8 +52,7 @@ const fetchLatestVersion = async () => {
     if (!res.ok) return { error: { type: 'fetch' as const, status: res.status, message: await res.text() } };
     const json = (await res.json()) as unknown;
     const parsed = await npmResponseSchema.safeParseAsync(json);
-    if (parsed.error) return { error: { type: 'validation' as const, message: parsed.error.message, data: json } };
-    return { data: parsed.data };
+    return parsed.error ? { error: { type: 'validation' as const, message: parsed.error.message, data: json } } : { data: parsed.data };
   } catch (err) {
     return { error: { type: 'unknown' as const, message: parseError(err).message } };
   }

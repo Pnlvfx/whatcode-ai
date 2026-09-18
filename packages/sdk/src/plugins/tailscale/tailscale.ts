@@ -16,8 +16,7 @@ export const createTailscale = (port: number) => {
     try {
       const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
       const result = serveStatusSchema.safeParse(JSON.parse(stdout));
-      if (!result.success) return false;
-      return Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString()));
+      return result.success ? Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString())) : false;
     } catch {
       return false;
     }

@@ -5,15 +5,13 @@ import { getNotificationState, markSessionSeen } from '../stores/notification-st
 export const notificationRouter = new Elysia({ prefix: '/notification' })
   .get('/state', async ({ status }) => {
     const result = await getNotificationState();
-    if (result.error) return status(500, { message: result.error.message });
-    return result.data;
+    return result.error ? status(500, { message: result.error.message }) : result.data;
   })
   .post(
     '/viewed',
     async ({ body: { sessionID } }) => {
       const result = await markSessionSeen(sessionID);
-      if (result.error) return status(500, { message: result.error });
-      return { status: 'success' };
+      return result.error ? status(500, { message: result.error }) : { status: 'success' };
     },
     { body: z.strictObject({ sessionID: z.string() }) },
   );

@@ -7,8 +7,7 @@ import { opencodeError, type OpencodeError } from '../compiled/whatcode/lib/open
 import type { StoreError } from '../compiled/store/store2.ts';
 
 const tSessionError = (err: OpencodeError | StoreError) => {
-  if ('type' in err) return new Error(err.message);
-  return opencodeError(err);
+  return 'type' in err ? new Error(err.message) : opencodeError(err);
 };
 
 export const startNotificationTracker = (client: OpencodeClient) => {
@@ -19,8 +18,7 @@ export const startNotificationTracker = (client: OpencodeClient) => {
     if (existing) return { data: { projectID: existing.projectID, directory: existing.directory } };
     const { data, error } = await client.session.get({ sessionID });
     if (error) return { error };
-    if (data.parentID !== undefined) return { data: undefined };
-    return { projectID: data.projectID, directory: data.directory };
+    return data.parentID === undefined ? { projectID: data.projectID, directory: data.directory } : { data: undefined };
   };
 
   const handleSessionStatus = async (sessionID: string) => {

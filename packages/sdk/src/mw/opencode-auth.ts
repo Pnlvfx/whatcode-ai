@@ -10,7 +10,5 @@ export const opencodeBasicAuth = (password: string) =>
     const colonIndex = decoded.indexOf(':');
     const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
     const passOk = pass.length === password.length && timingSafeEqual(Buffer.from(pass), Buffer.from(password));
-    if (!passOk) return status(401, { message: 'Unauthorized' });
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    return undefined;
+    return passOk ? undefined : status(401, { message: 'Unauthorized' });
   });
