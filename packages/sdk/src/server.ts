@@ -33,11 +33,10 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
       const { data: projects, error, response } = await client.project.list();
       if (error) return status(response.status, { message: error.data.message });
       const lastMessageTimes = getLastMessageTimeByProject();
-      const data = projects.map((project) => {
+      return projects.map((project) => {
         const lastMsg = lastMessageTimes.get(project.id);
         return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
       });
-      return data;
     })
     .all(
       '/*',
