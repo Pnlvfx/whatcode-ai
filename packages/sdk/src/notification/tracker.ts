@@ -17,8 +17,7 @@ export const startNotificationTracker = (client: OpencodeClient) => {
     const existing = currentResult.data[sessionID];
     if (existing) return { data: { projectID: existing.projectID, directory: existing.directory } };
     const { data, error } = await client.session.get({ sessionID });
-    if (error) return { error };
-    return data.parentID === undefined ? { projectID: data.projectID, directory: data.directory } : { data: undefined };
+    return error ? { error } : { data: data.parentID === undefined ? { projectID: data.projectID, directory: data.directory } : undefined };
   };
 
   const handleSessionStatus = async (sessionID: string) => {

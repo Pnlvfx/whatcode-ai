@@ -10,7 +10,7 @@ import { asyncExitHook } from 'exit-hook';
 import { startNotificationTracker } from '../notification/tracker.ts';
 import { getFeatureFlags } from '../feature-flags.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
-import { isProd } from '../config/constants.ts';
+import { isProd, SERVER_URL } from '../config/constants.ts';
 import { logger } from '../logger.ts';
 import { createOpencode } from '../opencode/opencode.ts';
 
@@ -33,6 +33,9 @@ export const createWhatcodeServer = async ({
 }: WhatcodeServerConfig = {}) => {
   logger.init({ logLevel });
   logger.info('whatcode', `started WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}`);
+  if (!isProd) {
+    logger.debug('relay', `Relay url: ${SERVER_URL}`);
+  }
 
   const [opencodeData, ipData, flags] = await Promise.all([
     createOpencode({ port: opencodePort, password, hostname }),
