@@ -45,12 +45,12 @@
     "@whatcode-ai/sdk": "workspace:*",
     "qrcode-terminal": "^0.12.0",
     "semver": "^7.8.5",
-    "yargs": "^18.1.0",
+    "yargs": "^18.2.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/node-monorepo-eslint": "^3.33.0",
+    "@goatjs/node-monorepo-eslint": "^3.35.0",
     "@goatjs/rimraf": "^2.15.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.6.2",
