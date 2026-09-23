@@ -16,6 +16,7 @@ export const createTailscale = (port: number) => {
     try {
       const { stdout } = await execa('tailscale', ['serve', 'status', '--json']);
       const result = serveStatusSchema.safeParse(JSON.parse(stdout));
+      // eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary
       return result.success ? Object.keys(result.data.TCP ?? {}).some((key) => key.includes(port.toString())) : false;
     } catch {
       return false;
