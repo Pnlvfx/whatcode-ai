@@ -38,6 +38,7 @@ const OPENCODE_NAMES = new Set(['BadRequest', 'NotFoundError']);
 export const isOpencodeError = (err: unknown): err is OpencodeError => {
   if (typeof err !== 'object' || err === null) return false;
   if ('_tag' in err && typeof err._tag === 'string') return OPENCODE_TAGS.has(err._tag);
+  // eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary
   return 'name' in err && typeof err.name === 'string' ? OPENCODE_NAMES.has(err.name) : false;
 };
 
