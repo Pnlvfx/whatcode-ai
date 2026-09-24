@@ -1,3 +1,11 @@
+## [1.30.0](compare/%40whatcode-ai%2Fsdk%401.29.0...%40whatcode-ai%2Fsdk%401.30.0) "@whatcode-ai/sdk" (2026-09-24)
+
+### Bug Fixes
+
+* missing wrapper on notification tracker 704fba4
+* tailscale logger 1e6c4cd
+* throw if server is already running 6a9f17f
+
 ## [1.29.0](compare/%40whatcode-ai%2Fsdk%401.28.0...%40whatcode-ai%2Fsdk%401.29.0) "@whatcode-ai/sdk" (2026-09-16)
 
 ### Bug Fixes

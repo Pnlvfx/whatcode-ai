@@ -1,3 +1,5 @@
+## [1.30.0](compare/%40whatcode-ai%2Fwhatcode%401.29.0...%40whatcode-ai%2Fwhatcode%401.30.0) "@whatcode-ai/whatcode" (2026-09-24)
+
 ## [1.29.0](compare/%40whatcode-ai%2Fwhatcode%401.28.0...%40whatcode-ai%2Fwhatcode%401.29.0) "@whatcode-ai/whatcode" (2026-09-16)
 
 ## [1.28.0](compare/%40whatcode-ai%2Fwhatcode%401.27.0...%40whatcode-ai%2Fwhatcode%401.28.0) "@whatcode-ai/whatcode" (2026-08-30)
