@@ -45,8 +45,8 @@
     "@goatjs/doctor": "^2.59.0",
     "@goatjs/node-monorepo-eslint": "^3.35.0",
     "lefthook": "^2.1.14",
-    "prettier": "^3.9.8",
-    "turbo": "^2.11.2",
+    "prettier": "^3.9.9",
+    "turbo": "^2.11.3",
     "typescript": "^6.0.3"
   },
   "packageManager": "pnpm@12.5.1"

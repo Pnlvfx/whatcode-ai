@@ -192,11 +192,11 @@ importers:
         specifier: ^2.1.14
         version: 2.1.14
       prettier:
-        specifier: ^3.9.8
-        version: 3.9.8
+        specifier: ^3.9.9
+        version: 3.9.9
       turbo:
-        specifier: ^2.11.2
-        version: 2.11.2
+        specifier: ^2.11.3
+        version: 2.11.3
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -256,8 +256,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       vercel:
-        specifier: ^59.25.2
-        version: 59.25.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
+        specifier: ^59.25.4
+        version: 59.25.4(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
 
   apps/example:
     dependencies:
@@ -3627,33 +3627,33 @@ packages:
   '@ts-morph/common@0.11.1':
     resolution: {integrity: sha512-7hWZS0NRpEsNV8vWJzg7FEz6V8MaLNeJOmwmghqUXTpzk16V1LLZhdo+4QvE/+zv4cVci0OviuJFnqhEfoV3+g==}
 
-  '@turbo/darwin-64@2.11.2':
-    resolution: {integrity: sha512-0pGfE4Lpxrbd+6gUD9z025Tn4z9uMaSNZ3VX0H/hkUPZkjY5xrCa1NfTqocs09NM5NiYE3wEVcoYBadrhayRCA==}
+  '@turbo/darwin-64@2.11.3':
+    resolution: {integrity: sha512-D4EIKTgPpxFQL5aZNbNqy57XOiRldM+mwP1ME9ZLM4DJoV3oNK7GKyQWVusz1umjiFNmLvunNGw7Jq4RUyYL3A==}
     cpu: [x64]
     os: [darwin]
 
-  '@turbo/darwin-arm64@2.11.2':
-    resolution: {integrity: sha512-Ub7hTbu0bPSiW156ciuLCexG5/SfuZM/QWeBBh9o8P4XyKiZwKqubT6Y9DdJjdp4ZY2wS47Prdl06Xxzt0q6zw==}
+  '@turbo/darwin-arm64@2.11.3':
+    resolution: {integrity: sha512-WOvgWIO86LzBQmL9aRFekROing1CZMVDjmdD7Dk6R65qFAFdrlKkufojenjW1AbUAqytpG6xsXzq8UEScdSdDQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@turbo/linux-64@2.11.2':
-    resolution: {integrity: sha512-8ipdmgmvSomfQ8E9afUsefO+BLO6QMW7srrHqMOCXD3BPX4FlYqqWAJY1GvbQotZMWKzNohdVkevrUYM6ZzYKA==}
+  '@turbo/linux-64@2.11.3':
+    resolution: {integrity: sha512-zIgNl9KkMnsdU54JrnazELatpMJDSktKjD3kjKVliUNMl/5uhFRrqQ+Z1qaACKw/2ybL7xzlsHir9s5q7sYlQg==}
     cpu: [x64]
     os: [android, linux]
 
-  '@turbo/linux-arm64@2.11.2':
-    resolution: {integrity: sha512-tsftYXAzgc+GdosqyRP8+Zzk2evJ8ej7Otal7/DU+6GVekVZ3kqM/z7zlGuF4TSHeetWxX04KN1I64LkmvYzgg==}
+  '@turbo/linux-arm64@2.11.3':
+    resolution: {integrity: sha512-aJToWHx5JYvpPwIrAt1DuYrHWcpQGjGf0XVPRMKQBHou//JUYR6oowHeUZp9Oq7e3XDWA75E37C2GnNaBqCVnA==}
     cpu: [arm64]
     os: [android, linux]
 
-  '@turbo/windows-64@2.11.2':
-    resolution: {integrity: sha512-p5LDVcGmC8W6FCrJPehr1t0ZvYqM8xvG3Va+LkwtDMK3Rl0NhSsJOYbYZVBfMbkm+9RKcCvekFCbSVtQ9Eyuqg==}
+  '@turbo/windows-64@2.11.3':
+    resolution: {integrity: sha512-hu5biiwVGdMvHB/vvaoPjtudNBn3TqcsKK2A06ap3O0wnSZwAtTXe92tKTckpecDeVs+IC+4r8s2wXpbdSPWoA==}
     cpu: [x64]
     os: [win32]
 
-  '@turbo/windows-arm64@2.11.2':
-    resolution: {integrity: sha512-u0M3m1aXo9lpDM/2iQhxlGzgWjHFq/MC4TqHn1YAvxk8g1wGtzRB2QBx/SLqRChhPhC29mzaB8eLcxKh/pcM1g==}
+  '@turbo/windows-arm64@2.11.3':
+    resolution: {integrity: sha512-naDEb/31UmOOJOChi+LebLMKWKa1kId0yig1yTRZzDViDg1lBw1Ptu5iQYCvOfOOrx6swUUucf3zPWuPGWz7Jw==}
     cpu: [arm64]
     os: [win32]
 
@@ -4087,8 +4087,8 @@ packages:
     resolution: {integrity: sha512-g9XerViJ/paZujufXYcu5XYI2vU2rtB4sgdpjUHde5RnOkdmpu0ngH46LCFGHoPXO/C+qDPSczIHIRN+8Q2YKQ==}
     engines: {node: '>= 18'}
 
-  '@vercel/container@8.3.1':
-    resolution: {integrity: sha512-iQ/46SlaYvEkA/DY9sYHRKY5rc/tPsiqlIeeFl1sjhwG0zJoNbXVlLIT4o9jobQ+7Ss3yvYtxjd/BT86B9FZuw==}
+  '@vercel/container@8.4.0':
+    resolution: {integrity: sha512-3NLKqP8KfTn9YVhUSg3/aGvPhicqAjGNhnM8xmgN/1U1z+BDeu8rya3LUlhyvdcO1TF7CprHYZIiX+2MEqBHlw==}
     peerDependencies:
       '@vercel/build-utils': 14.10.2
 
@@ -4219,33 +4219,33 @@ packages:
   '@vercel/static-config@3.4.3':
     resolution: {integrity: sha512-BY1sL8rNJvIm3TK/8TQ+Q6jIx7NpO5xckQzv7s6c1ypHvRnTl+vf6rmgY5WFXmoYDeGm3tMy4jiy/5M/5jGr/g==}
 
-  '@vercel/vc-native-darwin-arm64@59.25.2':
-    resolution: {integrity: sha512-8fCcmY0TrTEs0SrahJf+NeRzgelvWPf5zTbTl3rnkPuDlLJ5bkJcz13Hv4jmOF+n17LNDE6Af5TZU9iRRrLz9g==}
+  '@vercel/vc-native-darwin-arm64@59.25.4':
+    resolution: {integrity: sha512-nOfeLZFW9NwOnVUu6ZMlhDJomd/MYCqZwAEA2TmzrczrOL2J/NzzkOVRlRUfz+IO0Ktw0Qvqh2SewuXM3TQrng==}
     cpu: [arm64]
     os: [darwin]
 
-  '@vercel/vc-native-darwin-x64@59.25.2':
-    resolution: {integrity: sha512-piOC1v/H/uL/PfQFEUgW6SPX3Cz4rqXOXJmUFafPpHlCqaky5UOOWBLMJB1Fue6cGy8r4XtrponK6J+fEAIB5w==}
+  '@vercel/vc-native-darwin-x64@59.25.4':
+    resolution: {integrity: sha512-HOZ6vGsM0fDVVWNDvOcAo/yJW7W0mUqv8nHPbGjdZPfED75jxs5qY7TeGIseXAVCrH75o3dfHjAUYoKoyg2IFw==}
     cpu: [x64]
     os: [darwin]
 
-  '@vercel/vc-native-linux-arm64@59.25.2':
-    resolution: {integrity: sha512-lkFzFPsCf3PrTSwQJuzBpc9p6Jcc69EMB2Lny3LXd5ckuz5diYUuMoHuKf4EGAesTamhI7VjPS3mkq43j5DtNg==}
+  '@vercel/vc-native-linux-arm64@59.25.4':
+    resolution: {integrity: sha512-QN3MDqXmofTwxiW8XlBHnDg2oA6FB/GJZZxllol/KiCmGDhMdaWDKksvfcYDbuWOrT8Qi1atv2a4MsPz81OCKQ==}
     cpu: [arm64]
     os: [linux]
 
-  '@vercel/vc-native-linux-x64@59.25.2':
-    resolution: {integrity: sha512-sjpGzuPGa2mjSn60ssptqZetM1GOV9xpCB9lzkBYREJtSsH5tjwzszK2ssKom//GyWkdo3tZha5WQwfK4pde3Q==}
+  '@vercel/vc-native-linux-x64@59.25.4':
+    resolution: {integrity: sha512-UBlHVmYbD5/zPV4DC+fO5Thgdi6CTPKuDtmsl9XANjEqr32plrtaQhgbFwjFl+7Yxhrzqz/hn07DjyjD2qMBGg==}
     cpu: [x64]
     os: [linux]
 
-  '@vercel/vc-native-win32-arm64@59.25.2':
-    resolution: {integrity: sha512-gHQZkF9bQrCOzu7R+egidNx+lIbfzVzHp7gBQfvo9fMJC2YkAHbCEXkOA2qeUD0PRUywpLzZbwtnjlkHw654fw==}
+  '@vercel/vc-native-win32-arm64@59.25.4':
+    resolution: {integrity: sha512-Im6MBCpRzQV11H/w+gzmB6BGtK//h/9oozqKZoGQpz2LL6FwEjSi7wcsjzPTjdWXHUhXHQgRi2arOyAXBgCQrw==}
     cpu: [arm64]
     os: [win32]
 
-  '@vercel/vc-native-win32-x64@59.25.2':
-    resolution: {integrity: sha512-8WSCJ7ohlPvxxKGuGrS3nz/Sb109zKKsmf2RtIHA9tKFUQVuYXU3HUCEh29GlGPmLiMxghOyJhS4N5pT57usjQ==}
+  '@vercel/vc-native-win32-x64@59.25.4':
+    resolution: {integrity: sha512-vNooyn1uoTR7cUP5xnfrKZF6rLGY7KvyCf04aOqYtu4ybSpjVw5ZyYC3RK9OUDHVq1QZh/tOmNBk8ztye9eyiA==}
     cpu: [x64]
     os: [win32]
 
@@ -8158,8 +8158,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.9.8:
-    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
+  prettier@3.9.9:
+    resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -9128,8 +9128,8 @@ packages:
     resolution: {integrity: sha512-axr3IdNuVIxnaK5XGEUFTu3YmAQ6lllgrvqfEoR16g/HGnYY/6We4oWENtAnzK6/LpJ2ur9PAb80RBt7/U4ugw==}
     engines: {node: '>= 6.0.0'}
 
-  turbo@2.11.2:
-    resolution: {integrity: sha512-s0GhnWXlAAN+wb2GRMQxnZgFweRWTAceRWW/4Lk9iHj7QuLZMjDxQQqu+Xoh7Nckuy8UiSim520w6yqP2+ertw==}
+  turbo@2.11.3:
+    resolution: {integrity: sha512-Pfg2dWNOUPwJYbR+eYAcjoBbo4Kmoc8uQb80hzKrBgNEQtxvwf2ucXG7C28MyLVhV/zJSKvChrR+2CP/BONpoA==}
     hasBin: true
 
   type-check@0.4.0:
@@ -9348,8 +9348,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vercel@59.25.2:
-    resolution: {integrity: sha512-3qeivfZzkmPXh//WwtHy5auHm4VGf7EAsfdnXsrG5UVU4rQTrB23+KRAKvOAumj8sf/yQLLzWZEt985kA/GoUA==}
+  vercel@59.25.4:
+    resolution: {integrity: sha512-h3VxQx+sEKHmxS3k737wGiDk5dyNnHjz0+d+hOsJs0TQFvZg6qP8+Wgc3DK82K9EDDpfFHqdo0nsWyfU1KxeZA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -13825,22 +13825,22 @@ snapshots:
       mkdirp: 1.0.4
       path-browserify: 1.0.1
 
-  '@turbo/darwin-64@2.11.2':
+  '@turbo/darwin-64@2.11.3':
     optional: true
 
-  '@turbo/darwin-arm64@2.11.2':
+  '@turbo/darwin-arm64@2.11.3':
     optional: true
 
-  '@turbo/linux-64@2.11.2':
+  '@turbo/linux-64@2.11.3':
     optional: true
 
-  '@turbo/linux-arm64@2.11.2':
+  '@turbo/linux-arm64@2.11.3':
     optional: true
 
-  '@turbo/windows-64@2.11.2':
+  '@turbo/windows-64@2.11.3':
     optional: true
 
-  '@turbo/windows-arm64@2.11.2':
+  '@turbo/windows-arm64@2.11.3':
     optional: true
 
   '@tybys/wasm-util@0.10.4':
@@ -14316,7 +14316,7 @@ snapshots:
     dependencies:
       execa: 5.1.1
 
-  '@vercel/container@8.3.1(@vercel/build-utils@14.10.2)':
+  '@vercel/container@8.4.0(@vercel/build-utils@14.10.2)':
     dependencies:
       '@vercel/build-utils': 14.10.2
       smol-toml: 1.5.2
@@ -14634,22 +14634,22 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@vercel/vc-native-darwin-arm64@59.25.2':
+  '@vercel/vc-native-darwin-arm64@59.25.4':
     optional: true
 
-  '@vercel/vc-native-darwin-x64@59.25.2':
+  '@vercel/vc-native-darwin-x64@59.25.4':
     optional: true
 
-  '@vercel/vc-native-linux-arm64@59.25.2':
+  '@vercel/vc-native-linux-arm64@59.25.4':
     optional: true
 
-  '@vercel/vc-native-linux-x64@59.25.2':
+  '@vercel/vc-native-linux-x64@59.25.4':
     optional: true
 
-  '@vercel/vc-native-win32-arm64@59.25.2':
+  '@vercel/vc-native-win32-arm64@59.25.4':
     optional: true
 
-  '@vercel/vc-native-win32-x64@59.25.2':
+  '@vercel/vc-native-win32-x64@59.25.4':
     optional: true
 
   '@webassemblyjs/ast@1.14.1':
@@ -19224,7 +19224,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.9.8: {}
+  prettier@3.9.9: {}
 
   pretty-error@4.0.0:
     dependencies:
@@ -20335,14 +20335,14 @@ snapshots:
     dependencies:
       tslib: 1.14.1
 
-  turbo@2.11.2:
+  turbo@2.11.3:
     optionalDependencies:
-      '@turbo/darwin-64': 2.11.2
-      '@turbo/darwin-arm64': 2.11.2
-      '@turbo/linux-64': 2.11.2
-      '@turbo/linux-arm64': 2.11.2
-      '@turbo/windows-64': 2.11.2
-      '@turbo/windows-arm64': 2.11.2
+      '@turbo/darwin-64': 2.11.3
+      '@turbo/darwin-arm64': 2.11.3
+      '@turbo/linux-64': 2.11.3
+      '@turbo/linux-arm64': 2.11.3
+      '@turbo/windows-64': 2.11.3
+      '@turbo/windows-arm64': 2.11.3
 
   type-check@0.4.0:
     dependencies:
@@ -20587,14 +20587,14 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vercel@59.25.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1):
+  vercel@59.25.4(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1):
     dependencies:
       '@vercel/backends': 8.0.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@14.10.2)(supports-color@8.1.1)
       '@vercel/blob': 2.8.0
       '@vercel/build-utils': 14.10.2
       '@vercel/cli-auth': 0.3.9
       '@vercel/cli-config': 0.3.0
-      '@vercel/container': 8.3.1(@vercel/build-utils@14.10.2)
+      '@vercel/container': 8.4.0(@vercel/build-utils@14.10.2)
       '@vercel/detect-agent': 1.2.5
       '@vercel/elysia': 8.0.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@14.10.2)(supports-color@8.1.1)
       '@vercel/express': 8.0.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@14.10.2)(supports-color@8.1.1)
@@ -20627,12 +20627,12 @@ snapshots:
       uuid: 14.0.1
       zod: 4.1.11
     optionalDependencies:
-      '@vercel/vc-native-darwin-arm64': 59.25.2
-      '@vercel/vc-native-darwin-x64': 59.25.2
-      '@vercel/vc-native-linux-arm64': 59.25.2
-      '@vercel/vc-native-linux-x64': 59.25.2
-      '@vercel/vc-native-win32-arm64': 59.25.2
-      '@vercel/vc-native-win32-x64': 59.25.2
+      '@vercel/vc-native-darwin-arm64': 59.25.4
+      '@vercel/vc-native-darwin-x64': 59.25.4
+      '@vercel/vc-native-linux-arm64': 59.25.4
+      '@vercel/vc-native-linux-x64': 59.25.4
+      '@vercel/vc-native-win32-arm64': 59.25.4
+      '@vercel/vc-native-win32-x64': 59.25.4
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'

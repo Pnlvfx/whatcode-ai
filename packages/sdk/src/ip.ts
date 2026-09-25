@@ -13,7 +13,11 @@ const getLocalIpViaDgram = () => {
     socket.connect(80, '8.8.8.8', () => {
       const { address } = socket.address();
       socket.close();
-      resolve(address);
+      // Tailscale occupies the CGNAT range (100.64.0.0/10); if the OS routes
+      // outbound traffic through the Tailscale adapter we get a 100.x address
+      // which is only reachable via Tailscale. Fall through to the network
+      // interfaces scan so we return the real LAN IP instead.
+      resolve(isTailscaleCgnat(address) ? undefined : address);
     });
     socket.on('error', (error) => {
       socket.close();
@@ -38,3 +42,6 @@ const getLocalIpViaNetworkInterfaces = (): string | undefined => {
 const isPrivate = (v: string) => v.startsWith('192.168.') || v.startsWith('10.') || (v.startsWith('172.') && second(v) >= 16 && second(v) <= 31);
 // eslint-disable-next-line no-restricted-syntax
 const second = (v: string) => Math.trunc(Number(v.split('.', 2)[1] ?? '0'));
+
+// Tailscale uses the CGNAT range 100.64.0.0/10 (100.64–100.127)
+const isTailscaleCgnat = (v: string) => v.startsWith('100.') && second(v) >= 64 && second(v) <= 127;
