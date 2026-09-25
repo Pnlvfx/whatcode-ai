@@ -1,9 +1,10 @@
 import type { OpencodeClient } from '@opencode-ai/sdk/v2';
 import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
-import { getLastMessageTimeByProject } from './opencode/db.ts';
+import { getLastMessageTimeByProject, getLatestSessionByProject } from './opencode/db.ts';
 import { userRouter } from './routes/user.ts';
 import { notificationRouter } from './routes/notification.ts';
+import { sessionRouter } from './routes/session.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
@@ -18,54 +19,61 @@ interface Params {
 }
 
 export const startWhatcode = ({ port, opencodePort, password, client }: Params) => {
-  const app = new Elysia({ adapter: node() })
-    .onError(({ error, request }) => {
-      const { pathname, search } = new URL(request.url);
-      const url = `${pathname}${search}`;
-      logger.error('server-error', `An error occured at ${url}`, error);
-    })
-    .use(password ? opencodeBasicAuth(password) : new Elysia())
-    .get('/version', { app: { min: MIN_APP_VERSION } })
-    .use(userRouter)
-    .use(notificationRouter)
-    // .use(userAuth) TODO [2026-06-22] enable once released the app
-    .get('/project', async () => {
-      const { data: projects, error, response } = await client.project.list();
-      if (error) return status(response.status, { message: error.data.message });
-      const lastMessageTimes = getLastMessageTimeByProject();
-      return projects.map((project) => {
-        const lastMsg = lastMessageTimes.get(project.id);
-        return lastMsg === undefined ? project : { ...project, time: { ...project.time, updated: lastMsg } };
-      });
-    })
-    .all(
-      '/*',
-      async ({ request, set }) => {
-        const requestUrl = new URL(request.url);
-        const url = new URL(`http://localhost:${opencodePort.toString()}${requestUrl.pathname}${requestUrl.search}`);
-        const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
-        const body = hasBody ? request.body : undefined;
-        const requestHeaders = new Headers(request.headers);
-        requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
-        requestHeaders.delete('accept-encoding');
-        const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
-        if (!upstream.ok) {
-          logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
-        }
-        const responseHeaders = new Headers(upstream.headers);
-        responseHeaders.delete('content-encoding');
-        responseHeaders.delete('content-length');
-        responseHeaders.set('cache-control', 'no-cache');
-        responseHeaders.set('x-accel-buffering', 'no');
-        // Pre-populate set.headers with content-type so Elysia's stream handler
-        // doesn't override it with 'text/plain' when rewriting chunked responses.
-        const contentType = upstream.headers.get('content-type');
-        if (contentType) set.headers['content-type'] = contentType;
-        return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
-      },
-      { parse: 'none' },
-    )
-    .listen(port);
-
-  return app;
+  return (
+    new Elysia({ adapter: node() })
+      .onError(({ error, request }) => {
+        const { pathname, search } = new URL(request.url);
+        const url = `${pathname}${search}`;
+        logger.error('server-error', `An error occured at ${url}`, error);
+      })
+      .use(password ? opencodeBasicAuth(password) : new Elysia())
+      .get('/version', { app: { min: MIN_APP_VERSION } })
+      .use(userRouter)
+      .use(notificationRouter)
+      .use(sessionRouter)
+      // .use(userAuth) TODO [2026-06-22] enable once released the app
+      .get('/project', async () => {
+        const { data: projects, error, response } = await client.project.list();
+        if (error) return status(response.status, { message: error.data.message });
+        const lastMessageTimes = getLastMessageTimeByProject();
+        const latestSessions = getLatestSessionByProject();
+        return projects.map((project) => {
+          const lastMsg = lastMessageTimes.get(project.id);
+          const latestSession = latestSessions.get(project.id);
+          return {
+            ...project,
+            ...(lastMsg !== undefined && { time: { ...project.time, updated: lastMsg } }),
+            ...(latestSession !== undefined && { lastSessionId: latestSession.sessionId, lastSessionTitle: latestSession.title }),
+          };
+        });
+      })
+      .all(
+        '/*',
+        async ({ request, set }) => {
+          const requestUrl = new URL(request.url);
+          const url = new URL(`http://localhost:${opencodePort.toString()}${requestUrl.pathname}${requestUrl.search}`);
+          const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
+          const body = hasBody ? request.body : undefined;
+          const requestHeaders = new Headers(request.headers);
+          requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
+          requestHeaders.delete('accept-encoding');
+          const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
+          if (!upstream.ok) {
+            logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
+          }
+          const responseHeaders = new Headers(upstream.headers);
+          responseHeaders.delete('content-encoding');
+          responseHeaders.delete('content-length');
+          responseHeaders.set('cache-control', 'no-cache');
+          responseHeaders.set('x-accel-buffering', 'no');
+          // Pre-populate set.headers with content-type so Elysia's stream handler
+          // doesn't override it with 'text/plain' when rewriting chunked responses.
+          const contentType = upstream.headers.get('content-type');
+          if (contentType) set.headers['content-type'] = contentType;
+          return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
+        },
+        { parse: 'none' },
+      )
+      .listen(port)
+  );
 };
