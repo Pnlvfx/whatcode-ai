@@ -1,4 +1,4 @@
-import { relayClient } from './client.ts';
+import { relayClient } from './auth/client.ts';
 import { logger } from './logger.ts';
 
 export const getFeatureFlags = async () => {

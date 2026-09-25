@@ -1,10 +1,9 @@
 import { Elysia, status } from 'elysia';
 import { randomBytes, randomUUID } from 'node:crypto';
-import { addAccount, deleteAccountApnToken, getAccounts, updateAccountApnToken } from '../stores/accounts.ts';
+import { addAccount, deleteAccount, getAccounts } from '../stores/accounts.ts';
 import { userAuth } from '../mw/user-auth.ts';
 import { pairUserBody } from '../types/user.ts';
 import { buildAccountResponse } from '../user.ts';
-import * as z from 'zod/v4/mini';
 import { getIdentity } from '../stores/identity.ts';
 
 export const userRouter = new Elysia({ prefix: '/user' })
@@ -37,15 +36,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
     const identityData = await getIdentity();
     return identityData.error ? status(400, { message: identityData.error.message }) : { user: buildAccountResponse(account, identityData.data) };
   })
-  .post(
-    '/apn-token',
-    async ({ body: { token }, account }) => {
-      const { error } = await updateAccountApnToken({ deviceId: account.deviceId, apnToken: token });
-      return error ? status(400, { message: error.message }) : { status: 'success' };
-    },
-    { body: z.strictObject({ token: z.string() }) },
-  )
   .post('/logout', async ({ account }) => {
-    const { error } = await deleteAccountApnToken({ deviceId: account.deviceId });
+    const { error } = await deleteAccount(account);
     return error ? status(400, { message: error.message }) : { status: 'success' };
   });

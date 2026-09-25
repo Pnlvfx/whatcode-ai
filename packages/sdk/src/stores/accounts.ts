@@ -7,7 +7,6 @@ const accountSchema = z.strictObject({
   id: z.string(),
   name: z.string(),
   deviceId: z.string(),
-  apnToken: z.optional(z.string()),
   deviceName: z.string(),
   token: z.string(),
 });
@@ -21,21 +20,8 @@ if (validationResult.error) {
 }
 
 export const getAccounts = accountsStore.get;
-export const resetAccounts = accountsStore.clear;
 export const addAccount = (account: Account) => accountsStore.set((prev) => [...prev, account]);
-
-export const updateAccountApnToken = async ({ deviceId, apnToken }: { deviceId: string; apnToken: string }) => {
-  return accountsStore.set((prev) =>
-    prev.map((p) => {
-      if (p.deviceId !== deviceId) return p;
-      logger.debug('apn-token', `Apn token updated for ${deviceId}`);
-      return { ...p, apnToken };
-    }),
-  );
-};
-
-export const deleteAccountApnToken = async ({ deviceId }: { deviceId: string }) => {
-  return accountsStore.set((prev) => prev.map((e) => (e.deviceId === deviceId ? { ...e, apnToken: undefined } : e)));
-};
+export const deleteAccount = (account: Account) => accountsStore.set((prev) => prev.filter((a) => a.id === account.id));
+export const resetAccounts = accountsStore.clear;
 
 export type Account = z.infer<typeof accountSchema>;

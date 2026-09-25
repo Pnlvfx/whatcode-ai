@@ -38,12 +38,13 @@ const OPENCODE_NAMES = new Set(['BadRequest', 'NotFoundError']);
 export const isOpencodeError = (err: unknown): err is OpencodeError => {
   if (typeof err !== 'object' || err === null) return false;
   if ('_tag' in err && typeof err._tag === 'string') return OPENCODE_TAGS.has(err._tag);
-  // eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary
   return 'name' in err && typeof err.name === 'string' ? OPENCODE_NAMES.has(err.name) : false;
 };
 
+/** @deprecated */
 export const opencodeError = (err: OpencodeError): Error => new Error(getOpencodeErrorMessage(err), { cause: err });
 
+/** @deprecated */
 export const getOpencodeErrorMessage = (err: OpencodeError): string => {
   if (err instanceof Error) return err.message === 'Network request failed' ? 'Server unreachable.\nIs the OpenCode server running?' : err.message;
   if (!isOpencodeError(err)) return 'An unexpected error occurred';

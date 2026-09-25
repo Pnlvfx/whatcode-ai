@@ -14,6 +14,7 @@ import { isProd, SERVER_URL } from '../config/constants.ts';
 import { logger } from '../logger.ts';
 import { createOpencode } from '../opencode/opencode.ts';
 import { isServerRunning } from '../net.ts';
+import { authenticate } from '../auth/auth.ts';
 
 export interface WhatcodeServerConfig {
   tailscale?: boolean;
@@ -37,17 +38,20 @@ export const createWhatcodeServer = async ({
   const isRunning = await isServerRunning(port);
   if (isRunning) return { error: { type: 'server' as const, message: 'The daemon is already running!' } };
 
-  logger.info('whatcode', `started WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}`);
+  logger.info('whatcode', `starting WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}...`);
+
   if (!isProd) {
     logger.debug('relay', `Relay url: ${SERVER_URL}`);
   }
 
-  const [opencodeData, ipData, flags] = await Promise.all([
+  const [relayAuth, opencodeData, ipData, flags] = await Promise.all([
+    authenticate(),
     createOpencode({ port: opencodePort, password, hostname }),
     getLocalIp(),
     getFeatureFlags(),
   ]);
 
+  if (relayAuth.error) return { error: relayAuth.error };
   if (opencodeData.error) return { error: opencodeData.error };
   if (ipData.error) return { error: ipData.error };
 

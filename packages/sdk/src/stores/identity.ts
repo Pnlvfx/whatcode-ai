@@ -1,8 +1,8 @@
 import { createStore2 } from '../compiled/store/store2.ts';
-import mId from 'node-machine-id';
 import * as z from 'zod/v4/mini';
 import os from 'node:os';
 import { logger } from '../logger.ts';
+import { machineId } from '../config/constants.ts';
 
 const providerIdentitySchema = z.strictObject({ url: z.string(), version: z.string(), available: z.boolean() });
 
@@ -31,7 +31,7 @@ export const getIdentity = async () => {
 export const createIdentity = async ({ opencode, daemon, tailscale }: Pick<DaemonIdentity, 'opencode' | 'daemon' | 'tailscale'>) => {
   return identityStore.set({
     name: os.hostname(),
-    machineId: await mId.machineId(),
+    machineId,
     opencode,
     daemon,
     tailscale,

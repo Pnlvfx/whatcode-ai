@@ -1,5 +1,6 @@
 import os from 'node:os';
 import path from 'node:path';
+import mId from 'node-machine-id';
 
 export const platform = os.platform();
 
@@ -14,3 +15,5 @@ const WHATCODE_HOME = path.join(os.homedir(), '.whatcode');
 export const WHATCODE_ROOT = path.join(WHATCODE_HOME, devFolder);
 export const WHATCODE_AUTH = path.join(WHATCODE_ROOT, 'auth');
 export const MIN_APP_VERSION = '1.5.2';
+
+export const machineId = await mId.machineId();
