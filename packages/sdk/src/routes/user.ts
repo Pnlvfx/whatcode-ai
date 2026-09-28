@@ -16,6 +16,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
       let account = accounts.find((a) => a.deviceId === device_id);
       const identityData = await getIdentity();
       if (identityData.error) return status(400, { message: identityData.error.message });
+
       if (!account) {
         account = {
           name: identityData.data.name,
@@ -27,6 +28,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
         const { error } = await addAccount(account);
         if (error) return status(500, { message: error.message });
       }
+
       return { token: account.token, user: buildAccountResponse(account, identityData.data) };
     },
     { body: pairUserBody },
