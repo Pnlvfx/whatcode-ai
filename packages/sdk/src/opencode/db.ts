@@ -14,7 +14,7 @@ const openDb = (): DatabaseSync | undefined => {
 
 const db = openDb();
 
-const queryV1 = 'SELECT s.project_id, MAX(m.time_created) as last_msg FROM message m JOIN session s ON m.session_id = s.id GROUP BY s.project_id';
+const queryV1 = 'SELECT s.project_id, MAX(sm.time_created) as last_msg FROM session_message sm JOIN session_v2 s ON sm.session_id = s.id GROUP BY s.project_id';
 
 export const getLastMessageTimeByProject = (): Map<string, number> => {
   if (!db) return new Map();
@@ -48,7 +48,7 @@ export interface SessionSummary {
 
 // Fetches the last model used and title for a list of session IDs.
 // Reads directly from the opencode SQLite DB — stateless, no writes.
-const querySessionSummary = 'SELECT id, model, title FROM session WHERE id IN (';
+const querySessionSummary = 'SELECT id, model, title FROM session_v2 WHERE id IN (';
 
 export const getSessionSummaries = (sessionIds: string[]): Map<string, SessionSummary> => {
   const result = new Map<string, SessionSummary>();
@@ -85,9 +85,9 @@ export interface ProjectLatestSession {
 
 const queryLatestSessionByProject = `
   SELECT id, project_id, title
-  FROM session
+  FROM session_v2
   WHERE (project_id, time_updated) IN (
-    SELECT project_id, MAX(time_updated) FROM session GROUP BY project_id
+    SELECT project_id, MAX(time_updated) FROM session_v2 GROUP BY project_id
   )
 `;
 
