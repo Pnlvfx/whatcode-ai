@@ -1,27 +1,27 @@
-import type { EventPermissionAsked, EventSessionError, EventSessionIdle, GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { SessionMessageAssistant, V2Event, PermissionAsked, SessionExecutionFailed } from '@opencode/client';
+import type { WhatCodeClient } from '../opencode/client.ts';
 import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
-import { getLastAssistantText, trim, type OpencodeMessage } from './helpers.ts';
+import { trim } from './helpers.ts';
 import { createSmartNotification, IDLE_DELAY_MS } from './smart.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
-import { opencodeError } from '../compiled/whatcode/lib/opencode/error.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
 import { logger } from '../logger.ts';
 
-export const startNotifications = (client: OpencodeClient): void => {
+export const startNotifications = (client: WhatCodeClient): void => {
   const smart = createSmartNotification();
 
-  const getModelName = async (messages: OpencodeMessage[]) => {
-    const lastUser = messages.findLast((m) => m.info.role === 'user');
-    if (lastUser?.info.role !== 'user') return { data: 'unknown' };
-    const { providerID, modelID } = lastUser.info.model;
-    const { data: config, error } = await client.config.providers();
-    if (error) return { error: error };
-    const provider = config.providers.find((p) => p.id === providerID);
-    return { data: provider?.models[modelID]?.name ?? modelID };
+  const getModel = async (assistantMessage: SessionMessageAssistant) => {
+    const id = assistantMessage.model.id;
+    const result = await client.model.list();
+    if (result.error) {
+      logger.debug('notification:model', result.error.message);
+      return;
+    }
+    return result.data.data.find((m) => m.id === id);
   };
 
-  const handleSessionIdle = async ({ sessionID }: EventSessionIdle['properties']): Promise<void> => {
+  const handleSessionIdle = async (sessionID: string): Promise<void> => {
     const loggerName = 'notifications:session.idle';
     logger.debug(loggerName, `session.idle event received for session ${sessionID}`);
     // Delay slightly so a concurrent session.error handler has time to set the lock before we check it.
@@ -33,26 +33,25 @@ export const startNotifications = (client: OpencodeClient): void => {
     }
     const { data: session, error } = await client.session.get({ sessionID });
     if (error) {
-      logger.error(loggerName, opencodeError(error).message);
+      logger.error(loggerName, error.message);
       return;
     }
     if (session.parentID) {
       logger.debug(loggerName, `skipping session.idle for subagent session ${sessionID}`);
       return;
     }
-    const messagesResult = await client.session.messages({ sessionID });
+    const messagesResult = await client.message.list({ sessionID, order: 'desc', type: 'assistant', limit: 1 });
     if (messagesResult.error) {
-      logger.error(loggerName, opencodeError(messagesResult.error).message);
+      logger.error(loggerName, messagesResult.error.message);
       return;
     }
-    const title = getProjectName(session.directory);
-    const modelNameResult = await getModelName(messagesResult.data);
-    if (modelNameResult.error) {
-      logger.error(loggerName, modelNameResult.error.data.message);
-      return;
-    }
-    const lastText = getLastAssistantText(messagesResult.data);
-    const body = lastText ? trim(`${modelNameResult.data}: ${lastText}`) : modelNameResult.data;
+    const messages = messagesResult.data.data;
+    const title = getProjectName(session.location.directory);
+    const assistantMessages = messages.filter((m) => m.type === 'assistant');
+    const last = assistantMessages.at(-1);
+    const model = last ? await getModel(last) : undefined;
+    const text = last?.content.findLast((c) => c.type === 'text')?.text;
+    const body = trim(`${model?.name ?? 'Agent'}: ${text ?? 'Done'}`);
     logger.debug('notifications', `forwarding session.idle: title=${title}, body=${body}`);
     const forwardResult = await forwardToRelay({
       title,
@@ -60,54 +59,54 @@ export const startNotifications = (client: OpencodeClient): void => {
       event: 'session.idle',
       sessionID,
       projectID: session.projectID,
-      directory: session.directory,
+      directory: session.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
     }
   };
 
-  const handlePermissionAsked = async ({ sessionID, permission, patterns }: EventPermissionAsked['properties']): Promise<void> => {
+  const handlePermissionAsked = async ({ sessionID, action, resources }: PermissionAsked['data']): Promise<void> => {
     const loggerName = 'notifications:permission.asked';
-    logger.debug(loggerName, `permission.asked event received for session ${sessionID}, permission=${permission}`);
+    logger.debug(loggerName, `permission.asked event received for session ${sessionID}, action=${action}`);
     const { data: session, error } = await client.session.get({ sessionID });
     if (error) {
-      logger.error(loggerName, opencodeError(error).message);
+      logger.error(loggerName, error.message);
       return;
     }
     if (session.parentID) {
       logger.debug(loggerName, `skipping permission.asked for subagent session ${sessionID}`);
       return;
     }
-    const title = getProjectName(session.directory);
-    const messagesResult = await client.session.messages({ sessionID });
+
+    const messagesResult = await client.message.list({ sessionID });
     if (messagesResult.error) {
-      logger.error(loggerName, opencodeError(messagesResult.error).message);
+      logger.error(loggerName, messagesResult.error.message);
       return;
     }
-    const modelNameResult = await getModelName(messagesResult.data);
-    if (modelNameResult.error) {
-      logger.error(loggerName, modelNameResult.error.data.message);
-      return;
-    }
-    const target = patterns[0] ?? permission;
-    logger.debug('notifications', `forwarding permission.asked: title=${title}, target=${target}`);
+    const messages = messagesResult.data.data;
+    const title = getProjectName(session.location.directory);
+    const assistantMessages = messages.filter((m) => m.type === 'assistant');
+    const last = assistantMessages.at(-1);
+    const model = last ? await getModel(last) : undefined;
+    const text = `needs permission to ${action} ${resources.join(', ')}`;
+    logger.debug('notifications', `forwarding permission.asked: title=${title}, text=${text}`);
     const forwardResult = await forwardToRelay({
       title,
-      body: trim(`${modelNameResult.data} needs permission to: ${target}`),
+      body: trim(`${model?.name ?? 'Agent'} ${text}`),
       event: 'permission.asked',
       sessionID,
       projectID: session.projectID,
-      directory: session.directory,
+      directory: session.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
     }
   };
 
-  const handleSessionError = async ({ sessionID, error }: EventSessionError['properties']): Promise<void> => {
+  const handleSessionError = async ({ sessionID, error }: SessionExecutionFailed['data']): Promise<void> => {
     const loggerName = 'notifications:session.error';
-    logger.debug(loggerName, `session.error event received for session ${sessionID ?? 'unknown'}`);
+    logger.debug(loggerName, `session.error event received for session ${sessionID}`);
     if (!sessionID) {
       logger.debug('notifications', 'skipping session.error — no session available');
       return;
@@ -115,7 +114,7 @@ export const startNotifications = (client: OpencodeClient): void => {
     smart.lock(sessionID);
     const sessionResult = await client.session.get({ sessionID });
     if (sessionResult.error) {
-      logger.error(loggerName, opencodeError(sessionResult.error).message);
+      logger.error(loggerName, sessionResult.error.message);
       return;
     }
     if (sessionResult.data.parentID) {
@@ -123,8 +122,8 @@ export const startNotifications = (client: OpencodeClient): void => {
       logger.debug('notifications', `skipping session.error for subagent session ${sessionResult.data.id}`);
       return;
     }
-    const title = getProjectName(sessionResult.data.directory);
-    const body = trim(typeof error?.data.message === 'string' ? error.data.message : 'An unexpected error occurred');
+    const title = getProjectName(sessionResult.data.location.directory);
+    const body = trim(error.message);
     logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
     const forwardResult = await forwardToRelay({
       title,
@@ -132,25 +131,25 @@ export const startNotifications = (client: OpencodeClient): void => {
       event: 'session.error',
       sessionID,
       projectID: sessionResult.data.projectID,
-      directory: sessionResult.data.directory,
+      directory: sessionResult.data.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
     }
   };
 
-  registerEventHandler(async (event: GlobalEvent): Promise<void> => {
-    switch (event.payload.type) {
+  registerEventHandler(async (event: V2Event): Promise<void> => {
+    switch (event.type) {
       case 'session.idle': {
-        await handleSessionIdle(event.payload.properties);
+        await handleSessionIdle(event.data.sessionID);
         break;
       }
       case 'permission.asked': {
-        await handlePermissionAsked(event.payload.properties);
+        await handlePermissionAsked(event.data);
         break;
       }
-      case 'session.error': {
-        await handleSessionError(event.payload.properties);
+      case 'session.execution.failed': {
+        await handleSessionError(event.data);
         break;
       }
     }

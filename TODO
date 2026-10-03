@@ -1,5 +1,4 @@
-add max items on notification state and delete olds to avoid the object to grow infinitely
-when assigning the name add also account number like computername_account-number
+new notification-tracker
 
-migrate api to sdk v2
-drop notification-tracker
+offer a whatcode pair, remove qr logic from normal starts, make password required, if user don't pass it provide it as password on pair output, then do not show it anymore
+

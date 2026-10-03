@@ -21,22 +21,18 @@ await yargs(hideBin(process.argv))
       y
         .option('tailscale', { type: 'boolean', description: 'Expose WhatCode via Tailscale serve (HTTPS on your tailnet)' })
         .option('port', { type: 'number', description: 'Port for the WhatCode server (default: 8192)' })
-        .option('opencode-port', { type: 'number', description: 'Port for the OpenCode server (default: 4096)' })
-        .option('hostname', { type: 'string', description: 'Hostname to listen on' })
         .option('log-level', {
           type: 'string',
           choices: ['none', 'info', 'debug'] as const,
           default: 'info' as const,
           description: 'Log level: none | info | debug (default: info)',
         }),
-    async ({ logLevel, opencodePort, tailscale, port, hostname }) => {
+    async ({ logLevel, tailscale, port }) => {
       const server = await createWhatcodeServer({
         tailscale,
         ...(port !== undefined && { port }),
-        ...(opencodePort !== undefined && { opencodePort }),
         logLevel,
         ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
-        ...(hostname !== undefined && { hostname }),
       });
 
       if (server.error) {

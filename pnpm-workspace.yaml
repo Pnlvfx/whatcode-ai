@@ -25,4 +25,5 @@ allowBuilds:
   core-js: true
   esbuild: true
   lefthook: true
+  msgpackr-extract: true
   unrs-resolver: true

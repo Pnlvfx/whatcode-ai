@@ -1,5 +1,5 @@
 /* eslint-disable parallelize/no-sequential-await */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import-x/no-extraneous-dependencies */
 import { copyFilesFromFolder } from '@goatjs/node/copy-files-from-folder';
 import { homedir } from 'node:os';
 import path from 'node:path';
@@ -17,7 +17,7 @@ await copyFilesFromFolder([
   {
     inputFolder: path.join(goatjs, 'core', 'src'),
     outputFolder: path.join(output, 'core'),
-    files: ['capitalize.ts', 'error.ts'],
+    files: ['capitalize.ts', 'error.ts', 'try-catch.ts'],
   },
   {
     inputFolder: path.join(goatjs, 'core', 'src', 'errors'),
@@ -38,10 +38,5 @@ await copyFilesFromFolder([
     inputFolder: path.join(whatcode, 'src', 'lib'),
     outputFolder: path.join(output, 'whatcode', 'lib'),
     files: ['project.ts'],
-  },
-  {
-    inputFolder: path.join(whatcode, 'src', 'lib', 'opencode'),
-    outputFolder: path.join(output, 'whatcode', 'lib', 'opencode'),
-    files: ['error.ts'],
   },
 ]);

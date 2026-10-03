@@ -1,24 +1,26 @@
-import type { OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { WhatCodeClient } from './opencode/client.ts';
+import { Service, type Endpoint } from '@opencode/client/service';
 import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
 import { getLastMessageTimeByProject, getLatestSessionByProject } from './opencode/db.ts';
 import { userRouter } from './routes/user.ts';
-import { notificationRouter } from './routes/notification.ts';
 import { sessionRouter } from './routes/session.ts';
 import { opencodeBasicAuth } from './mw/opencode-auth.ts';
 import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
-import { status } from 'elysia/error';
 import { MIN_APP_VERSION } from './config/constants.ts';
+import pkgJson from '../package.json' with { type: 'json' };
+import { notificationRouter } from './routes/notification.ts';
 
 interface Params {
   port: number;
-  opencodePort: number;
+  endpoint: Endpoint;
   password: string | undefined;
-  client: OpencodeClient;
+  client: WhatCodeClient;
 }
 
-export const startWhatcode = ({ port, opencodePort, password, client }: Params) => {
+export const startWhatcode = ({ port, endpoint, password, client }: Params) => {
+  const ocHeaders = Service.headers(endpoint);
   return (
     new Elysia({ adapter: node() })
       .onError(({ error, request }) => {
@@ -27,17 +29,17 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
         logger.error('server-error', `An error occured at ${url}`, error);
       })
       .use(password ? opencodeBasicAuth(password) : new Elysia())
-      .get('/version', { app: { min: MIN_APP_VERSION } })
+      .get('/version', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
       .use(userRouter)
       .use(notificationRouter)
       .use(sessionRouter)
-      // .use(userAuth) TODO [2026-06-22] enable once released the app
-      .get('/project', async () => {
-        const { data: projects, error, response } = await client.project.list();
-        if (error) return status(response.status, { message: error.data.message });
+      // TODO the path of this has changed, check the db tables too
+      .get('/project', async ({ status }) => {
+        const projects = await client.project.list();
+        if (projects.error) return status(400, { message: projects.error.message });
         const lastMessageTimes = getLastMessageTimeByProject();
         const latestSessions = getLatestSessionByProject();
-        return projects.map((project) => {
+        return projects.data.map((project) => {
           const lastMsg = lastMessageTimes.get(project.id);
           const latestSession = latestSessions.get(project.id);
           return {
@@ -50,12 +52,16 @@ export const startWhatcode = ({ port, opencodePort, password, client }: Params) 
       .all(
         '/*',
         async ({ request, set }) => {
+          // TODO we can infer the url directly from the request.url rather than using the opencode endpoint
           const requestUrl = new URL(request.url);
-          const url = new URL(`http://localhost:${opencodePort.toString()}${requestUrl.pathname}${requestUrl.search}`);
+          const url = new URL(`${endpoint.url}${requestUrl.pathname}${requestUrl.search}`);
           const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
           const body = hasBody ? request.body : undefined;
           const requestHeaders = new Headers(request.headers);
-          requestHeaders.set('host', `localhost:${opencodePort.toString()}`);
+          requestHeaders.set('host', new URL(endpoint.url).host);
+          if (ocHeaders) {
+            requestHeaders.set('authorization', ocHeaders.authorization);
+          }
           requestHeaders.delete('accept-encoding');
           const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
           if (!upstream.ok) {

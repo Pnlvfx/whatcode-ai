@@ -1,8 +1,9 @@
-import type { GlobalEvent, OpencodeClient } from '@opencode-ai/sdk/v2';
+import type { V2Event } from '@opencode/client';
+import type { WhatCodeClient } from './client.ts';
 import { setTimeout } from 'node:timers/promises';
 import { logger } from '../logger.ts';
 
-type EventHandler = (event: GlobalEvent) => Promise<void> | void;
+type EventHandler = (event: V2Event) => Promise<void> | void;
 
 const BACKOFF_INITIAL_MS = 1000;
 const BACKOFF_MAX_MS = 30_000;
@@ -18,16 +19,16 @@ export const registerEventHandler = (handler: EventHandler): (() => void) => {
   };
 };
 
-export const startEventSubscription = (client: OpencodeClient): void => {
+export const startEventSubscription = (client: WhatCodeClient): void => {
   const subscribe = async (): Promise<void> => {
     let delay = BACKOFF_INITIAL_MS;
 
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     while (true) {
       try {
-        const events = await client.global.event();
+        const events = client.event.subscribe();
 
-        for await (const event of events.stream) {
+        for await (const event of events) {
           for (const handler of handlers) {
             // eslint-disable-next-line parallelize/no-sequential-await -- handlers must run sequentially: each processes the same event in registration order to avoid concurrent state mutations
             await handler(event);

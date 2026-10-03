@@ -2,6 +2,7 @@ import { Elysia } from 'elysia';
 import * as z from 'zod/v4/mini';
 import { getNotificationState, markSessionSeen } from '../stores/notification-state.ts';
 
+/** @deprecated make a new one with only the counters */
 export const notificationRouter = new Elysia({ prefix: '/notification' })
   .get('/count', async ({ status }) => {
     const result = await getNotificationState();
@@ -12,8 +13,7 @@ export const notificationRouter = new Elysia({ prefix: '/notification' })
     let totalUnreadSessions = 0;
 
     for (const s of sessions) {
-      if (!(s.unseenCount > 0 || s.hasPendingPermission)) continue;
-
+      if (s.unseenCount === 0) continue;
       unreadProjectIDs.add(s.projectID);
       totalUnreadSessions++;
     }
@@ -27,7 +27,7 @@ export const notificationRouter = new Elysia({ prefix: '/notification' })
     const unreadProjectIDs = new Set<string>();
 
     for (const s of Object.values(result.data)) {
-      if (s.unseenCount > 0 || s.hasPendingPermission) {
+      if (s.unseenCount > 0) {
         unreadProjectIDs.add(s.projectID);
       }
     }

@@ -4,19 +4,17 @@ import os from 'node:os';
 import { logger } from '../logger.ts';
 import { machineId } from '../config/constants.ts';
 
-const providerIdentitySchema = z.strictObject({ url: z.string(), version: z.string(), available: z.boolean() });
-
 const identitySchema = z.strictObject({
   name: z.string(),
   machineId: z.string(),
-  opencode: providerIdentitySchema,
-  daemon: providerIdentitySchema,
-  tailscale: z.strictObject({ url: z.optional(z.string()), available: z.boolean() }),
+  daemon: z.string(),
+  tailscale: z.optional(z.string()),
 });
 
 const identityStore = createStore2('identity', identitySchema, { persist: false, directory: '' });
 
 const validationResult = await identityStore.validate();
+
 if (validationResult.error) {
   logger.warn('identity', 'Identity schema changed, resetting...');
   await identityStore.clear();
@@ -28,11 +26,10 @@ export const getIdentity = async () => {
   return identity.data ? { data: identity.data } : { error: { type: 'identity-init' as const, message: 'Identity not initialized!' } };
 };
 
-export const createIdentity = async ({ opencode, daemon, tailscale }: Pick<DaemonIdentity, 'opencode' | 'daemon' | 'tailscale'>) => {
+export const createIdentity = async ({ daemon, tailscale }: Pick<DaemonIdentity, 'daemon' | 'tailscale'>) => {
   return identityStore.set({
     name: os.hostname(),
     machineId,
-    opencode,
     daemon,
     tailscale,
   });

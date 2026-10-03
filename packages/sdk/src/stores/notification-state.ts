@@ -6,16 +6,9 @@ import { logger } from '../logger.ts';
 const sessionStateSchema = z.strictObject({
   sessionID: z.string(),
   projectID: z.string(),
-  directory: z.string(),
-  isBusy: z.boolean(),
-  hasPendingPermission: z.boolean(),
-  hasError: z.boolean(),
   unseenCount: z.number(),
   unseenMessages: z.number(),
   lastEventAt: z.number(),
-  lastAssistantText: z.optional(z.string()),
-  lastErrorText: z.optional(z.string()),
-  lastModel: z.optional(z.string()),
 });
 
 const notificationStateSchema = z.record(z.string(), sessionStateSchema);
@@ -30,10 +23,11 @@ if (validationResult.error) {
   logger.warn('notification', 'Notification schema changed, resetting...');
   await notificationStateStore.clear();
 }
-
+/** @deprecated */
 export const getNotificationState = notificationStateStore.get;
+/** @deprecated */
 export const resetNotificationState = notificationStateStore.clear;
-
+/** @deprecated */
 export const updateNotificationState = async (
   sessionID: string,
   updater: (prev: SessionState) => SessionState,
@@ -44,21 +38,21 @@ export const updateNotificationState = async (
     return { ...prev, [sessionID]: updater(existing) };
   });
 };
-
+/** @deprecated */
 export const clearPendingPermission = async (sessionID: string) => {
   return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     return existing ? { ...prev, [sessionID]: { ...existing, hasPendingPermission: false, lastEventAt: Date.now() } } : prev;
   });
 };
-
+/** @deprecated */
 export const incrementUnseenMessages = async (sessionID: string) => {
   return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];
     return existing ? { ...prev, [sessionID]: { ...existing, unseenMessages: existing.unseenMessages + 1, lastEventAt: Date.now() } } : prev;
   });
 };
-
+/** @deprecated */
 export const markSessionSeen = async (sessionID: string) => {
   return notificationStateStore.set((prev) => {
     const existing = prev[sessionID];

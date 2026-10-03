@@ -1,3 +1,3 @@
 import type { DoctorConfig } from '@goatjs/doctor';
 
-export default {} satisfies DoctorConfig;
+export default { ignoreDependencies: ['@goatjs/doctor'] } satisfies DoctorConfig;
