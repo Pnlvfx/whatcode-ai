@@ -4,6 +4,8 @@ import os from 'node:os';
 import { logger } from '../logger.ts';
 import { machineId } from '../config/constants.ts';
 
+export const identityName = os.hostname();
+
 const identitySchema = z.strictObject({
   name: z.string(),
   machineId: z.string(),
@@ -27,12 +29,7 @@ export const getIdentity = async () => {
 };
 
 export const createIdentity = async ({ daemon, tailscale }: Pick<DaemonIdentity, 'daemon' | 'tailscale'>) => {
-  return identityStore.set({
-    name: os.hostname(),
-    machineId,
-    daemon,
-    tailscale,
-  });
+  return identityStore.set({ name: identityName, machineId, daemon, tailscale });
 };
 
 export type DaemonIdentity = z.infer<typeof identitySchema>;
