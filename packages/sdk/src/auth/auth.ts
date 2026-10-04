@@ -3,6 +3,7 @@ import { relayAuthStore } from '../stores/relay-auth.ts';
 import { logger } from '../logger.ts';
 import { headers } from './headers.ts';
 import { machineId } from '../config/constants.ts';
+import { identityName } from '../stores/identity.ts';
 
 export const authenticate = () => {
   let retryCount = 1;
@@ -13,7 +14,7 @@ export const authenticate = () => {
       if (stored.error) {
         logger.error('auth', stored.error.message);
       }
-      const response = await relayClient.environment.pair.post({ machine_id: machineId });
+      const response = await relayClient.environment.pair.post({ machine_id: machineId, name: identityName });
       if (response.error) return { error: response.error };
       await relayAuthStore.set({ token: response.data.token });
       headers.set('x-api-key', `Bearer ${response.data.token}`);
