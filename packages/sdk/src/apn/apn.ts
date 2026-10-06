@@ -1,16 +1,12 @@
 import type { SessionMessageAssistant, V2Event, PermissionAsked, SessionExecutionFailed } from '@opencode/client';
 import type { WhatCodeClient } from '../opencode/client.ts';
-import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
 import { trim } from './helpers.ts';
-import { createSmartNotification, IDLE_DELAY_MS } from './smart.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
 import { logger } from '../logger.ts';
 
 export const startNotifications = (client: WhatCodeClient): void => {
-  const smart = createSmartNotification();
-
   const getModel = async (assistantMessage: SessionMessageAssistant) => {
     const id = assistantMessage.model.id;
     const result = await client.model.list();
@@ -21,23 +17,16 @@ export const startNotifications = (client: WhatCodeClient): void => {
     return result.data.data.find((m) => m.id === id);
   };
 
-  const handleSessionIdle = async (sessionID: string): Promise<void> => {
-    const loggerName = 'notifications:session.idle';
-    logger.debug(loggerName, `session.idle event received for session ${sessionID}`);
-    // Delay slightly so a concurrent session.error handler has time to set the lock before we check it.
-    await setTimeout(IDLE_DELAY_MS);
-    logger.debug(loggerName, `skipping session.idle for session ${sessionID}, error notification already sent`);
-    if (smart.isLocked(sessionID)) {
-      logger.debug(loggerName, `skipping session.idle for session ${sessionID}, error notification already sent`);
-      return;
-    }
+  const handleSessionSucceeded = async (sessionID: string): Promise<void> => {
+    const loggerName = 'notifications:session.execution.succeeded';
+    logger.debug(loggerName, `session.execution.succeeded event received for session ${sessionID}`);
     const { data: session, error } = await client.session.get({ sessionID });
     if (error) {
       logger.error(loggerName, error.message);
       return;
     }
     if (session.parentID) {
-      logger.debug(loggerName, `skipping session.idle for subagent session ${sessionID}`);
+      logger.debug(loggerName, `skipping session.execution.succeeded for subagent session ${sessionID}`);
       return;
     }
     const messagesResult = await client.message.list({ sessionID, order: 'desc', type: 'assistant', limit: 1 });
@@ -52,7 +41,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const model = last ? await getModel(last) : undefined;
     const text = last?.content.findLast((c) => c.type === 'text')?.text;
     const body = trim(`${model?.name ?? 'Agent'}: ${text ?? 'Done'}`);
-    logger.debug('notifications', `forwarding session.idle: title=${title}, body=${body}`);
+    logger.debug('notifications', `forwarding session.execution.succeeded: title=${title}`);
     const forwardResult = await forwardToRelay({
       title,
       body,
@@ -90,7 +79,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const last = assistantMessages.at(-1);
     const model = last ? await getModel(last) : undefined;
     const text = `needs permission to ${action} ${resources.join(', ')}`;
-    logger.debug('notifications', `forwarding permission.asked: title=${title}, text=${text}`);
+    logger.debug('notifications', `forwarding permission.asked: title=${title}`);
     const forwardResult = await forwardToRelay({
       title,
       body: trim(`${model?.name ?? 'Agent'} ${text}`),
@@ -111,20 +100,18 @@ export const startNotifications = (client: WhatCodeClient): void => {
       logger.debug('notifications', 'skipping session.error — no session available');
       return;
     }
-    smart.lock(sessionID);
     const sessionResult = await client.session.get({ sessionID });
     if (sessionResult.error) {
       logger.error(loggerName, sessionResult.error.message);
       return;
     }
     if (sessionResult.data.parentID) {
-      smart.unlock(sessionID);
       logger.debug('notifications', `skipping session.error for subagent session ${sessionResult.data.id}`);
       return;
     }
     const title = getProjectName(sessionResult.data.location.directory);
     const body = trim(error.message);
-    logger.debug('notifications', `forwarding session.error: title=${title}, body=${body}`);
+    logger.debug('notifications', `forwarding session.error: title=${title}`);
     const forwardResult = await forwardToRelay({
       title,
       body,
@@ -140,8 +127,8 @@ export const startNotifications = (client: WhatCodeClient): void => {
 
   registerEventHandler(async (event: V2Event): Promise<void> => {
     switch (event.type) {
-      case 'session.idle': {
-        await handleSessionIdle(event.data.sessionID);
+      case 'session.execution.succeeded': {
+        await handleSessionSucceeded(event.data.sessionID);
         break;
       }
       case 'permission.asked': {
