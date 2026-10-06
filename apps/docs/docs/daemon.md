@@ -16,7 +16,7 @@ The daemon gives you three things that plain OpenCode cannot provide out of the 
 
 **Push notifications.** The daemon watches the OpenCode event stream and sends a push to your iPhone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
 
-Under the hood, the daemon runs `opencode --serve --hostname <address>` on your behalf and layers these capabilities on top. Plain OpenCode is still fully supported. The daemon just makes the mobile experience significantly better.
+Under the hood, the daemon connects to the local OpenCode service (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. Plain OpenCode is still fully supported. The daemon just makes the mobile experience significantly better.
 
 ## Installation
 
@@ -44,7 +44,6 @@ import { createWhatcodeServer } from '@whatcode-ai/sdk';
 
 await createWhatcodeServer({
   port: 8192,
-  opencodePort: 4096,
   tailscale: true,
   password: 'secret',
   logLevel: 'none',
@@ -62,18 +61,20 @@ When you run the daemon:
 
 The WhatCode server layer:
 
-- **Patches project sorting** - the `/project` endpoint enriches each project with the timestamp of its most recent message, so the app can sort projects by actual activity rather than creation date.
+- **Patches project sorting** - the `/api/project` endpoint enriches each project with the timestamp of its most recent message and its latest session, so the app can sort projects by actual activity rather than creation date.
 - **Disables caching** - forces `cache-control: no-cache` and `x-accel-buffering: no` on all proxied responses, which is important for the SSE event stream the app subscribes to.
-- **Exposes `/whatcode/identity`** - returns the machine ID of the host, used by the app to deduplicate connections across multiple machines.
-- **Handles device token registration** - the `/notifications/register` and `/notifications/unregister` endpoints let the app register and remove its APNs token.
+- **Exposes `/info`** - returns the daemon version and the minimum supported app version.
+- **Handles device pairing** - the `/user/pair` endpoint registers the app and returns an access token, `/user` returns the identity of the host (used by the app to deduplicate connections across multiple machines), and `/user/logout` removes the device.
 
 ## Push notifications
 
 The daemon subscribes to the OpenCode event stream and watches for three events:
 
-- `session.idle` - the agent finished its turn and is waiting for your input.
-- `session.error` - the agent hit an unrecoverable error.
+- `session.execution.succeeded` - the agent finished its turn and is waiting for your input.
+- `session.execution.failed` - the agent hit an unrecoverable error.
 - `permission.asked` - the agent needs your approval before it can proceed.
+
+Events from subagent sessions are ignored, so you only get notified for top-level sessions.
 
 When any of these events fire, the daemon sends a push notification to your iPhone via a relay server using APNs. You receive it within seconds, even when the app is in the background. If the event stream drops, the daemon reconnects automatically with exponential backoff.
 
@@ -103,7 +104,7 @@ In the app, enter the password when adding a connection manually. The QR code do
 
 ## Log level
 
-Control how much the daemon logs. The CLI defaults to `info` (shows info, warnings, and errors). The SDK defaults to `none` (silent). Use `debug` to see everything including internal events, APN token registrations, and Tailscale state.
+Control how much the daemon logs. The CLI defaults to `info` (shows info, warnings, and errors). The SDK defaults to `none` (silent). Use `debug` to see everything including internal events, notification dispatches, and Tailscale state.
 
 Via CLI:
 
@@ -117,11 +118,11 @@ Via library:
 await createWhatcodeServer({ logLevel: 'debug' });
 ```
 
-| Level   | Description                                          |
-| ------- | ---------------------------------------------------- |
-| `none`  | Silent, no output (SDK default)                      |
-| `info`  | Info, warnings and errors (CLI default)              |
-| `debug` | Everything, including internal events and APN tokens |
+| Level   | Description                                             |
+| ------- | ------------------------------------------------------- |
+| `none`  | Silent, no output (SDK default)                         |
+| `info`  | Info, warnings and errors (CLI default)                 |
+| `debug` | Everything, including internal events and notifications |
 
 ## Tailscale
 
@@ -140,7 +141,7 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 
 ## Resetting the daemon
 
-If notifications stop working or device registrations get into a bad state, you can reset the daemon stored data. This clears all saved APNs tokens, which stops push notification delivery for all linked devices. After resetting, open the app and reconnect to re-register your device.
+If notifications stop working or device pairings get into a bad state, you can reset the daemon stored data. This clears all paired devices and the stored notification state. After resetting, open the app and reconnect to pair your device again.
 
 Via CLI:
 
@@ -160,18 +161,16 @@ await resetWhatcodeServer();
 
 ### `createWhatcodeServer(config)`
 
-| Option         | Type                          | Default     | Description                                                                                                                                             |
-| -------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `port`         | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.                                              |
-| `opencodePort` | `number`                      | `4096`      | Port the OpenCode server listens on. Must match what OpenCode is actually bound to.                                                                     |
-| `tailscale`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.                                         |
-| `password`     | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually.                                     |
-| `logLevel`     | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                                                                |
-| `hostname`     | `string`                      | `undefined` | Hostname or IP to advertise as the public OpenCode address. Useful when the auto-detected local IP is incorrect, e.g. in VPN or multi-NIC environments. |
+| Option      | Type                          | Default     | Description                                                                                                         |
+| ----------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| `port`      | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
+| `tailscale` | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
+| `password`  | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
+| `logLevel`  | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
 ### `resetWhatcodeServer()`
 
-Clears all stored APNs device tokens. Use this if notifications stop working or if you need to unlink all devices from this machine.
+Clears all paired devices and the stored notification state. Use this if notifications stop working or if you need to unlink all devices from this machine.
 
 ## CLI reference
 
@@ -181,14 +180,12 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 
 **Flags**
 
-| Flag              | Type                          | Default | Description                                                                                       |
-| ----------------- | ----------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| `--port`          | `number`                      | `8192`  | Port for the WhatCode server.                                                                     |
-| `--opencode-port` | `number`                      | `4096`  | Port for the OpenCode server.                                                                     |
-| `--tailscale`     | `boolean`                     | -       | Expose via Tailscale HTTPS.                                                                       |
-| `--hostname`      | `string`                      | -       | Hostname or IP to advertise as the public OpenCode address. Overrides the auto-detected local IP. |
-| `--log-level`     | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                                                           |
-| `--version`       | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit.                                  |
+| Flag          | Type                          | Default | Description                                                      |
+| ------------- | ----------------------------- | ------- | ---------------------------------------------------------------- |
+| `--port`      | `number`                      | `8192`  | Port for the WhatCode server.                                    |
+| `--tailscale` | `boolean`                     | -       | Expose via Tailscale HTTPS.                                      |
+| `--log-level` | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                          |
+| `--version`   | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit. |
 
 **Environment variables**
 
@@ -198,7 +195,7 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 
 ### Commands
 
-| Command | Description                                                                        |
-| ------- | ---------------------------------------------------------------------------------- |
-| `start` | Start the daemon. This is the default command, so it also runs with no subcommand. |
-| `reset` | Reset stored daemon data (APNs tokens). Use this if notifications stop working.    |
+| Command | Description                                                                                               |
+| ------- | --------------------------------------------------------------------------------------------------------- |
+| `start` | Start the daemon. This is the default command, so it also runs with no subcommand.                        |
+| `reset` | Reset stored daemon data (paired devices and notification state). Use this if notifications stop working. |

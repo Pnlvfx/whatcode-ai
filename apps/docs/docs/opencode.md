@@ -35,7 +35,7 @@ Refer to the [OpenCode documentation](https://opencode.ai/docs) for the full lis
 
 ## Running OpenCode
 
-You don't need to start OpenCode manually. When you run the WhatCode daemon, it checks if OpenCode is already running on port `4096`. If it is, the daemon reuses it. If not, it starts it for you.
+You don't need to start OpenCode manually. When you run the WhatCode daemon, it checks if the local OpenCode service is already running. If it is, the daemon reuses it. If not, it starts it for you.
 
 ```bash
 npx @whatcode-ai/whatcode start
@@ -49,8 +49,10 @@ OpenCode reads its configuration from `~/.config/opencode/config.json`. You can 
 
 ## Ports
 
-By default OpenCode listens on port `4096` and the WhatCode daemon listens on port `8192`. Both ports can be changed via CLI flags:
+The WhatCode daemon listens on port `8192` by default. You can change it with the `--port` flag:
 
 ```bash
-npx @whatcode-ai/whatcode start --opencode-port 4096 --port 8192
+npx @whatcode-ai/whatcode start --port 8192
 ```
+
+OpenCode runs as a local service managed by OpenCode itself, so there is no OpenCode port to configure.

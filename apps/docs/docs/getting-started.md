@@ -44,7 +44,7 @@ npx @whatcode-ai/whatcode start
 
 This will:
 
-- Start OpenCode on port `4096` (or reuse it if it's already running)
+- Start the local OpenCode service (or reuse it if it's already running)
 - Print your local network URL
 - Display a QR code in the terminal
 
