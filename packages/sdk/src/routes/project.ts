@@ -3,7 +3,7 @@ import { Elysia } from 'elysia';
 import { getLastMessageTimeByProject, getLatestSessionByProject } from '../opencode/db.ts';
 
 export const createProjectRouterOverride = (client: WhatCodeClient) => {
-  return new Elysia({ prefix: '/api/project' }).get('/api/project', async ({ status }) => {
+  return new Elysia({ prefix: '/api/project' }).get('/', async ({ status }) => {
     const projects = await client.project.list();
     if (projects.error) return status(400, { message: projects.error.message });
     const lastMessageTimes = getLastMessageTimeByProject();
