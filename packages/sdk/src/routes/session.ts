@@ -4,7 +4,7 @@ import { getSessionSummaries } from '../opencode/db.ts';
 
 // TOD pagination and remove the 100 limit
 
-export const sessionRouter = new Elysia({ prefix: '/session' }).post(
+export const sessionRouter = new Elysia({ prefix: '/api/session' }).post(
   '/summary',
   ({ body: { sessionIds }, status }) => {
     if (sessionIds.length === 0) return {};
