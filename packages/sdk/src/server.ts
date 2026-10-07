@@ -29,7 +29,7 @@ export const startWhatcode = ({ port, endpoint, password, client }: Params) => {
         const url = `${pathname}${search}`;
         logger.error('server-error', `An error occured at ${url}`, error);
       })
-      // TODO pass should be required
+      // TODO [2026-10-08] pass should be required
       .use(password ? basicAuth(password) : new Elysia())
       .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
       .use(userRouter)

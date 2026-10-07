@@ -21,7 +21,7 @@ if (validationResult.error) {
 
 export const getAccounts = accountsStore.get;
 export const addAccount = (account: Account) => accountsStore.set((prev) => [...prev, account]);
-export const deleteAccount = (account: Account) => accountsStore.set((prev) => prev.filter((a) => a.id === account.id));
+export const deleteAccount = (account: Account) => accountsStore.set((prev) => prev.filter((a) => a.id !== account.id));
 export const resetAccounts = accountsStore.clear;
 
 export type Account = z.infer<typeof accountSchema>;
