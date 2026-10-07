@@ -2,6 +2,7 @@ import { execa } from 'execa';
 import { platform } from '../../config/constants.ts';
 import { serveStatusSchema, tailscaleSchema } from './types.ts';
 import { logger } from '../../logger.ts';
+import { isErrorWithCode } from '../../compiled/core/errors/code.ts';
 
 export const createTailscale = (port: number) => {
   let started = false;
@@ -61,8 +62,7 @@ const checkCommand = async (cmd: string): Promise<boolean> => {
     await execa(cmd, ['--version']);
     return true;
   } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    return !(error instanceof Error && 'code' in error && (error as NodeJS.ErrnoException).code === 'ENOENT');
+    return !(isErrorWithCode(error) && error.code === 'ENOENT');
   }
 };
 

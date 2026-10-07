@@ -4,12 +4,11 @@ import { Elysia } from 'elysia';
 import { node } from '@elysiajs/node';
 import { userRouter } from './routes/user.ts';
 import { sessionRouter } from './routes/session.ts';
-import { opencodeBasicAuth } from './mw/opencode-auth.ts';
+import { basicAuth } from './mw/opencode-auth.ts';
 import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
 import { MIN_APP_VERSION } from './config/constants.ts';
 import pkgJson from '../package.json' with { type: 'json' };
-import { notificationRouter } from './routes/notification.ts';
 import { createProjectRouterOverride } from './routes/project.ts';
 
 interface Params {
@@ -31,10 +30,9 @@ export const startWhatcode = ({ port, endpoint, password, client }: Params) => {
         logger.error('server-error', `An error occured at ${url}`, error);
       })
       // TODO pass should be required
-      .use(password ? opencodeBasicAuth(password) : new Elysia())
+      .use(password ? basicAuth(password) : new Elysia())
       .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
       .use(userRouter)
-      .use(notificationRouter)
       .use(sessionRouter)
       .use(projectRouter)
       .all(

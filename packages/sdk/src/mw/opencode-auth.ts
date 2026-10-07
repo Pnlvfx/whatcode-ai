@@ -2,8 +2,8 @@ import { Elysia } from 'elysia';
 import { timingSafeEqual } from 'node:crypto';
 import { status } from 'elysia/error';
 
-export const opencodeBasicAuth = (password: string) =>
-  new Elysia({ name: 'opencode-basic-auth' }).onBeforeHandle({ as: 'global' }, ({ headers: { authorization } }) => {
+export const basicAuth = (password: string) =>
+  new Elysia({ name: 'basic-auth' }).onBeforeHandle({ as: 'global' }, ({ headers: { authorization } }) => {
     if (!authorization?.startsWith('Basic ')) return status(401, { message: 'Unauthorized' });
     const encoded = authorization.slice('Basic '.length);
     const decoded = Buffer.from(encoded, 'base64').toString('utf8');

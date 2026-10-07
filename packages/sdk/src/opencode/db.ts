@@ -44,11 +44,14 @@ export interface SessionModelRef {
 export interface SessionSummary {
   lastModel: SessionModelRef | undefined;
   title: string | undefined;
+  timeIdle: number | undefined;
+  timeViewed: number | undefined;
+  outcome: 'succeeded' | 'failed' | 'interrupted' | undefined;
 }
 
 // Fetches the last model used and title for a list of session IDs.
 // Reads directly from the opencode SQLite DB — stateless, no writes.
-const querySessionSummary = 'SELECT id, model, title FROM session_v2 WHERE id IN (';
+const querySessionSummary = 'SELECT id, model, title, time_idle, time_viewed, idle_outcome FROM session_v2 WHERE id IN (';
 
 export const getSessionSummaries = (sessionIds: string[]): Map<string, SessionSummary> => {
   const result = new Map<string, SessionSummary>();
@@ -58,7 +61,14 @@ export const getSessionSummaries = (sessionIds: string[]): Map<string, SessionSu
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    const rows = db.prepare(`${querySessionSummary}${placeholders})`).all(...sessionIds) as { id: string; model: string | undefined; title: string | undefined }[];
+    const rows = db.prepare(`${querySessionSummary}${placeholders})`).all(...sessionIds) as {
+      id: string;
+      model: string | undefined;
+      title: string | undefined;
+      time_idle: number | null;
+      time_viewed: number | null;
+      idle_outcome: string | null;
+    }[];
     for (const row of rows) {
       let lastModel: SessionModelRef | undefined;
       if (row.model) {
@@ -69,13 +79,32 @@ export const getSessionSummaries = (sessionIds: string[]): Map<string, SessionSu
           // malformed JSON — skip
         }
       }
-      result.set(row.id, { lastModel, title: row.title ?? undefined });
+      result.set(row.id, {
+        lastModel,
+        title: row.title ?? undefined,
+        timeIdle: row.time_idle ?? undefined,
+        timeViewed: row.time_viewed ?? undefined,
+        outcome: toOutcome(row.idle_outcome),
+      });
     }
   } catch {
     // DB unavailable or schema changed — return empty rather than crash
   }
 
   return result;
+};
+
+const toOutcome = (value: string | null): SessionSummary['outcome'] => {
+  switch (value) {
+    case 'succeeded':
+    case 'failed':
+    case 'interrupted': {
+      return value;
+    }
+    default: {
+      return undefined;
+    }
+  }
 };
 
 export interface ProjectLatestSession {
@@ -86,8 +115,8 @@ export interface ProjectLatestSession {
 const queryLatestSessionByProject = `
   SELECT id, project_id, title
   FROM session_v2
-  WHERE (project_id, time_updated) IN (
-    SELECT project_id, MAX(time_updated) FROM session_v2 GROUP BY project_id
+  WHERE parent_id IS NULL AND (project_id, time_updated) IN (
+    SELECT project_id, MAX(time_updated) FROM session_v2 WHERE parent_id IS NULL GROUP BY project_id
   )
 `;
 
