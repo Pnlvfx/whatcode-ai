@@ -1,6 +1,6 @@
 {
   "name": "@whatcode-ai/whatcode",
-  "version": "2.0.0-canary.e25fb30",
+  "version": "2.0.0-canary.5abd559",
   "description": "CLI to start opencode and optionally expose it over HTTPS via Tailscale — connect to your AI coding assistant from anywhere.",
   "keywords": [
     "opencode",

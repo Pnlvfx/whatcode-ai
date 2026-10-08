@@ -1,3 +1,13 @@
+## [2.0.0-canary.5abd559](compare/%40whatcode-ai%2Fsdk%402.0.0-canary.e25fb30...%40whatcode-ai%2Fsdk%402.0.0-canary.5abd559) "@whatcode-ai/sdk" (2026-10-08)
+
+### Features
+
+* return opencode endpoint 5abd559
+
+### Bug Fixes
+
+* auth 90c2bfb
+
 ## [2.0.0-canary.e25fb30](compare/%40whatcode-ai%2Fsdk%401.30.0...%40whatcode-ai%2Fsdk%402.0.0-canary.e25fb30) "@whatcode-ai/sdk" (2026-10-08)
 
 ### Features
