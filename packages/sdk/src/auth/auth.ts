@@ -19,6 +19,7 @@ export const authenticate = () => {
       await relayAuthStore.set({ token: response.data.token });
       headers.set('x-api-key', `Bearer ${response.data.token}`);
     } else {
+      headers.set('x-api-key', `Bearer ${stored.data.token}`);
       const response = await relayClient.environment.get();
       if (response.error) {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -30,7 +31,6 @@ export const authenticate = () => {
         }
         return { error: response.error };
       }
-      headers.set('x-api-key', `Bearer ${stored.data.token}`);
     }
 
     return { data: { status: 'success' } };
