@@ -1,3 +1,26 @@
+## [2.0.0-canary.e25fb30](compare/%40whatcode-ai%2Fsdk%401.30.0...%40whatcode-ai%2Fsdk%402.0.0-canary.e25fb30) "@whatcode-ai/sdk" (2026-10-08)
+
+### Features
+
+* **breking:** opencode 2 support db446a2
+* **experimental:** move apn_token on server 21c08d4
+* move project override on his own route f7d2f74
+* remove deprecated notification tracker and replace it with built in methods 85134c2
+* **server:** override projects sort 931ca62
+
+### Bug Fixes
+
+* account delete 3ae3714
+* add api prefix on session route 0435e0b
+* auth bd38478
+* auth c43ea38
+* do not send notification if another client mark the session as viewed e25fb30
+* exclude tailscale private ip range fcdc587
+* improve backoff logic on event subscriptiion 416474e
+* project router endpoint 341527b
+* simplify apn notification da5ffe2
+* vendored deps mismatch 8593837
+
 ## [1.30.0](compare/%40whatcode-ai%2Fsdk%401.29.0...%40whatcode-ai%2Fsdk%401.30.0) "@whatcode-ai/sdk" (2026-09-24)
 
 ### Bug Fixes
