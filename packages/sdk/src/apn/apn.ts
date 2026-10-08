@@ -1,10 +1,14 @@
 import type { SessionMessageAssistant, V2Event, PermissionAsked, SessionExecutionFailed } from '@opencode/client';
 import type { WhatCodeClient } from '../opencode/client.ts';
+import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
 import { trim } from './helpers.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
 import { logger } from '../logger.ts';
+
+// How long to wait for another client to mark a finished session as viewed before pushing
+const VIEWED_GRACE_MS = 4000;
 
 export const startNotifications = (client: WhatCodeClient): void => {
   const getModel = async (assistantMessage: SessionMessageAssistant) => {
@@ -125,10 +129,35 @@ export const startNotifications = (client: WhatCodeClient): void => {
     }
   };
 
+  const isStillUnread = async (sessionID: string): Promise<boolean> => {
+    const { data: session, error } = await client.session.get({ sessionID });
+    if (error) {
+      logger.error('notifications', error.message);
+      return true;
+    }
+    const { idle, viewed } = session.time;
+    return idle !== undefined && (viewed === undefined || idle > viewed);
+  };
+
+  const notifyIfStillUnread = async (sessionID: string, notify: () => Promise<void>): Promise<void> => {
+    try {
+      await setTimeout(VIEWED_GRACE_MS);
+      if (await isStillUnread(sessionID)) {
+        await notify();
+        return;
+      }
+      logger.debug('notifications', `skipping push for session ${sessionID}, already viewed by another client`);
+    } catch (err) {
+      logger.error('notifications', `delayed push failed for session ${sessionID}`, err);
+    }
+  };
+
   registerEventHandler(async (event: V2Event): Promise<void> => {
     switch (event.type) {
       case 'session.execution.succeeded': {
-        await handleSessionSucceeded(event.data.sessionID);
+        const { sessionID } = event.data;
+        // not awaited on purpose: the event stream dispatches handlers sequentially and must not wait for the grace period
+        void notifyIfStillUnread(sessionID, () => handleSessionSucceeded(sessionID));
         break;
       }
       case 'permission.asked': {
@@ -136,7 +165,9 @@ export const startNotifications = (client: WhatCodeClient): void => {
         break;
       }
       case 'session.execution.failed': {
-        await handleSessionError(event.data);
+        const failed = event.data;
+        // not awaited on purpose: same reason as the succeeded case
+        void notifyIfStillUnread(failed.sessionID, () => handleSessionError(failed));
         break;
       }
     }

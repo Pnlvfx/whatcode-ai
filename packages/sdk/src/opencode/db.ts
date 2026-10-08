@@ -94,6 +94,22 @@ export const getSessionSummaries = (sessionIds: string[]): Map<string, SessionSu
   return result;
 };
 
+const queryUnreadRootSessionCount = `
+  SELECT COUNT(*) AS count
+  FROM session_v2
+  WHERE parent_id IS NULL AND time_idle IS NOT NULL AND (time_viewed IS NULL OR time_idle > time_viewed)
+`;
+
+// Counts root sessions whose idle watermark is newer than the viewed one, same rule as getSessionUnread in the app.
+export const getUnreadSessionCount = (): number => {
+  if (!db) throw new Error('opencode database is unavailable');
+  const row = db.prepare(queryUnreadRootSessionCount).get();
+  if (!row) throw new Error('Unexpected unread session count result');
+  const { count } = row;
+  if (typeof count !== 'number') throw new TypeError('Unexpected unread session count result');
+  return count;
+};
+
 const toOutcome = (value: string | null): SessionSummary['outcome'] => {
   switch (value) {
     case 'succeeded':

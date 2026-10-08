@@ -49,7 +49,7 @@
     "@opencode/client": "^2.0.24",
     "@sinclair/typebox": "^0.34.52",
     "elysia": "^1.4.29",
-    "execa": "^10.0.1",
+    "execa": "^10.1.0",
     "exit-hook": "^5.1.0",
     "file-type": "^22.1.1",
     "node-machine-id": "^1.1.12",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/node-monorepo-eslint": "^3.39.0",
+    "@goatjs/node-monorepo-eslint": "^3.40.0",
     "@goatjs/rimraf": "^2.15.0",
     "@goatjs/typescript-config": "^2.2.0",
     "@types/node": "^26.6.4",
