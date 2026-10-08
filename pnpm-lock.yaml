@@ -180,11 +180,11 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/dbz':
-        specifier: ^2.82.0
-        version: 2.82.0(@types/node@26.6.4)
+        specifier: ^2.83.0
+        version: 2.83.0(@types/node@26.6.4)
       '@goatjs/doctor':
-        specifier: ^2.62.0
-        version: 2.62.0(supports-color@8.1.1)
+        specifier: ^2.63.0
+        version: 2.63.0(supports-color@8.1.1)
       '@goatjs/node-monorepo-eslint':
         specifier: ^3.40.0
         version: 3.40.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.12.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -241,8 +241,8 @@ importers:
         specifier: 3.10.2
         version: 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@8.1.1)(svgo@3.3.5)
       '@goatjs/dbz':
-        specifier: ^2.82.0
-        version: 2.82.0(@types/node@26.6.2)
+        specifier: ^2.83.0
+        version: 2.83.0(@types/node@26.6.2)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -516,8 +516,8 @@ packages:
     resolution: {integrity: sha512-RgHBCvtjbOK2gXSNBNIkNoEc9qoVEtau3hj8gEqKQuL3HZAibKarWFEI3Lfm6EYKkLalOh8eSrj9b+ch9H/VBA==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/core@8.0.6':
-    resolution: {integrity: sha512-5zwYt1V4ji3mXKKRIAkohSJ29WepxNwxQi+7y7P5AcVPh1dcxnZBU2cfxHnPwS+u9+lZnXPsv30TQaF2xg+Tfg==}
+  '@babel/core@8.0.7':
+    resolution: {integrity: sha512-ZIsZWBG6Y1oa+8fkQVp0xeCdjCHBkXFCCIWrmg9SvejVvfcVQgKKRmGrBDWfM7rilhvnRoEuaqa5dkK7KB3pHA==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/generator@7.29.8':
@@ -536,8 +536,8 @@ packages:
     resolution: {integrity: sha512-wem6WaBj4NaVYVdNhLPPVacES6ZJ+KBBfSkTMD3YZxbP3rm3Di85tJU5ljaUNhaOynt+Aj0xruhYuzQBt8n71g==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helper-compilation-targets@8.0.6':
-    resolution: {integrity: sha512-HTrtZ4+iA0+kzdbCgvdSk1U4pEl3BvpGnlUbualCGNbrVhhQvhgBzurTUmqpWyvyHbWYWaIfdx2mOlL9LJjsew==}
+  '@babel/helper-compilation-targets@8.0.7':
+    resolution: {integrity: sha512-ilAZCdOOlOVA7dQbaFNw2f/59p6GW33NxTopc3DvEE3efp3ZXTrGX/yZScaKw8/vd9bq31Ag0EcXiLw32bAgJg==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/helper-create-class-features-plugin@7.29.7':
@@ -635,8 +635,8 @@ packages:
     resolution: {integrity: sha512-1k2lAGRMfHTcwuNYcCNUmaUffmQv8KWMfh2iJUUeRlwlwH4FdNG7mfPI10NPfLHJFThE4Tyr4mv7kTNZOiPuBg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helpers@8.0.5':
-    resolution: {integrity: sha512-fQtPOXjYOYv85PIdwotp2TJGVYOycX0PQq+l844fFAxOULtBy8BVF35GyeueX0r4KvDthqPH5xAI1clQPk/2uA==}
+  '@babel/helpers@8.0.7':
+    resolution: {integrity: sha512-5dMj5kFwS2AY7Dt4PZp4px3c5ThMbbEa7tZfuHTncCGSFYq8uoA1ufDE1IS/lYpQedE+3+GQ3cPZUiplIu195w==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/parser@7.29.9':
@@ -644,8 +644,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/parser@8.0.6':
-    resolution: {integrity: sha512-LpGDIYJAzc3Y3PT9x+FxBrGYu2PlWxLmyN7SwPTzaX0LSwEmFJBsRnPBqmaXF2r1v+Zhz6lNiEJ+7yKtM5+Ugg==}
+  '@babel/parser@8.0.7':
+    resolution: {integrity: sha512-UkDwEbPO1px2JQSrdh4qIgaH1JgG7GO/pFeJkpxhDxIETkT/QvGpnigXIw75ViHYPtIgKITmVUJqLjiO+JuWjA==}
     engines: {node: ^22.18.0 || >=24.11.0}
     hasBin: true
 
@@ -1161,8 +1161,8 @@ packages:
     resolution: {integrity: sha512-I5z7H3bf/41ktsNVLtpN0wAa336HkqIHQ5BuPLEhTkt1jVSyZpeNKIzTgEWmlxjdg81R0IgUCcaE+Ok3NvrfZg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/traverse@8.0.6':
-    resolution: {integrity: sha512-ilYV+qLStGzSKLipJlETdvdtpK3rAuwfCmCoGKv15MU4EoeIuLkespSNoNLFGOPSciEHx9TLWtN5mv0fz5w5mQ==}
+  '@babel/traverse@8.0.7':
+    resolution: {integrity: sha512-bVV0brinsTWgc6ptSIoQo3GbITtl0VZAqEUJbHHcyfDPEu+q/fEvlYEa+6H85HoK8IdksKBFtKJbJFZ6Kff+zg==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/types@7.29.8':
@@ -2067,15 +2067,15 @@ packages:
   '@goatjs/core-eslint@3.40.0':
     resolution: {integrity: sha512-EJ1GC3rwds69cUNT7FSEYYsLmW3ReD+nXQv6F6wNBFSfJFAwbIgvSsLZyDAp6KuQ1ju/X/5gmlOsrVYGuGPt+A==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core-eslint/-/@goatjs/core-eslint-3.40.0.tgz}
 
-  '@goatjs/core@2.41.0':
-    resolution: {integrity: sha512-+1XKrPS/chdcwgKxfJkd6VPPo/uKr9oJIrbaEEzNVuZbrHDrpWKAxpV/bhKSi9cTYikCZucUNZicvShROXATaQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.41.0.tgz}
+  '@goatjs/core@2.42.0':
+    resolution: {integrity: sha512-2/uCyWx+MeYNu1a5cz9FnGsBgKl4xLahDDc5Myr6Ke8dpxTx/fLOS0FyAQUUGwB9Y8nYT+RJbM7xZe7E6nP8dg==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.42.0.tgz}
 
-  '@goatjs/dbz@2.82.0':
-    resolution: {integrity: sha512-Q9+EfpfAKiQEE30RD76V3JZ+c84sMsceLgnDw/PrQUS2wwtFSc9o1TTEIVLkP566xGvIc+DmnRYc4ExZ7g9AeQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.82.0.tgz}
+  '@goatjs/dbz@2.83.0':
+    resolution: {integrity: sha512-mFuqpCUXvXrRowot2A0jwChoRaCwBUVfAOl0y7rhFM9aspi9MGzzhso9V2Hb/p83nblI7o0y6qmxPADxoDmygQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.83.0.tgz}
     hasBin: true
 
-  '@goatjs/doctor@2.62.0':
-    resolution: {integrity: sha512-6LDq6Rvm2ORgVWpAaFupLGHcBdrE5W6AXwOn5WjoXvGQwJYewSAjOi9Ip/l/S/Cyt2TFHAdEiO8y6pkSRYBQJQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/doctor/-/@goatjs/doctor-2.62.0.tgz}
+  '@goatjs/doctor@2.63.0':
+    resolution: {integrity: sha512-hvOXlrspZEiByUOtwxU9BQR2E79gjV/6/B9Q1ELWF9Sb7MWjqkxUsk3VdRqowQHyNBTwIx3ElAOrDgC1AnH4vA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/doctor/-/@goatjs/doctor-2.63.0.tgz}
     hasBin: true
 
   '@goatjs/node-eslint@3.40.0':
@@ -6685,8 +6685,8 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
-  knip@6.39.0:
-    resolution: {integrity: sha512-Y7g6Ve1ATMox1u1v+gx3z9LTlvzVLTJISm/LVn9TgBU4qc7OoC63AWGO8qCFPVDDdaqlYdXkDDvvO1METBfTRw==}
+  knip@6.40.0:
+    resolution: {integrity: sha512-5Lp/ANJu3AkW5f+J+2QG14z7xKZGi/ybb5MU1EWjeGdt6MpuIaLpLFiyBi0ZKryTiuTHiJqo/WKJRaWYimvavw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -7445,8 +7445,8 @@ packages:
   obuf@1.1.2:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
 
-  obug@2.2.1:
-    resolution: {integrity: sha512-XrsrhT5sybtKI6wakr2SPOlGZWWYbUXZ7a0jT8/QOeAPau+1X/bSegNe5YR75oJmEZQbKningirmGOEJCIk61Q==}
+  obug@3.0.0:
+    resolution: {integrity: sha512-5vvB5+W7ePv+p3uqxi+RcW1XAzLW0/hxt3/4X4Lc4qHudzOhmBiBwOY6DRob4WnanAEGvNcLjF+KNOufrUoEQw==}
     engines: {node: '>=12.20.0'}
 
   on-finished@2.4.1:
@@ -9295,10 +9295,15 @@ packages:
   vercel@62.7.0:
     resolution: {integrity: sha512-mpniESkx+lGbcr5vJfy4xQEZJyN3uzMVdfGrPNDyh49sbgiIGbHYO7jqs010LMKoif5JVVigv7FfMUJyiy6WTw==}
     engines: {node: '>= 20'}
+    deprecated: Known CLI self-upgrade bug. Reinstall vercel@latest using your package manager instead of running vc upgrade from this version.
     hasBin: true
 
   verkit@0.3.2:
     resolution: {integrity: sha512-zj/ob3UsvJGN0whEAKFp53REA5X66hvffVqoCtVQAakJKnKlH+/PcOfMoFwIG/o4rElqLv/ycAFlx8ZlXUorCg==}
+    engines: {node: '>=18.12.0'}
+
+  verkit@0.5.0:
+    resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
     engines: {node: '>=18.12.0'}
 
   vfile-location@5.0.3:
@@ -9760,15 +9765,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/core@8.0.6':
+  '@babel/core@8.0.7':
     dependencies:
       '@babel/code-frame': 8.0.6
       '@babel/generator': 8.0.6
-      '@babel/helper-compilation-targets': 8.0.6
-      '@babel/helpers': 8.0.5
-      '@babel/parser': 8.0.6
+      '@babel/helper-compilation-targets': 8.0.7
+      '@babel/helpers': 8.0.7
+      '@babel/parser': 8.0.7
       '@babel/template': 8.0.0
-      '@babel/traverse': 8.0.6
+      '@babel/traverse': 8.0.7
       '@babel/types': 8.0.6
       '@types/gensync': 1.0.5
       convert-source-map: 2.0.0
@@ -9776,8 +9781,8 @@ snapshots:
       gensync: 1.0.0-beta.2
       import-meta-resolve: 4.2.0
       json5: 2.2.3
-      obug: 2.2.1
-      verkit: 0.3.2
+      obug: 3.0.0
+      verkit: 0.5.0
 
   '@babel/generator@7.29.8':
     dependencies:
@@ -9789,7 +9794,7 @@ snapshots:
 
   '@babel/generator@8.0.6':
     dependencies:
-      '@babel/parser': 8.0.6
+      '@babel/parser': 8.0.7
       '@babel/types': 8.0.6
       '@jridgewell/gen-mapping': 0.4.0-beta.0
       '@jridgewell/trace-mapping': 0.3.31
@@ -9808,13 +9813,13 @@ snapshots:
       lru-cache: 5.1.1
       semver: 6.3.1
 
-  '@babel/helper-compilation-targets@8.0.6':
+  '@babel/helper-compilation-targets@8.0.7':
     dependencies:
       '@babel/compat-data': 8.0.5
       '@babel/helper-validator-option': 8.0.0
       browserslist: 4.29.3
       flru: 1.0.2
-      verkit: 0.3.2
+      verkit: 0.5.0
 
   '@babel/helper-create-class-features-plugin@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
@@ -9930,7 +9935,7 @@ snapshots:
       '@babel/template': 7.29.7
       '@babel/types': 7.29.8
 
-  '@babel/helpers@8.0.5':
+  '@babel/helpers@8.0.7':
     dependencies:
       '@babel/template': 8.0.0
       '@babel/types': 8.0.6
@@ -9939,7 +9944,7 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.8
 
-  '@babel/parser@8.0.6':
+  '@babel/parser@8.0.7':
     dependencies:
       '@babel/types': 8.0.6
 
@@ -10579,7 +10584,7 @@ snapshots:
   '@babel/template@8.0.0':
     dependencies:
       '@babel/code-frame': 8.0.6
-      '@babel/parser': 8.0.6
+      '@babel/parser': 8.0.7
       '@babel/types': 8.0.6
 
   '@babel/traverse@7.29.8(supports-color@8.1.1)':
@@ -10594,15 +10599,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/traverse@8.0.6':
+  '@babel/traverse@8.0.7':
     dependencies:
       '@babel/code-frame': 8.0.6
       '@babel/generator': 8.0.6
       '@babel/helper-globals': 8.0.6
-      '@babel/parser': 8.0.6
+      '@babel/parser': 8.0.7
       '@babel/template': 8.0.0
       '@babel/types': 8.0.6
-      obug: 2.2.1
+      obug: 3.0.0
 
   '@babel/types@7.29.8':
     dependencies:
@@ -12391,11 +12396,11 @@ snapshots:
       - supports-color
       - typescript
 
-  '@goatjs/core@2.41.0': {}
+  '@goatjs/core@2.42.0': {}
 
-  '@goatjs/dbz@2.82.0(@types/node@26.6.2)':
+  '@goatjs/dbz@2.83.0(@types/node@26.6.2)':
     dependencies:
-      '@goatjs/core': 2.41.0
+      '@goatjs/core': 2.42.0
       '@goatjs/node': 2.38.0
       '@goatjs/rimraf': 2.15.0
       '@goatjs/zod': 2.30.0(zod@4.6.5)
@@ -12410,9 +12415,9 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@goatjs/dbz@2.82.0(@types/node@26.6.4)':
+  '@goatjs/dbz@2.83.0(@types/node@26.6.4)':
     dependencies:
-      '@goatjs/core': 2.41.0
+      '@goatjs/core': 2.42.0
       '@goatjs/node': 2.38.0
       '@goatjs/rimraf': 2.15.0
       '@goatjs/zod': 2.30.0(zod@4.6.5)
@@ -12427,17 +12432,17 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@goatjs/doctor@2.62.0(supports-color@8.1.1)':
+  '@goatjs/doctor@2.63.0(supports-color@8.1.1)':
     dependencies:
-      '@babel/core': 8.0.6
+      '@babel/core': 8.0.7
       '@fbtjs/default-collection-transform': 1.0.0(babel-plugin-fbt@1.0.0)(supports-color@8.1.1)
-      '@goatjs/core': 2.41.0
+      '@goatjs/core': 2.42.0
       '@goatjs/rimraf': 2.15.0
       babel-plugin-fbt: 1.0.0(@fbtjs/default-collection-transform@1.0.0)(supports-color@8.1.1)
       babel-plugin-fbt-runtime: 1.0.0(babel-plugin-fbt@1.0.0)(supports-color@8.1.1)
       babel-plugin-react-compiler: 0.0.0-experimental-a1856f3-20260507
       execa: 10.1.0
-      knip: 6.39.0
+      knip: 6.40.0
       yargs: 18.2.0
       zod: 4.6.5
     transitivePeerDependencies:
@@ -17430,7 +17435,7 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  knip@6.39.0:
+  knip@6.40.0:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.7)
       formatly: 0.7.1
@@ -18383,7 +18388,7 @@ snapshots:
 
   obuf@1.1.2: {}
 
-  obug@2.2.1: {}
+  obug@3.0.0: {}
 
   on-finished@2.4.1:
     dependencies:
@@ -20591,6 +20596,8 @@ snapshots:
       - utf-8-validate
 
   verkit@0.3.2: {}
+
+  verkit@0.5.0: {}
 
   vfile-location@5.0.3:
     dependencies:
