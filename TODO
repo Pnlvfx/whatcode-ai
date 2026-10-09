@@ -1,4 +1,4 @@
 new notification-tracker
 
-offer a whatcode pair, remove qr logic from normal starts, make password required, if user don't pass it provide it as password on pair output, then do not show it anymore
+provide a whatcode pair, remove qr logic from normal starts, make password required, if user don't pass it provide it as password on pair output, then do not show it anymore
 

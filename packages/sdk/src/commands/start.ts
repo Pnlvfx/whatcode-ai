@@ -69,10 +69,6 @@ export const createWhatcodeServer = async ({ tailscale: hasTailscale, password, 
   );
 
   return {
-    data: {
-      url: tailscaleServer?.url ?? daemonUrl,
-      version: pkgJson.version,
-      opencodeEndpoint: opencodeData.endpoint,
-    },
+    data: { url: tailscaleServer?.url ?? daemonUrl, version: pkgJson.version },
   };
 };

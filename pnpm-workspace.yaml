@@ -19,6 +19,7 @@ minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
   - '@goatjs/*'
+  - '@opencode/*'
 
 allowBuilds:
   '@swc/core': true

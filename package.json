@@ -44,7 +44,7 @@
     "@goatjs/dbz": "^2.83.0",
     "@goatjs/doctor": "^2.63.0",
     "@goatjs/node-monorepo-eslint": "^3.40.0",
-    "lefthook": "^2.1.17",
+    "lefthook": "^2.2.1",
     "prettier": "^3.9.9",
     "turbo": "^2.11.7",
     "typescript": "^6.0.3"
