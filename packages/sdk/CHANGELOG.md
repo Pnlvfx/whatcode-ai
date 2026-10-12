@@ -1,3 +1,9 @@
+## [2.0.0-canary.27d6dc2](compare/%40whatcode-ai%2Fsdk%402.0.0-canary.5abd559...%40whatcode-ai%2Fsdk%402.0.0-canary.27d6dc2) "@whatcode-ai/sdk" (2026-10-12)
+
+### Bug Fixes
+
+* oc 2.0.27 27d6dc2
+
 ## [2.0.0-canary.5abd559](compare/%40whatcode-ai%2Fsdk%402.0.0-canary.e25fb30...%40whatcode-ai%2Fsdk%402.0.0-canary.5abd559) "@whatcode-ai/sdk" (2026-10-08)
 
 ### Features
