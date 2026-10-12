@@ -1,4 +1,4 @@
-// TODO [2026-10-10] opencode inferring issue
+// TODO [2026-12-10] opencode inferring issue
 // eslint-disable-next-line sonarjs/no-internal-api-use
 import type * as _ from '../../../../node_modules/@opencode/client/dist/shared-events.js';
 import { Service } from '@opencode/client/service';
