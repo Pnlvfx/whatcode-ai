@@ -1,3 +1,5 @@
+## [2.2.0](compare/%40whatcode-ai%2Fwhatcode%402.1.0...%40whatcode-ai%2Fwhatcode%402.2.0) "@whatcode-ai/whatcode" (2026-10-13)
+
 ## [2.1.0](compare/%40whatcode-ai%2Fwhatcode%402.0.0-canary.27d6dc2...%40whatcode-ai%2Fwhatcode%402.1.0) "@whatcode-ai/whatcode" (2026-10-13)
 
 ## [2.0.0-canary.27d6dc2](compare/%40whatcode-ai%2Fwhatcode%402.0.0-canary.5abd559...%40whatcode-ai%2Fwhatcode%402.0.0-canary.27d6dc2) "@whatcode-ai/whatcode" (2026-10-12)
