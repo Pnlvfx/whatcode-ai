@@ -14,7 +14,10 @@ await rimraf(['build', '.docusaurus']);
 
 await execa('pnpm', ['vercel', 'pull', '--yes'], { stdio: 'inherit' });
 await execa('pnpm', ['vercel', 'build', '--prod'], { stdio: 'inherit' });
-await execa('pnpm', ['vercel', 'deploy', '--prebuilt', '--prod'], { stdio: 'inherit' });
+await execa('pnpm', ['vercel', 'deploy', '--prebuilt', '--prod'], {
+  stdio: 'inherit',
+  env: { GIT_DIR: path.resolve('.', '.no-git') },
+});
 
 try {
   await dbz.bumpVersion(path.resolve('.'), 'minor');
