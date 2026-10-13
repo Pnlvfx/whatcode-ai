@@ -1,6 +1,6 @@
 {
   "name": "@whatcode-ai/sdk",
-  "version": "2.0.0-canary.27d6dc2",
+  "version": "2.1.0",
   "description": "Core SDK to start opencode and optionally expose it over HTTPS via Tailscale — connect from anywhere.",
   "keywords": [
     "opencode",
