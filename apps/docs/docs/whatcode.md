@@ -12,6 +12,8 @@ WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhon
 
 [Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
+Want a preview first? See the [screenshots](/screenshots).
+
 ## Features
 
 **Project browser** - all your OpenCode projects in one place, sorted by most recent activity. Always know which session needs your attention next.

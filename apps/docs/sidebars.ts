@@ -5,6 +5,7 @@ const sidebars: SidebarsConfig = {
     { type: 'doc', id: 'intro', label: 'Introduction' },
     { type: 'doc', id: 'getting-started', label: 'Getting Started' },
     { type: 'doc', id: 'whatcode', label: 'WhatCode' },
+    { type: 'doc', id: 'screenshots', label: 'Screenshots' },
     { type: 'doc', id: 'opencode', label: 'OpenCode' },
     { type: 'doc', id: 'daemon', label: 'Daemon' },
     { type: 'doc', id: 'pricing', label: 'Pricing' },
