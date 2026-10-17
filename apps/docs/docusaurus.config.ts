@@ -6,7 +6,13 @@ import { APP_URL, APP_STORE_URL, GITHUB_REPO_URL, GITHUB_EDIT_URL, ORG_NAME, PRO
 const config: Config = {
   title: 'WhatCode AI',
   tagline: 'Documentation',
-  favicon: 'favicon.ico',
+  headTags: [
+    { tagName: 'link', attributes: { rel: 'icon', href: '/favicon.ico', sizes: '48x48' } },
+    { tagName: 'link', attributes: { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' } },
+    { tagName: 'link', attributes: { rel: 'icon', href: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' } },
+    { tagName: 'link', attributes: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' } },
+    { tagName: 'link', attributes: { rel: 'manifest', href: '/site.webmanifest' } },
+  ],
   future: { v4: true },
   url: APP_URL,
   baseUrl: '/',
