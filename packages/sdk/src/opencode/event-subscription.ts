@@ -1,5 +1,6 @@
 import type { V2Event } from '@opencode/client';
 import type { WhatCodeClient } from './client.ts';
+import { ClientError } from '@opencode/client';
 import { setTimeout } from 'node:timers/promises';
 import { logger } from '../logger.ts';
 
@@ -25,7 +26,7 @@ export const startEventSubscription = (client: WhatCodeClient): void => {
         logger.debug('event-subscription', 'stream ended, reconnecting...');
         await setTimeout(BACKOFF_INITIAL_MS);
       } catch (err) {
-        logger.error('event-subscription', `stream error, retrying in ${(delay / 1000).toString()}s...`, err);
+        logStreamError(err, delay);
         await setTimeout(delay);
         delay = Math.min(delay * BACKOFF_MULTIPLIER, BACKOFF_MAX_MS);
       }
@@ -37,6 +38,7 @@ export const startEventSubscription = (client: WhatCodeClient): void => {
 
     for await (const event of events) {
       onEventReceived();
+      logIfConnected(event);
       await dispatchEvent(event);
     }
   };
@@ -63,4 +65,21 @@ const dispatchEvent = async (event: V2Event): Promise<void> => {
       logger.error('event-subscription', 'event handler failed, stream kept alive', err);
     }
   }
+};
+
+const logStreamError = (err: unknown, delay: number): void => {
+  const seconds = (delay / 1000).toString();
+
+  if (err instanceof ClientError && err.reason === 'Transport') {
+    logger.warn('event-subscription', `opencode service disconnected, reconnecting in ${seconds}s...`);
+    return;
+  }
+
+  logger.error('event-subscription', `stream error, retrying in ${seconds}s...`, err);
+};
+
+const logIfConnected = (event: V2Event): void => {
+  if (event.type !== 'server.connected') return;
+
+  logger.info('event-subscription', 'connected to opencode service');
 };

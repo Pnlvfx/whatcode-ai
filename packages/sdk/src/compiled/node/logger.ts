@@ -55,7 +55,6 @@ export const createLogger = () => {
       if (currentLevel === 'none') return;
       console.warn(`${colorize('yellow', 'warn')} ${formatScope(scope)} ${message}`);
     },
-    // eslint-disable-next-line unicorn/prefer-default-parameters
     error: (scope: string, message: string, err?: unknown): void => {
       warnUninitialized('error');
       if (currentLevel === 'none') return;
