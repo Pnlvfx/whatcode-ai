@@ -1,3 +1,9 @@
+## [2.3.0](compare/%40whatcode-ai%2Fsdk%402.2.0...%40whatcode-ai%2Fsdk%402.3.0) "@whatcode-ai/sdk" (2026-10-17)
+
+### Bug Fixes
+
+* handle sse capture errors greacefully 04fe5f7
+
 ## [2.2.0](compare/%40whatcode-ai%2Fsdk%402.0.0-canary.27d6dc2...%40whatcode-ai%2Fsdk%402.2.0) "@whatcode-ai/sdk" (2026-10-13)
 
 ### Features
