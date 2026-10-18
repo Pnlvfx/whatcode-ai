@@ -1,5 +1,8 @@
 ---
+title: 'OpenCode Server Setup for the WhatCode Mobile App'
 sidebar_position: 4
+description: How to install and run the OpenCode server that the WhatCode mobile app connects to. OpenCode runs on your machine and your code never leaves it.
+keywords: [opencode server, opencode install, opencode mobile, opencode ios app]
 ---
 
 # OpenCode

@@ -1,5 +1,8 @@
 ---
+title: 'WhatCode Support and Troubleshooting'
 sidebar_position: 6
+description: Troubleshooting for the WhatCode OpenCode iOS app, including connection problems and missing push notifications.
+keywords: [whatcode support, opencode ios app troubleshooting, opencode notifications not working]
 ---
 
 # Support

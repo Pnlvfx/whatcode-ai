@@ -1,5 +1,8 @@
 ---
+title: 'Getting Started: Connect the OpenCode iOS App to Your Machine'
 sidebar_position: 2
+description: Step-by-step setup for WhatCode, the OpenCode iOS app. Run the daemon, scan the QR code with your iPhone and monitor OpenCode sessions in minutes.
+keywords: [opencode ios app setup, opencode mobile setup, connect opencode to iphone, opencode remote access]
 ---
 
 # Getting Started

@@ -1,5 +1,8 @@
 ---
+title: 'About WhatCode, the OpenCode iOS App'
 sidebar_position: 2
+description: WhatCode is an open source OpenCode iOS app built by Simone Gauli, an Italian developer, to monitor OpenCode coding agents from a phone.
+keywords: [whatcode, opencode ios app, opencode mobile app, open source]
 ---
 
 # About

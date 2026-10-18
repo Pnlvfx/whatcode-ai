@@ -5,8 +5,23 @@ import { APP_URL, APP_STORE_URL, GITHUB_REPO_URL, GITHUB_EDIT_URL, ORG_NAME, PRO
 
 const config: Config = {
   title: 'WhatCode AI',
-  tagline: 'Documentation',
+  tagline: 'OpenCode mobile app for iPhone',
   headTags: [
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'WhatCode',
+        alternateName: ['OpenCode mobile app', 'OpenCode iOS app'],
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'iOS',
+        description: 'WhatCode is the OpenCode mobile app for iPhone. Monitor OpenCode sessions and get push notifications when your AI coding agent finishes.',
+        url: APP_URL,
+        downloadUrl: APP_STORE_URL,
+      }),
+    },
     { tagName: 'link', attributes: { rel: 'icon', href: '/favicon.ico', sizes: '48x48' } },
     { tagName: 'link', attributes: { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' } },
     { tagName: 'link', attributes: { rel: 'icon', href: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' } },
@@ -47,6 +62,7 @@ const config: Config = {
     ],
   ],
   themeConfig: {
+    image: 'img/social-card.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },

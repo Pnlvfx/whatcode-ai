@@ -1,13 +1,16 @@
 ---
 slug: /
+title: 'WhatCode: OpenCode Mobile App for iPhone'
 sidebar_position: 1
+description: WhatCode is the OpenCode mobile app for iPhone. Monitor OpenCode sessions, send messages and get push notifications the moment your AI coding agent finishes.
+keywords: [opencode mobile, opencode ios app, opencode iphone, opencode app, ai coding agent mobile, whatcode]
 ---
 
-# Introduction
+# WhatCode: OpenCode Mobile App for iPhone
 
 You start a long-running coding task, step away from your desk, and your phone buzzes the moment the agent finishes. That's WhatCode.
 
-WhatCode is an iOS companion for [OpenCode](https://opencode.ai), the open-source AI coding agent that runs on your machine. It lets you monitor sessions, send messages, and get push notifications in real time, all from your iPhone.
+WhatCode is the OpenCode mobile app for iOS: an iPhone companion for [OpenCode](https://opencode.ai), the open-source AI coding agent that runs on your machine. It lets you monitor sessions, send messages, and get push notifications in real time, all from your iPhone. Wondering about iPad or Android? See the [FAQ](/faq).
 
 **[Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)**
 

@@ -1,5 +1,8 @@
 ---
+title: 'WhatCode Daemon: OpenCode Push Notifications and Remote Access'
 sidebar_position: 5
+description: The WhatCode daemon exposes OpenCode to your iPhone, sends push notifications when an agent finishes, and supports remote access over Tailscale.
+keywords: [opencode push notifications, opencode remote access, opencode tailscale, opencode mobile, opencode daemon]
 ---
 
 # Daemon

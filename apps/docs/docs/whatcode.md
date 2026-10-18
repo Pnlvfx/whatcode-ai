@@ -1,12 +1,15 @@
 ---
+title: 'WhatCode: OpenCode iOS App Features and Setup'
 sidebar_position: 3
+description: Features of WhatCode, the OpenCode iOS app. Browse projects, continue sessions from your iPhone, switch models, and get push notifications when an agent finishes.
+keywords: [opencode ios app, opencode mobile app, opencode iphone, opencode push notifications, opencode remote]
 ---
 
 # WhatCode
 
 You start a long-running task, put your phone down, and WhatCode taps you on the shoulder when it's done.
 
-WhatCode is an iOS app that brings [OpenCode](https://opencode.ai) to your iPhone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an agent finishes its work.
+WhatCode is the OpenCode iOS app: a mobile client that brings [OpenCode](https://opencode.ai) to your iPhone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an agent finishes its work.
 
 ## Download
 

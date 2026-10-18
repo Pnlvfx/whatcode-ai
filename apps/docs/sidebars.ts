@@ -9,6 +9,7 @@ const sidebars: SidebarsConfig = {
     { type: 'doc', id: 'opencode', label: 'OpenCode' },
     { type: 'doc', id: 'daemon', label: 'Daemon' },
     { type: 'doc', id: 'pricing', label: 'Pricing' },
+    { type: 'doc', id: 'faq', label: 'FAQ' },
     { type: 'doc', id: 'support', label: 'Support' },
     { type: 'doc', id: 'about', label: 'About' },
     {

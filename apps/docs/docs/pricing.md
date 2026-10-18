@@ -1,5 +1,8 @@
 ---
+title: 'WhatCode Pricing: OpenCode iOS App Subscription'
 sidebar_position: 7
+description: WhatCode pricing for the OpenCode iOS app. The yearly plan is $2.00 per month and both plans include a 3-day free trial.
+keywords: [opencode ios app price, opencode mobile app pricing, whatcode pricing]
 ---
 
 # Pricing
