@@ -15,6 +15,8 @@ WhatCode is the OpenCode mobile app for iOS: an iPhone companion for [OpenCode](
 
 **[Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)**
 
+WhatCode is an independent project and is not affiliated with or endorsed by OpenCode.
+
 ## What's covered here
 
 - **WhatCode**: the iOS app. What it does, how to connect it to your machine, and how to navigate your projects and sessions.

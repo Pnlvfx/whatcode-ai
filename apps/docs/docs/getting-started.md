@@ -14,6 +14,7 @@ This guide walks you through connecting the WhatCode iOS app to your machine in 
 
 - [OpenCode](https://opencode.ai) installed
 - Node.js 22.5 or newer available on your PATH
+- A computer running macOS, Linux or Windows to run OpenCode and the daemon
 - The WhatCode app installed on your iPhone. [Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
 ## 1. Install OpenCode
@@ -28,7 +29,7 @@ Run the following command in your terminal:
 npx @whatcode-ai/whatcode start
 ```
 
-The command starts the OpenCode service, or reuses it if it is already running, and then prints a pairing QR code in the terminal. You will scan this code with the app in the next step. The local network URL of the server is printed alongside it, and is only needed if you choose to connect manually.
+The command starts the OpenCode server, or reuses it if it is already running, and then prints a pairing QR code in the terminal. You will scan this code with the app in the next step. The local network URL of the server is printed alongside it, and is only needed if you choose to connect manually.
 
 ## 3. Connect the iOS app
 

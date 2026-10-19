@@ -14,6 +14,8 @@ WhatCode is the OpenCode iOS app: a mobile client that brings [OpenCode](https:/
 
 [Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
+WhatCode requires a subscription. See [Pricing](/pricing).
+
 ## Features
 
 **Project browser.** All your OpenCode projects in one place, sorted by most recent activity.
@@ -26,7 +28,7 @@ WhatCode is the OpenCode iOS app: a mobile client that brings [OpenCode](https:/
 
 - An agent finishes a turn and goes idle
 - An agent hits an error
-- An agent needs your permission to proceed
+- An agent needs your permission to proceed, which you can approve from the app
 
 **Multiple machines.** Stay connected to several machines at once, for example a work laptop and a personal desktop. They all show up in one place.
 
@@ -69,4 +71,4 @@ If you can't scan the QR code, tap **Continue without QR** during setup and ente
 
 Notifications are delivered via APNs (Apple Push Notification service) through a relay server. The daemon on your machine listens to the OpenCode event stream, detects when a session goes idle or errors, and sends a push through the relay to your device.
 
-Because the daemon reacts to events instead of polling, the notification arrives within seconds of the agent finishing.
+Because the daemon reacts to events instead of polling, the notification usually arrives within seconds of the agent finishing. Delivery is best-effort.

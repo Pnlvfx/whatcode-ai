@@ -20,7 +20,7 @@ The daemon gives you three things that plain OpenCode cannot provide out of the 
 
 **Push notifications.** The daemon watches the OpenCode event stream and sends a push to your iPhone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
 
-Under the hood, the daemon connects to the local OpenCode service (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. You can still use OpenCode on its own. The daemon adds what the mobile app needs.
+Under the hood, the daemon connects to the local OpenCode server (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. You can still use OpenCode on its own. The daemon adds what the mobile app needs.
 
 ## Installation
 
@@ -61,7 +61,7 @@ When you run the daemon:
 1. It starts OpenCode on localhost (or reuses an existing instance).
 2. It starts a WhatCode server on port `8192` that sits in front of OpenCode, patching responses to improve the mobile experience.
 3. It prints your local network URL and a QR code. Scan it with the app to connect.
-4. If `--tailscale` is passed, it also prints a secure HTTPS URL on your tailnet.
+4. If `--tailscale` is passed, it also prints a secure HTTPS URL on your tailnet (your private Tailscale network).
 
 The WhatCode server layer:
 
@@ -78,9 +78,13 @@ The daemon subscribes to the OpenCode event stream and watches for three events:
 - `session.execution.failed`: the agent hit an unrecoverable error.
 - `permission.asked`: the agent needs your approval before it can proceed.
 
-Events from subagent sessions are ignored, so you only get notified for top-level sessions.
+These are the OpenCode event names. When the daemon forwards them to the relay, it labels them `session.idle`, `permission.asked` and `session.error`, which are the event types listed in the [Privacy Policy](/policies/privacy-policy).
 
-When any of these events fire, the daemon sends a push notification to your iPhone via a relay server using APNs. You receive it within seconds, even when the app is in the background. If the event stream drops, the daemon reconnects automatically with exponential backoff.
+For finished and failed sessions, the daemon waits a few seconds before sending the push and skips it if you already viewed the session in another client.
+
+Events from subagent sessions (sessions OpenCode starts from within another session) are ignored, so you only get notified for top-level sessions.
+
+When any of these events fire, the daemon sends a push notification to your iPhone via a relay server using APNs. It usually arrives within seconds, even when the app is in the background. If the event stream drops, the daemon reconnects automatically with exponential backoff.
 
 ## Password protection
 
@@ -94,8 +98,8 @@ WHATCODE_PASSWORD=your-password npx @whatcode-ai/whatcode start
 
 Or add it to a `.env` file in the directory where you run the daemon:
 
-```bash
-WHATCODE_PASSWORD = your-password
+```text
+WHATCODE_PASSWORD=your-password
 ```
 
 Via library, pass it as a parameter:
@@ -143,7 +147,7 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 ### Requirements
 
 - [Tailscale](https://tailscale.com) installed and authenticated (`tailscale up`)
-- The same Tailscale account logged in on your iPhone
+- The same Tailscale account logged in on your iPhone, with Tailscale connected whenever you use the app remotely
 
 ## Resetting the daemon
 

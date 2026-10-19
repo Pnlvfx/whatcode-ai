@@ -12,7 +12,7 @@ WhatCode ("we", "our", or "us") is committed to protecting your privacy. This po
 
 WhatCode is a local-first iOS companion for OpenCode. In practice this means:
 
-- Your code, conversations, and project data are processed entirely by the OpenCode server running on your own Mac. They never pass through our servers.
+- Your code, full conversations, and project data are processed entirely by the OpenCode server running on your own machine and never pass through our servers. The only conversation content the relay sees is the short notification snippet described in section 2.2.
 - We do not operate user accounts or cloud databases.
 - We do not use analytics, advertising SDKs, or cross-app tracking.
 - We do not sell your personal information.
@@ -22,9 +22,9 @@ WhatCode is a local-first iOS companion for OpenCode. In practice this means:
 
 ### 2.1 Push notification token
 
-When you enable notifications, the iOS app registers an Apple Push Notification service (APNs) device token with the WhatCode daemon running on your Mac. The daemon sends that token to our relay server (`api.whatcode.app`) so it can forward push notifications to your device.
+When you enable notifications, the iOS app registers an Apple Push Notification service (APNs) device token with the WhatCode daemon running on your machine. The daemon sends that token to our relay server (`api.whatcode.app`) so it can forward push notifications to your device.
 
-The token is stored locally on your Mac at `~/.whatcode/auth/` and on the relay for delivery purposes only. It is never shared with third parties for advertising or analytics.
+The token is stored locally on your machine at `~/.whatcode/auth/` and on the relay for delivery purposes only. It is never shared with third parties for advertising or analytics.
 
 ### 2.2 Notification payload
 
@@ -34,12 +34,13 @@ When your OpenCode session becomes idle, encounters an error, or requires your a
 - A short snippet of the last model response or error message (used as the notification body)
 - Event type (`session.idle`, `permission.asked`, or `session.error`)
 - Session and project identifiers
+- The local path of the project directory
 
 This content passes through our relay in transit to reach your device. We do not store notification bodies after delivery. Our relay does not have access to your full conversation history, only the snippet included in each individual notification.
 
 ### 2.3 Machine identifier
 
-A unique identifier for the machine running the WhatCode daemon is generated locally using standard system APIs. It is used to distinguish connections between your Mac and your iOS device. It is not linked to your personal identity and is not sent to our servers.
+A unique identifier for the machine running the WhatCode daemon is generated locally using standard system APIs. The daemon sends this identifier and the machine's hostname to our relay when it first registers, so the relay can issue an access token for that machine. The hostname is set by you and may contain personal information, such as your name.
 
 ### 2.4 Information we do not collect
 
@@ -53,7 +54,7 @@ A unique identifier for the machine running the WhatCode daemon is generated loc
 We use the information described above only to operate WhatCode:
 
 - Registering and storing your APNs token to enable push notification delivery
-- Routing push notifications from your Mac to your iOS device
+- Routing push notifications from your machine to your iOS device
 - Removing your token when you unregister or reset the daemon
 
 We do not use your information for advertising, profiling, or resale.
@@ -82,7 +83,7 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 
 ## 5. Data Storage and Security
 
-### 5.1 On your Mac
+### 5.1 On your machine
 
 - APNs token and device registration data are stored locally at `~/.whatcode/auth/`
 - The daemon holds session metadata (machine ID, OpenCode URL, daemon URL) in memory only and is not persisted to disk
@@ -90,13 +91,14 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 ### 5.2 On the relay server
 
 - APNs tokens are stored to enable push delivery
+- The machine identifier and hostname are received when the daemon registers with the relay
 - We do not store notification body content after it has been forwarded to APNs
 - The relay processes IP address and connection metadata as part of normal HTTPS operation
 
 ### 5.3 On your iOS device
 
 - The iOS app stores the pairing state and user identifier needed to register for notifications
-- No conversation history or code is stored by the app itself. All session data lives on your Mac
+- No conversation history or code is stored by the app itself. All session data lives on your machine
 
 ### 5.4 In transit
 
@@ -107,7 +109,7 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 
 - **APNs tokens:** retained on the relay for as long as they are valid and in use. Tokens are automatically removed when the daemon receives an `Unregistered` response from APNs, or when you run `whatcode reset` or call the unregister endpoint
 - **Notification payloads:** not stored after forwarding to APNs
-- **Local daemon data:** retained on your Mac until you delete the `~/.whatcode/` directory or reset the daemon
+- **Local daemon data:** retained on your machine until you delete the `~/.whatcode/` directory or reset the daemon
 
 ## 7. International Data Transfers
 

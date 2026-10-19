@@ -8,7 +8,7 @@ keywords: [opencode ios app price, opencode mobile app pricing, whatcode pricing
 
 # Pricing
 
-WhatCode is available as a monthly or a yearly subscription. Both plans include every feature.
+WhatCode requires a subscription, available as a monthly or a yearly plan. Both plans include every feature.
 
 ## Plans
 

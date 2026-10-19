@@ -10,7 +10,7 @@ By downloading or using the WhatCode app ("App"), you agree to these Terms of Us
 
 ## 1. Description of the App
 
-WhatCode is an iOS companion app for OpenCode. It connects to the OpenCode server running on your own Mac and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your Mac, not on our servers.
+WhatCode is an iOS companion app for OpenCode. It connects to the OpenCode server running on your own machine and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your machine, not on our servers. The relay only receives the notification content described in the Privacy Policy, including a short snippet of the last response or error.
 
 ## 2. Eligibility
 
@@ -27,13 +27,13 @@ You must be at least 13 years old, or the minimum age required in your jurisdict
 
 ## 4. Push Notifications and the Relay
 
-WhatCode uses a relay server (`api.whatcode.app`) to forward push notifications from your Mac to your device. The relay is provided on a best-effort basis. We do not guarantee delivery of notifications and are not liable for missed or delayed notifications.
+WhatCode uses a relay server (`api.whatcode.app`) to forward push notifications from your machine to your device. The relay is provided on a best-effort basis. We do not guarantee delivery of notifications and are not liable for missed or delayed notifications.
 
 ## 5. Subscription
 
 ### 5.1 Subscription features
 
-The App may offer an optional paid subscription. Subscription features may include enhanced notification options, additional configuration, and access to developer-operated infrastructure features. Feature availability may vary based on platform and your current build.
+Using the App requires an active paid subscription, billed through Apple. Plans and prices are listed on the Pricing page.
 
 ### 5.2 Billing
 

@@ -14,6 +14,8 @@ I built WhatCode because I kept running into the same frustration: I'd kick off 
 
 So I built one.
 
-WhatCode is a solo side project I started in my free time and decided to publish. The source code is [open on GitHub](https://github.com/Pnlvfx/whatcode-ai), so you can see exactly what the daemon does and how the app communicates with your machine.
+WhatCode is a solo side project I started in my free time and decided to publish. The daemon and SDK are [open source on GitHub](https://github.com/Pnlvfx/whatcode-ai), so you can see exactly what runs on your machine. The iOS app itself is closed source.
+
+WhatCode is an independent project and is not affiliated with or endorsed by OpenCode.
 
 If you have questions, feedback, or just want to say hi, find me on X: [@simone_gauli](https://x.com/simone_gauli).

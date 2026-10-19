@@ -34,4 +34,4 @@ WhatCode connects directly to the OpenCode server running on your machine, and y
 
 ## How much does WhatCode cost?
 
-See [Pricing](/pricing).
+WhatCode requires a subscription, and both plans start with a 3-day free trial. See [Pricing](/pricing) for the plans.
