@@ -1,15 +1,15 @@
 import type { WhatCodeClient } from './opencode/client.ts';
 import { Service, type Endpoint } from '@opencode/client/service';
 import { Elysia } from 'elysia';
-import { node } from '@elysiajs/node';
 import { userRouter } from './routes/user.ts';
 import { sessionRouter } from './routes/session.ts';
 import { basicAuth } from './mw/opencode-auth.ts';
 import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
 import { MIN_APP_VERSION } from './config/constants.ts';
-import pkgJson from '../package.json' with { type: 'json' };
 import { createProjectRouterOverride } from './routes/project.ts';
+import { getAdapter } from './adapters/adapter.ts';
+import pkgJson from '../package.json' with { type: 'json' };
 
 interface Params {
   port: number;
@@ -18,12 +18,12 @@ interface Params {
   client: WhatCodeClient;
 }
 
-export const startWhatcode = ({ port, endpoint, password, client }: Params) => {
+export const startWhatcode = async ({ port, endpoint, password, client }: Params) => {
   const ocHeaders = Service.headers(endpoint);
   const projectRouter = createProjectRouterOverride(client);
 
   return (
-    new Elysia({ adapter: node() })
+    new Elysia({ adapter: await getAdapter() })
       .onError(({ error, request }) => {
         const { pathname, search } = new URL(request.url);
         const url = `${pathname}${search}`;

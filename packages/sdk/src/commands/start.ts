@@ -48,7 +48,7 @@ export const createWhatcodeServer = async ({ tailscale: hasTailscale, password, 
   //   startNotificationTracker(client);
   // }
 
-  startWhatcode({ port, endpoint, password, client });
+  await startWhatcode({ port, endpoint, password, client });
   const tailscale = hasTailscale ? createTailscale(port) : undefined;
   const tailscaleServer = tailscale ? await tailscale.start() : undefined;
 
