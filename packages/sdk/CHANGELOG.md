@@ -1,3 +1,9 @@
+## [2.4.0](compare/%40whatcode-ai%2Fsdk%402.3.0...%40whatcode-ai%2Fsdk%402.4.0) "@whatcode-ai/sdk" (2026-10-19)
+
+### Bug Fixes
+
+* store initializer 6bd53e5
+
 ## [2.3.0](compare/%40whatcode-ai%2Fsdk%402.2.0...%40whatcode-ai%2Fsdk%402.3.0) "@whatcode-ai/sdk" (2026-10-17)
 
 ### Bug Fixes
