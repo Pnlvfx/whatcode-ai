@@ -19,7 +19,6 @@ WhatCode is the OpenCode mobile app for iOS: an iPhone companion for [OpenCode](
 This documentation covers three things:
 
 - **WhatCode** - the iOS app: what it does, how to connect it to your machine, and how to navigate your projects and sessions.
-- **OpenCode** - how to install and run the OpenCode server that WhatCode connects to.
 - **Daemon** - the lightweight server that bridges the iOS app and OpenCode, enabling push notifications, better project sorting, and optional remote access via Tailscale.
 
 ## Quick overview

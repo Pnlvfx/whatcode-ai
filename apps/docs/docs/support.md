@@ -37,7 +37,7 @@ npx @whatcode-ai/whatcode reset
 Tap **Continue without QR** and enter your server URL manually. You can find the URL printed in your terminal when the daemon starts.
 
 **OpenCode won't start**
-Make sure OpenCode is installed and that Node.js 22.5 or newer is available on your PATH. See the [OpenCode](/opencode) page for installation instructions.
+Make sure OpenCode is installed and that Node.js 22.5 or newer is available on your PATH. See the [OpenCode documentation](https://opencode.ai/docs) for installation instructions.
 
 **Something looks wrong and I need more detail**
 Start the daemon with `--log-level debug` to enable verbose logging. This shows exactly what the daemon is doing - incoming connections, notification dispatches, and Tailscale state.

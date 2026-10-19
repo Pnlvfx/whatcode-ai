@@ -8,7 +8,6 @@
 - [Getting Started](https://www.whatcode.app/getting-started/): connect the OpenCode iOS app to your machine
 - [WhatCode](https://www.whatcode.app/whatcode/): features of the OpenCode iOS app
 - [Screenshots](https://www.whatcode.app/screenshots/): the OpenCode iOS app on iPhone
-- [OpenCode](https://www.whatcode.app/opencode/): the OpenCode server the app connects to
 - [Daemon](https://www.whatcode.app/daemon/): push notifications and remote access over Tailscale
 - [FAQ](https://www.whatcode.app/faq/): OpenCode mobile app, iOS, iPad and Android questions
 - [Pricing](https://www.whatcode.app/pricing/): subscription plans and free trial
