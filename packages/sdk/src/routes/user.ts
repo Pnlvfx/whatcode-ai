@@ -15,7 +15,7 @@ export const userRouter = new Elysia({ prefix: '/user' })
       const accounts = accountsResult.data;
       let account = accounts.find((a) => a.deviceId === device_id);
       const identityData = await getIdentity();
-      if (identityData.error) return status(400, { message: identityData.error.message });
+      if (identityData.error) return status(500, { message: identityData.error.message });
 
       if (!account) {
         account = {
