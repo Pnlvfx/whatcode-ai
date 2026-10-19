@@ -12,7 +12,7 @@ WhatCode ("we", "our", or "us") is committed to protecting your privacy. This po
 
 WhatCode is a local-first iOS companion for OpenCode. In practice this means:
 
-- Your code, conversations, and project data are processed entirely by the OpenCode server running on your own Mac — they never pass through our servers.
+- Your code, conversations, and project data are processed entirely by the OpenCode server running on your own Mac. They never pass through our servers.
 - We do not operate user accounts or cloud databases.
 - We do not use analytics, advertising SDKs, or cross-app tracking.
 - We do not sell your personal information.
@@ -35,7 +35,7 @@ When your OpenCode session becomes idle, encounters an error, or requires your a
 - Event type (`session.idle`, `permission.asked`, or `session.error`)
 - Session and project identifiers
 
-This content passes through our relay in transit to reach your device. We do not store notification bodies after delivery. Our relay does not have access to your full conversation history — only the snippet included in each individual notification.
+This content passes through our relay in transit to reach your device. We do not store notification bodies after delivery. Our relay does not have access to your full conversation history, only the snippet included in each individual notification.
 
 ### 2.3 Machine identifier
 
@@ -62,9 +62,9 @@ We do not use your information for advertising, profiling, or resale.
 
 If you are in the European Economic Area, we rely on the following legal bases:
 
-- **Contract performance** — to provide the core notification delivery feature you have enabled
-- **Legitimate interests** — to maintain relay infrastructure security, prevent abuse, and ensure service stability
-- **Consent** — for iOS permissions such as notification access and local network access, which you grant through the standard iOS permission prompts
+- **Contract performance:** to provide the core notification delivery feature you have enabled
+- **Legitimate interests:** to maintain relay infrastructure security, prevent abuse, and ensure service stability
+- **Consent:** for iOS permissions such as notification access and local network access, which you grant through the standard iOS permission prompts
 
 ## 4. Third-Party Services
 
@@ -85,7 +85,7 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 ### 5.1 On your Mac
 
 - APNs token and device registration data are stored locally at `~/.whatcode/auth/`
-- The daemon holds session metadata (machine ID, OpenCode URL, daemon URL) in memory only — it is not persisted to disk
+- The daemon holds session metadata (machine ID, OpenCode URL, daemon URL) in memory only and is not persisted to disk
 
 ### 5.2 On the relay server
 
@@ -96,7 +96,7 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 ### 5.3 On your iOS device
 
 - The iOS app stores the pairing state and user identifier needed to register for notifications
-- No conversation history or code is stored by the app itself — all session data lives on your Mac
+- No conversation history or code is stored by the app itself. All session data lives on your Mac
 
 ### 5.4 In transit
 
@@ -105,9 +105,9 @@ If you launch the daemon with the `--tailscale` flag, your connection may route 
 
 ## 6. Data Retention
 
-- **APNs tokens** — retained on the relay for as long as they are valid and in use. Tokens are automatically removed when the daemon receives an `Unregistered` response from APNs, or when you run `whatcode --reset` or call the unregister endpoint
-- **Notification payloads** — not stored after forwarding to APNs
-- **Local daemon data** — retained on your Mac until you delete the `~/.whatcode/` directory or reset the daemon
+- **APNs tokens:** retained on the relay for as long as they are valid and in use. Tokens are automatically removed when the daemon receives an `Unregistered` response from APNs, or when you run `whatcode reset` or call the unregister endpoint
+- **Notification payloads:** not stored after forwarding to APNs
+- **Local daemon data:** retained on your Mac until you delete the `~/.whatcode/` directory or reset the daemon
 
 ## 7. International Data Transfers
 
@@ -117,7 +117,7 @@ WhatCode operates relay infrastructure and uses Apple's APNs, which may process 
 
 Depending on your jurisdiction, you may have the right to access, correct, delete, restrict, or object to the processing of your personal information, and to request portability where applicable.
 
-Because WhatCode is local-first, most of your data remains under your direct control on your own devices. For notification-related data processed by our relay, running `whatcode --reset` removes your APNs token. For any other privacy request, contact us at [support@whatcode.app](mailto:support@whatcode.app).
+Because WhatCode is local-first, most of your data remains under your direct control on your own devices. For notification-related data processed by our relay, running `whatcode reset` removes your APNs token. For any other privacy request, contact us at [support@whatcode.app](mailto:support@whatcode.app).
 
 **EEA users:** You also have the right to lodge a complaint with your local data protection supervisory authority.
 

@@ -1,20 +1,15 @@
-# Website
+# @whatcode-ai/docs
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Source of the [whatcode.app](https://whatcode.app) documentation site, built with [Docusaurus](https://docusaurus.io/).
 
-## Installation
+## Development
 
 ```bash
 pnpm install
-```
-
-## Local Development
-
-```bash
 pnpm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+`pnpm start` runs a local development server. Most changes are reflected live.
 
 ## Build
 
@@ -22,20 +17,23 @@ This command starts a local development server and opens up a browser window. Mo
 pnpm build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+Static output is written to the `build` directory. Use `pnpm serve` to preview it locally.
 
 ## Deployment
 
-Using SSH:
+The site is hosted on Vercel. Deploy with:
 
 ```bash
-USE_SSH=true pnpm deploy
+pnpm run deploy
 ```
 
-Not using SSH:
+Use `pnpm run deploy` rather than `pnpm deploy`, because `deploy` is also a built-in pnpm command and takes precedence over the package script.
 
-```bash
-GIT_USER=<Your GitHub username> pnpm deploy
-```
+The script (`tools/deploy.ts`) does the following in order:
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+1. Checks the git status.
+2. Removes the `build` and `.docusaurus` directories.
+3. Pulls the Vercel project settings, builds with `vercel build --prod`, and deploys the prebuilt output to production.
+4. Bumps the minor version in `package.json`, commits, pushes, and creates and pushes a `@whatcode-ai/docs@<version>` tag.
+
+If the release step fails, the script reverts the working tree changes and rethrows the error.

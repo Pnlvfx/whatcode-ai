@@ -1,8 +1,13 @@
 # @whatcode-ai/sdk
 
-SDK to start [OpenCode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com).
+SDK for the [WhatCode](https://whatcode.app) daemon. It starts [OpenCode](https://opencode.ai), serves it to the WhatCode iOS app with push notifications, and can expose it over HTTPS via [Tailscale](https://tailscale.com).
 
 Full documentation at **[whatcode.app](https://whatcode.app)**.
+
+## Requirements
+
+- [OpenCode](https://opencode.ai) installed
+- Node.js 22.5 or newer
 
 ## Install
 

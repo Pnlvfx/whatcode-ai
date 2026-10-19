@@ -1,13 +1,14 @@
 ---
 title: 'WhatCode Daemon: OpenCode Push Notifications and Remote Access'
 sidebar_position: 5
+sidebar_label: Daemon
 description: The WhatCode daemon exposes OpenCode to your iPhone, sends push notifications when an agent finishes, and supports remote access over Tailscale.
 keywords: [opencode push notifications, opencode remote access, opencode tailscale, opencode mobile, opencode daemon]
 ---
 
 # Daemon
 
-The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process that runs on your machine alongside OpenCode. It serves three purposes: exposing OpenCode on your local network so the iOS app can reach it, patching certain OpenCode responses to improve the mobile experience, and delivering push notifications to your iPhone when an agent finishes.
+The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process that runs on your machine alongside OpenCode and connects it to the iOS app.
 
 ## Why do I need a daemon?
 
@@ -19,7 +20,7 @@ The daemon gives you three things that plain OpenCode cannot provide out of the 
 
 **Push notifications.** The daemon watches the OpenCode event stream and sends a push to your iPhone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
 
-Under the hood, the daemon connects to the local OpenCode service (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. Plain OpenCode is still fully supported. The daemon just makes the mobile experience significantly better.
+Under the hood, the daemon connects to the local OpenCode service (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. You can still use OpenCode on its own. The daemon adds what the mobile app needs.
 
 ## Installation
 
@@ -64,18 +65,18 @@ When you run the daemon:
 
 The WhatCode server layer:
 
-- **Patches project sorting** - the `/api/project` endpoint enriches each project with the timestamp of its most recent message and its latest session, so the app can sort projects by actual activity rather than creation date.
-- **Disables caching** - forces `cache-control: no-cache` and `x-accel-buffering: no` on all proxied responses, which is important for the SSE event stream the app subscribes to.
-- **Exposes `/info`** - returns the daemon version and the minimum supported app version.
-- **Handles device pairing** - the `/user/pair` endpoint registers the app and returns an access token, `/user` returns the identity of the host (used by the app to deduplicate connections across multiple machines), and `/user/logout` removes the device.
+- **Patches project sorting:** the `/api/project` endpoint enriches each project with the timestamp of its most recent message and its latest session, so the app can sort projects by actual activity rather than creation date.
+- **Disables caching:** forces `cache-control: no-cache` and `x-accel-buffering: no` on all proxied responses, which the SSE event stream the app subscribes to depends on.
+- **Exposes `/info`:** returns the daemon version and the minimum supported app version.
+- **Handles device pairing:** the `/user/pair` endpoint registers the app and returns an access token, `/user` returns the identity of the host (used by the app to deduplicate connections across multiple machines), and `/user/logout` removes the device.
 
 ## Push notifications
 
 The daemon subscribes to the OpenCode event stream and watches for three events:
 
-- `session.execution.succeeded` - the agent finished its turn and is waiting for your input.
-- `session.execution.failed` - the agent hit an unrecoverable error.
-- `permission.asked` - the agent needs your approval before it can proceed.
+- `session.execution.succeeded`: the agent finished its turn and is waiting for your input.
+- `session.execution.failed`: the agent hit an unrecoverable error.
+- `permission.asked`: the agent needs your approval before it can proceed.
 
 Events from subagent sessions are ignored, so you only get notified for top-level sessions.
 
@@ -104,6 +105,8 @@ await createWhatcodeServer({ password: 'your-password' });
 ```
 
 In the app, enter the password when adding a connection manually. The QR code does not embed the password.
+
+HTTP Basic Auth sends credentials unencrypted, so on a plain HTTP local network URL the password can be read by anyone on that network. Use `--tailscale` if that matters for your setup.
 
 ## Log level
 
@@ -144,7 +147,7 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 
 ## Resetting the daemon
 
-If notifications stop working or device pairings get into a bad state, you can reset the daemon stored data. This clears all paired devices and the stored notification state. After resetting, open the app and reconnect to pair your device again.
+If notifications stop working or device pairings get into a bad state, you can reset the daemon's stored data. This clears all paired devices and the stored notification state. After resetting, open the app and reconnect to pair your device again.
 
 Via CLI:
 

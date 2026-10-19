@@ -1,39 +1,35 @@
 ---
 title: 'WhatCode Pricing: OpenCode iOS App Subscription'
 sidebar_position: 7
+sidebar_label: Pricing
 description: WhatCode pricing for the OpenCode iOS app. The yearly plan is $2.00 per month and both plans include a 3-day free trial.
 keywords: [opencode ios app price, opencode mobile app pricing, whatcode pricing]
 ---
 
 # Pricing
 
-WhatCode gives you full access to OpenCode from your iPhone. At just $2.00 / month on the yearly plan, it pays for itself the first time you catch a finished agent from your couch instead of your desk.
-
-Try it free for 3 days, no charge until the trial ends.
+WhatCode is available as a monthly or a yearly subscription. Both plans include every feature.
 
 ## Plans
 
-| | Monthly | Yearly |
-| --- | --- | --- |
+|       | Monthly       | Yearly                        |
+| ----- | ------------- | ----------------------------- |
 | Price | $3.29 / month | $23.99 / year ($2.00 / month) |
-| Free trial | 3 days | 3 days |
-| All features | Yes | Yes |
 
-The yearly plan saves you about 39% compared to monthly.
+The yearly plan saves about 39% compared to monthly.
 
 ## What's included
 
-- **Start agentic sessions** - kick off a new coding task from your phone and let the agent work while you're away from your desk.
-- **See tool calls** - follow along in real time as the agent reads files, runs commands, and browses the web.
-- **Abort the agent** - stop a running session at any time directly from the app.
-- **Push notifications** - get notified the moment an agent finishes its turn, hits an error, or needs your permission to proceed. No polling, no battery drain.
-- **Start new sessions** - open a new conversation in any project without touching your computer.
-- **Manage your projects** - browse all your OpenCode projects sorted by most recent activity and jump into any session from anywhere.
-- **Multiple accounts** - connect to more than one machine at the same time. Useful if you run OpenCode on a work computer and a personal one, or a desktop and a laptop.
+- **Start new sessions:** open a new conversation in any project and let the agent work while you're away from your desk.
+- **See tool calls:** follow along in real time as the agent reads files, runs commands, and browses the web.
+- **Abort the agent:** stop a running session at any time from the app.
+- **Push notifications:** get notified when an agent finishes its turn, hits an error, or needs your permission to proceed.
+- **Manage your projects:** browse all your OpenCode projects sorted by most recent activity and jump into any session.
+- **Multiple machines:** connect to more than one machine at the same time, such as a work computer and a personal one.
 
 ## Free trial
 
-Both plans include a 3-day free trial for new subscribers. You will not be charged until the trial ends, and you can cancel at any time during the trial without being billed.
+Both plans include a 3-day free trial for new subscribers. You are not charged until the trial ends, and you can cancel at any time during the trial without being billed.
 
 **[Start your free trial on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)**
 

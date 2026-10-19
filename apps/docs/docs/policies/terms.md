@@ -10,7 +10,7 @@ By downloading or using the WhatCode app ("App"), you agree to these Terms of Us
 
 ## 1. Description of the App
 
-WhatCode is an iOS companion app for OpenCode. It connects to the OpenCode server running on your own Mac and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your Mac — not on our servers.
+WhatCode is an iOS companion app for OpenCode. It connects to the OpenCode server running on your own Mac and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your Mac, not on our servers.
 
 ## 2. Eligibility
 

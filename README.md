@@ -6,7 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/@whatcode-ai/sdk?label=sdk%20downloads)](https://www.npmjs.com/package/@whatcode-ai/sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-Monorepo that provides a one-script setup to start [OpenCode](https://opencode.ai) and optionally expose it over HTTPS via [Tailscale](https://tailscale.com), so you can connect to it from anywhere (e.g. a private iOS app).
+WhatCode is an iOS app for monitoring [OpenCode](https://opencode.ai) sessions, sending messages, and getting push notifications from your iPhone. This monorepo contains the daemon that connects OpenCode to the app (with optional [Tailscale](https://tailscale.com) remote access), the SDK, the documentation site, and a usage example.
 
 <p align="center">
   <img src="apps/docs/static/img/screenshots/features.png" width="23%" alt="WhatCode session overview" />
@@ -34,6 +34,7 @@ npx @whatcode-ai/whatcode start --tailscale
 | [`@whatcode-ai/whatcode`](./packages/whatcode) | `whatcode` CLI                |
 | [`@whatcode-ai/sdk`](./packages/sdk)           | Core SDK (programmatic usage) |
 | [`@whatcode-ai/example`](./apps/example)       | Minimal usage example         |
+| [`apps/docs`](./apps/docs)                     | Documentation site            |
 
 ## Development
 

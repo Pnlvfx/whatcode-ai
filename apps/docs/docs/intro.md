@@ -2,6 +2,7 @@
 slug: /
 title: 'WhatCode: OpenCode Mobile App for iPhone'
 sidebar_position: 1
+sidebar_label: Introduction
 description: WhatCode is the OpenCode mobile app for iPhone. Monitor OpenCode sessions, send messages and get push notifications the moment your AI coding agent finishes.
 keywords: [opencode mobile, opencode ios app, opencode iphone, opencode app, ai coding agent mobile, whatcode]
 ---
@@ -16,10 +17,10 @@ WhatCode is the OpenCode mobile app for iOS: an iPhone companion for [OpenCode](
 
 ## What's covered here
 
-This documentation covers three things:
+This documentation covers two things:
 
-- **WhatCode** - the iOS app: what it does, how to connect it to your machine, and how to navigate your projects and sessions.
-- **Daemon** - the lightweight server that bridges the iOS app and OpenCode, enabling push notifications, better project sorting, and optional remote access via Tailscale.
+- **WhatCode**: the iOS app. What it does, how to connect it to your machine, and how to navigate your projects and sessions.
+- **Daemon**: the lightweight server that bridges the iOS app and OpenCode, enabling push notifications, better project sorting, and optional remote access via Tailscale.
 
 ## Quick overview
 

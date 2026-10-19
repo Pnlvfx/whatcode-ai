@@ -1,6 +1,7 @@
 ---
 title: 'Getting Started: Connect the OpenCode iOS App to Your Machine'
 sidebar_position: 2
+sidebar_label: Getting Started
 description: Step-by-step setup for WhatCode, the OpenCode iOS app. Run the daemon, scan the QR code with your iPhone and monitor OpenCode sessions in minutes.
 keywords: [opencode ios app setup, opencode mobile setup, connect opencode to iphone, opencode remote access]
 ---
@@ -12,6 +13,7 @@ This guide walks you through connecting the WhatCode iOS app to your machine in 
 ## Requirements
 
 - [OpenCode](https://opencode.ai) installed
+- Node.js 22.5 or newer available on your PATH
 - The WhatCode app installed on your iPhone. [Download on the App Store](https://apps.apple.com/us/app/whatcode/id6760623503)
 
 ## 1. Install OpenCode

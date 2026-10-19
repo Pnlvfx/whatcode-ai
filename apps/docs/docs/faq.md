@@ -1,5 +1,7 @@
 ---
 title: 'FAQ: OpenCode Mobile App, iOS and iPad'
+sidebar_position: 8
+sidebar_label: FAQ
 description: Answers about the OpenCode mobile app. Is there an OpenCode iOS app, does it work on iPad, and how do notifications and remote access work.
 keywords: [opencode mobile app, opencode ios app, opencode ipad, opencode iphone, opencode android]
 ---
@@ -14,13 +16,9 @@ Yes. WhatCode is a mobile app for [OpenCode](https://opencode.ai). It connects t
 
 Yes. WhatCode is available on the [App Store](https://apps.apple.com/us/app/whatcode/id6760623503) for iPhone.
 
-## Is there an OpenCode iPad app?
+## Is there an OpenCode iPad or Android app?
 
-WhatCode does not support iPad yet.
-
-## Is there an OpenCode Android app?
-
-WhatCode is currently an iOS app only.
+Not yet. WhatCode is currently available for iPhone only.
 
 ## How do I get a notification when an OpenCode agent finishes?
 
@@ -28,11 +26,11 @@ Run the [WhatCode daemon](/daemon) on your machine and pair it with the app. The
 
 ## Can I use OpenCode from my phone when I'm away from home?
 
-Yes. Start the daemon with the `--tailscale` flag to connect securely from anywhere. See [Daemon](/daemon) for the details.
+Yes. Start the daemon with the `--tailscale` flag to connect securely from anywhere. See [Daemon](/daemon#tailscale) for the details.
 
 ## Does my code leave my machine?
 
-No. OpenCode runs on your machine and WhatCode connects to it directly. See the [Privacy Policy](/policies/privacy-policy) for what the push relay handles.
+WhatCode connects directly to the OpenCode server running on your machine, and your code and conversations do not pass through WhatCode's servers. OpenCode itself sends your prompts and code context to the model provider you configured, which is outside WhatCode's control. The push relay only receives what is needed to deliver a notification: the project or session name, a short snippet of the last response or error, and the event type. The [Privacy Policy](/policies/privacy-policy) lists exactly what it handles.
 
 ## How much does WhatCode cost?
 
