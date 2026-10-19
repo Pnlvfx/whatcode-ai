@@ -58,14 +58,14 @@ WhatCode requires a subscription. See [Pricing](/pricing).
 See [Getting Started](/getting-started) for the full walkthrough. In short:
 
 1. Run `npx @whatcode-ai/whatcode start` on your machine.
-2. Scan the QR code with the app.
+2. Run `npx @whatcode-ai/whatcode pair` in another terminal and scan the QR code with the app.
 
 ## Connecting manually
 
 If you can't scan the QR code, tap **Continue without QR** during setup and enter:
 
-- **Server URL**: the local IP printed in your terminal (e.g. `http://192.168.1.10:8192`) or your Tailscale HTTPS URL.
-- **Password**: optional, only if you started the daemon with a password (see [Daemon](/daemon#password-protection)).
+- **Server URL**: the URL printed by `whatcode pair` (e.g. `http://192.168.1.10:8192`, or your Tailscale HTTPS URL).
+- **Password**: the password printed by `whatcode pair` (see [Daemon](/daemon#password-protection)).
 
 ## Notifications
 

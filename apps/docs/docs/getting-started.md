@@ -29,19 +29,29 @@ Run the following command in your terminal:
 npx @whatcode-ai/whatcode start
 ```
 
-The command starts the OpenCode server, or reuses it if it is already running, and then prints a pairing QR code in the terminal. You will scan this code with the app in the next step. The local network URL of the server is printed alongside it, and is only needed if you choose to connect manually.
+The command starts the OpenCode server, or reuses it if it is already running. Keep this terminal open, closing it disconnects the app.
 
-## 3. Connect the iOS app
+## 3. Pair the app
+
+In another terminal, while the daemon is running, run:
+
+```bash
+npx @whatcode-ai/whatcode pair
+```
+
+It prints your server URL, your password and a pairing QR code. You can run it again at any time, for example to connect a second device.
+
+## 4. Connect the iOS app
 
 Open the WhatCode app on your device. On first launch you'll be taken through a short setup flow:
 
 1. Tap **Get Started** and step through the intro screens.
-2. On the last step, tap **Scan QR** and point your camera at the QR code in your terminal.
+2. On the last step, tap **Scan QR** and point your camera at the QR code printed by `whatcode pair`.
 3. The app connects to your machine automatically.
 
-If your camera isn't available, tap **Continue without QR** and enter the URL manually.
+If your camera isn't available, tap **Continue without QR** and enter the URL and password printed by `whatcode pair`.
 
-## 4. You're connected
+## 5. You're connected
 
 You should now see your OpenCode projects listed in the app. Tap any project to open its sessions, send messages, and receive notifications when the agent finishes a task.
 
@@ -53,6 +63,6 @@ To connect from outside your local network, start the daemon with the `--tailsca
 npx @whatcode-ai/whatcode start --tailscale
 ```
 
-The QR code then includes your [Tailscale](https://tailscale.com) URL, so the app can reach your machine from anywhere. See the [Daemon](/daemon) page for more details.
+The QR code printed by `whatcode pair` then includes your [Tailscale](https://tailscale.com) URL, so the app can reach your machine from anywhere. See the [Daemon](/daemon) page for more details.
 
 :::

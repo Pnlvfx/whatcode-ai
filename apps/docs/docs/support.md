@@ -35,7 +35,7 @@ npx @whatcode-ai/whatcode reset
 ```
 
 **The QR code scan failed**
-Tap **Continue without QR** and enter your server URL manually. The URL is printed in your terminal when the daemon starts.
+Tap **Continue without QR** and enter your server URL manually. Run `whatcode pair` while the daemon is running to print the URL and password.
 
 **OpenCode won't start**
 Make sure OpenCode is installed and that Node.js 22.5 or newer is available on your PATH. See the [OpenCode documentation](https://opencode.ai/docs) for installation instructions.

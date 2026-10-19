@@ -26,5 +26,5 @@ WhatCode is an independent project and is not affiliated with or endorsed by Ope
 
 1. Install OpenCode on your machine.
 2. Run the WhatCode daemon. It starts OpenCode and exposes it on your local network.
-3. Open the iOS app, scan the QR code shown in your terminal, and you're connected.
+3. Run `whatcode pair` in another terminal, open the iOS app, scan the QR code, and you're connected.
 4. Start a coding session. When the agent finishes, your phone buzzes.

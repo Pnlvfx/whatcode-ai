@@ -5,6 +5,7 @@ import { checkForUpdate } from './update.ts';
 import { selfUpdate } from './self-update.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
+import { getPairing } from './pair.ts';
 import { hideBin } from 'yargs/helpers';
 import { logger } from '@whatcode-ai/sdk/internals/logger';
 import pkg from '../package.json' with { type: 'json' };
@@ -40,12 +41,28 @@ await yargs(hideBin(process.argv))
       if (server.error) {
         logger.error('whatcode', server.error.message, server.error);
       } else {
-        logger.info('whatcode', `use this URL in the app: ${server.data.url}`);
-        printQrCode(server.data.url, config.WHATCODE_PASSWORD);
-        logger.warn('whatcode', 'keep this terminal running, closing it will disconnect the app');
+        logger.info('whatcode', 'run "whatcode pair" in another terminal to connect the app');
+        logger.warn('whatcode', 'keep this running, closing it will disconnect the app');
       }
 
       await checkForUpdate(pkg.version);
+    },
+  )
+  .command(
+    'pair',
+    'Show the URL, password and QR code to connect the app (WhatCode must be started).',
+    (y) => y,
+    async () => {
+      logger.init({ logLevel: 'info' });
+      const pairing = await getPairing();
+      if (pairing.error) {
+        logger.error('whatcode', pairing.error.message, pairing.error);
+        process.exitCode = 1;
+        return;
+      }
+      logger.info('whatcode', `url: ${pairing.data.url}`);
+      logger.info('whatcode', `password: ${pairing.data.password}`);
+      printQrCode(pairing.data.url, pairing.data.password);
     },
   )
   .command(
@@ -54,7 +71,12 @@ await yargs(hideBin(process.argv))
     (y) => y,
     async () => {
       logger.init({ logLevel: 'info' });
-      await resetWhatcodeServer();
+      const result = await resetWhatcodeServer();
+      if (result.error) {
+        logger.error('whatcode', result.error.message, result.error);
+        process.exitCode = 1;
+        return;
+      }
       logger.info('whatcode', 'reset completed successfully');
     },
   )

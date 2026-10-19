@@ -60,8 +60,10 @@ When you run the daemon:
 
 1. It starts OpenCode on localhost (or reuses an existing instance).
 2. It starts a WhatCode server on port `8192` that sits in front of OpenCode, patching responses to improve the mobile experience.
-3. It prints your local network URL and a QR code. Scan it with the app to connect.
-4. If `--tailscale` is passed, it also prints a secure HTTPS URL on your tailnet (your private Tailscale network).
+3. It resolves the password: your `WHATCODE_PASSWORD` if set, otherwise the stored one, otherwise a newly generated one.
+4. If `--tailscale` is passed, it also exposes a secure HTTPS URL on your tailnet (your private Tailscale network).
+
+Run `whatcode pair` in another terminal to print the URL, password and QR code for the app.
 
 The WhatCode server layer:
 
@@ -88,9 +90,17 @@ When any of these events fire, the daemon sends a push notification to your iPho
 
 ## Password protection
 
-You can protect your daemon with a password. When set, every request must include the password via HTTP Basic Auth.
+Your daemon is always protected by a password: every request must include it via HTTP Basic Auth. If you don't provide one, WhatCode generates a random password on first start and reuses it on every later start. It is stored encrypted in `~/.whatcode/auth` with owner-only permissions. The encryption only keeps the password out of plain sight (for example in backups or screen shares), the file permissions are the real protection.
 
-Via CLI, set the `WHATCODE_PASSWORD` environment variable:
+To see the URL, password and QR code, run this in another terminal while the daemon is running:
+
+```bash
+npx @whatcode-ai/whatcode pair
+```
+
+`whatcode pair` fails if the daemon has not been started. To discard the stored password and generate a new one, run `whatcode reset`.
+
+To use your own password instead, set the `WHATCODE_PASSWORD` environment variable:
 
 ```bash
 WHATCODE_PASSWORD=your-password npx @whatcode-ai/whatcode start
@@ -108,7 +118,7 @@ Via library, pass it as a parameter:
 await createWhatcodeServer({ password: 'your-password' });
 ```
 
-In the app, enter the password when adding a connection manually. The QR code does not embed the password.
+In the app, scan the QR code printed by `whatcode pair`, which embeds the URL and the password, or enter them manually when adding a connection.
 
 HTTP Basic Auth sends credentials unencrypted, so on a plain HTTP local network URL the password can be read by anyone on that network. Use `--tailscale` if that matters for your setup.
 
@@ -142,7 +152,7 @@ Passing `--tailscale` exposes the daemon over a secure HTTPS tunnel on your [Tai
 npx @whatcode-ai/whatcode start --tailscale
 ```
 
-This runs `tailscale serve --bg <port>` in the background, which proxies your local port over HTTPS using your Tailscale hostname (e.g. `https://my-mac.tail1234.ts.net`). The QR code printed in the terminal includes this URL so the app connects over Tailscale automatically. When you stop the daemon (Ctrl+C), it cleans up the Tailscale serve rule automatically.
+This runs `tailscale serve --bg <port>` in the background, which proxies your local port over HTTPS using your Tailscale hostname (e.g. `https://my-mac.tail1234.ts.net`). The QR code printed by `whatcode pair` includes this URL so the app connects over Tailscale automatically. When you stop the daemon (Ctrl+C), it cleans up the Tailscale serve rule automatically.
 
 ### Requirements
 
@@ -175,7 +185,7 @@ await resetWhatcodeServer();
 | ----------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
 | `port`      | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
 | `tailscale` | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
-| `password`  | `string`                      | `undefined` | Protects all daemon endpoints with HTTP Basic Auth. The app will prompt for this password when connecting manually. |
+| `password`  | `string`                      | `undefined` | Password for HTTP Basic Auth on all daemon endpoints. If omitted, a random one is generated and stored encrypted. |
 | `logLevel`  | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
 ### `resetWhatcodeServer()`
@@ -201,7 +211,7 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 
 | Variable            | Default | Description                                                                        |
 | ------------------- | ------- | ---------------------------------------------------------------------------------- |
-| `WHATCODE_PASSWORD` | -       | Protect servers with HTTP Basic Auth. Set via environment variable or `.env` file. |
+| `WHATCODE_PASSWORD` | -       | Use your own password instead of the generated one. Set via environment variable or `.env` file. |
 
 ### Commands
 

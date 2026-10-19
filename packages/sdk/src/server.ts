@@ -14,7 +14,7 @@ import pkgJson from '../package.json' with { type: 'json' };
 interface Params {
   port: number;
   endpoint: Endpoint;
-  password: string | undefined;
+  password: string;
   client: WhatCodeClient;
 }
 
@@ -29,8 +29,7 @@ export const startWhatcode = async ({ port, endpoint, password, client }: Params
         const url = `${pathname}${search}`;
         logger.error('server-error', `An error occured at ${url}`, error);
       })
-      // TODO [2026-12-10] pass should be required
-      .use(password ? basicAuth(password) : new Elysia())
+      .use(basicAuth(password))
       .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
       .use(userRouter)
       .use(sessionRouter)
