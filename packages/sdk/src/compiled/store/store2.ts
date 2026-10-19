@@ -79,7 +79,7 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
     if (persist && currentConfig === undefined) {
       const bufferData = await getBuffer();
       if (bufferData.error) return { error: bufferData.error };
-      if (!bufferData.data) return { data: undefined };
+      if (!bufferData.data) return { data: initial };
       const raw = bufferData.data.toString();
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -95,8 +95,14 @@ export const createStore2 = <T extends z.$ZodType, TParams extends StoreParams<T
   const write = async (value: StoreType): Promise<StoreOpResult<StoreType>> => {
     const result = await z.safeParseAsync(schema, value);
     if (!result.success) return { error: { type: 'validation' as const, message: result.error.message, data: value } };
+    if (persist) {
+      try {
+        await fs.writeFile(configFile, JSON.stringify(result.data));
+      } catch (err) {
+        return { error: { type: 'fs' as const, message: parseError(err).message } };
+      }
+    }
     currentConfig = result.data;
-    if (persist) await fs.writeFile(configFile, JSON.stringify(currentConfig));
     return { data: currentConfig };
   };
 
