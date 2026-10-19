@@ -1,7 +1,7 @@
 {
   "name": "whatcode-ai",
   "private": true,
-  "description": "Monorepo for WhatCode. One-script setup to start opencode and expose it over HTTPS via Tailscale from anywhere.",
+  "description": "Monorepo for WhatCode. One-script setup to start OpenCode and expose it over HTTPS via Tailscale from anywhere.",
   "keywords": [
     "opencode",
     "tailscale",
