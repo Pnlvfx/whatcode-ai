@@ -8,6 +8,7 @@ import pkgJson from '../package.json' with { type: 'json' };
 
 const INTERVAL_MS = 24 * 60 * 60 * 1000;
 const FETCH_TIMEOUT_MS = 800;
+const COMMAND_TIMEOUT_MS = 10_000;
 const cacheSchema = z.strictObject({ latest: z.string(), checkedAt: z.number() });
 // eslint-disable-next-line no-restricted-properties
 const npmResponseSchema = z.object({ version: z.string() });
@@ -23,6 +24,8 @@ export const checkForUpdate = async (currentVersion: string) => {
   }
 };
 
+export const fetchFreshVersion = () => fetchAndCache(COMMAND_TIMEOUT_MS);
+
 const getLatestVersion = async () => {
   const cachedData = await store.get();
 
@@ -31,20 +34,26 @@ const getLatestVersion = async () => {
     cachedData.data = undefined;
   }
 
-  const now = Date.now();
-  if (cachedData.data && now - cachedData.data.checkedAt < INTERVAL_MS) return { data: { version: cachedData.data.latest } };
-  const { error, data } = await fetchLatestVersion();
+  const result =
+    cachedData.data && Date.now() - cachedData.data.checkedAt < INTERVAL_MS
+      ? { data: { version: cachedData.data.latest } }
+      : await fetchAndCache(FETCH_TIMEOUT_MS);
+  return result;
+};
+
+const fetchAndCache = async (timeoutMs: number) => {
+  const { error, data } = await fetchLatestVersion(timeoutMs);
   if (error) return { error };
-  await store.set({ latest: data.version, checkedAt: now });
+  await store.set({ latest: data.version, checkedAt: Date.now() });
   return { data: { version: data.version } };
 };
 
-const fetchLatestVersion = async () => {
+const fetchLatestVersion = async (timeoutMs: number) => {
   const controller = new AbortController();
 
   const timer = setTimeout(() => {
     controller.abort();
-  }, FETCH_TIMEOUT_MS);
+  }, timeoutMs);
 
   try {
     const res = await fetch(`https://registry.npmjs.org/${pkgJson.name}/latest`, { signal: controller.signal });

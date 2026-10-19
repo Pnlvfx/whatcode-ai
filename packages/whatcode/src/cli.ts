@@ -1,6 +1,8 @@
 #!/usr/bin/env node
+
 import { config } from './config.ts';
 import { checkForUpdate } from './update.ts';
+import { selfUpdate } from './self-update.ts';
 import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { hideBin } from 'yargs/helpers';
@@ -54,6 +56,15 @@ await yargs(hideBin(process.argv))
       logger.init({ logLevel: 'info' });
       await resetWhatcodeServer();
       logger.info('whatcode', 'reset completed successfully');
+    },
+  )
+  .command(
+    'update',
+    'Update WhatCode to the latest version.',
+    (y) => y,
+    async () => {
+      logger.init({ logLevel: 'info' });
+      await selfUpdate(pkg.version);
     },
   )
   .parseAsync();

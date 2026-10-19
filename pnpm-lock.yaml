@@ -356,6 +356,9 @@ importers:
       '@whatcode-ai/sdk':
         specifier: workspace:*
         version: link:../sdk
+      execa:
+        specifier: ^10.2.0
+        version: 10.2.0
       qrcode-terminal:
         specifier: ^0.12.0
         version: 0.12.0
