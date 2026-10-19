@@ -41,7 +41,7 @@ await yargs(hideBin(process.argv))
       if (server.error) {
         logger.error('whatcode', server.error.message, server.error);
       } else {
-        logger.info('whatcode', 'run "whatcode pair" in another terminal to connect the app');
+        logger.info('whatcode', 'run "whatcode pair" to connect');
         logger.warn('whatcode', 'keep this running, closing it will disconnect the app');
       }
 

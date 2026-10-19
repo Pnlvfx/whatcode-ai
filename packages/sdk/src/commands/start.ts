@@ -23,19 +23,29 @@ export interface WhatcodeServerConfig {
   logLevel?: LogLevel;
 }
 
-export const createWhatcodeServer = async ({ tailscale: hasTailscale, password, port = DEFAULT_PORT, logLevel = 'none' }: WhatcodeServerConfig = {}) => {
+export const createWhatcodeServer = async ({
+  tailscale: hasTailscale,
+  password,
+  port = DEFAULT_PORT,
+  logLevel = 'none',
+}: WhatcodeServerConfig = {}) => {
   logger.init({ logLevel });
 
   const isRunning = await isServerRunning(port);
   if (isRunning) return { error: { type: 'server' as const, message: 'The Daemon is already running on this machine!' } };
 
-  logger.info('whatcode', `starting WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}...`);
+  logger.debug('whatcode', `starting WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}...`);
 
   if (!isProd) {
     logger.debug('relay', `Relay url: ${SERVER_URL}`);
   }
 
-  const [relayAuth, opencodeData, ipData, passwordData] = await Promise.all([authenticate(), createOpencode(), getLocalIp(), resolvePassword(password)]);
+  const [relayAuth, opencodeData, ipData, passwordData] = await Promise.all([
+    authenticate(),
+    createOpencode(),
+    getLocalIp(),
+    resolvePassword(password),
+  ]);
 
   if (relayAuth.error) return { error: { type: 'relay' as const, message: relayAuth.error.value.message ?? relayAuth.error.status.toString() } };
   if (ipData.error) return { error: ipData.error };

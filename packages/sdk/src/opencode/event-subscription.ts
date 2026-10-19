@@ -81,5 +81,5 @@ const logStreamError = (err: unknown, delay: number): void => {
 const logIfConnected = (event: V2Event): void => {
   if (event.type !== 'server.connected') return;
 
-  logger.info('event-subscription', 'connected to opencode service');
+  logger.debug('event-subscription', 'connected to opencode service');
 };
