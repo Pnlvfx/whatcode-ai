@@ -1,6 +1,5 @@
 import { execa } from 'execa';
-import { logger } from '@whatcode-ai/sdk/internals/logger';
-import { parseError } from '@whatcode-ai/sdk/internals/compiled/core/error';
+import { logger, parseError } from '@whatcode-ai/sdk/internals';
 import semver from 'semver';
 import { fetchFreshVersion } from './update.ts';
 import pkgJson from '../package.json' with { type: 'json' };

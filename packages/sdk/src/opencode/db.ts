@@ -14,7 +14,8 @@ const openDb = (): DatabaseSync | undefined => {
 
 const db = openDb();
 
-const queryV1 = 'SELECT s.project_id, MAX(sm.time_created) as last_msg FROM session_message sm JOIN session_v2 s ON sm.session_id = s.id GROUP BY s.project_id';
+const queryV1 =
+  'SELECT s.project_id, MAX(sm.time_created) as last_msg FROM session_message sm JOIN session_v2 s ON sm.session_id = s.id GROUP BY s.project_id';
 
 export const getLastMessageTimeByProject = (): Map<string, number> => {
   if (!db) return new Map();
@@ -35,7 +36,7 @@ export const getLastMessageTimeByProject = (): Map<string, number> => {
   return map;
 };
 
-export interface SessionModelRef {
+interface SessionModelRef {
   id: string;
   providerID: string;
   variant?: string;

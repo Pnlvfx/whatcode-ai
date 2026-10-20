@@ -32,7 +32,7 @@
   "type": "module",
   "exports": {
     ".": "./src/whatcode.ts",
-    "./internals/*": "./src/*.ts"
+    "./internals": "./src/cli/utilities.ts"
   },
   "files": [
     "dist"
@@ -79,9 +79,9 @@
         "types": "./dist/whatcode.d.ts",
         "import": "./dist/whatcode.js"
       },
-      "./internals/*": {
-        "types": "./dist/*.d.ts",
-        "import": "./dist/*.js"
+      "./internals": {
+        "types": "./dist/cli/utilities.d.ts",
+        "import": "./dist/cli/utilities.js"
       }
     }
   }

@@ -7,7 +7,7 @@ import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { getPairing } from './pair.ts';
 import { hideBin } from 'yargs/helpers';
-import { logger } from '@whatcode-ai/sdk/internals/logger';
+import { logger } from '@whatcode-ai/sdk/internals';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
 

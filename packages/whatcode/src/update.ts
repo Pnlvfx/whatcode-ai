@@ -1,7 +1,4 @@
-import { WHATCODE_ROOT } from '@whatcode-ai/sdk/internals/config/constants';
-import { createStore2 } from '@whatcode-ai/sdk/internals/compiled/store/store2';
-import { logger } from '@whatcode-ai/sdk/internals/logger';
-import { parseError } from '@whatcode-ai/sdk/internals/compiled/core/error';
+import { WHATCODE_ROOT, createStore2, parseError, logger } from '@whatcode-ai/sdk/internals';
 import semver from 'semver';
 import * as z from 'zod/v4/mini';
 import pkgJson from '../package.json' with { type: 'json' };

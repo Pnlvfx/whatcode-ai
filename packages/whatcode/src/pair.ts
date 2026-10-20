@@ -1,5 +1,4 @@
-import { getPassword } from '@whatcode-ai/sdk/internals/stores/password';
-import { getDaemonUrl } from '@whatcode-ai/sdk/internals/stores/daemon-url';
+import { getPassword, getDaemonUrl } from '@whatcode-ai/sdk/internals';
 
 export const getPairing = async () => {
   const [password, url] = await Promise.all([getPassword(), getDaemonUrl()]);
