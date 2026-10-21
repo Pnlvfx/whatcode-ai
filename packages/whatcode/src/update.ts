@@ -17,7 +17,7 @@ export const checkForUpdate = async (currentVersion: string) => {
     logger.error('version-check', error.message, error);
   } else {
     if (!semver.gt(latest.version, currentVersion)) return;
-    logger.warn('whatcode', `update available: v${currentVersion} -> v${latest.version} — run \`npm i -g ${pkgJson.name}@latest\` to update`);
+    logger.warn('whatcode', `update available: v${currentVersion} -> v${latest.version} — run \`whatcode update\` to update`);
   }
 };
 

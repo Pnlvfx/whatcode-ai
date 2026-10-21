@@ -38,12 +38,12 @@
     "@whatcode-ai/whatcode": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.2",
-    "@commitlint/config-conventional": "^21.2.2",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
     "@eslint/config-helpers": "^0.7.0",
     "@goatjs/dbz": "^2.90.0",
     "@goatjs/doctor": "^2.66.0",
-    "@goatjs/node-monorepo-eslint": "^3.42.0",
+    "@goatjs/node-monorepo-eslint": "^3.43.0",
     "lefthook": "^2.2.2",
     "prettier": "^3.9.10",
     "turbo": "^2.11.9",
