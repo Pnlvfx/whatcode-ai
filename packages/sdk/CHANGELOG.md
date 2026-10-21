@@ -1,3 +1,18 @@
+## [2.5.0](compare/%40whatcode-ai%2Fsdk%402.4.0...%40whatcode-ai%2Fsdk%402.5.0) "@whatcode-ai/sdk" (2026-10-21)
+
+### ⚠ BREAKING CHANGES
+
+* password is now required, start no longer prints the QR code, use whatcode pair
+
+### Features
+
+* require a password and add the pair command 2bbc1cd
+* **sdk:** add bun support adef585
+
+### Bug Fixes
+
+* wrong status code on pair f5a3490
+
 ## [2.4.0](compare/%40whatcode-ai%2Fsdk%402.3.0...%40whatcode-ai%2Fsdk%402.4.0) "@whatcode-ai/sdk" (2026-10-19)
 
 ### Bug Fixes

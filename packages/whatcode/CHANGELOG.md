@@ -1,3 +1,14 @@
+## [2.5.0](compare/%40whatcode-ai%2Fwhatcode%402.4.0...%40whatcode-ai%2Fwhatcode%402.5.0) "@whatcode-ai/whatcode" (2026-10-21)
+
+### ⚠ BREAKING CHANGES
+
+* password is now required, start no longer prints the QR code, use whatcode pair
+
+### Features
+
+* add update command on cli ac667ca
+* require a password and add the pair command 2bbc1cd
+
 ## [2.4.0](compare/%40whatcode-ai%2Fwhatcode%402.3.0...%40whatcode-ai%2Fwhatcode%402.4.0) "@whatcode-ai/whatcode" (2026-10-19)
 
 ## [2.3.0](compare/%40whatcode-ai%2Fwhatcode%402.2.0...%40whatcode-ai%2Fwhatcode%402.3.0) "@whatcode-ai/whatcode" (2026-10-17)
