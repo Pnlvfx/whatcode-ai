@@ -20,7 +20,6 @@ export const parseError = (err: unknown) => {
 
 const errorToString = (err: unknown) => {
   let error = '';
-  // eslint-disable-next-line goatjs/no-in-checks
   if (typeof err === 'object' && err !== null && 'message' in err && typeof err.message === 'string') {
     error = err.message;
   } else if (typeof err === 'string') {
