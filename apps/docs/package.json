@@ -30,7 +30,6 @@
   "dependencies": {
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "^3.10.2",
-    "@docusaurus/plugin-vercel-analytics": "^3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
@@ -45,7 +44,7 @@
     "@goatjs/dbz": "^2.90.0",
     "@goatjs/rimraf": "^2.15.0",
     "@types/react": "^19.3.0",
-    "execa": "^10.2.0",
+    "execa": "^10.2.1",
     "typescript": "^6.0.3",
     "vercel": "^64.5.0"
   },

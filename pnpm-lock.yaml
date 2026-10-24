@@ -250,8 +250,8 @@ importers:
         specifier: ^19.3.0
         version: 19.3.0
       execa:
-        specifier: ^10.2.0
-        version: 10.2.0
+        specifier: ^10.2.1
+        version: 10.2.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -299,8 +299,8 @@ importers:
         specifier: ^1.4.5
         version: 1.4.5(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.2.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
       '@opencode/client':
-        specifier: ^2.1.3
-        version: 2.1.3(effect@4.0.1)
+        specifier: ^2.1.4
+        version: 2.1.4(effect@4.0.1)
       '@sinclair/typebox':
         specifier: ^0.34.52
         version: 0.34.52
@@ -308,8 +308,8 @@ importers:
         specifier: ^1.4.29
         version: 1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.2.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
       execa:
-        specifier: ^10.2.0
-        version: 10.2.0
+        specifier: ^10.2.1
+        version: 10.2.1
       exit-hook:
         specifier: ^5.1.0
         version: 5.1.0
@@ -357,8 +357,8 @@ importers:
         specifier: workspace:*
         version: link:../sdk
       execa:
-        specifier: ^10.2.0
-        version: 10.2.0
+        specifier: ^10.2.1
+        version: 10.2.1
       qrcode-terminal:
         specifier: ^0.12.0
         version: 0.12.0
@@ -2476,8 +2476,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@opencode/client@2.1.3':
-    resolution: {integrity: sha512-7hj4Z4TtszUTmpM7BSIssAYMO3dfcu9c5mHwpC0nDGQImkdSo6mTcNnjtSt0I9v6yjiz3vuQNCOChg0z7Ccyyw==}
+  '@opencode/client@2.1.4':
+    resolution: {integrity: sha512-xNHP8Xu4wcq4G849Xnbb8IxYxMTzF0TqvohWVUQZH5aURrVHIIbHMfXbZY6s4i4C9kpVbwjXFFwWAo6KIK3oiw==}
     peerDependencies:
       effect: 4.0.1
       solid-js: '>=1.9.0'
@@ -2487,11 +2487,11 @@ packages:
       solid-js:
         optional: true
 
-  '@opencode/protocol@2.1.3':
-    resolution: {integrity: sha512-OAaP6aaemBJVda3gYSgMPxmOmlMvlDtqCfUYtS1KN7pMAGb973qZ6a3u4ATg9LJuiIyR96ydBdbwB+c9JbB0gQ==}
+  '@opencode/protocol@2.1.4':
+    resolution: {integrity: sha512-dnifgvY6p4xdHkXRH3PEaobfCqrHb1AhihKxPNRNkGn5SueRCFCfK2pZW1GkeC36fGCmcLxlfihuIMaQL1BVzA==}
 
-  '@opencode/schema@2.1.3':
-    resolution: {integrity: sha512-TsAKqJvdyGgYR8XlbGBu2SAl23Czf92z1U2RD95O72lf78qUCBYbaHoN0gNZz5K6RdKiv7yI1h1zk2nk4nWSPw==}
+  '@opencode/schema@2.1.4':
+    resolution: {integrity: sha512-PLr8eFW81Yz6U7YsSgfSUClUUH//8omh3HiXu/L08VX5arorWNAu2uSjoXyHIGkm7TaTbdXBGPmmDfpvrDM2wQ==}
 
   '@oxc-parser/binding-android-arm-eabi@0.121.0':
     resolution: {integrity: sha512-n07FQcySwOlzap424/PLMtOkbS7xOu8nsJduKL8P3COGHKgKoDYXwoAHCbChfgFpHnviehrLWIPX0lKGtbEk/A==}
@@ -5506,8 +5506,8 @@ packages:
       typebox:
         optional: true
 
-  execa@10.2.0:
-    resolution: {integrity: sha512-j1pFOVxaybMVCTNHSBuISL2KQcDS3KIE1wBmUp4n2X+1FgaQI2ZDJVy9TYxDyMCzYojRIMh9O8X/UoWZtxTJdw==}
+  execa@10.2.1:
+    resolution: {integrity: sha512-/Bofl3ZBh2Q4/PG0W63qFzP5vDAypi8Zc90UWTBzaDNIYiX7apPOd0N6L8hG8CojUdq4V51adu8BObP+iVsSTw==}
     engines: {node: '>=22'}
 
   execa@3.2.0:
@@ -11934,7 +11934,7 @@ snapshots:
       '@inquirer/prompts': 8.7.3(@types/node@26.6.5)
       conventional-changelog: 8.1.3
       conventional-changelog-conventionalcommits: 10.4.1
-      execa: 10.2.0
+      execa: 10.2.1
       sort-package-json: 4.1.0
       typescript: 6.0.3
       yargs: 18.2.0
@@ -11948,7 +11948,7 @@ snapshots:
       '@goatjs/core': 2.44.0
       '@goatjs/rimraf': 2.15.0
       babel-plugin-react-compiler: 0.0.0-experimental-a1856f3-20260507
-      execa: 10.2.0
+      execa: 10.2.1
       knip: 6.41.0
       yargs: 18.2.0
       zod: 4.6.7
@@ -12484,19 +12484,19 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.3
 
-  '@opencode/client@2.1.3(effect@4.0.1)':
+  '@opencode/client@2.1.4(effect@4.0.1)':
     dependencies:
-      '@opencode/protocol': 2.1.3
-      '@opencode/schema': 2.1.3
+      '@opencode/protocol': 2.1.4
+      '@opencode/schema': 2.1.4
     optionalDependencies:
       effect: 4.0.1
 
-  '@opencode/protocol@2.1.3':
+  '@opencode/protocol@2.1.4':
     dependencies:
-      '@opencode/schema': 2.1.3
+      '@opencode/schema': 2.1.4
       effect: 4.0.1
 
-  '@opencode/schema@2.1.3':
+  '@opencode/schema@2.1.4':
     dependencies:
       '@standard-schema/spec': 1.1.0
       effect: 4.0.1
@@ -15582,7 +15582,7 @@ snapshots:
 
   exact-mirror@1.2.6: {}
 
-  execa@10.2.0:
+  execa@10.2.1:
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
       figures: 6.1.0
