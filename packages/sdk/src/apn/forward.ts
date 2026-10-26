@@ -2,7 +2,7 @@ import { relayClient } from '../auth/client.ts';
 import { logger } from '../logger.ts';
 import { getAccounts } from '../stores/accounts.ts';
 
-type NotificationEvent = 'session.idle' | 'permission.asked' | 'session.error';
+type NotificationEvent = 'session.execution.succeeded' | 'permission.asked' | 'form.created' | 'session.execution.failed';
 
 interface RelayMeta {
   readonly sessionID: string;

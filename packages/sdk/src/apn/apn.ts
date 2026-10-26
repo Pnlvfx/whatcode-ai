@@ -1,4 +1,4 @@
-import type { SessionMessageAssistant, V2Event, PermissionAsked, SessionExecutionFailed } from '@opencode/client';
+import type { SessionMessageAssistant, V2Event, PermissionAsked, SessionExecutionFailed, FormCreated } from '@opencode/client';
 import type { WhatCodeClient } from '../opencode/client.ts';
 import { setTimeout } from 'node:timers/promises';
 import { forwardToRelay } from './forward.ts';
@@ -9,6 +9,9 @@ import { logger } from '../logger.ts';
 
 // How long to wait for another client to mark a finished session as viewed before pushing
 const VIEWED_GRACE_MS = 4000;
+
+// permission and form requests still waiting for an answer, removed when replied/cancelled or when the grace period ends
+const pendingRequests = new Set<string>();
 
 export const startNotifications = (client: WhatCodeClient): void => {
   const getModel = async (assistantMessage: SessionMessageAssistant) => {
@@ -49,7 +52,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const forwardResult = await forwardToRelay({
       title,
       body,
-      event: 'session.idle',
+      event: 'session.execution.succeeded',
       sessionID,
       projectID: session.projectID,
       directory: session.location.directory,
@@ -59,16 +62,16 @@ export const startNotifications = (client: WhatCodeClient): void => {
     }
   };
 
-  const handlePermissionAsked = async ({ sessionID, action, resources }: PermissionAsked['data']): Promise<void> => {
-    const loggerName = 'notifications:permission.asked';
-    logger.debug(loggerName, `permission.asked event received for session ${sessionID}, action=${action}`);
+  const forwardBlocked = async (sessionID: string, event: 'permission.asked' | 'form.created', text: string): Promise<void> => {
+    const loggerName = `notifications:${event}`;
+    logger.debug(loggerName, `${event} event received for session ${sessionID}`);
     const { data: session, error } = await client.session.get({ sessionID });
     if (error) {
       logger.error(loggerName, error.message);
       return;
     }
     if (session.parentID) {
-      logger.debug(loggerName, `skipping permission.asked for subagent session ${sessionID}`);
+      logger.debug(loggerName, `skipping ${event} for subagent session ${sessionID}`);
       return;
     }
 
@@ -82,12 +85,11 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const assistantMessages = messages.filter((m) => m.type === 'assistant');
     const last = assistantMessages.at(-1);
     const model = last ? await getModel(last) : undefined;
-    const text = `needs permission to ${action} ${resources.join(', ')}`;
-    logger.debug('notifications', `forwarding permission.asked: title=${title}`);
+    logger.debug('notifications', `forwarding ${event}: title=${title}`);
     const forwardResult = await forwardToRelay({
       title,
       body: trim(`${model?.name ?? 'Agent'} ${text}`),
-      event: 'permission.asked',
+      event,
       sessionID,
       projectID: session.projectID,
       directory: session.location.directory,
@@ -95,6 +97,14 @@ export const startNotifications = (client: WhatCodeClient): void => {
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
     }
+  };
+
+  const handlePermissionAsked = ({ sessionID, action, resources }: PermissionAsked['data']): Promise<void> => {
+    return forwardBlocked(sessionID, 'permission.asked', `needs permission to ${action} ${resources.join(', ')}`);
+  };
+
+  const handleFormCreated = ({ form }: FormCreated['data']): Promise<void> => {
+    return forwardBlocked(form.sessionID, 'form.created', `asks: ${form.title}`);
   };
 
   const handleSessionError = async ({ sessionID, error }: SessionExecutionFailed['data']): Promise<void> => {
@@ -119,7 +129,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const forwardResult = await forwardToRelay({
       title,
       body,
-      event: 'session.error',
+      event: 'session.execution.failed',
       sessionID,
       projectID: sessionResult.data.projectID,
       directory: sessionResult.data.location.directory,
@@ -152,7 +162,37 @@ export const startNotifications = (client: WhatCodeClient): void => {
     }
   };
 
-  registerEventHandler(async (event: V2Event): Promise<void> => {
+  const isViewedSince = async (sessionID: string, created: number): Promise<boolean> => {
+    const { data: session, error } = await client.session.get({ sessionID });
+    if (error) {
+      logger.error('notifications', error.message);
+      return false;
+    }
+    const { viewed } = session.time;
+    return viewed !== undefined && viewed >= created;
+  };
+
+  const notifyIfStillBlocked = async (
+    { requestID, sessionID, created }: { requestID: string; sessionID: string; created: number },
+    notify: () => Promise<void>,
+  ): Promise<void> => {
+    try {
+      await setTimeout(VIEWED_GRACE_MS);
+      if (!pendingRequests.delete(requestID)) {
+        logger.debug('notifications', `skipping push for request ${requestID}, already answered`);
+        return;
+      }
+      if (await isViewedSince(sessionID, created)) {
+        logger.debug('notifications', `skipping push for request ${requestID}, session ${sessionID} already viewed by another client`);
+        return;
+      }
+      await notify();
+    } catch (err) {
+      logger.error('notifications', `delayed push failed for request ${requestID}`, err);
+    }
+  };
+
+  registerEventHandler((event: V2Event): void => {
     switch (event.type) {
       case 'session.execution.succeeded': {
         const { sessionID } = event.data;
@@ -161,7 +201,26 @@ export const startNotifications = (client: WhatCodeClient): void => {
         break;
       }
       case 'permission.asked': {
-        await handlePermissionAsked(event.data);
+        const { id, sessionID } = event.data;
+        pendingRequests.add(id);
+        // not awaited on purpose: same reason as the succeeded case
+        void notifyIfStillBlocked({ requestID: id, sessionID, created: event.created }, () => handlePermissionAsked(event.data));
+        break;
+      }
+      case 'permission.replied': {
+        pendingRequests.delete(event.data.requestID);
+        break;
+      }
+      case 'form.created': {
+        const { id, sessionID } = event.data.form;
+        pendingRequests.add(id);
+        // not awaited on purpose: same reason as the succeeded case
+        void notifyIfStillBlocked({ requestID: id, sessionID, created: event.created }, () => handleFormCreated(event.data));
+        break;
+      }
+      case 'form.replied':
+      case 'form.cancelled': {
+        pendingRequests.delete(event.data.id);
         break;
       }
       case 'session.execution.failed': {
