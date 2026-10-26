@@ -124,15 +124,6 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   },
-  plugins: [
-    [
-      'vercel-analytics',
-      {
-        debug: false,
-        mode: 'production',
-      },
-    ],
-  ],
 };
 
 export default config;
