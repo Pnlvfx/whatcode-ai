@@ -186,8 +186,8 @@ importers:
         specifier: ^2.67.0
         version: 2.67.0(supports-color@8.1.1)
       '@goatjs/node-monorepo-eslint':
-        specifier: ^3.44.0
-        version: 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+        specifier: ^3.45.0
+        version: 3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       lefthook:
         specifier: ^2.2.2
         version: 2.2.2
@@ -269,8 +269,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/node-monorepo-eslint':
-        specifier: ^3.44.0
-        version: 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+        specifier: ^3.45.0
+        version: 3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -296,8 +296,8 @@ importers:
         specifier: ^1.4.5
         version: 1.4.5(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.2.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
       '@opencode/client':
-        specifier: ^2.1.4
-        version: 2.1.4(effect@4.0.1)
+        specifier: ^2.2.0
+        version: 2.2.0(effect@4.0.1)
       '@sinclair/typebox':
         specifier: ^0.34.52
         version: 0.34.52
@@ -327,8 +327,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/node-monorepo-eslint':
-        specifier: ^3.44.0
-        version: 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+        specifier: ^3.45.0
+        version: 3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -373,8 +373,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/node-monorepo-eslint':
-        specifier: ^3.44.0
-        version: 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+        specifier: ^3.45.0
+        version: 3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -2026,11 +2026,11 @@ packages:
     resolution: {integrity: sha512-WTH1QT7rCIBdxW16jtQUi+YBaG5/2lPqe4BuocXF/lFlBqxLVjhEqNEBMVnyXxqji66rwBBGcn6PedjNLa93aA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/doctor/-/@goatjs/doctor-2.67.0.tgz}
     hasBin: true
 
-  '@goatjs/node-eslint@3.44.0':
-    resolution: {integrity: sha512-GWEEwNBOD9MqifybXonDXt1Tp9lz4/VnnAUb6xVP8xQ6l+KCyaIR0jNJV/XqlGcKO5TEXApkN5zJjQKBGNMGWw==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/node-eslint/-/@goatjs/node-eslint-3.44.0.tgz}
+  '@goatjs/node-eslint@3.45.0':
+    resolution: {integrity: sha512-Rv8RWHgQL4uorU0s2wMIzsruA1W9R0h+m/XEtdbRu/tzp/HQgBMtbEUh/OH1s4OAFO6ExLJ9UznT5skTgSOaVw==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/node-eslint/-/@goatjs/node-eslint-3.45.0.tgz}
 
-  '@goatjs/node-monorepo-eslint@3.44.0':
-    resolution: {integrity: sha512-Csmm2ooIPpIKI4c3uDy/DMFfGfJJgmwqnbELp8vU4n+OMdmx/gjf6iB7JcX6vqPajYBsMIy2b1A3TveCAhS/wg==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/node-monorepo-eslint/-/@goatjs/node-monorepo-eslint-3.44.0.tgz}
+  '@goatjs/node-monorepo-eslint@3.45.0':
+    resolution: {integrity: sha512-RroWf7O7nWz5TLKqB+Eb+IarVFhY5RrhY4iLF1aSCsWcMLiUu5HkIkjzWl7N2j3PxanKJrQcOJom2S+suiTMhQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/node-monorepo-eslint/-/@goatjs/node-monorepo-eslint-3.45.0.tgz}
 
   '@goatjs/node@2.39.0':
     resolution: {integrity: sha512-J11AbfYl6bVX+3Tgd1YW9q8jTSAJrwE0T1wqLOiXxs9AQEedyhhCABfLpPAdYVYd+3o3c4C1ubVgazwF7jg3yQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/node/-/@goatjs/node-2.39.0.tgz}
@@ -2519,8 +2519,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@opencode/client@2.1.4':
-    resolution: {integrity: sha512-xNHP8Xu4wcq4G849Xnbb8IxYxMTzF0TqvohWVUQZH5aURrVHIIbHMfXbZY6s4i4C9kpVbwjXFFwWAo6KIK3oiw==}
+  '@opencode/client@2.2.0':
+    resolution: {integrity: sha512-gus2XLaUcGh3ERH+OnOqEO6K379cS9DFNPOgWr8OTM2VM+zn8b4Qe+dgfyysTayv1BpMMlILsRG4eKlDSuyYWQ==}
     peerDependencies:
       effect: 4.0.1
       solid-js: '>=1.9.0'
@@ -2530,11 +2530,11 @@ packages:
       solid-js:
         optional: true
 
-  '@opencode/protocol@2.1.4':
-    resolution: {integrity: sha512-dnifgvY6p4xdHkXRH3PEaobfCqrHb1AhihKxPNRNkGn5SueRCFCfK2pZW1GkeC36fGCmcLxlfihuIMaQL1BVzA==}
+  '@opencode/protocol@2.2.0':
+    resolution: {integrity: sha512-bvZGwEU0WVgHXzDOsbmUluMWSCQZw6NVKNI+dGjNynxVWRvvpFJ+GA1wDiBkaAwx7dJ6FOH3SO3kNCJlPu2kOA==}
 
-  '@opencode/schema@2.1.4':
-    resolution: {integrity: sha512-PLr8eFW81Yz6U7YsSgfSUClUUH//8omh3HiXu/L08VX5arorWNAu2uSjoXyHIGkm7TaTbdXBGPmmDfpvrDM2wQ==}
+  '@opencode/schema@2.2.0':
+    resolution: {integrity: sha512-oyj1xiSnGA/Gwmqyk3MUVOwleozuT1Lt/x7eErhvNO0lyq2xhONnu7mK+riV98uMbD6+GxGWQV369gmpO9fAkQ==}
 
   '@oxc-parser/binding-android-arm-eabi@0.121.0':
     resolution: {integrity: sha512-n07FQcySwOlzap424/PLMtOkbS7xOu8nsJduKL8P3COGHKgKoDYXwoAHCbChfgFpHnviehrLWIPX0lKGtbEk/A==}
@@ -4245,6 +4245,11 @@ packages:
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
 
   ajv-keywords@3.5.2:
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
@@ -12168,7 +12173,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@goatjs/node-eslint@3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)':
+  '@goatjs/node-eslint@3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)':
     dependencies:
       '@goatjs/core-eslint': 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       globals: 17.13.0
@@ -12180,10 +12185,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@goatjs/node-monorepo-eslint@3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)':
+  '@goatjs/node-monorepo-eslint@3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)':
     dependencies:
       '@goatjs/core-eslint': 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
-      '@goatjs/node-eslint': 3.44.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+      '@goatjs/node-eslint': 3.45.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.13.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
     transitivePeerDependencies:
       - '@eslint/json'
       - eslint
@@ -12699,19 +12704,19 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.3
 
-  '@opencode/client@2.1.4(effect@4.0.1)':
+  '@opencode/client@2.2.0(effect@4.0.1)':
     dependencies:
-      '@opencode/protocol': 2.1.4
-      '@opencode/schema': 2.1.4
+      '@opencode/protocol': 2.2.0
+      '@opencode/schema': 2.2.0
     optionalDependencies:
       effect: 4.0.1
 
-  '@opencode/protocol@2.1.4':
+  '@opencode/protocol@2.2.0':
     dependencies:
-      '@opencode/schema': 2.1.4
+      '@opencode/schema': 2.2.0
       effect: 4.0.1
 
-  '@opencode/schema@2.1.4':
+  '@opencode/schema@2.2.0':
     dependencies:
       '@standard-schema/spec': 1.1.0
       effect: 4.0.1
