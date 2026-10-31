@@ -8,7 +8,9 @@ import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
 import { MIN_APP_VERSION } from './config/constants.ts';
 import { createProjectRouterOverride } from './routes/project.ts';
+import { createGitRouter } from './routes/git.ts';
 import { getAdapter } from './adapters/adapter.ts';
+import { attachPtyUpgradeProxy } from './pty-proxy.ts';
 import pkgJson from '../package.json' with { type: 'json' };
 
 interface Params {
@@ -21,6 +23,7 @@ interface Params {
 export const startWhatcode = async ({ port, endpoint, password, client }: Params) => {
   const ocHeaders = Service.headers(endpoint);
   const projectRouter = createProjectRouterOverride(client);
+  const gitRouter = createGitRouter(client);
 
   return (
     new Elysia({ adapter: await getAdapter() })
@@ -34,6 +37,7 @@ export const startWhatcode = async ({ port, endpoint, password, client }: Params
       .use(userRouter)
       .use(sessionRouter)
       .use(projectRouter)
+      .use(gitRouter)
       .all(
         '/*',
         async ({ request, set }) => {
@@ -64,6 +68,6 @@ export const startWhatcode = async ({ port, endpoint, password, client }: Params
         },
         { parse: 'none' },
       )
-      .listen(port)
+      .listen(port, attachPtyUpgradeProxy(endpoint.url))
   );
 };
