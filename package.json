@@ -43,11 +43,11 @@
     "@eslint/config-helpers": "^0.7.0",
     "@goatjs/dbz": "^2.91.0",
     "@goatjs/doctor": "^2.67.0",
-    "@goatjs/node-monorepo-eslint": "^3.45.0",
+    "@goatjs/node-monorepo-eslint": "^3.46.0",
     "lefthook": "^2.2.2",
     "prettier": "^3.9.10",
     "turbo": "^2.11.10",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.16.1"
 }
