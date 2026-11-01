@@ -1,3 +1,5 @@
+## [2.6.0](compare/%40whatcode-ai%2Fwhatcode%402.5.0...%40whatcode-ai%2Fwhatcode%402.6.0) "@whatcode-ai/whatcode" (2026-11-01)
+
 ## [2.5.0](compare/%40whatcode-ai%2Fwhatcode%402.4.0...%40whatcode-ai%2Fwhatcode%402.5.0) "@whatcode-ai/whatcode" (2026-10-21)
 
 ### ⚠ BREAKING CHANGES

@@ -1,3 +1,14 @@
+## [2.6.0](compare/%40whatcode-ai%2Fsdk%402.5.0...%40whatcode-ai%2Fsdk%402.6.0) "@whatcode-ai/sdk" (2026-11-01)
+
+### ⚠ BREAKING CHANGES
+
+* rename apn events, add question event notifications, do not forward on viewed sessions
+
+### Features
+
+* **experimental:** add pty and git capabilities b1c7005
+* rename apn events, add question event notifications, do not forward on viewed sessions d9f49bd
+
 ## [2.5.0](compare/%40whatcode-ai%2Fsdk%402.4.0...%40whatcode-ai%2Fsdk%402.5.0) "@whatcode-ai/sdk" (2026-10-21)
 
 ### ⚠ BREAKING CHANGES
