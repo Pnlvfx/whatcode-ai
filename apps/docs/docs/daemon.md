@@ -180,6 +180,49 @@ The URL is reachable from the internet, so the daemon password is the only thing
 
 `--tunnel` cannot be combined with `--tailscale`: the daemon exits with an error if both are enabled, including when one of them comes from the global config.
 
+## Global config
+
+Instead of repeating the same flags on every start, you can save your defaults in `~/.whatcode/config.json`. The file is optional: if it does not exist, the daemon behaves as if it were empty.
+
+```json
+{
+  "tailscale": true,
+  "port": 8192,
+  "logLevel": "debug"
+}
+```
+
+| Key         | Type                          | Description                                                          |
+| ----------- | ----------------------------- | -------------------------------------------------------------------- |
+| `tailscale` | `boolean`                     | Same as `--tailscale`.                                               |
+| `tunnel`    | `boolean`                     | Same as `--tunnel`.                                                  |
+| `port`      | `number`                      | Same as `--port`. Must be an integer between `1` and `65535`.        |
+| `logLevel`  | `'none' \| 'info' \| 'debug'` | Same as `--log-level`.                                               |
+
+All keys are optional. The config applies both to the CLI and to `createWhatcodeServer`.
+
+### Precedence
+
+Each setting is resolved in this order:
+
+1. The flag (CLI) or option (library) you pass explicitly.
+2. The value in `config.json`.
+3. The built-in default (`8192` for the port, `info` for the CLI log level, `none` for the SDK log level).
+
+### Validation
+
+The file is validated strictly: unknown keys and invalid values are rejected. If the file cannot be loaded, the daemon does not start and prints `Unable to load the global config (<path>): <reason>`.
+
+### Overriding the config
+
+To turn off a boolean setting for a single run, negate the flag:
+
+```bash
+npx @whatcode-ai/whatcode start --no-tunnel
+```
+
+`--tailscale` and `--tunnel` cannot be passed together, not even in negated form, so you cannot switch from a config that enables `tunnel` to Tailscale with flags alone (and the other way around). Edit `config.json` instead, or turn the config value off first.
+
 ## Resetting the daemon
 
 If notifications stop working or device pairings get into a bad state, you can reset the daemon's stored data. This clears all paired devices and the stored notification state. After resetting, open the app and reconnect to pair your device again.
@@ -210,6 +253,8 @@ await resetWhatcodeServer();
 | `password`  | `string`                      | `undefined` | Password for HTTP Basic Auth on all daemon endpoints. If omitted, a random one is generated and stored encrypted. |
 | `logLevel`  | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
+Omitted `port`, `tailscale`, `tunnel` and `logLevel` values fall back to the [global config](#global-config), then to the defaults above.
+
 ### `resetWhatcodeServer()`
 
 Clears all paired devices and the stored notification state. Use this if notifications stop working or if you need to unlink all devices from this machine.
@@ -229,6 +274,8 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 | `--tunnel`    | `boolean`                     | -       | Expose via an OpenTunnel public HTTPS URL. Conflicts with `--tailscale`. |
 | `--log-level` | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                          |
 | `--version`   | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit. |
+
+Flags take precedence over the same setting in the [global config](#global-config).
 
 **Environment variables**
 
