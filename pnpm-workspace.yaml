@@ -25,6 +25,7 @@ allowBuilds:
   '@swc/core': true
   core-js: true
   esbuild: true
+  koffi: false
   lefthook: true
   msgpackr-extract: true
   unrs-resolver: true

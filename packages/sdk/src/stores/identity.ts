@@ -11,6 +11,7 @@ const identitySchema = z.strictObject({
   machineId: z.string(),
   daemon: z.string(),
   tailscale: z.optional(z.string()),
+  tunnel: z.optional(z.string()),
 });
 
 const identityStore = createStore2('identity', identitySchema, { persist: false, directory: '' });
@@ -28,8 +29,8 @@ export const getIdentity = async () => {
   return identity.data ? { data: identity.data } : { error: { type: 'identity-init' as const, message: 'Identity not initialized!' } };
 };
 
-export const createIdentity = async ({ daemon, tailscale }: Pick<DaemonIdentity, 'daemon' | 'tailscale'>) => {
-  return identityStore.set({ name: identityName, machineId, daemon, tailscale });
+export const createIdentity = async ({ daemon, tailscale, tunnel }: Pick<DaemonIdentity, 'daemon' | 'tailscale' | 'tunnel'>) => {
+  return identityStore.set({ name: identityName, machineId, daemon, tailscale, tunnel });
 };
 
 export type DaemonIdentity = z.infer<typeof identitySchema>;

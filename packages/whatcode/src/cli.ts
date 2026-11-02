@@ -7,7 +7,7 @@ import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { getPairing } from './pair.ts';
 import { hideBin } from 'yargs/helpers';
-import { logger } from '@whatcode-ai/sdk/internals';
+import { getGlobalConfig, logger } from '@whatcode-ai/sdk/internals';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
 
@@ -22,19 +22,28 @@ await yargs(hideBin(process.argv))
     'Start WhatCode',
     (y) =>
       y
-        .option('tailscale', { type: 'boolean', description: 'Expose WhatCode via Tailscale serve (HTTPS on your tailnet)' })
+        .option('tailscale', { type: 'boolean', conflicts: 'tunnel', description: 'Expose WhatCode via Tailscale serve (HTTPS on your tailnet)' })
+        .option('tunnel', { type: 'boolean', description: 'Expose WhatCode via an OpenTunnel public HTTPS address' })
         .option('port', { type: 'number', description: 'Port for the WhatCode server (default: 8192)' })
         .option('log-level', {
           type: 'string',
           choices: ['none', 'info', 'debug'] as const,
-          default: 'info' as const,
           description: 'Log level: none | info | debug (default: info)',
         }),
-    async ({ logLevel, tailscale, port }) => {
+    async ({ logLevel, tailscale, tunnel, port }) => {
+      const globalConfig = await getGlobalConfig();
+      if (globalConfig.error) {
+        logger.init({ logLevel: 'info' });
+        logger.error('whatcode', globalConfig.error.message, globalConfig.error);
+        process.exitCode = 1;
+        return;
+      }
+
       const server = await createWhatcodeServer({
         tailscale,
+        tunnel,
         ...(port !== undefined && { port }),
-        logLevel,
+        logLevel: logLevel ?? globalConfig.data.logLevel ?? 'info',
         ...(config.WHATCODE_PASSWORD !== undefined && { password: config.WHATCODE_PASSWORD }),
       });
 

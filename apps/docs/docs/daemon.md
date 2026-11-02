@@ -62,6 +62,7 @@ When you run the daemon:
 2. It starts a WhatCode server on port `8192` that sits in front of OpenCode, patching responses to improve the mobile experience.
 3. It resolves the password: your `WHATCODE_PASSWORD` if set, otherwise the stored one, otherwise a newly generated one.
 4. If `--tailscale` is passed, it also exposes a secure HTTPS URL on your tailnet (your private Tailscale network).
+5. If `--tunnel` is passed, it instead exposes a public HTTPS URL through an [OpenTunnel](https://github.com/anomalyco/opentunnel) tunnel. `--tailscale` and `--tunnel` are mutually exclusive.
 
 Run `whatcode pair` in another terminal to print the URL, password and QR code for the app.
 
@@ -159,6 +160,26 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 - [Tailscale](https://tailscale.com) installed and authenticated (`tailscale up`)
 - The same Tailscale account logged in on your iPhone, with Tailscale connected whenever you use the app remotely
 
+## Tunnel
+
+Passing `--tunnel` exposes the daemon through an [OpenTunnel](https://github.com/anomalyco/opentunnel) tunnel, the same technology behind `opencode pair --remote`. Unlike `opencode pair --remote`, the tunnel points at the WhatCode server instead of plain OpenCode, so you keep push notifications and the rest of the daemon features:
+
+```bash
+npx @whatcode-ai/whatcode start --tunnel
+```
+
+The daemon gets a public HTTPS URL (e.g. `https://<id>.opentunnel.xyz`) that is included in the QR code printed by `whatcode pair`. TLS terminates on your machine, so the relay never sees your traffic. The tunnel runs inside the daemon, so there is nothing extra to install, and it uses its own `whatcode` profile, separate from the tunnel OpenCode uses for its own remote access. When you stop the daemon (Ctrl+C), the tunnel is closed automatically.
+
+### Requirements
+
+- An internet connection. The first run creates the tunnel and stores its credentials locally in the OpenTunnel data directory.
+
+### Security
+
+The URL is reachable from the internet, so the daemon password is the only thing protecting it. Keep it secret, and run `whatcode reset` to generate a new one if it leaks.
+
+`--tunnel` cannot be combined with `--tailscale`: the daemon exits with an error if both are enabled, including when one of them comes from the global config.
+
 ## Resetting the daemon
 
 If notifications stop working or device pairings get into a bad state, you can reset the daemon's stored data. This clears all paired devices and the stored notification state. After resetting, open the app and reconnect to pair your device again.
@@ -185,6 +206,7 @@ await resetWhatcodeServer();
 | ----------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
 | `port`      | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
 | `tailscale` | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
+| `tunnel`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over a public HTTPS URL via OpenTunnel. Cannot be combined with `tailscale`.        |
 | `password`  | `string`                      | `undefined` | Password for HTTP Basic Auth on all daemon endpoints. If omitted, a random one is generated and stored encrypted. |
 | `logLevel`  | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
@@ -203,7 +225,8 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 | Flag          | Type                          | Default | Description                                                      |
 | ------------- | ----------------------------- | ------- | ---------------------------------------------------------------- |
 | `--port`      | `number`                      | `8192`  | Port for the WhatCode server.                                    |
-| `--tailscale` | `boolean`                     | -       | Expose via Tailscale HTTPS.                                      |
+| `--tailscale` | `boolean`                     | -       | Expose via Tailscale HTTPS. Conflicts with `--tunnel`.           |
+| `--tunnel`    | `boolean`                     | -       | Expose via an OpenTunnel public HTTPS URL. Conflicts with `--tailscale`. |
 | `--log-level` | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                          |
 | `--version`   | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit. |
 

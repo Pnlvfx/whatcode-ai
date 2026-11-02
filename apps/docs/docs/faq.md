@@ -26,11 +26,11 @@ Run the [WhatCode daemon](/daemon) on your machine and pair it with the app. The
 
 ## Can I use OpenCode from my phone when I'm away from home?
 
-Yes. Start the daemon with the `--tailscale` flag to connect securely from anywhere. See [Daemon](/daemon#tailscale) for the details.
+Yes. Start the daemon with the `--tailscale` flag to connect securely from anywhere, or with `--tunnel` to use a public HTTPS URL through OpenTunnel if you don't use Tailscale. The two flags cannot be combined. See [Daemon](/daemon#tailscale) and [Daemon](/daemon#tunnel) for the details.
 
 ## Does my code leave my machine?
 
-WhatCode connects directly to the OpenCode server running on your machine, and your code and conversations do not pass through WhatCode's servers. OpenCode itself sends your prompts and code context to the model provider you configured, which is outside WhatCode's control. The push relay only receives what is needed to deliver a notification: the project or session name, a short snippet of the last response or error, and the event type. The [Privacy Policy](/policies/privacy-policy) lists exactly what it handles.
+WhatCode connects directly to the OpenCode server running on your machine, and your code and conversations do not pass through WhatCode's servers. If you use `--tunnel`, the encrypted traffic is relayed by OpenTunnel, which cannot read it because TLS terminates on your machine. OpenCode itself sends your prompts and code context to the model provider you configured, which is outside WhatCode's control. The push relay only receives what is needed to deliver a notification: the project or session name, a short snippet of the last response or error, and the event type. The [Privacy Policy](/policies/privacy-policy) lists exactly what it handles.
 
 ## How much does WhatCode cost?
 

@@ -24,50 +24,49 @@ export const startWhatcode = async ({ port, endpoint, password, client }: Params
   const ocHeaders = Service.headers(endpoint);
   const projectRouter = createProjectRouterOverride(client);
   const gitRouter = createGitRouter(client);
+  const adapter = await getAdapter();
 
-  return (
-    new Elysia({ adapter: await getAdapter() })
-      .onError(({ error, request }) => {
-        const { pathname, search } = new URL(request.url);
-        const url = `${pathname}${search}`;
-        logger.error('server-error', `An error occured at ${url}`, error);
-      })
-      .use(basicAuth(password))
-      .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
-      .use(userRouter)
-      .use(sessionRouter)
-      .use(projectRouter)
-      .use(gitRouter)
-      .all(
-        '/*',
-        async ({ request, set }) => {
-          const requestUrl = new URL(request.url);
-          const url = new URL(`${endpoint.url}${requestUrl.pathname}${requestUrl.search}`);
-          const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
-          const body = hasBody ? request.body : undefined;
-          const requestHeaders = new Headers(request.headers);
-          requestHeaders.set('host', new URL(endpoint.url).host);
-          if (ocHeaders) {
-            requestHeaders.set('authorization', ocHeaders.authorization);
-          }
-          requestHeaders.delete('accept-encoding');
-          const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, body, duplex: 'half' });
-          if (!upstream.ok) {
-            logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
-          }
-          const responseHeaders = new Headers(upstream.headers);
-          responseHeaders.delete('content-encoding');
-          responseHeaders.delete('content-length');
-          responseHeaders.set('cache-control', 'no-cache');
-          responseHeaders.set('x-accel-buffering', 'no');
-          // Pre-populate set.headers with content-type so Elysia's stream handler
-          // doesn't override it with 'text/plain' when rewriting chunked responses.
-          const contentType = upstream.headers.get('content-type');
-          if (contentType) set.headers['content-type'] = contentType;
-          return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
-        },
-        { parse: 'none' },
-      )
-      .listen(port, attachPtyUpgradeProxy(endpoint.url))
-  );
+  return new Elysia(adapter ? { adapter } : undefined)
+    .onError(({ error, request }) => {
+      const { pathname, search } = new URL(request.url);
+      const url = `${pathname}${search}`;
+      logger.error('server-error', `An error occured at ${url}`, error);
+    })
+    .use(basicAuth(password))
+    .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
+    .use(userRouter)
+    .use(sessionRouter)
+    .use(projectRouter)
+    .use(gitRouter)
+    .all(
+      '/*',
+      async ({ request, set }) => {
+        const requestUrl = new URL(request.url);
+        const url = new URL(`${endpoint.url}${requestUrl.pathname}${requestUrl.search}`);
+        const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
+        const body = hasBody ? request.body : undefined;
+        const requestHeaders = new Headers(request.headers);
+        requestHeaders.set('host', new URL(endpoint.url).host);
+        if (ocHeaders) {
+          requestHeaders.set('authorization', ocHeaders.authorization);
+        }
+        requestHeaders.delete('accept-encoding');
+        const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, duplex: 'half', ...(body && { body }) });
+        if (!upstream.ok) {
+          logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
+        }
+        const responseHeaders = new Headers(upstream.headers);
+        responseHeaders.delete('content-encoding');
+        responseHeaders.delete('content-length');
+        responseHeaders.set('cache-control', 'no-cache');
+        responseHeaders.set('x-accel-buffering', 'no');
+        // Pre-populate set.headers with content-type so Elysia's stream handler
+        // doesn't override it with 'text/plain' when rewriting chunked responses.
+        const contentType = upstream.headers.get('content-type');
+        if (contentType) set.headers['content-type'] = contentType;
+        return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
+      },
+      { parse: 'none' },
+    )
+    .listen(port, attachPtyUpgradeProxy(endpoint.url));
 };

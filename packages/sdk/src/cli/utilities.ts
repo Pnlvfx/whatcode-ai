@@ -4,3 +4,4 @@ export { parseError } from '../compiled/core/error.ts';
 export { logger } from '../logger.ts';
 export { getPassword } from '../stores/password.ts';
 export { getDaemonUrl } from '../stores/daemon-url.ts';
+export { getGlobalConfig } from '../stores/global-config.ts';

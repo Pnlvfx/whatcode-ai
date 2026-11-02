@@ -81,6 +81,10 @@ Apple provides App Store distribution, in-app purchase infrastructure, and iOS p
 
 If you launch the daemon with the `--tailscale` flag, your connection may route through Tailscale's network. Tailscale's privacy policy applies: [tailscale.com/privacy-policy](https://tailscale.com/privacy-policy/)
 
+### 4.4 OpenTunnel (optional)
+
+If you launch the daemon with the `--tunnel` flag, your connection is routed through the [OpenTunnel](https://opentunnel.xyz) relay, which gives your machine a public `opentunnel.xyz` address. TLS is terminated on your machine, so the relay forwards encrypted traffic and does not see the content of your requests. As with any relay, it handles connection metadata such as visitor IP addresses and the tunnel hostname. This traffic does not pass through WhatCode's servers.
+
 ## 5. Data Storage and Security
 
 ### 5.1 On your machine

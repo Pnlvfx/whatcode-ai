@@ -66,3 +66,15 @@ npx @whatcode-ai/whatcode start --tailscale
 The QR code printed by `whatcode pair` then includes your [Tailscale](https://tailscale.com) URL, so the app can reach your machine from anywhere. See the [Daemon](/daemon) page for more details.
 
 :::
+
+:::tip[Extra: Remote access without Tailscale]
+
+If you don't use Tailscale, start the daemon with the `--tunnel` flag instead. It gives your machine a public HTTPS URL through [OpenTunnel](https://github.com/anomalyco/opentunnel), with nothing extra to install:
+
+```bash
+npx @whatcode-ai/whatcode start --tunnel
+```
+
+The URL is reachable from the internet and protected only by your daemon password, so keep the password private. `--tunnel` and `--tailscale` cannot be used together. See the [Daemon](/daemon#tunnel) page for more details.
+
+:::
