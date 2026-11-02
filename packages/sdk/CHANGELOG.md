@@ -1,3 +1,9 @@
+## [2.7.0](compare/%40whatcode-ai%2Fsdk%402.6.0...%40whatcode-ai%2Fsdk%402.7.0) "@whatcode-ai/sdk" (2026-11-02)
+
+### Features
+
+* add opencode tunnel support and global configs fe65ff2
+
 ## [2.6.0](compare/%40whatcode-ai%2Fsdk%402.5.0...%40whatcode-ai%2Fsdk%402.6.0) "@whatcode-ai/sdk" (2026-11-01)
 
 ### ⚠ BREAKING CHANGES
