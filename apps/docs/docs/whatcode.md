@@ -1,14 +1,14 @@
 ---
-title: 'WhatCode: OpenCode iOS App Features and Setup'
+title: 'WhatCode: OpenCode Mobile Companion Features and Setup'
 sidebar_position: 3
 sidebar_label: WhatCode
-description: Features of WhatCode, the OpenCode iOS app. Browse projects, continue sessions from your iPhone, switch models, and get push notifications when an agent finishes.
-keywords: [opencode ios app, opencode mobile app, opencode iphone, opencode push notifications, opencode remote]
+description: Features of WhatCode, the OpenCode mobile companion. Browse projects, continue sessions from your phone, switch models, and get push notifications when an agent finishes.
+keywords: [opencode mobile companion, opencode mobile app, opencode push notifications, opencode remote]
 ---
 
 # WhatCode
 
-WhatCode is the OpenCode iOS app: a mobile client that brings [OpenCode](https://opencode.ai) to your iPhone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an agent finishes its work.
+WhatCode is the mobile companion for [OpenCode](https://opencode.ai): it brings OpenCode to your phone. It connects to the OpenCode server running on your machine and lets you browse projects, read and continue coding sessions, and get a push notification the moment an agent finishes its work.
 
 ## Download
 
@@ -32,7 +32,7 @@ WhatCode requires a subscription. See [Pricing](/pricing).
 
 **Multiple machines.** Stay connected to several machines at once, for example a work laptop and a personal desktop. They all show up in one place.
 
-**Tailscale support.** Start the daemon with `--tailscale` to connect securely from outside your local network. This requires Tailscale on both your machine and your iPhone. See [Daemon](/daemon#tailscale).
+**Tailscale support.** Start the daemon with `--tailscale` to connect securely from outside your local network. This requires Tailscale on both your machine and your phone. See [Daemon](/daemon#tailscale).
 
 <div className="screenshots">
   <figure>

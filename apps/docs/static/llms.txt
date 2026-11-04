@@ -1,15 +1,15 @@
 # WhatCode
 
-> WhatCode is the OpenCode mobile app for iPhone. It connects to the OpenCode AI coding agent running on your machine, so you can monitor sessions, send messages and get push notifications when an agent finishes. iPad is not supported yet.
+> WhatCode is the mobile companion for OpenCode. It connects to the OpenCode AI coding agent running on your machine, so you can monitor sessions, send messages and get push notifications when an agent finishes. It is available on iPhone today, with iPad and Android planned.
 
 ## Docs
 
 - [Introduction](https://www.whatcode.app/): what WhatCode is and how it works
-- [Getting Started](https://www.whatcode.app/getting-started/): connect the OpenCode iOS app to your machine
-- [WhatCode](https://www.whatcode.app/whatcode/): features of the OpenCode iOS app
-- [Screenshots](https://www.whatcode.app/screenshots/): the OpenCode iOS app on iPhone
+- [Getting Started](https://www.whatcode.app/getting-started/): connect the WhatCode mobile companion to your machine
+- [WhatCode](https://www.whatcode.app/whatcode/): features of the WhatCode mobile companion
+- [Screenshots](https://www.whatcode.app/screenshots/): the WhatCode mobile companion on iPhone
 - [Daemon](https://www.whatcode.app/daemon/): push notifications and remote access over Tailscale
-- [FAQ](https://www.whatcode.app/faq/): OpenCode mobile app, iOS, iPad and Android questions
+- [FAQ](https://www.whatcode.app/faq/): WhatCode mobile companion questions, supported platforms, notifications and remote access
 - [Pricing](https://www.whatcode.app/pricing/): subscription plans and free trial
 - [Support](https://www.whatcode.app/support/): troubleshooting
 

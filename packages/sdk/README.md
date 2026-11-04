@@ -1,6 +1,6 @@
 # @whatcode-ai/sdk
 
-SDK for the [WhatCode](https://whatcode.app) daemon. It starts [OpenCode](https://opencode.ai), serves it to the WhatCode iOS app with push notifications, and can expose it over HTTPS via [Tailscale](https://tailscale.com).
+SDK for the [WhatCode](https://whatcode.app) daemon. It starts [OpenCode](https://opencode.ai), serves it to the WhatCode mobile companion with push notifications, and can expose it over HTTPS via [Tailscale](https://tailscale.com).
 
 Full documentation at **[whatcode.app](https://whatcode.app)**.
 

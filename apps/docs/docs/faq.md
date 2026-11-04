@@ -1,24 +1,20 @@
 ---
-title: 'FAQ: OpenCode Mobile App, iOS and iPad'
+title: 'FAQ: OpenCode Mobile Companion'
 sidebar_position: 8
 sidebar_label: FAQ
-description: Answers about the OpenCode mobile app. Is there an OpenCode iOS app, does it work on iPad, and how do notifications and remote access work.
-keywords: [opencode mobile app, opencode ios app, opencode ipad, opencode iphone, opencode android]
+description: Answers about the WhatCode mobile companion for OpenCode. Which platforms are supported, and how do notifications and remote access work.
+keywords: [opencode mobile app, opencode mobile companion, opencode ipad, opencode android, whatcode platforms]
 ---
 
 # FAQ: OpenCode Mobile App
 
 ## Is there an OpenCode mobile app?
 
-Yes. WhatCode is a mobile app for [OpenCode](https://opencode.ai). It connects to the OpenCode server running on your machine, so you can browse projects, read and continue sessions, and get push notifications from your phone. See [WhatCode](/whatcode) for the full feature list.
+Yes. WhatCode is a mobile companion for [OpenCode](https://opencode.ai). It connects to the OpenCode server running on your machine, so you can browse projects, read and continue sessions, and get push notifications from your phone. See [WhatCode](/whatcode) for the full feature list.
 
-## Is there an OpenCode iOS app?
+## Which platforms does WhatCode support?
 
-Yes. WhatCode is available on the [App Store](https://apps.apple.com/us/app/whatcode/id6760623503) for iPhone.
-
-## Is there an OpenCode iPad or Android app?
-
-Not yet. WhatCode is currently available for iPhone only.
+WhatCode is available on the [App Store](https://apps.apple.com/us/app/whatcode/id6760623503) for iPhone today. Support for iPad, Android and more platforms is planned.
 
 ## How do I get a notification when an OpenCode agent finishes?
 

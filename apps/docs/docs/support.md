@@ -2,8 +2,8 @@
 title: 'WhatCode Support and Troubleshooting'
 sidebar_position: 6
 sidebar_label: Support
-description: Troubleshooting for the WhatCode OpenCode iOS app, including connection problems and missing push notifications.
-keywords: [whatcode support, opencode ios app troubleshooting, opencode notifications not working]
+description: Troubleshooting for the WhatCode mobile companion for OpenCode, including connection problems and missing push notifications.
+keywords: [whatcode support, opencode mobile companion troubleshooting, opencode notifications not working]
 ---
 
 # Support
@@ -25,7 +25,7 @@ Found a bug or want to contribute? Open an issue on GitHub:
 ## Common issues
 
 **The app can't find my server**
-Make sure the daemon is running on your machine (`npx @whatcode-ai/whatcode start`) and that your iPhone is on the same local network. If you're connecting remotely, use the `--tailscale` flag.
+Make sure the daemon is running on your machine (`npx @whatcode-ai/whatcode start`) and that your phone is on the same local network. If you're connecting remotely, use the `--tailscale` flag.
 
 **I'm not receiving push notifications**
 Make sure you granted notification permissions when the app asked. You can re-enable them in **Settings > WhatCode > Notifications** on your iPhone. If permissions are on but notifications still don't arrive, reset the daemon and reconnect the app to pair your device again:

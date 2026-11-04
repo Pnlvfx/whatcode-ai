@@ -1,9 +1,9 @@
 ---
-title: 'About WhatCode, the OpenCode iOS App'
+title: 'About WhatCode, the OpenCode Mobile Companion'
 sidebar_position: 9
 sidebar_label: About
-description: WhatCode is an open source OpenCode iOS app built by Simone Gauli, an Italian developer, to monitor OpenCode coding agents from a phone.
-keywords: [whatcode, opencode ios app, opencode mobile app, open source]
+description: WhatCode is an OpenCode mobile companion built by Simone Gauli, an Italian developer, to monitor OpenCode coding agents from a phone.
+keywords: [whatcode, opencode mobile companion, opencode mobile app, open source]
 ---
 
 # About
@@ -14,7 +14,7 @@ I built WhatCode because I kept running into the same frustration: I'd kick off 
 
 So I built one.
 
-WhatCode is a solo side project I started in my free time and decided to publish. The daemon and SDK are [open source on GitHub](https://github.com/Pnlvfx/whatcode-ai), so you can see exactly what runs on your machine. The iOS app itself is closed source.
+WhatCode is a solo side project I started in my free time and decided to publish. The daemon and SDK are [open source on GitHub](https://github.com/Pnlvfx/whatcode-ai), so you can see exactly what runs on your machine. The mobile app itself is closed source.
 
 WhatCode is an independent project and is not affiliated with or endorsed by OpenCode.
 

@@ -5,7 +5,7 @@ import { APP_URL, APP_STORE_URL, GITHUB_REPO_URL, GITHUB_EDIT_URL, ORG_NAME, PRO
 
 const config: Config = {
   title: 'WhatCode AI',
-  tagline: 'OpenCode mobile app for iPhone',
+  tagline: 'The mobile companion for OpenCode',
   headTags: [
     {
       tagName: 'script',
@@ -14,10 +14,10 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         name: 'WhatCode',
-        alternateName: ['OpenCode mobile app', 'OpenCode iOS app'],
+        alternateName: ['OpenCode mobile app', 'OpenCode mobile companion'],
         applicationCategory: 'DeveloperApplication',
         operatingSystem: 'iOS',
-        description: 'WhatCode is the OpenCode mobile app for iPhone. Monitor OpenCode sessions and get push notifications when your AI coding agent finishes.',
+        description: 'WhatCode is the mobile companion for OpenCode. Monitor OpenCode sessions and get push notifications when your AI coding agent finishes.',
         url: APP_URL,
         downloadUrl: APP_STORE_URL,
       }),

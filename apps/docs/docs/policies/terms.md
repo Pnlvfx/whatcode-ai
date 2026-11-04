@@ -10,7 +10,7 @@ By downloading or using the WhatCode app ("App"), you agree to these Terms of Us
 
 ## 1. Description of the App
 
-WhatCode is an iOS companion app for OpenCode. It connects to the OpenCode server running on your own machine and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your machine, not on our servers. The relay only receives the notification content described in the Privacy Policy, including a short snippet of the last response or error.
+WhatCode is a mobile companion for OpenCode. It connects to the OpenCode server running on your own machine and delivers push notifications to your device through a developer-operated relay. Your code, conversations, and project data are processed locally on your machine, not on our servers. The relay only receives the notification content described in the Privacy Policy, including a short snippet of the last response or error.
 
 ## 2. Eligibility
 
@@ -23,7 +23,7 @@ You must be at least 13 years old, or the minimum age required in your jurisdict
 - You must not interfere with or abuse the App, daemon, or relay infrastructure.
 - You must not transmit malware, harmful payloads, or abusive traffic through the relay.
 - You must not attempt to bypass security, entitlement, or pairing protections.
-- You must not reverse-engineer, modify, or redistribute the WhatCode iOS app.
+- You must not reverse-engineer, modify, or redistribute the WhatCode mobile app.
 
 ## 4. Push Notifications and the Relay
 

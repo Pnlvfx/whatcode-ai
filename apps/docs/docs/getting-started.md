@@ -1,14 +1,14 @@
 ---
-title: 'Getting Started: Connect the OpenCode iOS App to Your Machine'
+title: 'Getting Started: Connect the OpenCode Mobile Companion to Your Machine'
 sidebar_position: 2
 sidebar_label: Getting Started
-description: Step-by-step setup for WhatCode, the OpenCode iOS app. Run the daemon, scan the QR code with your iPhone and monitor OpenCode sessions in minutes.
-keywords: [opencode ios app setup, opencode mobile setup, connect opencode to iphone, opencode remote access]
+description: Step-by-step setup for WhatCode, the OpenCode mobile companion. Run the daemon, scan the QR code with your phone and monitor OpenCode sessions in minutes.
+keywords: [opencode mobile companion setup, opencode mobile setup, connect opencode to phone, opencode remote access]
 ---
 
 # Getting Started
 
-This guide walks you through connecting the WhatCode iOS app to your machine in a few minutes.
+This guide walks you through connecting the WhatCode mobile companion to your machine in a few minutes.
 
 ## Requirements
 
@@ -41,7 +41,7 @@ npx @whatcode-ai/whatcode pair
 
 It prints your server URL, your password and a pairing QR code. You can run it again at any time, for example to connect a second device.
 
-## 4. Connect the iOS app
+## 4. Connect the app
 
 Open the WhatCode app on your device. On first launch you'll be taken through a short setup flow:
 

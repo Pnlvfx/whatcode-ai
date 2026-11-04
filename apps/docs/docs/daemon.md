@@ -2,23 +2,23 @@
 title: 'WhatCode Daemon: OpenCode Push Notifications and Remote Access'
 sidebar_position: 5
 sidebar_label: Daemon
-description: The WhatCode daemon exposes OpenCode to your iPhone, sends push notifications when an agent finishes, and supports remote access over Tailscale.
+description: The WhatCode daemon exposes OpenCode to your phone, sends push notifications when an agent finishes, and supports remote access over Tailscale.
 keywords: [opencode push notifications, opencode remote access, opencode tailscale, opencode mobile, opencode daemon]
 ---
 
 # Daemon
 
-The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process that runs on your machine alongside OpenCode and connects it to the iOS app.
+The WhatCode daemon (`@whatcode-ai/whatcode`) is a lightweight Node.js process that runs on your machine alongside OpenCode and connects it to the WhatCode mobile companion.
 
 ## Why do I need a daemon?
 
 The daemon gives you three things that plain OpenCode cannot provide out of the box.
 
-**Reachable from your phone.** By default, OpenCode binds to `127.0.0.1` only. The daemon exposes it on your local network (and optionally over Tailscale) so your iPhone can connect.
+**Reachable from your phone.** By default, OpenCode binds to `127.0.0.1` only. The daemon exposes it on your local network (and optionally over Tailscale) so your phone can connect.
 
 **A stable address.** OpenCode picks a random port on every restart. The daemon always listens on a fixed port (`8192`), so the app can reconnect automatically without any reconfiguration.
 
-**Push notifications.** The daemon watches the OpenCode event stream and sends a push to your iPhone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
+**Push notifications.** The daemon watches the OpenCode event stream and sends a push to your phone the moment an agent goes idle, hits an error, or needs your approval. The app does not need to be open.
 
 Under the hood, the daemon connects to the local OpenCode server (starting it with `opencode serve --service` if it isn't already running) and layers these capabilities on top. You can still use OpenCode on its own. The daemon adds what the mobile app needs.
 
@@ -87,7 +87,7 @@ For finished and failed sessions, the daemon waits a few seconds before sending 
 
 Events from subagent sessions (sessions OpenCode starts from within another session) are ignored, so you only get notified for top-level sessions.
 
-When any of these events fire, the daemon sends a push notification to your iPhone via a relay server using APNs. It usually arrives within seconds, even when the app is in the background. If the event stream drops, the daemon reconnects automatically with exponential backoff.
+When any of these events fire, the daemon sends a push notification to your phone via a relay server using APNs. It usually arrives within seconds, even when the app is in the background. If the event stream drops, the daemon reconnects automatically with exponential backoff.
 
 ## Password protection
 
@@ -158,7 +158,7 @@ This runs `tailscale serve --bg <port>` in the background, which proxies your lo
 ### Requirements
 
 - [Tailscale](https://tailscale.com) installed and authenticated (`tailscale up`)
-- The same Tailscale account logged in on your iPhone, with Tailscale connected whenever you use the app remotely
+- The same Tailscale account logged in on your phone, with Tailscale connected whenever you use the app remotely
 
 ## Tunnel
 
