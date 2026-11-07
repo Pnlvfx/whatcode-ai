@@ -6,5 +6,4 @@ import { treaty } from '@elysia/eden/treaty2';
 import { SERVER_URL } from '../config/constants.ts';
 import { headers } from './headers.ts';
 
-/** @ts-expect-error elysia mismatch */
 export const relayClient = treaty<App>(SERVER_URL, { headers, parseDate: false });

@@ -180,11 +180,11 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/dbz':
-        specifier: ^2.95.0
-        version: 2.95.0(@types/node@26.6.6)
+        specifier: ^2.96.0
+        version: 2.96.0(@types/node@26.6.6)
       '@goatjs/doctor':
-        specifier: ^2.71.0
-        version: 2.71.0(supports-color@8.1.1)
+        specifier: ^2.72.0
+        version: 2.72.0(supports-color@8.1.1)
       '@goatjs/node-monorepo-eslint':
         specifier: ^3.47.0
         version: 3.47.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.14.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -238,8 +238,8 @@ importers:
         specifier: 3.10.2
         version: 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)
       '@goatjs/dbz':
-        specifier: ^2.95.0
-        version: 2.95.0(@types/node@26.6.6)
+        specifier: ^2.96.0
+        version: 2.96.0(@types/node@26.6.6)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -253,8 +253,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       vercel:
-        specifier: ^65.9.0
-        version: 65.9.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
+        specifier: ^65.10.0
+        version: 65.10.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
 
   apps/example:
     dependencies:
@@ -291,22 +291,22 @@ importers:
     dependencies:
       '@elysia/eden':
         specifier: ^1.4.10
-        version: 1.4.10(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
+        version: 1.4.10(elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
       '@elysiajs/node':
         specifier: ^1.4.5
-        version: 1.4.5(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
+        version: 1.4.5(elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))
       '@opencode/client':
-        specifier: ^2.2.5
-        version: 2.2.5(effect@4.0.6)
+        specifier: ^2.2.6
+        version: 2.2.6(effect@4.1.0)
       '@opentunnel/client':
-        specifier: ^0.6.1
-        version: 0.6.1(effect@4.0.6)(undici@8.12.3)
+        specifier: ^0.6.2
+        version: 0.6.2(effect@4.1.0)(undici@8.12.4)
       '@sinclair/typebox':
         specifier: ^0.34.52
         version: 0.34.52
       elysia:
-        specifier: ^1.4.29
-        version: 1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
+        specifier: ^1.4.31
+        version: 1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
       execa:
         specifier: ^10.2.1
         version: 10.2.1
@@ -323,8 +323,8 @@ importers:
         specifier: ^12.1.3
         version: 12.1.3
       undici:
-        specifier: ^8.12.3
-        version: 8.12.3
+        specifier: ^8.12.4
+        version: 8.12.4
     devDependencies:
       '@eslint/config-helpers':
         specifier: ^0.7.0
@@ -363,8 +363,8 @@ importers:
         specifier: ^0.12.0
         version: 0.12.0
       semver:
-        specifier: ^7.8.5
-        version: 7.8.5
+        specifier: ^7.8.6
+        version: 7.8.6
       yargs:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1127,8 +1127,8 @@ packages:
     resolution: {integrity: sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/types@8.0.10':
-    resolution: {integrity: sha512-KV8Y+teoRsmXeEPS4sCJY1kwV+hcPzHP1qQqgCxrjKOehLdBaxpsFBfoJ8MXWFV80y6Jw56+TM95wR0Per8dYw==}
+  '@babel/types@8.1.0':
+    resolution: {integrity: sha512-8V8aSTDx012YPmDQF30vrokyxVFdRAU2YBS2VzrnfLAGkP8floVnjckwgFcD0Jrvf6GWMSRdCrYVsk3tyMwZRg==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@borewit/text-codec@0.2.2':
@@ -2018,15 +2018,15 @@ packages:
   '@goatjs/core-eslint@3.46.0':
     resolution: {integrity: sha512-zX4uMBN0l/TbJwzb33CvRGPVpckZGr/Udgtvp6I6LAsNJUSxpD/6Bvw1/vzzIbuM5ykzLgY05PbXW+CRIDoTZg==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core-eslint/-/@goatjs/core-eslint-3.46.0.tgz}
 
-  '@goatjs/core@2.49.0':
-    resolution: {integrity: sha512-gTI9l7V4S1JS3OwxiUveQsYSTRhBOOidv2Hw5t4YmX32UxUcaeZ1IyHJRyUf75OO6uTxeIkMIvP0PdB8OY1NdA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.49.0.tgz}
+  '@goatjs/core@2.50.0':
+    resolution: {integrity: sha512-FmmJIltqTiml4NS1haZ8uo7TcuCTXWP5KKQe39nsHjOnkq5CwM3zJVcb9BmUoEYztlCY32y8LbR+UIZLWxIWtw==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.50.0.tgz}
 
-  '@goatjs/dbz@2.95.0':
-    resolution: {integrity: sha512-WSESrCCr13DINmxdM6TPKbV7DoLjAMGJ1Hq5+TXP7lJ/fe8lwqaxAb6rdBgmqkJgN4P9NvuRWKmMqdgOyvWREQ==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.95.0.tgz}
+  '@goatjs/dbz@2.96.0':
+    resolution: {integrity: sha512-4YEzVEiMOMAJc+Ulc9S/CnK+ke4GMCReMrUBKKEtAW5cZqivcAVsrvJukrz4lqmiB/zfNcCeWlFNAxtQG3w3WA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.96.0.tgz}
     hasBin: true
 
-  '@goatjs/doctor@2.71.0':
-    resolution: {integrity: sha512-t5HqHkF6B8vR0PXGF1jujmt1U0Sa0BZ910cfMvnLRJvo8RI7C2efeKAEr4TY7hpJFwNP/sh2HQPDUBjCBiorcw==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/doctor/-/@goatjs/doctor-2.71.0.tgz}
+  '@goatjs/doctor@2.72.0':
+    resolution: {integrity: sha512-1XRhQgfMNOXcsbD4Wx1tvMCApG8AbAdFYY7Lk4fGpr2Wlb6sue13NwOpZwAU2o3bz1s9OqQDrDdtcLUkL3cllg==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/doctor/-/@goatjs/doctor-2.72.0.tgz}
     hasBin: true
 
   '@goatjs/node-eslint@3.47.0':
@@ -2622,10 +2622,10 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@opencode/client@2.2.5':
-    resolution: {integrity: sha512-EjYrFGWHURsIbjtmQdIsGSPmYZGaulxqwEfYxQH5t9838508BCIvDX9f7/ZsgNGHYXM0punA3W8hTt6GjxIEaw==}
+  '@opencode/client@2.2.6':
+    resolution: {integrity: sha512-o90b8Z6tk62U3MiRK1g6r7WmNWLzHzIHme75/MCWa9/XmOREMzY4W1N01wAuHwU3J6UH/PlUDNKvLkeX5qCyeA==}
     peerDependencies:
-      effect: 4.0.6
+      effect: 4.1.0
       solid-js: '>=1.9.0'
     peerDependenciesMeta:
       effect:
@@ -2633,14 +2633,14 @@ packages:
       solid-js:
         optional: true
 
-  '@opencode/protocol@2.2.5':
-    resolution: {integrity: sha512-T3ET0kS1kj8sv7/d+c1T2he7TXoZ4Rki7zTqHuv8b0kWhg3Vk6o0t+T9KsEQdEat7PFksgH5haC2iSSdJOB7/w==}
+  '@opencode/protocol@2.2.6':
+    resolution: {integrity: sha512-XBAgz2qnhFS/EI4P3pgC9A6HJTHnFiaQXkqux3liXwE7hZh5wEzRZ551nQZD95rkrH00EnryUSaKI2y/O2Bt6w==}
 
-  '@opencode/schema@2.2.5':
-    resolution: {integrity: sha512-hlKk6cX28BwvOMOVG3Mtt4tEHxwY68Z6Gz5/cL32N8qfZexykCKsZai49Jms4/2gD8BzvVuBERnnlLDbdLstUA==}
+  '@opencode/schema@2.2.6':
+    resolution: {integrity: sha512-TaLr30ktFFVsuReorFNbqYvybTVxV/4M44qm5XzRjUqq6deR0jH4h4Wt1gB0NTkXDFL0LMH+Ul1oVBnp5w9TRg==}
 
-  '@opentunnel/client@0.6.1':
-    resolution: {integrity: sha512-OuVNlWywQebIXCtkixjVHebOsR3KFRxJ0DSZry6Dzj4hHaHIf3eTVmQ7VwLCjuVmw+ctU2qHIP6RxuAPr07WDw==}
+  '@opentunnel/client@0.6.2':
+    resolution: {integrity: sha512-rcfq/Q8ViIEkSA7oCW3ntbM/W1BKUB2o+wDWgfAjuJ/MNhBIEG90sEyG8FGZ8zZekbxSrtKp3wPTaTN5ceZTbg==}
     engines: {bun: '>=1.4.0', node: '>=22'}
     peerDependencies:
       effect: ^4.0.0
@@ -2649,8 +2649,8 @@ packages:
       undici:
         optional: true
 
-  '@opentunnel/protocol@0.6.1':
-    resolution: {integrity: sha512-fdckKvQ4TEJSQ2Ia/M/GKmDbCTCw148Wc1zo6HcpUBjSwsFeKs6Tbql4Uih1oIVR8NVqtGrcPZukVVvWFyOEHA==}
+  '@opentunnel/protocol@0.6.2':
+    resolution: {integrity: sha512-4XgCGOBufE1iNpOMIVH9/S+HjhIgma9qWDgf4G4tminjqG5M7XDN21TJNb7vKce2U5oXLANfVsX3JrDqWxsUTw==}
     peerDependencies:
       effect: ^4.0.0
 
@@ -4075,8 +4075,8 @@ packages:
     resolution: {integrity: sha512-2xrnGnZknt7UY7YpZFIuKlYOIRqCQ/MjS6Q7DyxUnd70zzirzAsn/0oqj5KWlUgkcizSI36mo+KK/bgQSrfqCw==}
     hasBin: true
 
-  '@vercel/cli-auth@0.3.14':
-    resolution: {integrity: sha512-Kw0XvBCzsI9aKXfX8D4pmK9pTs4jNuAec8jT7aey0iHSkLG9WVYMo8o0YyOfTyC/sPSG63R3UMTSDWnlo9QLKw==}
+  '@vercel/cli-auth@0.3.15':
+    resolution: {integrity: sha512-iObcfLVw4tqIdPFul+SX9Ouz/ftqA9JUVAKO0JCZibHT4uiJvL2JzBOhRotjmMErLDn+hgt2gzkDZVBYfe5Xyg==}
 
   '@vercel/cli-config@0.2.7':
     resolution: {integrity: sha512-KeSN2HBp8puZrj7kVjSEneDi9yBqW4nAD9AnhGhdYjGNpHl7IkXZVb3HnNe0WWc5+20RlUtmAGWNPQ8qP5QBhQ==}
@@ -4084,17 +4084,17 @@ packages:
   '@vercel/cli-config@0.3.1':
     resolution: {integrity: sha512-sISbygqlFXYb8qfPu/+2Cf/A8IjrlAuZePdag3EDQr2PRA455s7UZtl9Ro674CWsB/saBRmz3jEkw0YsQs8OoQ==}
 
-  '@vercel/cli-config@0.3.5':
-    resolution: {integrity: sha512-O7y3EFzHENSLtE/3fjM3vIRqDpFFhZor2dMcZaND4G1d88gQk9u8yBcZhRR9CKnBowgzXdl0qcXkuINI05I72w==}
+  '@vercel/cli-config@0.3.6':
+    resolution: {integrity: sha512-jKsEWixJ+yMs2V29fqFxeDTQDglsgj7hvSXJf9pPmyYISvuTpTt45j/g47O6RWbe7aJycPbDOk7uKPHPA+LDYg==}
 
   '@vercel/cli-exec@1.0.1':
     resolution: {integrity: sha512-g9XerViJ/paZujufXYcu5XYI2vU2rtB4sgdpjUHde5RnOkdmpu0ngH46LCFGHoPXO/C+qDPSczIHIRN+8Q2YKQ==}
     engines: {node: '>= 18'}
 
-  '@vercel/cli-support@65.9.0':
-    resolution: {integrity: sha512-k12AkTLISlopZJTvMF1OUmxs9dkZz79I2QBcOhh8P99r/qH5h0HSeH6AfoAQUbQUCgii7l1fpEAP+XQgBwkBgQ==}
+  '@vercel/cli-support@65.10.0':
+    resolution: {integrity: sha512-HLxM6JtOEVPiaaqJVkzsnM4f61mzhi4WaVoO9fsi1+JRtuXpk3zZz2ZJkTrrxyczqUQJWe/2JTycCjQkaU5Bsg==}
     engines: {node: '>= 20'}
-    os: ['!darwin', '!linux']
+    os: ['!darwin', '!linux', '!win32']
 
   '@vercel/container@24.0.1':
     resolution: {integrity: sha512-nvH3foXkCyr36qFWa2F09rhOh6c3+MbIm+sTRXQL0RI+CGPYGQWfa4Xe8oH54aJMfpZVhx1Z7duNDBXwQ77nMw==}
@@ -4193,11 +4193,11 @@ packages:
   '@vercel/prepare-flags-definitions@0.6.1':
     resolution: {integrity: sha512-0Z4ULrbGwiff425y7R4G+HKkgL/aRDPEzWL/iQvhxHJCO0OONst3d28XWKUIxRUQ1GF36/3K/W79CGzDzd7ovw==}
 
-  '@vercel/python-analysis@0.15.2':
-    resolution: {integrity: sha512-2w+BXbaOPNO2NAz7mLNYeNnM4W+oZX78cePJWPxOzxGzaf5OOvBRYvT+zmgyw2Nw41XKTzy+N4QmzUzVAXtqag==}
+  '@vercel/python-analysis@0.15.3':
+    resolution: {integrity: sha512-WICWt4qXg4K6agFzfg0cv0o8dJILPiaGrqZpb/8IXWympfCrIh9f/mRMeSUlJDaaSS/tXmBt0Hj919CWccae9A==}
 
-  '@vercel/python@30.0.1':
-    resolution: {integrity: sha512-h8AReYGHppFeSToq2c0Y6oIroztzNWHH/Cs6jDIfi4yDh1P5VurakI/oXBSDmHYh9EEIh21gUZ078e0jHysBVg==}
+  '@vercel/python@30.1.0':
+    resolution: {integrity: sha512-5FEcDWtvLYRk0nCbs/ZQj7ZaWdgiqjgFBgoFqmxJ6CP5t5uaNhMfQjlsjf1afQU1c0VliuK7J/lmJGVG8pKKuw==}
     peerDependencies:
       '@vercel/build-utils': 15.2.1
 
@@ -4232,39 +4232,49 @@ packages:
   '@vercel/static-config@3.4.4':
     resolution: {integrity: sha512-WppaPyEKQhO8qo5gVee3mSo1QSCgDZaUcUDHrqICSlt90oYeC/SHTmKCPWY1x1NB9hU+kR2oDzJwAeRKKv5NIw==}
 
-  '@vercel/vc-native-darwin-arm64@65.9.0':
-    resolution: {integrity: sha512-N+Z9qCuB/YwczaWAcmVRqWuubNtDdRZsjwasxUCKAhDrstksRw9pbaIVh3StzcNOiqdAPqIuupG0cZDi9NDa3Q==}
+  '@vercel/vc-native-darwin-arm64@65.10.0':
+    resolution: {integrity: sha512-HSQsnaz4sQHrQqzBRcdvMDH86qN/LW1W+12r1+4Kjap+mUveYrcGqdVdX4K64OsoM5ajyURGZ9VDGhobxq6/gw==}
     cpu: [arm64]
     os: [darwin]
 
-  '@vercel/vc-native-darwin-x64@65.9.0':
-    resolution: {integrity: sha512-EFcgvCESOh+5XOt3o7ZJ5CKJkSXrP68SAoPHISHLRsK9wASsSsvlz5PwLyc+yhJeoFOWkGWlQUmgraJxfgtG4g==}
+  '@vercel/vc-native-darwin-x64@65.10.0':
+    resolution: {integrity: sha512-oD4C+TokU9YFAyl4Z7GDlemD3HsngiwsNonBR7/6BzL/Nw5aQjp2M4BV9AMan+u30s6uklro/VBo0qjI6H6orA==}
     cpu: [x64]
     os: [darwin]
 
-  '@vercel/vc-native-linux-arm64-musl@65.9.0':
-    resolution: {integrity: sha512-muvKrqoXLHcwwQPuI87ic0mObMMdjZiftcvky50gI4loLUemPRg/SD+GlSpP+jB4texYTC1Cn34xEw1XLlBshA==}
+  '@vercel/vc-native-linux-arm64-musl@65.10.0':
+    resolution: {integrity: sha512-oJViwIZLLoCsYv5gUbnioxSvOCeffnpWSI2MuBar0vnZ+kRJgNdSxkBrKDb64J9hFgLgkLyzRl5ppcfE7XPd4g==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@vercel/vc-native-linux-arm64@65.9.0':
-    resolution: {integrity: sha512-dTlH2o2T2z64VMuH5W91XhIVLhsRXTdXhj/PO1wdXAlyf/zmGHaUBGvrA/IPI0ysd+J0nsBcz96KGkbOhqhjhA==}
+  '@vercel/vc-native-linux-arm64@65.10.0':
+    resolution: {integrity: sha512-GhjcosaJqo1jWPnowDe/Ry4O97B2IaBc4pP/S7hbRgGqHtLfILK8pbbTae2aHP2cvgePbZUP2XdiVsGf2vVcfQ==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@vercel/vc-native-linux-x64-musl@65.9.0':
-    resolution: {integrity: sha512-wbUca+QzwUSDBEWTyr9LEdlVTCtPn8VBIVx2p+Gl2nk2j19kpMEyf/04yodamRXYaccJEeQWM5sKDpwNaErrig==}
+  '@vercel/vc-native-linux-x64-musl@65.10.0':
+    resolution: {integrity: sha512-BjUrXcDAfh4MQXhRn4fAfs2LMZJTqJOZVRH6fibu+vncnBdPB1SDLL8zx7XdNqXxEMt7FUmGy0rkOuljUV5R4w==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@vercel/vc-native-linux-x64@65.9.0':
-    resolution: {integrity: sha512-Up6XNsBwYdvrTT61acjS1bv3IKpWtbZyp7Ll0SdFVjyZUBVvNuNKmNEpnr8NIf6x2EGW/C9ZIfsWHDAONY/I2g==}
+  '@vercel/vc-native-linux-x64@65.10.0':
+    resolution: {integrity: sha512-tpTdd3jKH5vjwrK8YlZkHbgUnhgqrEG/jXk98D99QBH3p6UT/2yTerjOQ2VxuHJPGD6tzcY+HZvBPlgjZolZiQ==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+
+  '@vercel/vc-native-win32-arm64@65.10.0':
+    resolution: {integrity: sha512-ZGm2klWtGkKkMROGGKNf/orIUMmYDqVzkcw7FiZHcgbN9IPLL0OK3+lbVTqHySnkMChurMP/fJhJyQmhFRFPgQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@vercel/vc-native-win32-x64@65.10.0':
+    resolution: {integrity: sha512-TCqCQBBfmEGtHi4g6uenNjtihBEN8SJ1oMYeOQ4ZHdGd1IslGec6qSXM/f4RsTlSs7uFMeq3UQdl5IdWEm1Q9A==}
+    cpu: [x64]
+    os: [win32]
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -5335,18 +5345,18 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  effect@4.0.6:
-    resolution: {integrity: sha512-Tc3mkzuLR6t6P9dhLt0D2GrxYtmU5td4XEJEiXCmILz53IRIfJyHsKZWjTA3xEjiwpNTtXBgI4iqYPxMztBDrw==}
+  effect@4.1.0:
+    resolution: {integrity: sha512-lGx2MJJyrXA8RZb2UpQ/0Nkb5Utaimby7oD92+18noBxLPE85IFOvptdzau8dvcxAOwfwHo9iqapbKeFzqQM/Q==}
 
   electron-to-chromium@1.5.444:
     resolution: {integrity: sha512-5ss/uJfoDYDHT0lfJzT6FbcskIzROIOPf0BbbFkGcvDzoJU7i//9GDrwwIHQVmIsrAGiF3ihpADBRIsrEFt1rQ==}
 
-  elysia@1.4.30:
-    resolution: {integrity: sha512-S2qqV0CbM4faB1hQQ5IYoeYnAUinjHlzRduxaBc4OoNqh0GjOc8k6tt3hv5ozWcG6Svr6hugw6JL4zNke4jwfA==}
+  elysia@1.4.31:
+    resolution: {integrity: sha512-8Dt6PcIvdPWe/9Nj1gpmdRy7z8y5JoPKP0yjtpmbF1bLa8MTbNvS0Xu+0kdC58L05Qp/2bzUjqdid0CJB4cLeQ==}
     peerDependencies:
       '@sinclair/typebox': '>= 0.34.0 < 1'
       '@types/bun': '>= 1.2.0'
-      exact-mirror: '>= 0.0.9'
+      exact-mirror: '>= 0.2.9 < 1'
       file-type: '>= 20.0.0'
       openapi-types: '>= 12.0.0'
       typescript: '>= 5.0.0'
@@ -5681,12 +5691,12 @@ packages:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
 
-  exact-mirror@1.2.6:
-    resolution: {integrity: sha512-EGx81nhFP1GE94coJsz94FLzdxWrnkNCJdfdX44rbd7pVcAotWzDlBJUC7yy1Ae7d7dYKpoTtZ1jCAIz2IVtfA==}
+  exact-mirror@0.2.9:
+    resolution: {integrity: sha512-7+ecLdWdlY0Br1E1Fax2Pss5VU3b1WQwJ8bdyt5azPNdhKHuivjQlV8baXF9NkQwlvnyOwaM6ITBiuK43PQ4wg==}
     peerDependencies:
-      typebox: '>= 1.1.0'
+      '@sinclair/typebox': ^0.34.15
     peerDependenciesMeta:
-      typebox:
+      '@sinclair/typebox':
         optional: true
 
   execa@10.2.1:
@@ -8543,13 +8553,17 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
+  semver@6.3.2:
+    resolution: {integrity: sha512-GYrCADwpu6yV5OAvchkQ27Z5wwMxWAEMg5NNWjyHh/5DboFFqbdbvYNIvZouQpxXyeMPoTOh0vdPYKlf0ZswdQ==}
+    hasBin: true
+
   semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.8.5:
-    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+  semver@7.8.6:
+    resolution: {integrity: sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -9150,8 +9164,8 @@ packages:
     resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
     engines: {node: '>=20.18.1'}
 
-  undici@8.12.3:
-    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
+  undici@8.12.4:
+    resolution: {integrity: sha512-8Mx+uNKKER2bA4AdtedkqRbwUCIJFr2nJckXRe5yrDqzePqwLP7VNcctN8/XdmDSbF7mS+jJKIszlL+vbam1VA==}
     engines: {node: '>=22.19.0'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -9277,8 +9291,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vercel@65.9.0:
-    resolution: {integrity: sha512-uROjH+BpZP18DXTruhl4JTVvZbRZPIG89gFN8xZ5V66WLK660Qc+3rITATIG82/yrEm3d3GpYGavISc52kBn/w==}
+  vercel@65.10.0:
+    resolution: {integrity: sha512-dXoJ5FqmbnUqpIJ/wBRXJnc/+fiARikuPA80wFJF3IfhS0/dpH+rv2oIKfpylWTe7p4gtHAIX3svZBiUA81cng==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -9734,7 +9748,7 @@ snapshots:
       debug: 4.4.3(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -9756,7 +9770,7 @@ snapshots:
       '@babel/helper-validator-option': 7.29.7
       browserslist: 4.29.3
       lru-cache: 5.1.1
-      semver: 6.3.1
+      semver: 6.3.2
 
   '@babel/helper-create-class-features-plugin@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
@@ -9767,7 +9781,7 @@ snapshots:
       '@babel/helper-replace-supers': 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/helper-skip-transparent-expression-wrappers': 7.29.7(supports-color@8.1.1)
       '@babel/traverse': 7.29.8(supports-color@8.1.1)
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -9776,7 +9790,7 @@ snapshots:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-annotate-as-pure': 7.29.7
       regexpu-core: 6.4.0
-      semver: 6.3.1
+      semver: 6.3.2
 
   '@babel/helper-define-polyfill-provider@0.6.8(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
@@ -10315,7 +10329,7 @@ snapshots:
       babel-plugin-polyfill-corejs2: 0.4.17(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       babel-plugin-polyfill-corejs3: 0.13.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       babel-plugin-polyfill-regenerator: 0.6.8(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -10454,7 +10468,7 @@ snapshots:
       babel-plugin-polyfill-corejs3: 0.14.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       babel-plugin-polyfill-regenerator: 0.6.8(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       core-js-compat: 3.50.0
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -10522,7 +10536,7 @@ snapshots:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
 
-  '@babel/types@8.0.10':
+  '@babel/types@8.1.0':
     dependencies:
       '@babel/helper-string-parser': 8.0.8
       '@babel/helper-validator-identifier': 8.0.6
@@ -10586,7 +10600,7 @@ snapshots:
   '@commitlint/is-ignored@21.2.3':
     dependencies:
       '@commitlint/types': 21.2.3
-      semver: 7.8.5
+      semver: 7.8.6
 
   '@commitlint/lint@21.2.4':
     dependencies:
@@ -10657,7 +10671,7 @@ snapshots:
     dependencies:
       '@simple-libs/child-process-utils': 2.0.0
       '@simple-libs/stream-utils': 2.0.0
-      semver: 7.8.5
+      semver: 7.8.6
     optionalDependencies:
       conventional-commits-filter: 6.0.1
       conventional-commits-parser: 7.1.2
@@ -11122,7 +11136,7 @@ snapshots:
       react-router: 5.3.4(react@19.3.1)
       react-router-config: 5.1.1(react-router@5.3.4(react@19.3.1))(react@19.3.1)
       react-router-dom: 5.3.4(react@19.3.1)
-      semver: 7.8.5
+      semver: 7.8.6
       serve-handler: 6.1.7
       tinypool: 1.1.1
       tslib: 2.8.1
@@ -11174,7 +11188,7 @@ snapshots:
       '@swc/html': 1.16.2
       browserslist: 4.29.3
       lightningcss: 1.33.0
-      semver: 7.8.5
+      semver: 7.8.6
       swc-loader: 0.2.7(@swc/core@1.16.2)(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5))
       tslib: 2.8.1
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)
@@ -12042,14 +12056,14 @@ snapshots:
     dependencies:
       '@edge-runtime/primitives': 4.1.0
 
-  '@elysia/eden@1.4.10(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))':
+  '@elysia/eden@1.4.10(elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))':
     dependencies:
-      elysia: 1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
+      elysia: 1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
 
-  '@elysiajs/node@1.4.5(elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))':
+  '@elysiajs/node@1.4.5(elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3))':
     dependencies:
       crossws: 0.4.12(srvx@0.11.22)
-      elysia: 1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
+      elysia: 1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3)
       srvx: 0.11.22
 
   '@emnapi/core@1.10.0':
@@ -12257,11 +12271,11 @@ snapshots:
       - supports-color
       - typescript
 
-  '@goatjs/core@2.49.0': {}
+  '@goatjs/core@2.50.0': {}
 
-  '@goatjs/dbz@2.95.0(@types/node@26.6.6)':
+  '@goatjs/dbz@2.96.0(@types/node@26.6.6)':
     dependencies:
-      '@goatjs/core': 2.49.0
+      '@goatjs/core': 2.50.0
       '@goatjs/node': 2.39.0
       '@goatjs/rimraf': 2.15.0
       '@goatjs/zod': 2.31.0(zod@4.6.7)
@@ -12276,11 +12290,11 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@goatjs/doctor@2.71.0(supports-color@8.1.1)':
+  '@goatjs/doctor@2.72.0(supports-color@8.1.1)':
     dependencies:
-      '@babel/types': 8.0.10
+      '@babel/types': 8.1.0
       '@fbtjs/default-collection-transform': 1.0.0(babel-plugin-fbt@1.0.0)(supports-color@8.1.1)
-      '@goatjs/core': 2.49.0
+      '@goatjs/core': 2.50.0
       '@goatjs/rimraf': 2.15.0
       babel-plugin-fbt: 1.0.0(@fbtjs/default-collection-transform@1.0.0)(supports-color@8.1.1)
       babel-plugin-fbt-runtime: 1.0.0(babel-plugin-fbt@1.0.0)(supports-color@8.1.1)
@@ -12723,7 +12737,7 @@ snapshots:
       https-proxy-agent: 7.0.6(supports-color@8.1.1)
       node-fetch: 2.7.0
       nopt: 8.1.0
-      semver: 7.8.5
+      semver: 7.8.6
       tar: 7.5.22
     transitivePeerDependencies:
       - encoding
@@ -12883,33 +12897,33 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.3
 
-  '@opencode/client@2.2.5(effect@4.0.6)':
+  '@opencode/client@2.2.6(effect@4.1.0)':
     dependencies:
-      '@opencode/protocol': 2.2.5
-      '@opencode/schema': 2.2.5
+      '@opencode/protocol': 2.2.6
+      '@opencode/schema': 2.2.6
     optionalDependencies:
-      effect: 4.0.6
+      effect: 4.1.0
 
-  '@opencode/protocol@2.2.5':
+  '@opencode/protocol@2.2.6':
     dependencies:
-      '@opencode/schema': 2.2.5
-      effect: 4.0.6
+      '@opencode/schema': 2.2.6
+      effect: 4.1.0
 
-  '@opencode/schema@2.2.5':
+  '@opencode/schema@2.2.6':
     dependencies:
       '@standard-schema/spec': 1.1.0
-      effect: 4.0.6
+      effect: 4.1.0
 
-  '@opentunnel/client@0.6.1(effect@4.0.6)(undici@8.12.3)':
+  '@opentunnel/client@0.6.2(effect@4.1.0)(undici@8.12.4)':
     dependencies:
-      '@opentunnel/protocol': 0.6.1(effect@4.0.6)
-      effect: 4.0.6
+      '@opentunnel/protocol': 0.6.2(effect@4.1.0)
+      effect: 4.1.0
     optionalDependencies:
-      undici: 8.12.3
+      undici: 8.12.4
 
-  '@opentunnel/protocol@0.6.1(effect@4.0.6)':
+  '@opentunnel/protocol@0.6.2(effect@4.1.0)':
     dependencies:
-      effect: 4.0.6
+      effect: 4.1.0
 
   '@oxc-parser/binding-android-arm-eabi@0.121.0':
     optional: true
@@ -13397,7 +13411,7 @@ snapshots:
   '@simple-libs/normalize-package-data@1.0.0':
     dependencies:
       '@simple-libs/hosted-git-info': 2.0.0
-      semver: 7.8.5
+      semver: 7.8.6
 
   '@simple-libs/stream-utils@2.0.0': {}
 
@@ -13919,7 +13933,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.72.1
       debug: 4.4.3(supports-color@8.1.1)
       minimatch: 10.2.6
-      semver: 7.8.5
+      semver: 7.8.6
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
@@ -14062,13 +14076,13 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vercel/cli-auth@0.3.14':
+  '@vercel/cli-auth@0.3.15':
     dependencies:
       '@napi-rs/keyring': 1.2.0
-      '@vercel/cli-config': 0.3.5
+      '@vercel/cli-config': 0.3.6
       async-listen: 3.0.0
       open: 8.4.0
-      zod: 4.1.11
+      zod: 4.6.7
     optionalDependencies:
       koffi: 3.3.3
 
@@ -14082,22 +14096,22 @@ snapshots:
       xdg-app-paths: 5.1.0
       zod: 4.1.11
 
-  '@vercel/cli-config@0.3.5':
+  '@vercel/cli-config@0.3.6':
     dependencies:
       xdg-app-paths: 5.5.1
-      zod: 4.1.11
+      zod: 4.6.7
 
   '@vercel/cli-exec@1.0.1':
     dependencies:
       execa: 5.1.1
 
-  '@vercel/cli-support@65.9.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)':
+  '@vercel/cli-support@65.10.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)':
     dependencies:
       '@vercel/backends': 24.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/blob': 2.8.0
       '@vercel/build-utils': 15.2.1
-      '@vercel/cli-auth': 0.3.14
-      '@vercel/cli-config': 0.3.5
+      '@vercel/cli-auth': 0.3.15
+      '@vercel/cli-config': 0.3.6
       '@vercel/container': 24.0.1(@vercel/build-utils@15.2.1)
       '@vercel/detect-agent': 1.2.7
       '@vercel/elysia': 24.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
@@ -14113,8 +14127,8 @@ snapshots:
       '@vercel/next': 28.0.1(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/node': 29.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/prepare-flags-definitions': 0.6.1
-      '@vercel/python': 30.0.1(@vercel/build-utils@15.2.1)
-      '@vercel/python-analysis': 0.15.2
+      '@vercel/python': 30.1.0(@vercel/build-utils@15.2.1)
+      '@vercel/python-analysis': 0.15.3
       '@vercel/redwood': 26.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/remix-builder': 29.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/ruby': 26.0.1(@vercel/build-utils@15.2.1)
@@ -14129,7 +14143,7 @@ snapshots:
       smol-toml: 1.5.2
       undici: 5.29.0
       uuid: 14.0.1
-      zod: 4.1.11
+      zod: 4.6.7
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -14369,7 +14383,7 @@ snapshots:
 
   '@vercel/prepare-flags-definitions@0.6.1': {}
 
-  '@vercel/python-analysis@0.15.2':
+  '@vercel/python-analysis@0.15.3':
     dependencies:
       '@bytecodealliance/preview2-shim': 0.17.6
       fs-extra: 11.1.1
@@ -14378,10 +14392,10 @@ snapshots:
       smol-toml: 1.5.2
       zod: 3.22.4
 
-  '@vercel/python@30.0.1(@vercel/build-utils@15.2.1)':
+  '@vercel/python@30.1.0(@vercel/build-utils@15.2.1)':
     dependencies:
       '@vercel/build-utils': 15.2.1
-      '@vercel/python-analysis': 0.15.2
+      '@vercel/python-analysis': 0.15.3
 
   '@vercel/redwood@26.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)':
     dependencies:
@@ -14464,22 +14478,28 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@vercel/vc-native-darwin-arm64@65.9.0':
+  '@vercel/vc-native-darwin-arm64@65.10.0':
     optional: true
 
-  '@vercel/vc-native-darwin-x64@65.9.0':
+  '@vercel/vc-native-darwin-x64@65.10.0':
     optional: true
 
-  '@vercel/vc-native-linux-arm64-musl@65.9.0':
+  '@vercel/vc-native-linux-arm64-musl@65.10.0':
     optional: true
 
-  '@vercel/vc-native-linux-arm64@65.9.0':
+  '@vercel/vc-native-linux-arm64@65.10.0':
     optional: true
 
-  '@vercel/vc-native-linux-x64-musl@65.9.0':
+  '@vercel/vc-native-linux-x64-musl@65.10.0':
     optional: true
 
-  '@vercel/vc-native-linux-x64@65.9.0':
+  '@vercel/vc-native-linux-x64@65.10.0':
+    optional: true
+
+  '@vercel/vc-native-win32-arm64@65.10.0':
+    optional: true
+
+  '@vercel/vc-native-win32-x64@65.10.0':
     optional: true
 
   '@webassemblyjs/ast@1.14.1':
@@ -14793,7 +14813,7 @@ snapshots:
       '@babel/compat-data': 7.29.7
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-define-polyfill-provider': 0.6.8(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -15194,7 +15214,7 @@ snapshots:
       '@simple-libs/stream-utils': 2.0.0
       argue-cli: 3.2.0
       conventional-commits-filter: 6.0.1
-      semver: 7.8.5
+      semver: 7.8.6
 
   conventional-changelog@8.1.3:
     dependencies:
@@ -15302,7 +15322,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.28)
       postcss-modules-values: 4.0.0(postcss@8.5.28)
       postcss-value-parser: 4.2.0
-      semver: 7.8.5
+      semver: 7.8.6
     optionalDependencies:
       '@rspack/core': 1.7.12
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)
@@ -15621,15 +15641,15 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect@4.0.6: {}
+  effect@4.1.0: {}
 
   electron-to-chromium@1.5.444: {}
 
-  elysia@1.4.30(@sinclair/typebox@0.34.52)(exact-mirror@1.2.6)(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3):
+  elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@8.1.1))(openapi-types@12.1.3)(typescript@6.0.3):
     dependencies:
       '@sinclair/typebox': 0.34.52
       cookie: 1.1.1
-      exact-mirror: 1.2.6
+      exact-mirror: 0.2.9(@sinclair/typebox@0.34.52)
       fast-decode-uri-component: 1.0.1
       file-type: 22.3.0(supports-color@8.1.1)
       memoirist: 0.4.0
@@ -15886,7 +15906,7 @@ snapshots:
       eslint-import-context: 0.1.9(unrs-resolver@1.12.2)
       is-glob: 4.0.3
       minimatch: 10.2.6
-      semver: 7.8.5
+      semver: 7.8.6
       stable-hash-x: 0.2.0
       unrs-resolver: 1.12.2
     optionalDependencies:
@@ -15912,7 +15932,7 @@ snapshots:
       eslint-json-compat-utils: 0.2.3(eslint@10.14.0(jiti@2.7.0)(supports-color@8.1.1))(jsonc-eslint-parser@3.3.0)
       jsonc-eslint-parser: 3.3.0
       package-json-validator: 1.6.1
-      semver: 7.8.5
+      semver: 7.8.6
       sort-object-keys: 2.1.0
       sort-package-json: 4.1.0
 
@@ -15938,7 +15958,7 @@ snapshots:
       lodash.merge: 4.6.2
       minimatch: 10.2.6
       scslre: 0.3.0
-      semver: 7.8.5
+      semver: 7.8.6
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
       yaml: 2.9.1
@@ -15965,7 +15985,7 @@ snapshots:
       quote-js-string: 0.1.0
       regjsparser: 0.13.3
       reserved-identifiers: 1.2.0
-      semver: 7.8.5
+      semver: 7.8.6
       strip-indent: 4.1.1
       yaml: 2.9.1
     optionalDependencies:
@@ -16099,7 +16119,9 @@ snapshots:
 
   events@3.3.0: {}
 
-  exact-mirror@1.2.6: {}
+  exact-mirror@0.2.9(@sinclair/typebox@0.34.52):
+    optionalDependencies:
+      '@sinclair/typebox': 0.34.52
 
   execa@10.2.1:
     dependencies:
@@ -16952,7 +16974,7 @@ snapshots:
 
   is-bun-module@2.0.0:
     dependencies:
-      semver: 7.8.5
+      semver: 7.8.6
 
   is-callable@1.2.7:
     optional: true
@@ -18124,7 +18146,7 @@ snapshots:
       array.prototype.flatmap: 1.3.3
       es-errors: 1.3.0
       object.entries: 1.1.9
-      semver: 6.3.1
+      semver: 6.3.2
     optional: true
 
   node-fetch@2.6.7:
@@ -18157,7 +18179,7 @@ snapshots:
     dependencies:
       hosted-git-info: 9.0.3
       proc-log: 6.1.0
-      semver: 7.8.5
+      semver: 7.8.6
       validate-npm-package-name: 7.0.2
 
   npm-run-path@4.0.1:
@@ -18422,7 +18444,7 @@ snapshots:
   package-json-validator@1.6.1:
     dependencies:
       npm-package-arg: 13.0.2
-      semver: 7.8.5
+      semver: 7.8.6
       validate-npm-package-license: 3.0.4
       validate-npm-package-name: 7.0.2
 
@@ -18431,7 +18453,7 @@ snapshots:
       got: 12.6.1
       registry-auth-token: 5.1.1
       registry-url: 6.0.1
-      semver: 7.8.5
+      semver: 7.8.6
 
   package-manager-detector@1.8.0: {}
 
@@ -18711,7 +18733,7 @@ snapshots:
       cosmiconfig: 8.3.6(typescript@6.0.3)
       jiti: 1.21.7
       postcss: 8.5.28
-      semver: 7.8.5
+      semver: 7.8.6
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.27.0)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)
     transitivePeerDependencies:
       - typescript
@@ -19547,17 +19569,19 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.8.5
+      semver: 7.8.6
 
   semver@5.7.2: {}
 
   semver@6.3.1: {}
 
+  semver@6.3.2: {}
+
   semver@7.5.4:
     dependencies:
       lru-cache: 6.0.0
 
-  semver@7.8.5: {}
+  semver@7.8.6: {}
 
   send@0.19.2(supports-color@8.1.1):
     dependencies:
@@ -19738,7 +19762,7 @@ snapshots:
       detect-newline: 4.0.1
       git-hooks-list: 4.2.1
       is-plain-obj: 4.1.0
-      semver: 7.8.5
+      semver: 7.8.6
       sort-object-keys: 2.1.0
       tinyglobby: 0.2.17
 
@@ -20208,7 +20232,7 @@ snapshots:
 
   undici@7.29.1: {}
 
-  undici@8.12.3: {}
+  undici@8.12.4: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -20316,7 +20340,7 @@ snapshots:
       is-yarn-global: 0.4.1
       latest-version: 7.0.0
       pupa: 3.3.0
-      semver: 7.8.5
+      semver: 7.8.6
       semver-diff: 4.0.0
       xdg-basedir: 5.1.0
 
@@ -20358,13 +20382,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vercel@65.9.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1):
+  vercel@65.10.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1):
     dependencies:
       '@vercel/backends': 24.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/blob': 2.8.0
       '@vercel/build-utils': 15.2.1
-      '@vercel/cli-auth': 0.3.14
-      '@vercel/cli-config': 0.3.5
+      '@vercel/cli-auth': 0.3.15
+      '@vercel/cli-config': 0.3.6
       '@vercel/container': 24.0.1(@vercel/build-utils@15.2.1)
       '@vercel/detect-agent': 1.2.7
       '@vercel/elysia': 24.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
@@ -20380,8 +20404,8 @@ snapshots:
       '@vercel/next': 28.0.1(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/node': 29.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/prepare-flags-definitions': 0.6.1
-      '@vercel/python': 30.0.1(@vercel/build-utils@15.2.1)
-      '@vercel/python-analysis': 0.15.2
+      '@vercel/python': 30.1.0(@vercel/build-utils@15.2.1)
+      '@vercel/python-analysis': 0.15.3
       '@vercel/redwood': 26.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/remix-builder': 29.0.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@vercel/build-utils@15.2.1)(supports-color@8.1.1)
       '@vercel/ruby': 26.0.1(@vercel/build-utils@15.2.1)
@@ -20396,15 +20420,17 @@ snapshots:
       smol-toml: 1.5.2
       undici: 5.29.0
       uuid: 14.0.1
-      zod: 4.1.11
+      zod: 4.6.7
     optionalDependencies:
-      '@vercel/cli-support': 65.9.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
-      '@vercel/vc-native-darwin-arm64': 65.9.0
-      '@vercel/vc-native-darwin-x64': 65.9.0
-      '@vercel/vc-native-linux-arm64': 65.9.0
-      '@vercel/vc-native-linux-arm64-musl': 65.9.0
-      '@vercel/vc-native-linux-x64': 65.9.0
-      '@vercel/vc-native-linux-x64-musl': 65.9.0
+      '@vercel/cli-support': 65.10.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@8.1.1)
+      '@vercel/vc-native-darwin-arm64': 65.10.0
+      '@vercel/vc-native-darwin-x64': 65.10.0
+      '@vercel/vc-native-linux-arm64': 65.10.0
+      '@vercel/vc-native-linux-arm64-musl': 65.10.0
+      '@vercel/vc-native-linux-x64': 65.10.0
+      '@vercel/vc-native-linux-x64-musl': 65.10.0
+      '@vercel/vc-native-win32-arm64': 65.10.0
+      '@vercel/vc-native-win32-x64': 65.10.0
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'

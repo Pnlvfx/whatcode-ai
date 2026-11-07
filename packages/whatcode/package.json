@@ -45,7 +45,7 @@
     "@whatcode-ai/sdk": "workspace:*",
     "execa": "^10.2.1",
     "qrcode-terminal": "^0.12.0",
-    "semver": "^7.8.5",
+    "semver": "^7.8.6",
     "yargs": "^18.2.0",
     "zod": "^4.6.7"
   },
