@@ -15,6 +15,7 @@ import { createOpencode } from '../opencode/opencode.ts';
 import { isServerRunning } from '../net.ts';
 import { authenticate } from '../auth/auth.ts';
 import { startNotifications } from '../apn/apn.ts';
+import { startScheduler } from '../scheduler/scheduler.ts';
 import { startEventSubscription } from '../opencode/event-subscription.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
 
@@ -61,6 +62,7 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   const daemonUrl = `http://${ipData.data}:${port.toString()}`;
   startEventSubscription(client);
   startNotifications(client);
+  startScheduler(client);
   // if (flags?.WHATCODE_NOTIFICATION_V2) {
   //   startNotificationTracker(client);
   // }

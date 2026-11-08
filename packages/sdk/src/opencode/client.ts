@@ -1,4 +1,12 @@
-import { ClientError, OpenCode, type MessageListInput, type ModelListInput, type ProjectListInput, type SessionGetInput } from '@opencode/client';
+import {
+  ClientError,
+  OpenCode,
+  type MessageListInput,
+  type ModelListInput,
+  type ProjectListInput,
+  type SessionGetInput,
+  type SessionPromptInput,
+} from '@opencode/client';
 import { Service, type Endpoint } from '@opencode/client/service';
 import { safeTryCatch } from '../compiled/core/try-catch.ts';
 
@@ -25,6 +33,9 @@ export const createWhatCodeClient = (endpoint: Endpoint) => {
     session: {
       get: (input: SessionGetInput) => {
         return request2(client.session.get(input));
+      },
+      prompt: (input: SessionPromptInput) => {
+        return request2(client.session.prompt(input));
       },
     },
     message: {
