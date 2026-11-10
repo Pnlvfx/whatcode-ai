@@ -1,6 +1,6 @@
 {
   "name": "@whatcode-ai/whatcode",
-  "version": "2.7.0",
+  "version": "2.8.0-canary.0",
   "description": "CLI to start OpenCode and optionally expose it over HTTPS. Connect to your AI coding assistant from anywhere.",
   "keywords": [
     "opencode",

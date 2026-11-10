@@ -1,3 +1,9 @@
+## [2.8.0-canary.0](compare/%40whatcode-ai%2Fwhatcode%402.7.0...%40whatcode-ai%2Fwhatcode%402.8.0-canary.0) "@whatcode-ai/whatcode" (2026-11-10)
+
+### Bug Fixes
+
+* desplop f08243b
+
 ## [2.7.0](compare/%40whatcode-ai%2Fwhatcode%402.6.0...%40whatcode-ai%2Fwhatcode%402.7.0) "@whatcode-ai/whatcode" (2026-11-02)
 
 ### Features
