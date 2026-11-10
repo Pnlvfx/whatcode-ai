@@ -1,6 +1,5 @@
-import type { IncomingMessage } from 'node:http';
+import type { IncomingMessage, Server } from 'node:http';
 import type { Duplex } from 'node:stream';
-import { Server } from 'node:http';
 import net from 'node:net';
 import tls from 'node:tls';
 import { parseError } from './compiled/core/error.ts';
@@ -18,30 +17,18 @@ const PTY_PREFIX = '/api/pty/';
 const CONNECT_SUFFIX = '/connect';
 const HANDSHAKE_HEADERS = ['connection', 'upgrade', 'sec-websocket-key', 'sec-websocket-version', 'sec-websocket-protocol', 'sec-websocket-extensions'];
 
-// Takes over PTY websocket upgrades and pipes them straight to OpenCode, everything else keeps the server's original upgrade listeners.
-// Elysia's node adapter can't carry a raw terminal stream: its websocket message handler swallows any frame containing "ping" and decodes every frame as text.
-export const attachPtyUpgradeProxy = (opencodeUrl: string) => (server: unknown) => {
-  const httpServer = findNodeServer(server);
-  if (!httpServer) return;
+// Pipes PTY websocket upgrades straight to OpenCode as raw sockets, so terminal frames are never parsed here.
+// The daemon has no websocket routes of its own, so any other upgrade is dropped.
+export const attachPtyUpgradeProxy = (server: Server, opencodeUrl: string) => {
   const target = new URL(opencodeUrl);
-  const fallbacks = httpServer.listeners('upgrade');
-  httpServer.removeAllListeners('upgrade');
-  httpServer.on('upgrade', (req: IncomingMessage, socket: Duplex, head: Buffer) => {
+  server.on('upgrade', (req, socket, head) => {
     if (isPtyUpgrade(req)) {
       proxyUpgrade({ req, socket, head, target });
       return;
     }
-    for (const listener of fallbacks) Reflect.apply(listener, httpServer, [req, socket, head]);
+    socket.destroy();
   });
 };
-
-const findNodeServer = (server: unknown) => {
-  const node = getProperty(getProperty(server, 'raw'), 'node');
-  const httpServer = getProperty(node, 'server');
-  return httpServer instanceof Server ? httpServer : undefined;
-};
-
-const getProperty = (value: unknown, key: string): unknown => (typeof value === 'object' && value !== null ? Reflect.get(value, key) : undefined);
 
 // The ticket is validated by OpenCode on the upstream leg, the daemon only recognizes the route.
 const isPtyUpgrade = ({ url = '/', headers }: IncomingMessage) => {

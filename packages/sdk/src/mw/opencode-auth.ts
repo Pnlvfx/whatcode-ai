@@ -1,14 +1,14 @@
-import { Elysia } from 'elysia';
+import { createMiddleware } from 'hono/factory';
 import { timingSafeEqual } from 'node:crypto';
-import { status } from 'elysia/error';
 
 export const basicAuth = (password: string) =>
-  new Elysia({ name: 'basic-auth' }).onBeforeHandle({ as: 'global' }, ({ headers: { authorization } }) => {
-    if (!authorization?.startsWith('Basic ')) return status(401, { message: 'Unauthorized' });
-    const encoded = authorization.slice('Basic '.length);
-    const decoded = Buffer.from(encoded, 'base64').toString('utf8');
-    const colonIndex = decoded.indexOf(':');
-    const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
-    const passOk = pass.length === password.length && timingSafeEqual(Buffer.from(pass), Buffer.from(password));
-    return passOk ? undefined : status(401, { message: 'Unauthorized' });
-  });
+  createMiddleware((c, next) => (isAuthorized(c.req.header('authorization'), password) ? next() : Promise.resolve(c.json({ message: 'Unauthorized' }, 401))));
+
+const isAuthorized = (authorization: string | undefined, password: string) => {
+  if (!authorization?.startsWith('Basic ')) return false;
+  const encoded = authorization.slice('Basic '.length);
+  const decoded = Buffer.from(encoded, 'base64').toString('utf8');
+  const colonIndex = decoded.indexOf(':');
+  const pass = colonIndex === -1 ? decoded : decoded.slice(colonIndex + 1);
+  return pass.length === password.length && timingSafeEqual(Buffer.from(pass), Buffer.from(password));
+};

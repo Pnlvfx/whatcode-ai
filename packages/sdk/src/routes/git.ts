@@ -1,41 +1,33 @@
 import type { WhatCodeClient } from '../opencode/client.ts';
-import { Elysia } from 'elysia';
+import { sValidator } from '@hono/standard-validator';
+import { Hono } from 'hono';
 import { findEscapingPath, prepareRepo } from '../git/prepare.ts';
 import { commitFiles, pullBranch, pushBranch } from '../git/operations.ts';
 import { commitBody, directoryBody } from '../types/git.ts';
+import { invalidRequest } from '../validation.ts';
 
 export const createGitRouter = (client: WhatCodeClient) => {
-  return new Elysia({ prefix: '/api/git' })
-    .post(
-      '/commit',
-      async ({ body, status }) => {
-        const repo = await prepareRepo(client, body.directory);
-        if (repo.error) return status(repo.error.status, { message: repo.error.message });
-        const escaping = findEscapingPath(repo.data, body.filePaths);
-        if (escaping !== undefined) return status(400, { message: `Path is outside the project: ${escaping}` });
-        const result = await commitFiles(repo.data, body.message, body.filePaths);
-        return result.error ? status(400, { message: result.error.message }) : result.data;
-      },
-      { body: commitBody },
-    )
-    .post(
-      '/push',
-      async ({ body, status }) => {
-        const repo = await prepareRepo(client, body.directory);
-        if (repo.error) return status(repo.error.status, { message: repo.error.message });
-        const result = await pushBranch(repo.data);
-        return result.error ? status(400, { message: result.error.message }) : { status: 'success' };
-      },
-      { body: directoryBody },
-    )
-    .post(
-      '/pull',
-      async ({ body, status }) => {
-        const repo = await prepareRepo(client, body.directory);
-        if (repo.error) return status(repo.error.status, { message: repo.error.message });
-        const result = await pullBranch(repo.data);
-        return result.error ? status(400, { message: result.error.message }) : result.data;
-      },
-      { body: directoryBody },
-    );
+  return new Hono()
+    .basePath('/api/git')
+    .post('/commit', sValidator('json', commitBody, invalidRequest), async (c) => {
+      const body = c.req.valid('json');
+      const repo = await prepareRepo(client, body.directory);
+      if (repo.error) return c.json({ message: repo.error.message }, repo.error.status);
+      const escaping = findEscapingPath(repo.data, body.filePaths);
+      if (escaping !== undefined) return c.json({ message: `Path is outside the project: ${escaping}` }, 400);
+      const result = await commitFiles(repo.data, body.message, body.filePaths);
+      return result.error ? c.json({ message: result.error.message }, 400) : c.json(result.data, 200);
+    })
+    .post('/push', sValidator('json', directoryBody, invalidRequest), async (c) => {
+      const repo = await prepareRepo(client, c.req.valid('json').directory);
+      if (repo.error) return c.json({ message: repo.error.message }, repo.error.status);
+      const result = await pushBranch(repo.data);
+      return result.error ? c.json({ message: result.error.message }, 400) : c.json({ status: 'success' }, 200);
+    })
+    .post('/pull', sValidator('json', directoryBody, invalidRequest), async (c) => {
+      const repo = await prepareRepo(client, c.req.valid('json').directory);
+      if (repo.error) return c.json({ message: repo.error.message }, repo.error.status);
+      const result = await pullBranch(repo.data);
+      return result.error ? c.json({ message: result.error.message }, 400) : c.json(result.data, 200);
+    });
 };

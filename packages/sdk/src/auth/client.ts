@@ -1,6 +1,7 @@
 // TODO [2026-12-08] Eysia type portability issue
 // eslint-disable-next-line sonarjs/no-internal-api-use
 import type * as _ from '../../../../node_modules/@elysia/eden/dist/types.js';
+import type * as __ from 'undici';
 import type { App } from '@/server/server';
 import { treaty } from '@elysia/eden/treaty2';
 import { SERVER_URL } from '../config/constants.ts';

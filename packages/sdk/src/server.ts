@@ -1,15 +1,20 @@
+import type { ServerType } from '@hono/node-server';
+import type { Context } from 'hono';
+import type { ApplyGlobalResponse } from 'hono/client';
 import type { WhatCodeClient } from './opencode/client.ts';
 import { Service, type Endpoint } from '@opencode/client/service';
-import { Elysia } from 'elysia';
+import { serve } from '@hono/node-server';
+import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
+import { once } from 'node:events';
+import { Server } from 'node:http';
 import { userRouter } from './routes/user.ts';
 import { sessionRouter } from './routes/session.ts';
 import { basicAuth } from './mw/opencode-auth.ts';
-import { fetch, Headers, Response } from 'undici';
 import { logger } from './logger.ts';
 import { MIN_APP_VERSION } from './config/constants.ts';
 import { createProjectRouterOverride } from './routes/project.ts';
 import { createGitRouter } from './routes/git.ts';
-import { getAdapter } from './adapters/adapter.ts';
 import { attachPtyUpgradeProxy } from './pty-proxy.ts';
 import pkgJson from '../package.json' with { type: 'json' };
 
@@ -20,53 +25,76 @@ interface Params {
   client: WhatCodeClient;
 }
 
-export const startWhatcode = async ({ port, endpoint, password, client }: Params) => {
-  const ocHeaders = Service.headers(endpoint);
-  const projectRouter = createProjectRouterOverride(client);
-  const gitRouter = createGitRouter(client);
-  const adapter = await getAdapter();
+// the auth middleware and onError answer outside the route handlers, so hono only knows about them when they are declared here
+export type DaemonApp = ApplyGlobalResponse<ReturnType<typeof createApp>, { 401: { json: { message: string } }; 500: { json: { message: string } } }>;
 
-  return new Elysia(adapter ? { adapter } : undefined)
-    .onError(({ error, request }) => {
-      const { pathname, search } = new URL(request.url);
-      const url = `${pathname}${search}`;
-      logger.error('server-error', `An error occured at ${url}`, error);
-    })
+export const startWhatcode = async ({ client, endpoint, password, port }: Params) => {
+  const server = toHttpServer(serve({ fetch: createApp({ client, password, endpoint }).fetch, port }));
+  attachPtyUpgradeProxy(server, endpoint.url);
+  await once(server, 'listening');
+};
+
+const toHttpServer = (server: ServerType) => {
+  if (server instanceof Server) return server;
+  throw new Error('Expected an HTTP/1 server from @hono/node-server');
+};
+
+const createApp = ({ endpoint, password, client }: Pick<Params, 'client' | 'endpoint' | 'password'>) => {
+  return new Hono({ strict: false })
+    .onError(handleError)
     .use(basicAuth(password))
-    .get('/info', { version: pkgJson.version, app: { min: MIN_APP_VERSION } })
-    .use(userRouter)
-    .use(sessionRouter)
-    .use(projectRouter)
-    .use(gitRouter)
-    .all(
-      '/*',
-      async ({ request, set }) => {
-        const requestUrl = new URL(request.url);
-        const url = new URL(`${endpoint.url}${requestUrl.pathname}${requestUrl.search}`);
-        const hasBody = request.method !== 'GET' && request.method !== 'HEAD';
-        const body = hasBody ? request.body : undefined;
-        const requestHeaders = new Headers(request.headers);
-        requestHeaders.set('host', new URL(endpoint.url).host);
-        if (ocHeaders) {
-          requestHeaders.set('authorization', ocHeaders.authorization);
-        }
-        requestHeaders.delete('accept-encoding');
-        const upstream = await fetch(url.href, { method: request.method, headers: requestHeaders, duplex: 'half', ...(body && { body }) });
-        if (!upstream.ok) {
-          logger.error('opencode-error', `Upstream ${request.method} ${url.pathname}${url.search} failed with ${upstream.status.toString()}`);
-        }
-        const responseHeaders = new Headers(upstream.headers);
-        responseHeaders.delete('content-encoding');
-        responseHeaders.delete('content-length');
-        responseHeaders.set('cache-control', 'no-cache');
-        responseHeaders.set('x-accel-buffering', 'no');
-        // Pre-populate set.headers with content-type so Elysia's stream handler
-        // doesn't override it with 'text/plain' when rewriting chunked responses.
-        const contentType = upstream.headers.get('content-type');
-        if (contentType) set.headers['content-type'] = contentType;
-        return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
-      },
-      { parse: 'none' },
-    )
-    .listen(port, attachPtyUpgradeProxy(endpoint.url));
+    .get('/info', (c) => c.json({ version: pkgJson.version, app: { min: MIN_APP_VERSION } }, 200))
+    .route('/', userRouter)
+    .route('/', sessionRouter)
+    .route('/', createProjectRouterOverride(client))
+    .route('/', createGitRouter(client))
+    .all('/*', createProxy(endpoint));
+};
+
+const handleError = (error: Error, c: Context) => {
+  if (error instanceof HTTPException) return c.json({ message: error.message }, error.status);
+  const { pathname, search } = new URL(c.req.url);
+  logger.error('server-error', `An error occured at ${pathname}${search}`, error);
+  return c.json({ message: 'Internal server error' }, 500);
+};
+
+const createProxy = (endpoint: Endpoint) => {
+  const host = new URL(endpoint.url).host;
+  const authorization = Service.headers(endpoint)?.authorization;
+  return async ({ req: { raw } }: Context) => {
+    const { pathname, search } = new URL(raw.url);
+    const upstream = await fetch(`${endpoint.url}${pathname}${search}`, buildUpstreamInit(raw, host, authorization));
+    if (!upstream.ok) {
+      logger.error('opencode-error', `Upstream ${raw.method} ${pathname}${search} failed with ${upstream.status.toString()}`);
+    }
+    return new Response(upstream.body, { status: upstream.status, headers: buildResponseHeaders(upstream.headers) });
+  };
+};
+
+const buildUpstreamInit = (raw: Request, host: string, authorization: string | undefined) => {
+  const hasBody = raw.method !== 'GET' && raw.method !== 'HEAD';
+  return {
+    method: raw.method,
+    headers: buildUpstreamHeaders(raw, host, authorization),
+    duplex: 'half',
+    ...(hasBody && raw.body && { body: raw.body }),
+  } satisfies RequestInit & { duplex: 'half' };
+};
+
+const buildUpstreamHeaders = ({ headers: source }: Request, host: string, authorization: string | undefined) => {
+  const headers = new Headers(source);
+  headers.set('host', host);
+  if (authorization === undefined) headers.delete('authorization');
+  else headers.set('authorization', authorization);
+  headers.delete('accept-encoding');
+  return headers;
+};
+
+const buildResponseHeaders = (source: Headers) => {
+  const headers = new Headers(source);
+  headers.delete('content-encoding');
+  headers.delete('content-length');
+  headers.set('cache-control', 'no-cache');
+  headers.set('x-accel-buffering', 'no');
+  return headers;
 };
