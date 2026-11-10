@@ -111,7 +111,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
     const loggerName = 'notifications:session.error';
     logger.debug(loggerName, `session.error event received for session ${sessionID}`);
     if (!sessionID) {
-      logger.debug('notifications', 'skipping session.error — no session available');
+      logger.debug('notifications', 'skipping session.error, no session available!');
       return;
     }
     const sessionResult = await client.session.get({ sessionID });
@@ -193,6 +193,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
   };
 
   registerEventHandler((event: V2Event): void => {
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (event.type) {
       case 'session.execution.succeeded': {
         const { sessionID } = event.data;

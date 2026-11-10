@@ -46,7 +46,7 @@
     "@types/react": "^19.3.0",
     "execa": "^10.2.1",
     "typescript": "^6.0.3",
-    "vercel": "^65.10.0"
+    "vercel": "^65.14.0"
   },
   "engines": {
     "node": ">=20.0"

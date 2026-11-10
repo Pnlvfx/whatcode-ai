@@ -5,12 +5,14 @@ Do not modify it manually
 
 import { capitalize } from '../../core/capitalize.ts';
 
+const rgx = /[-_]/;
+
 export const getProjectName = (worktree: string): string => {
   const sep = worktree.includes('/') ? '/' : '\\';
   if (worktree === '/') return 'Root';
   const name = worktree.split(sep).at(-1) ?? '';
   return name
-    .split(/[-_]/)
+    .split(rgx)
     .map((c) => capitalize(c))
     .join(' ');
 };

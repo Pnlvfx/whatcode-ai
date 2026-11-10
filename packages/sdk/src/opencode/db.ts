@@ -65,7 +65,6 @@ export const getLastMessageTimeByProject = (): Success<Map<string, number>> | Fa
 };
 
 // Fetches the last model used and title for a list of session IDs.
-// Reads directly from the opencode SQLite DB — stateless, no writes.
 export const getSessionSummaries = (sessionIds: string[]): Success<Map<string, SessionSummary>> | Failure<Error> => {
   if (sessionIds.length === 0) return { data: new Map() };
 

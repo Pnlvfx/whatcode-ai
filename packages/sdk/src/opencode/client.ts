@@ -1,5 +1,5 @@
 import {
-  ClientError,
+  type ClientError,
   OpenCode,
   type MessageListInput,
   type ModelListInput,

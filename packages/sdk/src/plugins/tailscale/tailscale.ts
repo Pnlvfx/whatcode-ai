@@ -9,7 +9,7 @@ export const createTailscale = (port: number) => {
 
   const startServe = async (): Promise<void> => {
     // tailscale serve proxies localhost:<port> over HTTPS on the tailnet hostname
-    // this runs in the background — the process exits after setting up the config
+    // this runs in the background, the process exits after setting up the config
     await execa('tailscale', ['serve', '--bg', port.toString()]);
   };
 
@@ -41,14 +41,14 @@ export const createTailscale = (port: number) => {
         logger.debug('tailscale', `started on port ${port.toString()}`);
       }
 
-      const url = `https://${hostname.replace(/-$/, '')}`;
+      const url = `https://${hostname.endsWith('-') ? hostname.slice(0, -1) : hostname}`;
       logger.debug('tailscale', `url: ${url}`);
 
       return { url };
     },
     stop: async (): Promise<void> => {
       if (!started) {
-        logger.debug('tailscale', 'serve was already running before we started — skipping teardown');
+        logger.debug('tailscale', 'tailscale was already running before we started ');
         return;
       }
       await execa('tailscale', ['serve', port.toString(), 'off']);
@@ -71,13 +71,13 @@ const assertTailscaleInstalled = async (): Promise<void> => {
   if (installed) return;
   switch (platform) {
     case 'darwin': {
-      throw new Error('[tailscale] tailscale is not installed — install it with: brew install tailscale, then re-run');
+      throw new Error('[tailscale] tailscale is not installed, install it with: brew install tailscale, then re-run');
     }
     case 'win32': {
-      throw new Error('[tailscale] tailscale is not installed — install it with: choco install tailscale, then re-run');
+      throw new Error('[tailscale] tailscale is not installed, install it with: choco install tailscale, then re-run');
     }
     default: {
-      throw new Error('[tailscale] tailscale is not installed — install it from https://tailscale.com/download, then re-run');
+      throw new Error('[tailscale] tailscale is not installed, install it from https://tailscale.com/download, then re-run');
     }
   }
 };
@@ -86,18 +86,20 @@ const assertDaemonReachable = async (): Promise<void> => {
   try {
     await execa('tailscale', ['status', '--json']);
   } catch {
-    throw new Error('[tailscale] daemon is not reachable — make sure the tailscale service is running, then re-run');
+    throw new Error('[tailscale] daemon is not reachable, make sure the tailscale service is running, then re-run');
   }
 };
+
+const hostRgx = /\.$/;
 
 const getHostname = async (): Promise<string> => {
   const { stdout } = await execa('tailscale', ['status', '--json']);
   const data = await tailscaleSchema.parseAsync(JSON.parse(stdout));
   if (data.BackendState !== 'Running') {
-    throw new Error(`[tailscale] unexpected state: ${data.BackendState} — run tailscale up to authenticate, then re-run`);
+    throw new Error(`[tailscale] unexpected state: ${data.BackendState}, run tailscale up to authenticate, then re-run`);
   }
-  const hostname = data.Self?.DNSName?.replace(/\.$/, '');
-  if (!hostname) throw new Error('[tailscale] could not determine hostname — run tailscale status');
+  const hostname = data.Self?.DNSName?.replace(hostRgx, '');
+  if (!hostname) throw new Error('[tailscale] could not determine hostname, run tailscale status');
   return hostname;
 };
 
