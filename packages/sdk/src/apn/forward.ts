@@ -1,37 +1,22 @@
+import type { InferRequestType } from 'hono/client';
 import { relayClient } from '../auth/client.ts';
 import { logger } from '../logger.ts';
 import { getAccounts } from '../stores/accounts.ts';
 
-type NotificationEvent = 'session.execution.succeeded' | 'permission.asked' | 'form.created' | 'session.execution.failed';
+type PushBody = InferRequestType<typeof relayClient.environment.push.$post>['json'];
 
-interface RelayMeta {
-  readonly sessionID: string;
-  readonly projectID: string;
-  readonly directory: string;
-}
-
-interface Params extends RelayMeta {
-  title: string;
-  body: string;
-  event: NotificationEvent;
-}
-
-export const forwardToRelay = async ({ body, event, directory, projectID, sessionID, title }: Params) => {
+export const forwardToRelay = async ({ body, event, worktree, project_id, session_id, title }: PushBody) => {
   const accountsResult = await getAccounts();
   if (accountsResult.error) return { error: accountsResult.error };
 
-  const { error, status } = await relayClient.environment.push.post({
-    title,
-    body,
-    event,
-    session_id: sessionID,
-    project_id: projectID,
-    worktree: directory,
+  const response = await relayClient.environment.push.$post({
+    json: { title, body, event, session_id, project_id, worktree },
   });
-  if (error) {
-    logger.error('notifications', `push failed: (${error.value.message ?? status.toString()})`);
-  } else {
+  if (response.ok) {
     logger.debug('notifications', 'forwarded successfully.');
+  } else {
+    const { message } = await response.json();
+    logger.error('notifications', `push failed: (${message})`);
   }
 
   return { data: { status: 'success' } };

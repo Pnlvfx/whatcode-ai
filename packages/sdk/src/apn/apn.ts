@@ -53,9 +53,9 @@ export const startNotifications = (client: WhatCodeClient): void => {
       title,
       body,
       event: 'session.execution.succeeded',
-      sessionID,
-      projectID: session.projectID,
-      directory: session.location.directory,
+      session_id: sessionID,
+      project_id: session.projectID,
+      worktree: session.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
@@ -90,9 +90,9 @@ export const startNotifications = (client: WhatCodeClient): void => {
       title,
       body: trim(`${model?.name ?? 'Agent'} ${text}`),
       event,
-      sessionID,
-      projectID: session.projectID,
-      directory: session.location.directory,
+      session_id: sessionID,
+      project_id: session.projectID,
+      worktree: session.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);
@@ -130,9 +130,9 @@ export const startNotifications = (client: WhatCodeClient): void => {
       title,
       body,
       event: 'session.execution.failed',
-      sessionID,
-      projectID: sessionResult.data.projectID,
-      directory: sessionResult.data.location.directory,
+      session_id: sessionID,
+      project_id: sessionResult.data.projectID,
+      worktree: sessionResult.data.location.directory,
     });
     if (forwardResult.error) {
       logger.error(loggerName, forwardResult.error.message);

@@ -52,7 +52,7 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
     resolvePassword(password),
   ]);
 
-  if (relayAuth.error) return { error: { type: 'relay' as const, message: relayAuth.error.value.message ?? relayAuth.error.status.toString() } };
+  if (relayAuth.error) return { error: { type: 'relay' as const, message: relayAuth.error.message } };
   if (ipData.error) return { error: ipData.error };
   if (passwordData.error) return { error: passwordData.error };
 

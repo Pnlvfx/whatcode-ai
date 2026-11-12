@@ -17,9 +17,9 @@ export const notifyScheduledPromptFailed = async (client: WhatCodeClient, prompt
     title: getProjectName(session.location.directory),
     body: trim(`Scheduled prompt not sent: ${prompt.error ?? 'unknown error'}`),
     event: 'session.execution.failed',
-    sessionID: prompt.sessionId,
-    projectID: session.projectID,
-    directory: session.location.directory,
+    session_id: prompt.sessionId,
+    project_id: session.projectID,
+    worktree: session.location.directory,
   });
   if (forwardResult.error) {
     logger.error(loggerName, forwardResult.error.message);

@@ -14,22 +14,22 @@ export const authenticate = () => {
       if (stored.error) {
         logger.error('auth', stored.error.message);
       }
-      const response = await relayClient.environment.pair.post({ machine_id: machineId, name: identityName });
-      if (response.error) return { error: response.error };
-      await relayAuthStore.set({ token: response.data.token });
-      headers.set('x-api-key', `Bearer ${response.data.token}`);
+      const response = await relayClient.environment.pair.$post({ json: { machine_id: machineId, name: identityName } });
+      if (!response.ok) return { error: await response.json() };
+      const { token } = await response.json();
+      await relayAuthStore.set({ token });
+      headers.set('x-api-key', `Bearer ${token}`);
     } else {
       headers.set('x-api-key', `Bearer ${stored.data.token}`);
-      const response = await relayClient.environment.get();
-      if (response.error) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (retryCount === 1 && response.error.status === 401) {
+      const response = await relayClient.environment.$get();
+      if (!response.ok) {
+        if (retryCount === 1 && response.status === 401) {
           logger.debug('auth', 'Relay token no more valid, reauthenticating...');
           await relayAuthStore.clear();
           retryCount++;
           return $auth();
         }
-        return { error: response.error };
+        return { error: await response.json() };
       }
     }
 

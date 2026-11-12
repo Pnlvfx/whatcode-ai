@@ -25,7 +25,7 @@ interface Params {
   client: WhatCodeClient;
 }
 
-// the auth middleware and onError answer outside the route handlers, so hono only knows about them when they are declared here
+// the auth middleware and onError answer outside the route handlers, so hono only knows about them when they are declared here (401 | 500)
 export type DaemonApp = ApplyGlobalResponse<ReturnType<typeof createApp>, { 401: { json: { message: string } }; 500: { json: { message: string } } }>;
 
 export const startWhatcode = async ({ client, endpoint, password, port }: Params) => {
