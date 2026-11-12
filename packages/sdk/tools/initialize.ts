@@ -49,7 +49,12 @@ await copyFilesFromFolder([
 ]);
 
 // the sdk has no @goatjs/core dependency, so the vendored copies must import it through the relative compiled/core files
-const coreImportPrefix = `'@goatjs/core/`;
+const coreImportPrefix = "'@goatjs/core/";
+
+const toPosixRelative = (fromFile: string, toFile: string) => {
+  const posixFromFile = fromFile.split(path.sep).join(path.posix.sep);
+  return path.posix.relative(path.posix.dirname(posixFromFile), toFile);
+};
 
 const compiledFiles = await readdir(output, { recursive: true });
 
@@ -62,8 +67,8 @@ await Promise.all(
       const [head = '', ...chunks] = content.split(coreImportPrefix);
       if (chunks.length === 0) return;
       const rewrittenChunks = chunks.map((chunk) => {
-        const end = chunk.indexOf(`'`);
-        const relative = path.relative(path.dirname(filePath), path.join(output, 'core', `${chunk.slice(0, end)}.ts`));
+        const end = chunk.indexOf("'");
+        const relative = toPosixRelative(file, `core/${chunk.slice(0, end)}.ts`);
         return `'${relative.startsWith('.') ? relative : `./${relative}`}${chunk.slice(end)}`;
       });
       await writeFile(filePath, [head, ...rewrittenChunks].join(''));
