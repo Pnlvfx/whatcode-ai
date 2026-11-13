@@ -1,8 +1,8 @@
 import { Service, type Endpoint } from '@opencode/client/service';
-import { access } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { execa } from 'execa';
 import { createWhatCodeClient } from './client.ts';
 import { parseError } from '../cli/utilities.ts';
+import { platform } from '../config/constants.ts';
 import { logger } from '../logger.ts';
 import { safeTryCatch } from '../compiled/core/try-catch.ts';
 
@@ -15,22 +15,29 @@ export const createOpencode = async () => {
 
 const ensureService = async () => {
   const endpoint = await safeTryCatch<Endpoint, Error>(Service.ensure());
-  if (!endpoint.error) return endpoint;
-  logger.warn('opencode', `Default opencode lookup failed, falling back to the bundled binary: ${parseError(endpoint.error).message}`);
-  const fallback = await ensureBundledService();
+  if (platform !== 'win32' || !endpoint.error) return endpoint;
+  logger.warn('opencode', `Default opencode lookup failed, falling back to the installed binary: ${parseError(endpoint.error).message}`);
+  const fallback = await ensureInstalledService();
   return fallback.error
-    ? { error: new Error(`${parseError(endpoint.error).message}\nBundled binary fallback: ${parseError(fallback.error).message}`) }
+    ? { error: new Error(`${parseError(endpoint.error).message}\nInstalled binary fallback: ${parseError(fallback.error).message}`) }
     : fallback;
 };
 
-// Fallback for when the default "opencode" lookup fails, which happens on Windows on a cold boot.
-const ensureBundledService = async () => {
-  const binary = await safeTryCatch<string, Error>(resolveBundledBinary());
+// Windows cannot spawn a bare "opencode" on a cold boot, so spawn the absolute path of the installed opencode.exe like OpenCode does.
+const ensureInstalledService = async () => {
+  const binary = await safeTryCatch<string, Error>(findInstalledBinary());
   return binary.error ? binary : safeTryCatch<Endpoint, Error>(Service.ensure({ command: [binary.data, 'serve', '--service'] }));
 };
 
-const resolveBundledBinary = async () => {
-  const binary = fileURLToPath(new URL('bin/opencode.exe', import.meta.resolve('@opencode/cli/package.json')));
-  await access(binary);
+const findInstalledBinary = async () => {
+  const result = await execa('where', ['opencode'], { reject: false });
+  if (result.failed) throw new Error('opencode was not found on PATH, make sure it is installed');
+  const binary = result.stdout
+    .split('\n')
+    .map((line) => line.trim())
+    .find((line) => line.toLowerCase().endsWith('.exe'));
+  if (!binary) {
+    throw new Error('opencode was found on PATH but not as an opencode.exe (npm .cmd shims cannot be spawned directly), install it with scoop, choco or from https://opencode.ai');
+  }
   return binary;
 };
