@@ -1,3 +1,5 @@
+## [2.8.1](compare/%40whatcode-ai%2Fwhatcode%402.8.0...%40whatcode-ai%2Fwhatcode%402.8.1) "@whatcode-ai/whatcode" (2026-11-13)
+
 ## [2.8.0](compare/%40whatcode-ai%2Fwhatcode%402.8.0-canary.0...%40whatcode-ai%2Fwhatcode%402.8.0) "@whatcode-ai/whatcode" (2026-11-13)
 
 ### Features
