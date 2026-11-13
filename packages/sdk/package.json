@@ -44,14 +44,14 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@hono/node-server": "^2.1.6",
+    "@hono/node-server": "^2.1.8",
     "@hono/standard-validator": "^0.4.1",
     "@opencode/cli": "^2.3.0",
     "@opencode/client": "^2.3.0",
     "@opentunnel/client": "^0.6.2",
     "execa": "^10.2.1",
     "exit-hook": "^5.1.0",
-    "hono": "^4.13.17",
+    "hono": "^4.13.18",
     "node-machine-id": "^1.1.12",
     "undici": "^8.12.4"
   },
