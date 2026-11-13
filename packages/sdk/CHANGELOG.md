@@ -1,3 +1,14 @@
+## [2.8.0](compare/%40whatcode-ai%2Fsdk%402.8.0-canary.0...%40whatcode-ai%2Fsdk%402.8.0) "@whatcode-ai/sdk" (2026-11-13)
+
+### Features
+
+* migrate relay client to hc f0f0b5d
+
+### Bug Fixes
+
+* **sdk:** fall back to the bundled opencode binary when the default lookup fails f065aa7
+* vendor on windows a6ee210
+
 ## [2.8.0-canary.0](compare/%40whatcode-ai%2Fsdk%402.7.0...%40whatcode-ai%2Fsdk%402.8.0-canary.0) "@whatcode-ai/sdk" (2026-11-10)
 
 ### Features
