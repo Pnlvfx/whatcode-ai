@@ -11,7 +11,7 @@ import { createTunnel } from '../plugins/tunnel/tunnel.ts';
 import { asyncExitHook } from 'exit-hook';
 import { DEFAULT_PORT, isProd, SERVER_URL } from '../config/constants.ts';
 import { logger } from '../logger.ts';
-import { createOpencode } from '../opencode/opencode.ts';
+import { createOpencode } from '../opencode/service.ts';
 import { isServerRunning } from '../net.ts';
 import { authenticate } from '../auth/auth.ts';
 import { startNotifications } from '../apn/apn.ts';
@@ -55,8 +55,9 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   if (relayAuth.error) return { error: { type: 'relay' as const, message: relayAuth.error.message } };
   if (ipData.error) return { error: ipData.error };
   if (passwordData.error) return { error: passwordData.error };
+  if (opencodeData.error) return { error: opencodeData.error };
 
-  const { client, endpoint } = opencodeData;
+  const { client, endpoint } = opencodeData.data;
 
   // checkOpencodeMinVersion(opencodeVersion);
   const daemonUrl = `http://${ipData.data}:${port.toString()}`;
