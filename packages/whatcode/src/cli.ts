@@ -7,7 +7,7 @@ import { createWhatcodeServer, resetWhatcodeServer } from '@whatcode-ai/sdk';
 import { printQrCode } from './qrcode.ts';
 import { getPairing } from './pair.ts';
 import { hideBin } from 'yargs/helpers';
-import { getGlobalConfig, logger } from '@whatcode-ai/sdk/internals';
+import { getAccounts, getGlobalConfig, logger } from '@whatcode-ai/sdk/internals';
 import pkg from '../package.json' with { type: 'json' };
 import yargs from 'yargs';
 
@@ -49,10 +49,17 @@ await yargs(hideBin(process.argv))
 
       if (server.error) {
         logger.error('whatcode', server.error.message, server.error);
-      } else {
-        logger.info('whatcode', 'run "whatcode pair" to connect');
-        logger.warn('whatcode', 'keep this running, closing it will disconnect the app');
+        process.exitCode = 1;
+        return;
       }
+
+      const accounts = await getAccounts();
+      if (accounts.error) {
+        logger.error('whatcode', accounts.error.message, accounts.error);
+      } else if (accounts.data.length === 0) {
+        logger.info('whatcode', 'run "whatcode pair" to connect');
+      }
+      logger.warn('whatcode', 'keep this running, closing it will disconnect the app');
 
       await checkForUpdate(pkg.version);
     },
