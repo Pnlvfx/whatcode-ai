@@ -14,7 +14,7 @@ const store = createStore2('update-check', cacheSchema, { directory: WHATCODE_RO
 export const checkForUpdate = async (currentVersion: string) => {
   const { data: latest, error } = await getLatestVersion();
   if (error) {
-    logger.error('version-check', error.message, error);
+    logger.warn('version-check', `Version check failed: ${error.message}`);
   } else {
     if (!semver.gt(latest.version, currentVersion)) return;
     logger.warn('whatcode', `update available: v${currentVersion} -> v${latest.version}. Run \`whatcode update\` to update`);
