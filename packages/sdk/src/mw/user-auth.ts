@@ -1,7 +1,6 @@
-import type { Account } from '../stores/accounts.ts';
 import { createMiddleware } from 'hono/factory';
 import { timingSafeEqual } from 'node:crypto';
-import { getAccounts } from '../stores/accounts.ts';
+import { getAccounts, type Account } from '../stores/accounts.ts';
 
 export interface UserAuthEnv {
   Variables: { account: Account };

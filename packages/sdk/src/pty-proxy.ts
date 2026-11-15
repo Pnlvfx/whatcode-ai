@@ -2,8 +2,7 @@ import type { IncomingMessage, Server } from 'node:http';
 import type { Duplex } from 'node:stream';
 import net from 'node:net';
 import tls from 'node:tls';
-import { parseError } from './compiled/core/error.ts';
-import { toNumber } from './compiled/core/number.ts';
+import { toNumber2 } from './compiled/core/number.ts';
 import { logger } from './logger.ts';
 
 interface UpgradeParams {
@@ -15,7 +14,14 @@ interface UpgradeParams {
 
 const PTY_PREFIX = '/api/pty/';
 const CONNECT_SUFFIX = '/connect';
-const HANDSHAKE_HEADERS = ['connection', 'upgrade', 'sec-websocket-key', 'sec-websocket-version', 'sec-websocket-protocol', 'sec-websocket-extensions'];
+const HANDSHAKE_HEADERS = [
+  'connection',
+  'upgrade',
+  'sec-websocket-key',
+  'sec-websocket-version',
+  'sec-websocket-protocol',
+  'sec-websocket-extensions',
+];
 
 // Pipes PTY websocket upgrades straight to OpenCode as raw sockets, so terminal frames are never parsed here.
 // The daemon has no websocket routes of its own, so any other upgrade is dropped.
@@ -54,33 +60,41 @@ const proxyUpgrade = ({ req, socket, head, target }: UpgradeParams) => {
   closeTogether(upstream, socket, 'upstream');
 };
 
-const openUpstream = (target: URL) => {
-  const { protocol, hostname } = target;
-  const port = resolvePort(target);
-  return protocol === 'https:' ? tls.connect({ host: hostname, port, servername: hostname }) : net.connect({ host: hostname, port });
+const openUpstream = ({ protocol, hostname, port }: Pick<URL, 'protocol' | 'hostname' | 'port'>) => {
+  const portData = resolvePort({ protocol, port });
+  return protocol === 'https:'
+    ? tls.connect({ host: hostname, port: portData, servername: hostname })
+    : net.connect({ host: hostname, port: portData });
 };
 
 // URL drops default ports, so an empty port means 443 for https and 80 for http.
-const resolvePort = ({ protocol, port }: URL) => {
-  if (port !== '') return toNumber(port);
+const resolvePort = ({ protocol, port }: Pick<URL, 'protocol' | 'port'>) => {
+  if (port !== '') {
+    const result = toNumber2(port);
+    if (result.data !== undefined) return result.data;
+  }
+
   return protocol === 'https:' ? 443 : 80;
 };
 
 // Only the websocket handshake headers are forwarded, so the daemon's own credentials never reach OpenCode.
 const serializeHandshake = ({ method = 'GET', url = '/', headers }: IncomingMessage, host: string) => {
   const lines = [`${method} ${url} HTTP/1.1`, `host: ${host}`];
+
   for (const name of HANDSHAKE_HEADERS) {
     const value = headers[name];
     if (value !== undefined) lines.push(`${name}: ${Array.isArray(value) ? value.join(', ') : value}`);
   }
+
   return `${lines.join('\r\n')}\r\n\r\n`;
 };
 
 const closeTogether = (source: Duplex, peer: Duplex, label: string) => {
   source.on('error', (error) => {
-    logger.error('pty-proxy', `${label} socket failed: ${parseError(error).message}`, error);
+    logger.error('pty-proxy', `${label} socket failed: ${error.message}`);
     peer.destroy();
   });
+
   source.on('close', () => {
     peer.destroy();
   });

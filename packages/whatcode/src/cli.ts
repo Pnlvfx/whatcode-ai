@@ -34,7 +34,7 @@ await yargs(hideBin(process.argv))
       const globalConfig = await getGlobalConfig();
       if (globalConfig.error) {
         logger.init({ logLevel: 'info' });
-        logger.error('whatcode', globalConfig.error.message, globalConfig.error);
+        logger.error('whatcode', globalConfig.error.message);
         process.exitCode = 1;
         return;
       }
@@ -48,14 +48,14 @@ await yargs(hideBin(process.argv))
       });
 
       if (server.error) {
-        logger.error('whatcode', server.error.message, server.error);
+        logger.error('whatcode', server.error.message);
         process.exitCode = 1;
         return;
       }
 
       const accounts = await getAccounts();
       if (accounts.error) {
-        logger.error('whatcode', accounts.error.message, accounts.error);
+        logger.error('whatcode', accounts.error.message);
       } else if (accounts.data.length === 0) {
         logger.info('whatcode', 'run "whatcode pair" to connect');
       }
@@ -72,7 +72,7 @@ await yargs(hideBin(process.argv))
       logger.init({ logLevel: 'info' });
       const pairing = await getPairing();
       if (pairing.error) {
-        logger.error('whatcode', pairing.error.message, pairing.error);
+        logger.error('whatcode', pairing.error.message);
         process.exitCode = 1;
         return;
       }
@@ -89,7 +89,7 @@ await yargs(hideBin(process.argv))
       logger.init({ logLevel: 'info' });
       const result = await resetWhatcodeServer();
       if (result.error) {
-        logger.error('whatcode', result.error.message, result.error);
+        logger.error('whatcode', result.error.message);
         process.exitCode = 1;
         return;
       }

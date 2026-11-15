@@ -1,7 +1,6 @@
-import type { StoreOpResult } from '../compiled/store/store2.ts';
 import * as z from 'zod/v4/mini';
 import { WHATCODE_ROOT } from '../config/constants.ts';
-import { createStore2 } from '../compiled/store/store2.ts';
+import { createStore2, type StoreOpResult } from '../compiled/store/store2.ts';
 import { logger } from '../logger.ts';
 
 const scheduledPromptSchema = z.strictObject({

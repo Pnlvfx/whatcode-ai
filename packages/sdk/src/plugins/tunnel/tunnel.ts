@@ -1,5 +1,4 @@
-import type { OpenTunnelClientEvent, OpenTunnelConnection } from '@opentunnel/client';
-import { create, ROOT_ROUTE } from '@opentunnel/client';
+import { create, ROOT_ROUTE, type OpenTunnelClientEvent, type OpenTunnelConnection } from '@opentunnel/client';
 import { logger } from '../../logger.ts';
 
 export const createTunnel = (port: number) => {

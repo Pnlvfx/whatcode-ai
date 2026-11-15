@@ -1,8 +1,7 @@
 import type { WhatCodeClient } from '../opencode/client.ts';
 import type { Failure, Success } from '../compiled/core/try-catch.ts';
-import type { GitFailure } from './repo-state.ts';
 import path from 'node:path';
-import { checkRepoState } from './repo-state.ts';
+import { checkRepoState, type GitFailure } from './repo-state.ts';
 
 type GitResult<T> = Success<T> | Failure<GitFailure>;
 

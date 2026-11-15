@@ -1,8 +1,8 @@
-import type { V2Event } from '@opencode/client';
 import type { WhatCodeClient } from './client.ts';
-import { ClientError } from '@opencode/client';
+import { ClientError, type V2Event } from '@opencode/client';
 import { setTimeout } from 'node:timers/promises';
 import { logger } from '../logger.ts';
+import { parseError } from '../cli/utilities.ts';
 
 type EventHandler = (event: V2Event) => Promise<void> | void;
 
@@ -58,12 +58,8 @@ export const registerEventHandler = (handler: EventHandler): (() => void) => {
 
 const dispatchEvent = async (event: V2Event): Promise<void> => {
   for (const handler of handlers) {
-    try {
-      // eslint-disable-next-line parallelize/no-sequential-await -- handlers must run sequentially: each processes the same event in registration order to avoid concurrent state mutations
-      await handler(event);
-    } catch (err) {
-      logger.error('event-subscription', 'event handler failed, stream kept alive', err);
-    }
+    // eslint-disable-next-line parallelize/no-sequential-await -- handlers must run sequentially: each processes the same event in registration order to avoid concurrent state mutations
+    await handler(event);
   }
 };
 
@@ -75,11 +71,10 @@ const logStreamError = (err: unknown, delay: number): void => {
     return;
   }
 
-  logger.error('event-subscription', `stream error, retrying in ${seconds}s...`, err);
+  logger.error('event-subscription', `stream error: ${parseError(err).message} retrying in ${seconds}s...`);
 };
 
 const logIfConnected = (event: V2Event): void => {
   if (event.type !== 'server.connected') return;
-
   logger.debug('event-subscription', 'connected to opencode service');
 };

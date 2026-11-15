@@ -8,18 +8,26 @@ export const numberToString = <K extends number>(number: K) => number.toString()
 
 // most of the time we do if (!) on a number
 // which will also affect 0 and maybe other numbers,
-// this will correctly check
+// this will check it correctly
 export const isNumber = (value: string | number | undefined | null): value is number => {
   if (typeof value === 'number') return true;
   if (value === undefined || value === null) return false;
-  try {
-    toNumber(value);
-    return true;
-  } catch {
-    return false;
-  }
+  const result = toNumber2(value);
+  return typeof result.data === 'number';
 };
 
+export const toNumber2 = <T extends string>(string: T) => {
+  type StringToNumber<T extends string> = T extends `${infer N extends number}` ? N : number;
+  if (string.trim() === '') return { error: { type: 'invalid-number' as const, message: `"${string}" is not a valid number.` } };
+  // eslint-disable-next-line no-restricted-syntax
+  const num = Number(string);
+  return Number.isNaN(num)
+    ? { error: { type: 'invalid-number' as const, message: `"${string}" is not a valid number.` } }
+    : // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      { data: num as StringToNumber<T> };
+};
+
+/** @deprecated */
 export const toNumber = <T extends string>(string: T) => {
   type StringToNumber<T extends string> = T extends `${infer N extends number}` ? N : number;
   if (string.trim() === '') throw new Error(`"${string}" is not a valid number.`);

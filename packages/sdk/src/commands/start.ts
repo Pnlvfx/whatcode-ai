@@ -88,7 +88,7 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
       try {
         await Promise.all([tailscale?.stop(), tunnel?.stop(), clearDaemonUrl()]);
       } catch (err) {
-        logger.error('exit-hook', parseError(err).message, err);
+        logger.error('exit-hook', parseError(err).message);
       }
     },
     { wait: 3000 },

@@ -6,6 +6,7 @@ import { trim } from './helpers.ts';
 import { registerEventHandler } from '../opencode/event-subscription.ts';
 import { getProjectName } from '../compiled/whatcode/lib/project.ts';
 import { logger } from '../logger.ts';
+import { parseError } from '../cli/utilities.ts';
 
 // How long to wait for another client to mark a finished session as viewed before pushing
 const VIEWED_GRACE_MS = 4000;
@@ -158,7 +159,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
       }
       logger.debug('notifications', `skipping push for session ${sessionID}, already viewed by another client`);
     } catch (err) {
-      logger.error('notifications', `delayed push failed for session ${sessionID}`, err);
+      logger.error('notifications', `delayed push failed for session ${sessionID}, reason: ${parseError(err).message}`);
     }
   };
 
@@ -188,7 +189,7 @@ export const startNotifications = (client: WhatCodeClient): void => {
       }
       await notify();
     } catch (err) {
-      logger.error('notifications', `delayed push failed for request ${requestID}`, err);
+      logger.error('notifications', `delayed push failed for request ${requestID}, reason: ${parseError(err).message}`);
     }
   };
 

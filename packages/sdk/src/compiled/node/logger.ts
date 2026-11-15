@@ -55,14 +55,13 @@ export const createLogger = () => {
       if (currentLevel === 'none') return;
       console.warn(`${colorize('yellow', 'warn')} ${formatScope(scope)} ${message}`);
     },
-    error: (scope: string, message: string, err?: unknown): void => {
+    error: (scope: string, message: string): void => {
       warnUninitialized('error');
       if (currentLevel === 'none') return;
-      console.error(`${colorize('red', 'error')} ${formatScope(scope)} ${message}`, err ?? '');
+      console.error(`${colorize('red', 'error')} ${formatScope(scope)} ${message}`);
     },
   } satisfies Logger;
 };
 
 const formatScope = (scope: string): string => colorize('gray', `[${scope}]`);
-
 const colorize = (color: keyof typeof colors, text: string): string => `${colors[color]}${text}${reset}`;

@@ -13,7 +13,7 @@ export interface Failure<E> {
   error: E;
 }
 
-type Result<T, E = unknown> = Success<T> | Failure<E>;
+export type Result<T, E = unknown> = Success<T> | Failure<E>;
 
 // Main wrapper function
 export const safeTryCatch = async <T, E = unknown>(promise: Promise<T>): Promise<Result<T, E>> => {

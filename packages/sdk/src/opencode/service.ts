@@ -1,12 +1,10 @@
-import type { Endpoint } from '@opencode/client/service';
-import type { Failure, Success } from '../compiled/core/try-catch.ts';
-import { Service } from '@opencode/client/service';
+import { Service, type Endpoint } from '@opencode/client/service';
 import { execa } from 'execa';
 import { createWhatCodeClient } from './client.ts';
 import { parseError } from '../cli/utilities.ts';
 import { platform } from '../config/constants.ts';
 import { logger } from '../logger.ts';
-import { safeTryCatch } from '../compiled/core/try-catch.ts';
+import { safeTryCatch, type Failure, type Success } from '../compiled/core/try-catch.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 

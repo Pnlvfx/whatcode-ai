@@ -1,9 +1,9 @@
 import type { WhatCodeClient } from '../opencode/client.ts';
-import type { ScheduledPrompt } from '../stores/scheduled-prompts.ts';
 import { setTimeout } from 'node:timers/promises';
-import { applyScheduledOutcomes, findScheduledPrompt, getScheduledPrompts } from '../stores/scheduled-prompts.ts';
+import { applyScheduledOutcomes, findScheduledPrompt, getScheduledPrompts, type ScheduledPrompt } from '../stores/scheduled-prompts.ts';
 import { notifyScheduledPromptFailed } from '../apn/scheduled.ts';
 import { logger } from '../logger.ts';
+import { parseError } from '../cli/utilities.ts';
 
 const TICK_MS = 15_000;
 // a prompt is not sent anymore once it is this far past its scheduled time
@@ -26,7 +26,7 @@ const runLoop = async (client: WhatCodeClient): Promise<void> => {
     try {
       await runDue(client);
     } catch (err) {
-      logger.error('scheduler', 'tick failed', err);
+      logger.error('scheduler', `tick failed: ${parseError(err).message}`);
     }
     await setTimeout(TICK_MS);
   }

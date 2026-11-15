@@ -8,7 +8,7 @@ export const selfUpdate = async (currentVersion: string) => {
   const { data: latest, error } = await fetchFreshVersion();
   if (error) {
     process.exitCode = 1;
-    logger.error('update', error.message, error);
+    logger.error('update', error.message);
     return;
   }
 
@@ -28,6 +28,6 @@ const installLatest = async (currentVersion: string, latestVersion: string) => {
   } catch (err) {
     process.exitCode = 1;
     const error = parseError(err);
-    logger.error('update', error.message, error);
+    logger.error('update', error.message);
   }
 };
