@@ -1,3 +1,10 @@
+## [2.8.2](compare/%40whatcode-ai%2Fwhatcode%402.8.1...%40whatcode-ai%2Fwhatcode%402.8.2) "@whatcode-ai/whatcode" (2026-11-15)
+
+### Bug Fixes
+
+* do not print pair instructions if already paired once 2231eea
+* **whatcode:** exit with code 1 when startup fails e9e369f
+
 ## [2.8.1](compare/%40whatcode-ai%2Fwhatcode%402.8.0...%40whatcode-ai%2Fwhatcode%402.8.1) "@whatcode-ai/whatcode" (2026-11-13)
 
 ## [2.8.0](compare/%40whatcode-ai%2Fwhatcode%402.8.0-canary.0...%40whatcode-ai%2Fwhatcode%402.8.0) "@whatcode-ai/whatcode" (2026-11-13)

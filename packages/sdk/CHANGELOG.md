@@ -1,3 +1,14 @@
+## [2.8.2](compare/%40whatcode-ai%2Fsdk%402.8.1...%40whatcode-ai%2Fsdk%402.8.2) "@whatcode-ai/sdk" (2026-11-15)
+
+### Features
+
+* auth check now run on all routes d798a8c
+
+### Bug Fixes
+
+* do not print pair instructions if already paired once 2231eea
+* windows workaround part 3 b8ded2a
+
 ## [2.8.1](compare/%40whatcode-ai%2Fsdk%402.8.0...%40whatcode-ai%2Fsdk%402.8.1) "@whatcode-ai/sdk" (2026-11-13)
 
 ### Bug Fixes
