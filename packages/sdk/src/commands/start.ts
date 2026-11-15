@@ -12,7 +12,6 @@ import { asyncExitHook } from 'exit-hook';
 import { DEFAULT_PORT, isProd, SERVER_URL } from '../config/constants.ts';
 import { logger } from '../logger.ts';
 import { createOpencode } from '../opencode/service.ts';
-import { isServerRunning } from '../net.ts';
 import { authenticate } from '../auth/auth.ts';
 import { startNotifications } from '../apn/apn.ts';
 import { startScheduler } from '../scheduler/scheduler.ts';
@@ -31,14 +30,8 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   const resolved = await resolveOptions(options);
   if (resolved.error) return { error: resolved.error };
   const { tailscale: hasTailscale, tunnel: hasTunnel, password, port, logLevel } = resolved.data;
-
   logger.init({ logLevel });
-
   if (hasTailscale && hasTunnel) return { error: { type: 'config' as const, message: EXCLUSIVE_MESSAGE } };
-
-  const isRunning = await isServerRunning(port);
-  if (isRunning) return { error: { type: 'server' as const, message: 'The Daemon is already running on this machine!' } };
-
   logger.debug('whatcode', `starting WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}...`);
 
   if (!isProd) {
