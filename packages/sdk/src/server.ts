@@ -1,16 +1,16 @@
-import type { ServerType } from '@hono/node-server';
-import type { Context } from 'hono';
 import type { ApplyGlobalResponse } from 'hono/client';
 import type { WhatCodeClient } from './opencode/client.ts';
 import { Service, type Endpoint } from '@opencode/client/service';
-import { serve } from '@hono/node-server';
-import { Hono } from 'hono';
+import { serve, type ServerType } from '@hono/node-server';
+import { Hono, type Context } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { once } from 'node:events';
 import { Server } from 'node:http';
+import { pairRouter } from './routes/pair.ts';
 import { userRouter } from './routes/user.ts';
 import { sessionRouter } from './routes/session.ts';
 import { basicAuth } from './mw/opencode-auth.ts';
+import { userAuth } from './mw/user-auth.ts';
 import { logger } from './logger.ts';
 import { MIN_APP_VERSION } from './config/constants.ts';
 import { createProjectRouterOverride } from './routes/project.ts';
@@ -43,18 +43,20 @@ const createApp = ({ endpoint, password, client }: Pick<Params, 'client' | 'endp
   return new Hono({ strict: false })
     .onError(handleError)
     .use(basicAuth(password))
+    .route('/user', pairRouter)
+    .use(userAuth)
     .get('/info', (c) => c.json({ version: pkgJson.version, app: { min: MIN_APP_VERSION } }, 200))
-    .route('/', userRouter)
-    .route('/', sessionRouter)
-    .route('/', createProjectRouterOverride(client))
-    .route('/', createGitRouter(client))
+    .route('/user', userRouter)
+    .route('/api/session', sessionRouter)
+    .route('/api/project', createProjectRouterOverride(client))
+    .route('/api/git', createGitRouter(client))
     .all('/*', createProxy(endpoint));
 };
 
 const handleError = (error: Error, c: Context) => {
   if (error instanceof HTTPException) return c.json({ message: error.message }, error.status);
   const { pathname, search } = new URL(c.req.url);
-  logger.error('server-error', `An error occured at ${pathname}${search}`, error);
+  logger.error('server-error', `An error occured at ${pathname}${search}: ${error.message}`);
   return c.json({ message: 'Internal server error' }, 500);
 };
 

@@ -4,7 +4,7 @@ import { logger } from '../logger.ts';
 import { getLastMessageTimeByProject, getLatestSessionByProject } from '../opencode/db.ts';
 
 export const createProjectRouterOverride = (client: WhatCodeClient) => {
-  return new Hono().basePath('/api/project').get('/', async (c) => {
+  return new Hono().get('/', async (c) => {
     const projects = await client.project.list();
     if (projects.error) return c.json({ message: projects.error.message }, 400);
     const lastMessageTimes = getLastMessageTimeByProject();

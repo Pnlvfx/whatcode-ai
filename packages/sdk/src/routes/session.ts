@@ -10,7 +10,6 @@ import { invalidRequest } from '../validation.ts';
 // TOD pagination and remove the 100 limit
 
 export const sessionRouter = new Hono()
-  .basePath('/api/session')
   .post('/summary', sValidator('json', z.strictObject({ sessionIds: z.array(z.string()) }), invalidRequest), (c) => {
     const { sessionIds } = c.req.valid('json');
     if (sessionIds.length > 100) return c.json({ message: 'Too many session IDs (max 100)' }, 400);
@@ -26,12 +25,12 @@ export const sessionRouter = new Hono()
     if (body.runAt <= Date.now()) return c.json({ message: 'The scheduled time must be in the future' }, 400);
     // opencode only accepts client ids with this prefix, and the id doubles as its message id
     const { error } = await addScheduledPrompt({ id: `msg_${randomUUID()}`, status: 'pending', ...body });
-    return error ? c.json({ message: error.message }, 500) : c.json({ status: 'success' });
+    return error ? c.json({ message: error.message }, 500) : c.json({ status: 'success' }, 200);
   })
   .get('/schedule', sValidator('query', z.strictObject({ sessionId: z.string() }), invalidRequest), async (c) => {
     const { sessionId } = c.req.valid('query');
     const { data, error } = await listSessionScheduledPrompts(sessionId);
-    return error ? c.json({ message: error.message }, 500) : c.json(data);
+    return error ? c.json({ message: error.message }, 500) : c.json(data, 200);
   })
   .delete('/schedule/:id', sValidator('param', z.strictObject({ id: z.string() }), invalidRequest), async (c) => {
     const { id } = c.req.valid('param');
@@ -40,5 +39,5 @@ export const sessionRouter = new Hono()
     if (found.data === undefined) return c.json({ message: 'The scheduled prompt was already sent or cancelled' }, 404);
 
     const { error } = await removeScheduledPrompt(id);
-    return error ? c.json({ message: error.message }, 500) : c.json({ status: 'success' });
+    return error ? c.json({ message: error.message }, 500) : c.json({ status: 'success' }, 200);
   });

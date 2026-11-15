@@ -8,7 +8,6 @@ import { invalidRequest } from '../validation.ts';
 
 export const createGitRouter = (client: WhatCodeClient) => {
   return new Hono()
-    .basePath('/api/git')
     .post('/commit', sValidator('json', commitBody, invalidRequest), async (c) => {
       const body = c.req.valid('json');
       const repo = await prepareRepo(client, body.directory);
