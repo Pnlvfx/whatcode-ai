@@ -32,7 +32,6 @@
     "@docusaurus/faster": "^3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.1.1",
-    "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
@@ -46,7 +45,7 @@
     "@types/react": "^19.3.0",
     "execa": "^10.2.1",
     "typescript": "^6.0.3",
-    "vercel": "^65.15.0"
+    "wrangler": "^4.162.0"
   },
   "engines": {
     "node": ">=20.0"

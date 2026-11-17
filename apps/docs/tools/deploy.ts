@@ -5,6 +5,5 @@ import { execa } from 'execa';
 
 await rimraf(['build', '.docusaurus']);
 
-await execa('pnpm', ['vercel', 'pull', '--yes'], { stdio: 'inherit' });
-await execa('pnpm', ['vercel', 'build', '--prod'], { stdio: 'inherit' });
-await execa('pnpm', ['vercel', 'deploy', '--prebuilt', '--prod']);
+await execa('pnpm', ['build'], { stdio: 'inherit' });
+await execa('pnpm', ['wrangler', 'deploy'], { stdio: 'inherit' });

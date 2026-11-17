@@ -12,4 +12,4 @@
 .DS_Store
 .env
 .env.*
-.vercel
+.wrangler

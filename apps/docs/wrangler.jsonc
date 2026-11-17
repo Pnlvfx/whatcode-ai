@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "whatcode-docs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "build",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "www.whatcode.app",
+      "custom_domain": true
+    },
+    {
+      "pattern": "whatcode.app",
+      "custom_domain": true
+    }
+  ]
+}
