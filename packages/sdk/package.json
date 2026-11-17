@@ -50,12 +50,13 @@
     "@opentunnel/client": "^0.6.2",
     "execa": "^10.2.1",
     "exit-hook": "^5.1.0",
-    "hono": "^4.13.18",
+    "hono": "^4.13.19",
     "node-machine-id": "^1.1.12",
     "undici": "^8.12.4"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
+    "@goatjs/dbz": "^2.102.0",
     "@goatjs/node-monorepo-eslint": "^3.52.0",
     "@goatjs/rimraf": "^2.15.0",
     "@goatjs/typescript-config": "^2.3.0",

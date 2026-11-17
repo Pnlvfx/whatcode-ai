@@ -181,7 +181,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^21.2.4
-        version: 21.2.4(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
+        version: 21.2.4(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)(typescript@6.0.3)
       '@commitlint/config-conventional':
         specifier: ^21.2.4
         version: 21.2.4
@@ -189,8 +189,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/dbz':
-        specifier: ^2.101.0
-        version: 2.101.0(@types/node@26.6.6)
+        specifier: ^2.102.0
+        version: 2.102.0(@types/node@26.6.6)
       '@goatjs/doctor':
         specifier: ^2.77.0
         version: 2.77.0(supports-color@8.1.1)
@@ -224,9 +224,6 @@ importers:
       '@mdx-js/react':
         specifier: ^3.1.1
         version: 3.1.1(@types/react@19.3.0)(react@19.3.1)
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.3.1)
@@ -247,8 +244,8 @@ importers:
         specifier: 3.10.2
         version: 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       '@goatjs/dbz':
-        specifier: ^2.101.0
-        version: 2.101.0(@types/node@26.6.6)
+        specifier: ^2.102.0
+        version: 2.102.0(@types/node@26.6.6)
       '@goatjs/rimraf':
         specifier: ^2.15.0
         version: 2.15.0
@@ -262,8 +259,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       wrangler:
-        specifier: ^4.162.0
-        version: 4.162.0(@types/node@26.6.6)
+        specifier: ^4.163.0
+        version: 4.163.0(@types/node@26.6.6)
 
   apps/example:
     dependencies:
@@ -300,10 +297,10 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^2.1.8
-        version: 2.1.8(hono@4.13.18)
+        version: 2.1.8(hono@4.13.19)
       '@hono/standard-validator':
         specifier: ^0.4.1
-        version: 0.4.1(@standard-schema/spec@1.1.0)(hono@4.13.18)
+        version: 0.4.1(@standard-schema/spec@1.1.0)(hono@4.13.19)
       '@opencode/client':
         specifier: ^2.3.0
         version: 2.3.0(effect@4.1.0)
@@ -317,8 +314,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       hono:
-        specifier: ^4.13.18
-        version: 4.13.18
+        specifier: ^4.13.19
+        version: 4.13.19
       node-machine-id:
         specifier: ^1.1.12
         version: 1.1.12
@@ -330,8 +327,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@goatjs/dbz':
-        specifier: ^2.101.0
-        version: 2.101.0(@types/node@26.6.6)
+        specifier: ^2.102.0
+        version: 2.102.0(@types/node@26.6.6)
       '@goatjs/node-monorepo-eslint':
         specifier: ^3.52.0
         version: 3.52.0(eslint-import-resolver-node@0.3.10(supports-color@8.1.1))(eslint@10.15.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -1153,32 +1150,32 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/workerd-darwin-64@1.20261113.1':
-    resolution: {integrity: sha512-UcShHyWJVZNbuI8jL3F5QZXMrJm7oScge33D5p3hAyhIIkoVj72+bior+VcUcr1SBWkh5w3Umnrx179WE7Wvpw==}
+  '@cloudflare/workerd-darwin-64@1.20261116.1':
+    resolution: {integrity: sha512-+zzaR7CQXcT10Tbor784vI80+rO0NEy/jkTL7ZJP6PYmwjdDj2udk+sN9Ui1nqDs+frYYUtB+7nI7kycONFb0Q==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
 
-  '@cloudflare/workerd-darwin-arm64@1.20261113.1':
-    resolution: {integrity: sha512-bKfFcpueb9GOg0NZSR4x7dpEJZMsQOwCk0XzsAoXoBfG4osFRQcFxtAhrXvB1y445zXFLhrEkDJ/+LvGAMkPSg==}
+  '@cloudflare/workerd-darwin-arm64@1.20261116.1':
+    resolution: {integrity: sha512-jOZBuQL3FdFC9FcVzfSDEWu1/jx3/asrQAU7TydMop8kdZWhqT4dslE3rC6cMait6w32XaglzEtV6OM1Ove9ZA==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20261113.1':
-    resolution: {integrity: sha512-3VCnXzi7apwPSMwkiTIeEc5z/UWWGQXBZZNHCBBCXPlavWCR06SQ77tO0rEoKonfjBGW0MQaHNZ7U1pCPe4v3g==}
+  '@cloudflare/workerd-linux-64@1.20261116.1':
+    resolution: {integrity: sha512-/HnEV29Ykg3t9X6llrnlOJ9+N+cXFNsuPTTdRiE1L/hXIkI39o1RZVjEgj3GtyWtpuhsJ1mNLrNshrEjCvzk0w==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
 
-  '@cloudflare/workerd-linux-arm64@1.20261113.1':
-    resolution: {integrity: sha512-phnb1686FTIVSr4qxQFOt7MyiWMotqsVUyZVnQl579/bCrqWaYUcRnikN5f6bBpDbxCk1OvOvYz0ykjT1lvYpg==}
+  '@cloudflare/workerd-linux-arm64@1.20261116.1':
+    resolution: {integrity: sha512-hH73ERVfyoQ19DzbjPv/Gp4klU6F7gpx99JIlkmelC3vfsXPpsJdJsNAJA8LIxILa+gfH7tfxSSciCzr+0vqOQ==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
 
-  '@cloudflare/workerd-windows-64@1.20261113.1':
-    resolution: {integrity: sha512-WtQakCAIzUQJ6dQDPn7kIGlFJ9yjB0ooNx2WFqEHLYNAT7TLCNyaORem2WVM38TceVR8flCP5UWgYm6ht3dlIw==}
+  '@cloudflare/workerd-windows-64@1.20261116.1':
+    resolution: {integrity: sha512-eUxFymDyGt3jYjE3/OsNZlSYM5jjCKx8h4nlGRdljtK1fRUT+llI8COE/1gaqMppS6x8qN6tc8vcyRXT4pxqxw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
@@ -1256,20 +1253,20 @@ packages:
     resolution: {integrity: sha512-sGEA473TlCvhCGNoTBY9OXZVWdscIXdGt0dm8EpB+2MRfmt8LNh/X56P/T3nCtEB+eH5qGEa3odphSAoUxSfSQ==}
     engines: {node: '>=22.12.0'}
 
-  '@conventional-changelog/git-client@3.1.2':
-    resolution: {integrity: sha512-jZqwnJwf7nboIlAcw/mkOjVa6DexCcUOgT2oOQgkoi3z9vR8tGFkcMy2BFcYwjhL9sYcDDXkRQDayiDieCoW7A==}
+  '@conventional-changelog/git-client@3.2.0':
+    resolution: {integrity: sha512-sD/E0vzpkoDz/dqM1Hhv0ihC4KBw6RXjefeO8SG1XrX+wGkMxe1pKeedkKDPCtr2JjuhbuS9aJNgOvnT8hbeBw==}
     engines: {node: '>=22'}
     peerDependencies:
       conventional-commits-filter: ^6.0.1
-      conventional-commits-parser: ^7.1.2
+      conventional-commits-parser: ^7.1.3
     peerDependenciesMeta:
       conventional-commits-filter:
         optional: true
       conventional-commits-parser:
         optional: true
 
-  '@conventional-changelog/template@1.4.0':
-    resolution: {integrity: sha512-aalGyl7dbB5PArRebDIX43ZvBlXrYm9uWzGJ26t+4SzJVPsOuvfILGGbw5X4yX7i50YEmJ8zvbiWnqH/AAnZqg==}
+  '@conventional-changelog/template@1.4.1':
+    resolution: {integrity: sha512-mHyyEL0eIEqJ6+aF24+AdZRo4bu4W5GdUiCiCx5X7kfDY51ye8GQJ264uOINObrRSKxtSRCOWPpl9hbOy4UzxQ==}
     engines: {node: '>=22'}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -2048,8 +2045,8 @@ packages:
   '@goatjs/core@2.55.0':
     resolution: {integrity: sha512-lKYomnFYhwOjL3SAzikQGatPq1PYQil/Y2WwvugaGsltQ3VWf6cu47f54Aete+M/75K/+QHFZJVX/xi+Q7cKqA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/core/-/@goatjs/core-2.55.0.tgz}
 
-  '@goatjs/dbz@2.101.0':
-    resolution: {integrity: sha512-NVmhxKAc5RzVFSrcLG3fgreDbbCOnr0cwbRfEg2idYUiJry8Nf+wPS77bEt8OE3Z6bUujLK+J5rgBUCU+JEWnA==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.101.0.tgz}
+  '@goatjs/dbz@2.102.0':
+    resolution: {integrity: sha512-+xmn03v60aMel5EK7ZlsPvh1bWzYuiK6g5/SoP+EfUOQMblm7ub7b7bW1ktQbaqxohM0gahp7803zDKkKIj/bw==, tarball: https://europe-west8-npm.pkg.dev/open-gto-2/goat/@goatjs/dbz/-/@goatjs/dbz-2.102.0.tgz}
     hasBin: true
 
   '@goatjs/doctor@2.77.0':
@@ -2430,8 +2427,8 @@ packages:
   '@jridgewell/remapping@2.3.5':
     resolution: {integrity: sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ==}
 
-  '@jridgewell/resolve-uri@3.1.2':
-    resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
+  '@jridgewell/resolve-uri@3.1.3':
+    resolution: {integrity: sha512-lhTtjtoEArWBjismtfS761S9Hlyn+nIZqOZVYoZ1Xn82PMNMVnk+jj/NhC4fAXGTs7ydONcJiR5vyQBTMDu27g==}
     engines: {node: '>=6.0.0'}
 
   '@jridgewell/source-map@0.3.11':
@@ -3829,8 +3826,8 @@ packages:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
 
-  ansi-regex@6.3.0:
-    resolution: {integrity: sha512-WpDfL7NO6j7tH88IDBNVdUJxDh9nmCteAVW9dsep846XdwF4naCBK+/tGLX3KJgcpgMRXCFlTM2hKGoK9FsdrQ==}
+  ansi-regex@6.6.0:
+    resolution: {integrity: sha512-XZ5apbzreCbXSKwPjJstu8R0zOi247w3XYwWxtwBXgpZrCyc1Ka7p9/xY0A9/diMewmHbEKz+FIraWaEWjlN5g==}
     engines: {node: '>=12'}
 
   ansi-styles@4.3.0:
@@ -3858,8 +3855,8 @@ packages:
   argparse@3.0.4:
     resolution: {integrity: sha512-fwWK3Zq22l4XJJjx5mcBHGikIk+hJqO+32dPm0Jur7+rtG5x1scOjSfdT9ZKeWHPpsya/l0HHK4tDImBkTrtvA==}
 
-  argue-cli@3.2.0:
-    resolution: {integrity: sha512-VipTB0gXgGIFO2Rg9yEVN5wLt2AurJcZqDbgmYSwPwsykhLrQhs240/bfceev4w68lI8JshoOJIk9uW7tFzROw==}
+  argue-cli@3.2.1:
+    resolution: {integrity: sha512-h8QG03KSAympQnbZe0k5h/mnQCCkoKO9rVQ0L+F99+NNTV4vm18Lq70WwIKE0aLN3mM1EUf42l960bl6Dd0jOw==}
     engines: {node: '>=22'}
 
   array-buffer-byte-length@1.0.2:
@@ -4286,8 +4283,8 @@ packages:
     resolution: {integrity: sha512-GZ8E3RQzXQb3JFy0pKl8oeSf7ENIhvAMvJr+PlWkavZOesLHHdhkfNJ4SvW35eo1Fu2+EyVxWQ1tVvtzAG2iWg==}
     engines: {node: '>=22'}
 
-  conventional-changelog-writer@9.2.1:
-    resolution: {integrity: sha512-StlYSmW3wLedRaqohJMpP3YuWiAqtgD0/cpsai9frdDkXv7rxj0hRbpJrubPYvJxJsjplONsOobEQnPuS9UgCg==}
+  conventional-changelog-writer@9.3.0:
+    resolution: {integrity: sha512-lxiECDlvy880e7JIYAtAhxg0wD/CGCVbZCdeua5aOlQVFTEd39zAeOzwK22i/FO4xnEOURK1gbUTETNEYW7zxQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -4300,8 +4297,8 @@ packages:
     resolution: {integrity: sha512-cs+LadpH7Kpw0M3k8wurk+sOVVDAENA0iK4OBOrkL94j5lEVYRJ4j3zd2bhY9qgzyrPqthdcYT3axzRN7AliMg==}
     engines: {node: '>=22'}
 
-  conventional-commits-parser@7.1.2:
-    resolution: {integrity: sha512-O+x4N2yH+ijvqWlIyTHsXTAP+algNWgGbjY2duCe8w2vUMvUB95cLRslCPfTMQyLAKlet3bhZTdu6ozn4M+QJQ==}
+  conventional-commits-parser@7.1.4:
+    resolution: {integrity: sha512-TW3PZHi6hwF4cyu7KKc4kNqD1cgg8AkkK5ge9+zsEfpjaSXOeeIQyNWBr7kx5hR2wFuKVmr0be37RzcpmACQIA==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -5431,8 +5428,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.13.18:
-    resolution: {integrity: sha512-H9q/E1XizaWstJxUW881dmLxEj+t/TrGGnyxINkm4+sK0qUwsMtFdo2BWI9Vs3cIS19MU6b6iCijoUoEf4f3DA==}
+  hono@4.13.19:
+    resolution: {integrity: sha512-KmXvQAXwcAHV+muzbIwoJ23niEB5nMoDVr9WcRkU8mvjUECm/1+7v4Jgp7P7a+H6MLFrh+vXrGonGrGS+RQfkA==}
     engines: {node: '>=16.9.0'}
 
   hookified@1.15.1:
@@ -6455,8 +6452,8 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
 
-  miniflare@5.20261113.0-beta:
-    resolution: {integrity: sha512-Kg+SarKNSn0lkhR88OHI29rIXJvmKs/c9hmxFXvEqK1J9aHu+AFl6CdaBq/k3iOTyMbm2p4h1HGLs7vXaLYMWA==}
+  miniflare@5.20261116.0-beta:
+    resolution: {integrity: sha512-vQozfXz0eh4VlXJPsn/sxV3siRHmhl5kghZplFsTAt7+8gSPmjbZkYQEA4VudmcN9HTbI8pOqPynckIaIenwPg==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       kerberos: ^2.0.0
@@ -7681,8 +7678,8 @@ packages:
     resolution: {integrity: sha512-0Ju4+6A8iOnpL/Thra7dZsSlOHYAHIeMxfhWQRI1/VLcT3WDBZKKtQt/QkBOsiIN9ZpuvHE6cGZ0x4glCMmfiA==}
     engines: {node: '>=12'}
 
-  semver@5.7.2:
-    resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
+  semver@5.7.3:
+    resolution: {integrity: sha512-kM18BPOqTi0+TB68703/GJRpAML5Me+IDQsR1J26YB3EFKKNEyHIVZuWDX7+WKQB3tHwDwgk24BfhdpWUbytvQ==}
     hasBin: true
 
   semver@6.3.2:
@@ -7899,8 +7896,8 @@ packages:
     resolution: {integrity: sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==}
     engines: {node: '>=18'}
 
-  string-width@8.2.2:
-    resolution: {integrity: sha512-GaPUh5gfdrYzqeVNZvUfT23vYYxXzKYidUcnMtJg/3rxRV63EFZy3k6xfKlmfeJD0176lnUV/Usr3XcwSvFzpg==}
+  string-width@8.3.0:
+    resolution: {integrity: sha512-ZbmZM0JCihQN91dWnxoipT2KOEyHqEyfRXUyjuRhW8b/xnqPDoq4gWEVApTVa9db2wN8mmoikgFBbjh71+cGeQ==}
     engines: {node: '>=20'}
 
   string.prototype.trim@1.2.11:
@@ -8122,8 +8119,8 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
-  tslib@2.8.1:
-    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+  tslib@2.9.1:
+    resolution: {integrity: sha512-a4Ux9VKuIMHsOS7ENbEq6hK2ZGYIT27Rtl0E4eD9KqwxhKiQeMZE/9xb3IdYwWaSOyIBQLExhQgXDTYoiCxnWA==}
 
   tsyringe@4.10.0:
     resolution: {integrity: sha512-axr3IdNuVIxnaK5XGEUFTu3YmAQ6lllgrvqfEoR16g/HGnYY/6We4oWENtAnzK6/LpJ2ur9PAb80RBt7/U4ugw==}
@@ -8329,6 +8326,10 @@ packages:
     resolution: {integrity: sha512-mMVzj0TXExtVdlDEq+Mzp0eyOuyznNpFobNM3uAqe3HVm/Ps2c+u17BligMkZjZCA6EiXpoon8iRTer3iu40SQ==}
     engines: {node: '>=18.12.0'}
 
+  verkit@0.5.0:
+    resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
+    engines: {node: '>=18.12.0'}
+
   vfile-location@5.0.3:
     resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
 
@@ -8464,17 +8465,17 @@ packages:
   wordwrap@1.0.0:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
 
-  workerd@1.20261113.1:
-    resolution: {integrity: sha512-FJP8Bm1jiiJTE2xpSIhT9JkMaKzU54y9Jk0q7n3BLWyWdUNsn35QGCqARcqXGwO3FGkvahhYqUEG2bJzlgcfhw==}
+  workerd@1.20261116.1:
+    resolution: {integrity: sha512-w3uPBuALjYs4n/p6x5SodorOe5y1bsBZ3RYeH1g0W5l73vT+yPGI7/WtxfzXbxZqpeCZ0/RfEwgD8Pc43uzu+w==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.162.0:
-    resolution: {integrity: sha512-jUnlzHKlWdW4MFXPgeYbe0+c4oTy/AAZfL/IUz921+dZBY5nJ48xjpvwff5djUR1MXoJRevzntAP/U97TUhPEw==}
+  wrangler@4.163.0:
+    resolution: {integrity: sha512-EBM/QOpQsce6LenEDv1nXsK+AX9BYfAhE5yHosriPhFZPj47Z0usk6oGYWgPpLPa5qYDzhm9EDzaDD/WI5lzOA==}
     engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^5.20261113.1
+      '@cloudflare/workers-types': ^5.20261116.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -8497,8 +8498,8 @@ packages:
   write-file-atomic@3.0.3:
     resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}
 
-  ws@7.5.13:
-    resolution: {integrity: sha512-rsKI6xDBFVf4r/x8XyChGK04QR/XHroxs/jUcoWvtEZM8TPU/X/uIY9B1CsSzYws9ZJb/6bbBu7dPhFW00CAoA==}
+  ws@7.5.14:
+    resolution: {integrity: sha512-u9Oi2nQ8SZnTUAf6spLLKF5TyqoG3Nbbrd4ai6Sjo4P24bycDewhQqtNMIg4bFpnpH/TD4qk4IuAVhT0HIIqug==}
     engines: {node: '>=8.3.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -8521,8 +8522,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@8.21.3:
-    resolution: {integrity: sha512-201TZ/kPWxoPr/OKWjquZR1SWKXcvxdH+e1xrx89b3YbmzLMFCLfnaG1HFIgWzJOEWZ7MvpK++odZufgYR50Rw==}
+  ws@8.23.0:
+    resolution: {integrity: sha512-wCkmX8QMOrKjgO8HW2WyDbTSGeqkocxgDzS9iR79rEAexty6/2qzilx3Ag8Tqf9ykop3irLKle0MtVn5qjVnoQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -9572,37 +9573,37 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261113.1)':
+  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261116.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
-      workerd: 1.20261113.1
+      workerd: 1.20261116.1
 
-  '@cloudflare/workerd-darwin-64@1.20261113.1':
+  '@cloudflare/workerd-darwin-64@1.20261116.1':
     optional: true
 
-  '@cloudflare/workerd-darwin-arm64@1.20261113.1':
+  '@cloudflare/workerd-darwin-arm64@1.20261116.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20261113.1':
+  '@cloudflare/workerd-linux-64@1.20261116.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20261113.1':
+  '@cloudflare/workerd-linux-arm64@1.20261116.1':
     optional: true
 
-  '@cloudflare/workerd-windows-64@1.20261113.1':
+  '@cloudflare/workerd-windows-64@1.20261116.1':
     optional: true
 
   '@colors/colors@1.5.0':
     optional: true
 
-  '@commitlint/cli@21.2.4(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)':
+  '@commitlint/cli@21.2.4(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-conventional': 21.2.4
       '@commitlint/format': 21.2.3
       '@commitlint/lint': 21.2.4
       '@commitlint/load': 21.2.4(typescript@6.0.3)
-      '@commitlint/read': 21.2.3(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
+      '@commitlint/read': 21.2.3(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       '@commitlint/types': 21.2.3
       tinyexec: 1.3.1
       yargs: 18.2.0
@@ -9665,13 +9666,13 @@ snapshots:
     dependencies:
       '@commitlint/types': 21.2.3
       conventional-changelog-angular: 9.4.0
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
 
-  '@commitlint/read@21.2.3(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)':
+  '@commitlint/read@21.2.3(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)':
     dependencies:
       '@commitlint/top-level': 21.2.0
       '@commitlint/types': 21.2.3
-      '@conventional-changelog/git-client': 3.1.2(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
+      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       tinyexec: 1.3.1
     transitivePeerDependencies:
       - conventional-commits-filter
@@ -9700,19 +9701,19 @@ snapshots:
 
   '@commitlint/types@21.2.3':
     dependencies:
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
       picocolors: 1.1.1
 
-  '@conventional-changelog/git-client@3.1.2(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)':
+  '@conventional-changelog/git-client@3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)':
     dependencies:
       '@simple-libs/child-process-utils': 2.0.0
       '@simple-libs/stream-utils': 2.0.0
-      semver: 7.8.6
+      verkit: 0.5.0
     optionalDependencies:
       conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
 
-  '@conventional-changelog/template@1.4.0': {}
+  '@conventional-changelog/template@1.4.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -10066,7 +10067,7 @@ snapshots:
       '@docusaurus/utils': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       babel-plugin-dynamic-import-node: 2.3.3
       fs-extra: 11.4.0
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@napi-rs/image'
@@ -10111,7 +10112,7 @@ snapshots:
       postcss-loader: 7.3.4(postcss@8.5.28)(typescript@6.0.3)(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
       postcss-preset-env: 10.6.1(postcss@8.5.28)
       terser-webpack-plugin: 5.6.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
-      tslib: 2.8.1
+      tslib: 2.9.1
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)))(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
       webpackbar: 7.0.0(@rspack/core@1.7.12)(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
@@ -10179,7 +10180,7 @@ snapshots:
       semver: 7.8.6
       serve-handler: 6.1.7
       tinypool: 1.1.1
-      tslib: 2.8.1
+      tslib: 2.9.1
       update-notifier: 6.0.2
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
       webpack-bundle-analyzer: 4.10.2
@@ -10218,7 +10219,7 @@ snapshots:
       cssnano-preset-advanced: 6.1.2(postcss@8.5.28)
       postcss: 8.5.28
       postcss-sort-media-queries: 5.2.0(postcss@8.5.28)
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)':
     dependencies:
@@ -10230,7 +10231,7 @@ snapshots:
       lightningcss: 1.33.0
       semver: 7.8.6
       swc-loader: 0.2.7(@swc/core@1.16.2)(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
-      tslib: 2.8.1
+      tslib: 2.9.1
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -10252,7 +10253,7 @@ snapshots:
   '@docusaurus/logger@3.10.2':
     dependencies:
       chalk: 4.1.2
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@docusaurus/mdx-loader@3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)':
     dependencies:
@@ -10276,7 +10277,7 @@ snapshots:
       remark-frontmatter: 5.0.0(supports-color@8.1.1)
       remark-gfm: 4.0.1(supports-color@8.1.1)
       stringify-object: 3.3.0
-      tslib: 2.8.1
+      tslib: 2.9.1
       unified: 11.0.5
       unist-util-visit: 5.1.0
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)))(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
@@ -10353,7 +10354,7 @@ snapshots:
       react-dom: 19.3.1(react@19.3.1)
       schema-dts: 1.1.5
       srcset: 4.0.0
-      tslib: 2.8.1
+      tslib: 2.9.1
       unist-util-visit: 5.1.0
       utility-types: 3.11.0
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
@@ -10404,7 +10405,7 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       schema-dts: 1.1.5
-      tslib: 2.8.1
+      tslib: 2.9.1
       utility-types: 3.11.0
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
     transitivePeerDependencies:
@@ -10445,7 +10446,7 @@ snapshots:
       fs-extra: 11.4.0
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
     transitivePeerDependencies:
       - '@docusaurus/faster'
@@ -10481,7 +10482,7 @@ snapshots:
       '@docusaurus/types': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       '@docusaurus/utils': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       '@docusaurus/utils-validation': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10521,7 +10522,7 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       react-json-view-lite: 2.5.0(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10557,7 +10558,7 @@ snapshots:
       '@docusaurus/utils-validation': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10593,7 +10594,7 @@ snapshots:
       '@docusaurus/utils-validation': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10629,7 +10630,7 @@ snapshots:
       '@docusaurus/utils-validation': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10670,7 +10671,7 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       sitemap: 7.1.3
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -10709,7 +10710,7 @@ snapshots:
       '@svgr/webpack': 8.1.0(supports-color@8.1.1)(typescript@6.0.3)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
     transitivePeerDependencies:
       - '@docusaurus/faster'
@@ -10822,7 +10823,7 @@ snapshots:
       react-dom: 19.3.1(react@19.3.1)
       react-router-dom: 5.3.4(react@19.3.1)
       rtlcss: 4.3.0
-      tslib: 2.8.1
+      tslib: 2.9.1
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@docusaurus/faster'
@@ -10866,7 +10867,7 @@ snapshots:
       prism-react-renderer: 2.4.1(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -10907,7 +10908,7 @@ snapshots:
       lodash: 4.18.1
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tslib: 2.8.1
+      tslib: 2.9.1
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -10943,7 +10944,7 @@ snapshots:
   '@docusaurus/theme-translations@3.10.2':
     dependencies:
       fs-extra: 11.4.0
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@docusaurus/tsconfig@3.10.2': {}
 
@@ -10984,7 +10985,7 @@ snapshots:
   '@docusaurus/utils-common@3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)':
     dependencies:
       '@docusaurus/types': 3.10.2(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sharp@0.35.5(@types/node@26.6.6))(supports-color@8.1.1)(svgo@3.3.5)
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@napi-rs/image'
@@ -11016,7 +11017,7 @@ snapshots:
       joi: 17.13.8
       js-yaml: 4.3.2
       lodash: 4.18.1
-      tslib: 2.8.1
+      tslib: 2.9.1
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@napi-rs/image'
@@ -11058,7 +11059,7 @@ snapshots:
       p-queue: 6.6.2
       prompts: 2.4.2
       resolve-pathname: 3.0.0
-      tslib: 2.8.1
+      tslib: 2.9.1
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)))(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
       utility-types: 3.11.0
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
@@ -11095,49 +11096,49 @@ snapshots:
   '@emnapi/core@1.10.0':
     dependencies:
       '@emnapi/wasi-threads': 1.2.1
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/core@1.11.2':
     dependencies:
       '@emnapi/wasi-threads': 1.2.2
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/core@1.11.3':
     dependencies:
       '@emnapi/wasi-threads': 1.2.3
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/runtime@1.10.0':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/runtime@1.11.2':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/runtime@1.11.3':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/wasi-threads@1.2.1':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/wasi-threads@1.2.2':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@emnapi/wasi-threads@1.2.3':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@esbuild/aix-ppc64@0.28.2':
@@ -11308,7 +11309,7 @@ snapshots:
 
   '@goatjs/core@2.55.0': {}
 
-  '@goatjs/dbz@2.101.0(@types/node@26.6.6)':
+  '@goatjs/dbz@2.102.0(@types/node@26.6.6)':
     dependencies:
       '@goatjs/core': 2.55.0
       '@goatjs/node': 2.40.0
@@ -11390,14 +11391,14 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hono/node-server@2.1.8(hono@4.13.18)':
+  '@hono/node-server@2.1.8(hono@4.13.19)':
     dependencies:
-      hono: 4.13.18
+      hono: 4.13.19
 
-  '@hono/standard-validator@0.4.1(@standard-schema/spec@1.1.0)(hono@4.13.18)':
+  '@hono/standard-validator@0.4.1(@standard-schema/spec@1.1.0)(hono@4.13.19)':
     dependencies:
       '@standard-schema/spec': 1.1.0
-      hono: 4.13.18
+      hono: 4.13.19
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -11665,7 +11666,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@jridgewell/resolve-uri@3.1.2': {}
+  '@jridgewell/resolve-uri@3.1.3': {}
 
   '@jridgewell/source-map@0.3.11':
     dependencies:
@@ -11676,141 +11677,141 @@ snapshots:
 
   '@jridgewell/trace-mapping@0.3.31':
     dependencies:
-      '@jridgewell/resolve-uri': 3.1.2
+      '@jridgewell/resolve-uri': 3.1.3
       '@jridgewell/sourcemap-codec': 1.6.0
 
   '@jridgewell/trace-mapping@0.3.9':
     dependencies:
-      '@jridgewell/resolve-uri': 3.1.2
+      '@jridgewell/resolve-uri': 3.1.3
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@jsonjoy.com/base64@1.1.2(tslib@2.8.1)':
+  '@jsonjoy.com/base64@1.1.2(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/base64@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/base64@17.67.0(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/buffers@1.2.1(tslib@2.8.1)':
+  '@jsonjoy.com/buffers@1.2.1(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/buffers@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/buffers@17.67.0(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/codegen@1.0.0(tslib@2.8.1)':
+  '@jsonjoy.com/codegen@1.0.0(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/codegen@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/codegen@17.67.0(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-core@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-core@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      thingies: 2.6.1(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      thingies: 2.6.1(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-fsa@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-fsa@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      thingies: 2.6.1(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      thingies: 2.6.1(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-node-builtins@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-node-builtins@4.78.1(tslib@2.9.1)':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-node-to-fsa@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-node-to-fsa@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-fsa': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-fsa': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-node-utils@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-node-utils@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      glob-to-regex.js: 1.3.1(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      glob-to-regex.js: 1.3.1(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-node@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-node@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-print': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-snapshot': 4.78.1(tslib@2.8.1)
-      glob-to-regex.js: 1.3.1(tslib@2.8.1)
-      thingies: 2.6.1(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-print': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-snapshot': 4.78.1(tslib@2.9.1)
+      glob-to-regex.js: 1.3.1(tslib@2.9.1)
+      thingies: 2.6.1(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-print@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-print@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      tree-dump: 1.1.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      tree-dump: 1.1.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/fs-snapshot@4.78.1(tslib@2.8.1)':
+  '@jsonjoy.com/fs-snapshot@4.78.1(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/buffers': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/json-pack': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/util': 17.67.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/buffers': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/json-pack': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/util': 17.67.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/json-pack@1.21.0(tslib@2.8.1)':
+  '@jsonjoy.com/json-pack@1.21.0(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/base64': 1.1.2(tslib@2.8.1)
-      '@jsonjoy.com/buffers': 1.2.1(tslib@2.8.1)
-      '@jsonjoy.com/codegen': 1.0.0(tslib@2.8.1)
-      '@jsonjoy.com/json-pointer': 1.0.2(tslib@2.8.1)
-      '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)
+      '@jsonjoy.com/base64': 1.1.2(tslib@2.9.1)
+      '@jsonjoy.com/buffers': 1.2.1(tslib@2.9.1)
+      '@jsonjoy.com/codegen': 1.0.0(tslib@2.9.1)
+      '@jsonjoy.com/json-pointer': 1.0.2(tslib@2.9.1)
+      '@jsonjoy.com/util': 1.9.0(tslib@2.9.1)
       hyperdyperid: 1.2.0
-      thingies: 2.6.1(tslib@2.8.1)
-      tree-dump: 1.1.0(tslib@2.8.1)
-      tslib: 2.8.1
+      thingies: 2.6.1(tslib@2.9.1)
+      tree-dump: 1.1.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/json-pack@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/json-pack@17.67.0(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/base64': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/buffers': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/codegen': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/json-pointer': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/util': 17.67.0(tslib@2.8.1)
+      '@jsonjoy.com/base64': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/buffers': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/codegen': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/json-pointer': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/util': 17.67.0(tslib@2.9.1)
       hyperdyperid: 1.2.0
-      thingies: 2.6.1(tslib@2.8.1)
-      tree-dump: 1.1.0(tslib@2.8.1)
-      tslib: 2.8.1
+      thingies: 2.6.1(tslib@2.9.1)
+      tree-dump: 1.1.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/json-pointer@1.0.2(tslib@2.8.1)':
+  '@jsonjoy.com/json-pointer@1.0.2(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/codegen': 1.0.0(tslib@2.8.1)
-      '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/codegen': 1.0.0(tslib@2.9.1)
+      '@jsonjoy.com/util': 1.9.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/json-pointer@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/json-pointer@17.67.0(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/util': 17.67.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/util': 17.67.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/util@1.9.0(tslib@2.8.1)':
+  '@jsonjoy.com/util@1.9.0(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/buffers': 1.2.1(tslib@2.8.1)
-      '@jsonjoy.com/codegen': 1.0.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/buffers': 1.2.1(tslib@2.9.1)
+      '@jsonjoy.com/codegen': 1.0.0(tslib@2.9.1)
+      tslib: 2.9.1
 
-  '@jsonjoy.com/util@17.67.0(tslib@2.8.1)':
+  '@jsonjoy.com/util@17.67.0(tslib@2.9.1)':
     dependencies:
-      '@jsonjoy.com/buffers': 17.67.0(tslib@2.8.1)
-      '@jsonjoy.com/codegen': 17.67.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/buffers': 17.67.0(tslib@2.9.1)
+      '@jsonjoy.com/codegen': 17.67.0(tslib@2.9.1)
+      tslib: 2.9.1
 
   '@keyv/bigmap@1.3.1(keyv@5.6.0)':
     dependencies:
@@ -12072,21 +12073,21 @@ snapshots:
       '@peculiar/asn1-x509': 2.9.4
       '@peculiar/asn1-x509-attr': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-csr@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/asn1-x509': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-ecc@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/asn1-x509': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-pfx@2.9.4':
     dependencies:
@@ -12095,14 +12096,14 @@ snapshots:
       '@peculiar/asn1-rsa': 2.9.4
       '@peculiar/asn1-schema': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-pkcs8@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/asn1-x509': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-pkcs9@2.9.4':
     dependencies:
@@ -12113,38 +12114,38 @@ snapshots:
       '@peculiar/asn1-x509': 2.9.4
       '@peculiar/asn1-x509-attr': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-rsa@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/asn1-x509': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-schema@2.9.4':
     dependencies:
       '@peculiar/utils': 2.0.3
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-x509-attr@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/asn1-x509': 2.9.4
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/asn1-x509@2.9.4':
     dependencies:
       '@peculiar/asn1-schema': 2.9.4
       '@peculiar/utils': 2.0.3
       asn1js: 3.0.10
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/utils@2.0.3':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   '@peculiar/x509@1.14.3':
     dependencies:
@@ -12157,7 +12158,7 @@ snapshots:
       '@peculiar/asn1-x509': 2.9.4
       pvtsutils: 1.3.6
       reflect-metadata: 0.2.2
-      tslib: 2.8.1
+      tslib: 2.9.1
       tsyringe: 4.10.0
 
   '@pnpm/config.env-replace@1.1.0': {}
@@ -12524,7 +12525,7 @@ snapshots:
 
   '@tybys/wasm-util@0.10.4':
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     optional: true
 
   '@types/body-parser@1.19.6':
@@ -13011,7 +13012,7 @@ snapshots:
 
   ansi-regex@5.0.1: {}
 
-  ansi-regex@6.3.0: {}
+  ansi-regex@6.6.0: {}
 
   ansi-styles@4.3.0:
     dependencies:
@@ -13032,7 +13033,7 @@ snapshots:
 
   argparse@3.0.4: {}
 
-  argue-cli@3.2.0: {}
+  argue-cli@3.2.1: {}
 
   array-buffer-byte-length@1.0.2:
     dependencies:
@@ -13067,7 +13068,7 @@ snapshots:
     dependencies:
       pvtsutils: 1.3.6
       pvutils: 1.2.0
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   astring@1.9.0: {}
 
@@ -13304,7 +13305,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   camelcase@5.3.1: {}
 
@@ -13501,40 +13502,40 @@ snapshots:
 
   conventional-changelog-angular@9.4.0:
     dependencies:
-      '@conventional-changelog/template': 1.4.0
+      '@conventional-changelog/template': 1.4.1
 
   conventional-changelog-conventionalcommits@10.4.1:
     dependencies:
-      '@conventional-changelog/template': 1.4.0
+      '@conventional-changelog/template': 1.4.1
 
   conventional-changelog-preset-loader@6.0.1: {}
 
-  conventional-changelog-writer@9.2.1:
+  conventional-changelog-writer@9.3.0:
     dependencies:
-      '@conventional-changelog/template': 1.4.0
+      '@conventional-changelog/template': 1.4.1
       '@simple-libs/stream-utils': 2.0.0
-      argue-cli: 3.2.0
+      argue-cli: 3.2.1
       conventional-commits-filter: 6.0.1
-      semver: 7.8.6
+      verkit: 0.5.0
 
   conventional-changelog@8.1.3:
     dependencies:
-      '@conventional-changelog/git-client': 3.1.2(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
+      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       '@simple-libs/hosted-git-info': 2.0.0
       '@simple-libs/normalize-package-data': 1.0.0
-      argue-cli: 3.2.0
+      argue-cli: 3.2.1
       conventional-changelog-preset-loader: 6.0.1
-      conventional-changelog-writer: 9.2.1
+      conventional-changelog-writer: 9.3.0
       conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
       fd-package-json: 2.0.0
 
   conventional-commits-filter@6.0.1: {}
 
-  conventional-commits-parser@7.1.2:
+  conventional-commits-parser@7.1.4:
     dependencies:
       '@simple-libs/stream-utils': 2.0.0
-      argue-cli: 3.2.0
+      argue-cli: 3.2.1
 
   convert-source-map@2.0.0: {}
 
@@ -13898,7 +13899,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   dot-prop@6.0.1:
     dependencies:
@@ -14745,9 +14746,9 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  glob-to-regex.js@1.3.1(tslib@2.8.1):
+  glob-to-regex.js@1.3.1(tslib@2.9.1):
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   glob@7.2.3:
     dependencies:
@@ -14963,7 +14964,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.13.18: {}
+  hono@4.13.19: {}
 
   hookified@1.15.1: {}
 
@@ -15651,7 +15652,7 @@ snapshots:
 
   lower-case@2.0.2:
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   lowercase-keys@3.0.0: {}
 
@@ -15664,7 +15665,7 @@ snapshots:
   make-dir@2.1.0:
     dependencies:
       pify: 4.0.1
-      semver: 5.7.2
+      semver: 5.7.3
 
   markdown-extensions@2.0.0: {}
 
@@ -15870,20 +15871,20 @@ snapshots:
 
   memfs@4.78.1:
     dependencies:
-      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-fsa': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-to-fsa': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-print': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/fs-snapshot': 4.78.1(tslib@2.8.1)
-      '@jsonjoy.com/json-pack': 1.21.0(tslib@2.8.1)
-      '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)
-      glob-to-regex.js: 1.3.1(tslib@2.8.1)
-      thingies: 2.6.1(tslib@2.8.1)
-      tree-dump: 1.1.0(tslib@2.8.1)
-      tslib: 2.8.1
+      '@jsonjoy.com/fs-core': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-fsa': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-builtins': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-to-fsa': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-node-utils': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-print': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/fs-snapshot': 4.78.1(tslib@2.9.1)
+      '@jsonjoy.com/json-pack': 1.21.0(tslib@2.9.1)
+      '@jsonjoy.com/util': 1.9.0(tslib@2.9.1)
+      glob-to-regex.js: 1.3.1(tslib@2.9.1)
+      thingies: 2.6.1(tslib@2.9.1)
+      tree-dump: 1.1.0(tslib@2.9.1)
+      tslib: 2.9.1
 
   merge-descriptors@1.0.3: {}
 
@@ -16230,12 +16231,12 @@ snapshots:
       tapable: 2.3.3
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
 
-  miniflare@5.20261113.0-beta(@types/node@26.6.6):
+  miniflare@5.20261116.0-beta(@types/node@26.6.6):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.5(@types/node@26.6.6)
       undici: 7.30.1
-      workerd: 1.20261113.1
+      workerd: 1.20261116.1
       ws: 8.21.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
@@ -16308,7 +16309,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   node-emoji@2.2.0:
     dependencies:
@@ -16552,7 +16553,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   parent-module@1.0.1:
     dependencies:
@@ -16597,7 +16598,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   path-exists@3.0.0: {}
 
@@ -16654,7 +16655,7 @@ snapshots:
       bytestreamjs: 2.0.1
       pvtsutils: 1.3.6
       pvutils: 1.2.0
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   pluralize@8.0.0: {}
 
@@ -17157,7 +17158,7 @@ snapshots:
 
   pvtsutils@1.3.6:
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   pvutils@1.2.0: {}
 
@@ -17590,7 +17591,7 @@ snapshots:
     dependencies:
       semver: 7.8.6
 
-  semver@5.7.2: {}
+  semver@5.7.3: {}
 
   semver@6.3.2: {}
 
@@ -17784,7 +17785,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   sockjs@0.3.24:
     dependencies:
@@ -17888,7 +17889,7 @@ snapshots:
       get-east-asian-width: 1.7.0
       strip-ansi: 7.2.0
 
-  string-width@8.2.2:
+  string-width@8.3.0:
     dependencies:
       get-east-asian-width: 1.7.0
       strip-ansi: 7.2.0
@@ -17945,7 +17946,7 @@ snapshots:
 
   strip-ansi@7.2.0:
     dependencies:
-      ansi-regex: 6.3.0
+      ansi-regex: 6.6.0
 
   strip-bom-string@1.0.0: {}
 
@@ -18032,9 +18033,9 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  thingies@2.6.1(tslib@2.8.1):
+  thingies@2.6.1(tslib@2.9.1):
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   thunky@1.1.0: {}
 
@@ -18059,9 +18060,9 @@ snapshots:
 
   totalist@3.0.1: {}
 
-  tree-dump@1.1.0(tslib@2.8.1):
+  tree-dump@1.1.0(tslib@2.9.1):
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
 
   trim-lines@3.0.1: {}
 
@@ -18077,7 +18078,7 @@ snapshots:
 
   tslib@1.14.1: {}
 
-  tslib@2.8.1: {}
+  tslib@2.9.1: {}
 
   tsyringe@4.10.0:
     dependencies:
@@ -18328,6 +18329,8 @@ snapshots:
 
   verkit@0.4.1: {}
 
+  verkit@0.5.0: {}
+
   vfile-location@5.0.3:
     dependencies:
       '@types/unist': 3.0.3
@@ -18368,7 +18371,7 @@ snapshots:
       opener: 1.5.2
       picocolors: 1.1.1
       sirv: 2.0.4
-      ws: 7.5.13
+      ws: 7.5.14
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -18413,7 +18416,7 @@ snapshots:
       sockjs: 0.3.24
       spdy: 4.0.2(supports-color@8.1.1)
       webpack-dev-middleware: 7.4.6(webpack@5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5))
-      ws: 8.21.3
+      ws: 8.23.0
     optionalDependencies:
       webpack: 5.111.1(@swc/core@1.16.2)(@swc/html@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@26.6.6))(svgo@3.3.5)
     transitivePeerDependencies:
@@ -18554,25 +18557,25 @@ snapshots:
 
   wordwrap@1.0.0: {}
 
-  workerd@1.20261113.1:
+  workerd@1.20261116.1:
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20261113.1
-      '@cloudflare/workerd-darwin-arm64': 1.20261113.1
-      '@cloudflare/workerd-linux-64': 1.20261113.1
-      '@cloudflare/workerd-linux-arm64': 1.20261113.1
-      '@cloudflare/workerd-windows-64': 1.20261113.1
+      '@cloudflare/workerd-darwin-64': 1.20261116.1
+      '@cloudflare/workerd-darwin-arm64': 1.20261116.1
+      '@cloudflare/workerd-linux-64': 1.20261116.1
+      '@cloudflare/workerd-linux-arm64': 1.20261116.1
+      '@cloudflare/workerd-windows-64': 1.20261116.1
 
-  wrangler@4.162.0(@types/node@26.6.6):
+  wrangler@4.163.0(@types/node@26.6.6):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
-      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261113.1)
+      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261116.1)
       '@cspotcode/source-map-support': 0.8.1
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261113.0-beta(@types/node@26.6.6)
+      miniflare: 5.20261116.0-beta(@types/node@26.6.6)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20261113.1
+      workerd: 1.20261116.1
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:
@@ -18608,11 +18611,11 @@ snapshots:
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
 
-  ws@7.5.13: {}
+  ws@7.5.14: {}
 
   ws@8.21.0: {}
 
-  ws@8.21.3: {}
+  ws@8.23.0: {}
 
   wsl-utils@0.1.0:
     dependencies:
@@ -18658,7 +18661,7 @@ snapshots:
       cliui: 9.0.1
       escalade: 3.2.0
       get-caller-file: 2.0.5
-      string-width: 8.2.2
+      string-width: 8.3.0
       y18n: 5.0.8
       yargs-parser: 22.0.0
 

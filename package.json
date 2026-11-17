@@ -41,7 +41,7 @@
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@eslint/config-helpers": "^0.7.0",
-    "@goatjs/dbz": "^2.101.0",
+    "@goatjs/dbz": "^2.102.0",
     "@goatjs/doctor": "^2.77.0",
     "@goatjs/node-monorepo-eslint": "^3.52.0",
     "lefthook": "^2.2.2",
