@@ -1,12 +1,10 @@
 import type { LogLevel } from '../compiled/node/logger.ts';
-import { parseError } from '../compiled/core/error.ts';
 import { startWhatcode } from '../server.ts';
 import { getLocalIp } from '../ip.ts';
 import { createIdentity } from '../stores/identity.ts';
 import { resolvePassword } from '../stores/password.ts';
 import { getGlobalConfig } from '../stores/global-config.ts';
 import { clearDaemonUrl, saveDaemonUrl } from '../stores/daemon-url.ts';
-import { createTailscale } from '../plugins/tailscale/tailscale.ts';
 import { createTunnel } from '../plugins/tunnel/tunnel.ts';
 import { asyncExitHook } from 'exit-hook';
 import { DEFAULT_PORT, isProd, SERVER_URL } from '../config/constants.ts';
@@ -16,6 +14,7 @@ import { authenticate } from '../auth/auth.ts';
 import { startNotifications } from '../apn/apn.ts';
 import { startScheduler } from '../scheduler/scheduler.ts';
 import { startEventSubscription } from '../opencode/event-subscription.ts';
+import { createTailscale } from '../compiled/tailscale/tailscale.ts';
 import pkgJson from '../../package.json' with { type: 'json' };
 
 export interface WhatcodeServerConfig {
@@ -62,10 +61,9 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   // }
 
   await startWhatcode({ port, endpoint, password: passwordData.data, client });
-  const tailscale = hasTailscale ? createTailscale(port) : undefined;
+  const tailscale = hasTailscale ? createTailscale({ logLevel }) : undefined;
   const tunnel = hasTunnel ? createTunnel(port) : undefined;
-  const [tailscaleServer, tunnelServer] = await Promise.all([tailscale?.start(), tunnel?.start()]);
-
+  const [tailscaleServer, tunnelServer] = await Promise.all([tailscale?.serveSession({ port }), tunnel?.start()]);
   const url = tailscaleServer?.url ?? tunnelServer?.url ?? daemonUrl;
   const [iResult, urlResult] = await Promise.all([
     createIdentity({ daemon: daemonUrl, tailscale: tailscaleServer?.url, tunnel: tunnelServer?.url }),
@@ -78,11 +76,7 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   // clean up
   asyncExitHook(
     async () => {
-      try {
-        await Promise.all([tailscale?.stop(), tunnel?.stop(), clearDaemonUrl()]);
-      } catch (err) {
-        logger.error('exit-hook', parseError(err).message);
-      }
+      await Promise.all([tunnel?.stop(), clearDaemonUrl()]);
     },
     { wait: 3000 },
   );

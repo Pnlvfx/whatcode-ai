@@ -37,6 +37,11 @@ await copyFilesFromFolder([
     files: ['logger.ts'],
   },
   {
+    inputFolder: path.join(goatjs, 'tailscale', 'src'),
+    outputFolder: path.join(output, 'tailscale'),
+    files: '*',
+  },
+  {
     inputFolder: path.join(whatcode, 'src', 'lib'),
     outputFolder: path.join(output, 'whatcode', 'lib'),
     files: ['project.ts'],
@@ -48,12 +53,22 @@ await copyFilesFromFolder([
   },
 ]);
 
-// the sdk has no @goatjs/core dependency, so the vendored copies must import it through the relative compiled/core files
-const coreImportPrefix = "'@goatjs/core/";
+// the sdk has no @goatjs/core or @goatjs/node dependency, so the vendored copies must import them through the relative compiled files
+const vendoredPackages = ['core', 'node'];
 
 const toPosixRelative = (fromFile: string, toFile: string) => {
   const posixFromFile = fromFile.split(path.sep).join(path.posix.sep);
   return path.posix.relative(path.posix.dirname(posixFromFile), toFile);
+};
+
+const rewritePackageImports = (file: string, content: string, packageName: string) => {
+  const [head = '', ...chunks] = content.split(`'@goatjs/${packageName}/`);
+  const rewrittenChunks = chunks.map((chunk) => {
+    const end = chunk.indexOf("'");
+    const relative = toPosixRelative(file, `${packageName}/${chunk.slice(0, end)}.ts`);
+    return `'${relative.startsWith('.') ? relative : `./${relative}`}${chunk.slice(end)}`;
+  });
+  return [head, ...rewrittenChunks].join('');
 };
 
 const compiledFiles = await readdir(output, { recursive: true });
@@ -64,13 +79,11 @@ await Promise.all(
     .map(async (file) => {
       const filePath = path.join(output, file);
       const content = await readFile(filePath, 'utf8');
-      const [head = '', ...chunks] = content.split(coreImportPrefix);
-      if (chunks.length === 0) return;
-      const rewrittenChunks = chunks.map((chunk) => {
-        const end = chunk.indexOf("'");
-        const relative = toPosixRelative(file, `core/${chunk.slice(0, end)}.ts`);
-        return `'${relative.startsWith('.') ? relative : `./${relative}`}${chunk.slice(end)}`;
-      });
-      await writeFile(filePath, [head, ...rewrittenChunks].join(''));
+      let rewritten = content;
+      for (const packageName of vendoredPackages) {
+        rewritten = rewritePackageImports(file, rewritten, packageName);
+      }
+      if (rewritten === content) return;
+      await writeFile(filePath, rewritten);
     }),
 );
