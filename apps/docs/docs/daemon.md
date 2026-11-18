@@ -155,6 +155,16 @@ npx @whatcode-ai/whatcode start --tailscale
 
 This runs `tailscale serve --bg <port>` in the background, which proxies your local port over HTTPS using your Tailscale hostname (e.g. `https://my-mac.tail1234.ts.net`). The QR code printed by `whatcode pair` includes this URL so the app connects over Tailscale automatically. When you stop the daemon (Ctrl+C), it cleans up the Tailscale serve rule automatically.
 
+### Custom HTTPS port
+
+By default the daemon is served on port `443`. If `443` is already used by another `tailscale serve` rule on the same machine, pass another HTTPS port:
+
+```bash
+npx @whatcode-ai/whatcode start --tailscale --https-port 8443
+```
+
+The port is part of the URL (e.g. `https://my-pc.tail1234.ts.net:8443`) and is included in the QR code printed by `whatcode pair`. The same setting is available as `tailscaleHttpsPort` in the [global config](#global-config) and in `createWhatcodeServer`. It has no effect unless Tailscale is enabled.
+
 ### Requirements
 
 - [Tailscale](https://tailscale.com) installed and authenticated (`tailscale up`)
@@ -195,6 +205,7 @@ Instead of repeating the same flags on every start, you can save your defaults i
 | Key         | Type                          | Description                                                          |
 | ----------- | ----------------------------- | -------------------------------------------------------------------- |
 | `tailscale` | `boolean`                     | Same as `--tailscale`.                                               |
+| `tailscaleHttpsPort` | `number`             | Same as `--https-port`. Must be an integer between `1` and `65535`.  |
 | `tunnel`    | `boolean`                     | Same as `--tunnel`.                                                  |
 | `port`      | `number`                      | Same as `--port`. Must be an integer between `1` and `65535`.        |
 | `logLevel`  | `'none' \| 'info' \| 'debug'` | Same as `--log-level`.                                               |
@@ -207,11 +218,11 @@ Each setting is resolved in this order:
 
 1. The flag (CLI) or option (library) you pass explicitly.
 2. The value in `config.json`.
-3. The built-in default (`8192` for the port, `info` for the CLI log level, `none` for the SDK log level).
+3. The built-in default (`8192` for the port, `443` for the Tailscale HTTPS port, `info` for the CLI log level, `none` for the SDK log level).
 
 ### Validation
 
-The file is validated strictly: unknown keys and invalid values are rejected. If the file cannot be loaded, the daemon does not start and prints `Unable to load the global config (<path>): <reason>`.
+The file is validated strictly: unknown keys and invalid values are rejected. If the file cannot be loaded, the daemon does not start and prints `Unable to load the global config (<path>): <reason>`. Ports passed as flags or options (`port`, `tailscaleHttpsPort`) follow the same rule: an integer between `1` and `65535`, otherwise the daemon does not start.
 
 ### Overriding the config
 
@@ -249,11 +260,12 @@ await resetWhatcodeServer();
 | ----------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
 | `port`      | `number`                      | `8192`      | Port the WhatCode server listens on. Change this if `8192` conflicts with another process on your machine.          |
 | `tailscale` | `boolean`                     | `undefined` | When `true`, exposes the daemon over HTTPS via Tailscale serve. Requires Tailscale installed and authenticated.     |
+| `tailscaleHttpsPort` | `number`            | `443`       | HTTPS port exposed on your tailnet when `tailscale` is enabled. Use another port if `443` is already served. Must be an integer between `1` and `65535`. |
 | `tunnel`    | `boolean`                     | `undefined` | When `true`, exposes the daemon over a public HTTPS URL via OpenTunnel. Cannot be combined with `tailscale`.        |
 | `password`  | `string`                      | `undefined` | Password for HTTP Basic Auth on all daemon endpoints. If omitted, a random one is generated and stored encrypted. |
 | `logLevel`  | `'none' \| 'info' \| 'debug'` | `'none'`    | Controls log verbosity. `none` = silent, `info` = info/warn/error, `debug` = everything.                            |
 
-Omitted `port`, `tailscale`, `tunnel` and `logLevel` values fall back to the [global config](#global-config), then to the defaults above.
+Omitted `port`, `tailscale`, `tailscaleHttpsPort`, `tunnel` and `logLevel` values fall back to the [global config](#global-config), then to the defaults above.
 
 ### `resetWhatcodeServer()`
 
@@ -271,6 +283,7 @@ Run `npx @whatcode-ai/whatcode --version` to print the installed version without
 | ------------- | ----------------------------- | ------- | ---------------------------------------------------------------- |
 | `--port`      | `number`                      | `8192`  | Port for the WhatCode server.                                    |
 | `--tailscale` | `boolean`                     | -       | Expose via Tailscale HTTPS. Conflicts with `--tunnel`.           |
+| `--https-port` | `number`                    | `443`   | HTTPS port exposed on your tailnet when Tailscale is enabled.    |
 | `--tunnel`    | `boolean`                     | -       | Expose via an OpenTunnel public HTTPS URL. Conflicts with `--tailscale`. |
 | `--log-level` | `'none' \| 'info' \| 'debug'` | `info`  | Controls log verbosity.                                          |
 | `--version`   | `boolean`                     | -       | Print the installed version of `@whatcode-ai/whatcode` and exit. |

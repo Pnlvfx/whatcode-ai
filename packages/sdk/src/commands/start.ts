@@ -4,6 +4,8 @@ import { getLocalIp } from '../ip.ts';
 import { createIdentity } from '../stores/identity.ts';
 import { resolvePassword } from '../stores/password.ts';
 import { getGlobalConfig } from '../stores/global-config.ts';
+import { portSchema } from '../types/port.ts';
+import * as z from 'zod/v4/mini';
 import { clearDaemonUrl, saveDaemonUrl } from '../stores/daemon-url.ts';
 import { createTunnel } from '../plugins/tunnel/tunnel.ts';
 import { asyncExitHook } from 'exit-hook';
@@ -19,6 +21,7 @@ import pkgJson from '../../package.json' with { type: 'json' };
 
 export interface WhatcodeServerConfig {
   tailscale?: boolean | undefined;
+  tailscaleHttpsPort?: number | undefined;
   tunnel?: boolean | undefined;
   password?: string | undefined;
   port?: number | undefined;
@@ -28,7 +31,7 @@ export interface WhatcodeServerConfig {
 export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) => {
   const resolved = await resolveOptions(options);
   if (resolved.error) return { error: resolved.error };
-  const { tailscale: hasTailscale, tunnel: hasTunnel, password, port, logLevel } = resolved.data;
+  const { tailscale: hasTailscale, tailscaleHttpsPort, tunnel: hasTunnel, password, port, logLevel } = resolved.data;
   logger.init({ logLevel });
   if (hasTailscale && hasTunnel) return { error: { type: 'config' as const, message: EXCLUSIVE_MESSAGE } };
   logger.debug('whatcode', `starting WhatCode${isProd ? '' : 'Dev'} on version ${pkgJson.version}...`);
@@ -63,7 +66,10 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
   await startWhatcode({ port, endpoint, password: passwordData.data, client });
   const tailscale = hasTailscale ? createTailscale({ logLevel }) : undefined;
   const tunnel = hasTunnel ? createTunnel(port) : undefined;
-  const [tailscaleServer, tunnelServer] = await Promise.all([tailscale?.serveSession({ port }), tunnel?.start()]);
+  const [tailscaleServer, tunnelServer] = await Promise.all([
+    tailscale?.serveSession({ port, ...(tailscaleHttpsPort !== undefined && { httpsPort: tailscaleHttpsPort }) }),
+    tunnel?.start(),
+  ]);
   const url = tailscaleServer?.url ?? tunnelServer?.url ?? daemonUrl;
   const [iResult, urlResult] = await Promise.all([
     createIdentity({ daemon: daemonUrl, tailscale: tailscaleServer?.url, tunnel: tunnelServer?.url }),
@@ -89,17 +95,26 @@ export const createWhatcodeServer = async (options: WhatcodeServerConfig = {}) =
 const EXCLUSIVE_MESSAGE = 'Tailscale and tunnel are mutually exclusive, enable only one of them (check the flags and the global config).';
 
 // Precedence: explicit options, then the global config file, then the built-in defaults.
-const resolveOptions = async ({ tailscale, tunnel, password, port, logLevel }: WhatcodeServerConfig) => {
+const resolveOptions = async ({ tailscale, tailscaleHttpsPort, tunnel, password, port, logLevel }: WhatcodeServerConfig) => {
   const globalConfig = await getGlobalConfig();
   if (globalConfig.error) return { error: globalConfig.error };
+
+  const invalidPort = validatePort('port', port) ?? validatePort('tailscaleHttpsPort', tailscaleHttpsPort);
+  if (invalidPort) return { error: invalidPort };
 
   return {
     data: {
       password,
       tailscale: tailscale ?? globalConfig.data.tailscale,
+      tailscaleHttpsPort: tailscaleHttpsPort ?? globalConfig.data.tailscaleHttpsPort,
       tunnel: tunnel ?? globalConfig.data.tunnel,
       port: port ?? globalConfig.data.port ?? DEFAULT_PORT,
       logLevel: logLevel ?? globalConfig.data.logLevel ?? 'none',
     },
   };
+};
+
+const validatePort = (name: string, value: number | undefined) => {
+  const isValid = value === undefined || z.safeParse(portSchema, value).success;
+  return isValid ? undefined : { type: 'config' as const, message: `Invalid ${name} (${value.toString()}): it must be an integer between 1 and 65535.` };
 };

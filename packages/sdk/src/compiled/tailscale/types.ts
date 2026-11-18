@@ -6,7 +6,7 @@ Do not modify it manually
 export interface ServeOptions {
   /** Local port to proxy. */
   port: number;
-  /** HTTPS port exposed on the tailnet hostname. Tailscale only allows 443, 8443 and 10000. Default: 443. */
+  /** HTTPS port exposed on the tailnet hostname. Default: 443. */
   httpsPort?: number;
 }
 

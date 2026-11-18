@@ -1,6 +1,7 @@
 import { createStore2 } from '../compiled/store/store2.ts';
 import { parseError } from '../compiled/core/error.ts';
 import { WHATCODE_ROOT } from '../config/constants.ts';
+import { portSchema } from '../types/port.ts';
 import * as z from 'zod/v4/mini';
 import path from 'node:path';
 
@@ -18,8 +19,9 @@ const CONFIG_FILE = path.join(WHATCODE_ROOT, `${CONFIG_NAME}.json`);
 
 const globalConfigSchema = z.strictObject({
   tailscale: z.optional(z.boolean()),
+  tailscaleHttpsPort: z.optional(portSchema),
   tunnel: z.optional(z.boolean()),
-  port: z.optional(z.int().check(z.gte(1), z.lte(65_535))),
+  port: z.optional(portSchema),
   logLevel: z.optional(z.literal(['none', 'info', 'debug'])),
 });
 

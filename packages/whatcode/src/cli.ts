@@ -23,6 +23,10 @@ await yargs(hideBin(process.argv))
     (y) =>
       y
         .option('tailscale', { type: 'boolean', conflicts: 'tunnel', description: 'Expose WhatCode via Tailscale serve (HTTPS on your tailnet)' })
+        .option('https-port', {
+          type: 'number',
+          description: 'HTTPS port exposed on your tailnet when using --tailscale (default: 443)',
+        })
         .option('tunnel', { type: 'boolean', description: 'Expose WhatCode via an OpenTunnel public HTTPS address' })
         .option('port', { type: 'number', description: 'Port for the WhatCode server (default: 8192)' })
         .option('log-level', {
@@ -30,7 +34,7 @@ await yargs(hideBin(process.argv))
           choices: ['none', 'info', 'debug'] as const,
           description: 'Log level: none | info | debug (default: info)',
         }),
-    async ({ logLevel, tailscale, tunnel, port }) => {
+    async ({ logLevel, tailscale, httpsPort, tunnel, port }) => {
       const globalConfig = await getGlobalConfig();
       if (globalConfig.error) {
         logger.init({ logLevel: 'info' });
@@ -41,6 +45,7 @@ await yargs(hideBin(process.argv))
 
       const server = await createWhatcodeServer({
         tailscale,
+        tailscaleHttpsPort: httpsPort,
         tunnel,
         ...(port !== undefined && { port }),
         logLevel: logLevel ?? globalConfig.data.logLevel ?? 'info',
