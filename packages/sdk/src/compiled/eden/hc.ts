@@ -8,7 +8,11 @@ import type { Env, Schema } from 'hono/types';
 import { hc as $hc, type ApplyGlobalResponse, type ClientRequestOptions } from 'hono/client';
 import { type ClientErrorResponses, safeFetch } from './fetch.ts';
 
-export const hc = <T extends Hono<Env, Schema, string>, Prefix extends string = string>(
+export const hc = <
+  T extends Hono<E, Schema, string>,
+  Prefix extends string = string,
+  E extends Env = T extends Hono<infer InferredEnv extends Env, infer _Schema extends Schema, infer _BasePath extends string> ? InferredEnv : never,
+>(
   baseUrl: Prefix,
   options?: Omit<ClientRequestOptions, 'fetch'>,
 ): ReturnType<typeof $hc<ApplyGlobalResponse<T, ClientErrorResponses>, Prefix>> => {

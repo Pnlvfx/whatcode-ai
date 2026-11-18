@@ -3,13 +3,23 @@
 import { copyFilesFromFolder } from '@goatjs/node/copy-files-from-folder';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
-import path from 'node:path';
 import { rimraf } from '@goatjs/rimraf';
+import path from 'node:path';
+import { dbz } from '@goatjs/dbz';
+import { createGitClient } from '@goatjs/node/git';
 
 const home = homedir();
-const goatjs = path.join(home, 'Desktop', 'packages', 'goatjs', 'packages');
-const coraline = path.join(home, 'Desktop', 'packages', 'coraline', 'packages');
-const whatcode = path.join(home, 'Desktop', 'apps', 'whatcode');
+
+const packages = {
+  goatjs: path.join(home, 'Desktop', 'packages', 'goatjs'),
+  coraline: path.join(home, 'Desktop', 'packages', 'coraline'),
+  whatcode: path.join(home, 'Desktop', 'apps', 'whatcode'),
+};
+
+for (const value of Object.values(packages)) {
+  const git = createGitClient({ cwd: value });
+  await dbz.checkGitStatus(git, { local: false });
+}
 
 const output = path.join('src', 'compiled');
 
@@ -17,37 +27,37 @@ await rimraf(output);
 
 await copyFilesFromFolder([
   {
-    inputFolder: path.join(goatjs, 'core', 'src'),
+    inputFolder: path.join(packages.goatjs, 'packages', 'core', 'src'),
     outputFolder: path.join(output, 'core'),
     files: ['capitalize.ts', 'error.ts', 'number.ts', 'try-catch.ts'],
   },
   {
-    inputFolder: path.join(goatjs, 'core', 'src', 'errors'),
+    inputFolder: path.join(packages.goatjs, 'packages', 'core', 'src', 'errors'),
     outputFolder: path.join(output, 'core', 'errors'),
     files: ['code.ts'],
   },
   {
-    inputFolder: path.join(goatjs, 'store', 'src'),
+    inputFolder: path.join(packages.goatjs, 'packages', 'store', 'src'),
     outputFolder: path.join(output, 'store'),
     files: ['store2.ts'],
   },
   {
-    inputFolder: path.join(goatjs, 'node', 'src'),
+    inputFolder: path.join(packages.goatjs, 'packages', 'node', 'src'),
     outputFolder: path.join(output, 'node'),
     files: ['logger.ts'],
   },
   {
-    inputFolder: path.join(goatjs, 'tailscale', 'src'),
+    inputFolder: path.join(packages.goatjs, 'packages', 'tailscale', 'src'),
     outputFolder: path.join(output, 'tailscale'),
     files: '*',
   },
   {
-    inputFolder: path.join(whatcode, 'src', 'lib'),
+    inputFolder: path.join(packages.whatcode, 'src', 'lib'),
     outputFolder: path.join(output, 'whatcode', 'lib'),
     files: ['project.ts'],
   },
   {
-    inputFolder: path.join(coraline, 'eden', 'src'),
+    inputFolder: path.join(packages.coraline, 'packages', 'eden', 'src'),
     outputFolder: path.join(output, 'eden'),
     files: ['fetch.ts', 'hc.ts'],
   },
