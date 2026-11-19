@@ -1,3 +1,9 @@
+## [2.8.3](compare/%40whatcode-ai%2Fwhatcode%402.8.2...%40whatcode-ai%2Fwhatcode%402.8.3) "@whatcode-ai/whatcode" (2026-11-19)
+
+### Features
+
+* add configurable tailscale https port 47c5eec
+
 ## [2.8.2](compare/%40whatcode-ai%2Fwhatcode%402.8.1...%40whatcode-ai%2Fwhatcode%402.8.2) "@whatcode-ai/whatcode" (2026-11-15)
 
 ### Bug Fixes
