@@ -12,7 +12,7 @@ export interface ClientErrorResponses {
 }
 
 export const safeFetch = async (input: string | Request | URL, init?: RequestInit) => {
-  const { data: response, error } = await safeTryCatch<Response, Error>(fetch(input, init));
+  const { data: response, error } = await safeTryCatch(fetch(input, init));
   if (error) {
     return init?.signal?.aborted
       ? createErrorResponse(408, 'Request Timeout', error.message || 'Request Timeout')
@@ -23,7 +23,7 @@ export const safeFetch = async (input: string | Request | URL, init?: RequestIni
 };
 
 const ensureErrorMessage = async (response: Response) => {
-  const { data: text } = await safeTryCatch<string, Error>(response.clone().text());
+  const { data: text } = await safeTryCatch(response.clone().text());
   const json = parseJson(text);
   if (typeof json === 'object' && json !== null && 'message' in json && typeof json.message === 'string' && json.message.length > 0) return response;
 
