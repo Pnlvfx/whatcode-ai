@@ -15,18 +15,18 @@ export const createGitRouter = (client: WhatCodeClient) => {
       const escaping = findEscapingPath(repo.data, body.filePaths);
       if (escaping !== undefined) return c.json({ message: `Path is outside the project: ${escaping}` }, 400);
       const result = await commitFiles(repo.data, body.message, body.filePaths);
-      return result.error ? c.json({ message: result.error.message }, 400) : c.json(result.data, 200);
+      return result.error ? c.json({ message: result.error.message }, result.error.status) : c.json(result.data, 200);
     })
     .post('/push', sValidator('json', directoryBody, invalidRequest), async (c) => {
       const repo = await prepareRepo(client, c.req.valid('json').directory);
       if (repo.error) return c.json({ message: repo.error.message }, repo.error.status);
       const result = await pushBranch(repo.data);
-      return result.error ? c.json({ message: result.error.message }, 400) : c.json({ status: 'success' }, 200);
+      return result.error ? c.json({ message: result.error.message }, result.error.status) : c.json({ status: 'success' }, 200);
     })
     .post('/pull', sValidator('json', directoryBody, invalidRequest), async (c) => {
       const repo = await prepareRepo(client, c.req.valid('json').directory);
       if (repo.error) return c.json({ message: repo.error.message }, repo.error.status);
       const result = await pullBranch(repo.data);
-      return result.error ? c.json({ message: result.error.message }, 400) : c.json(result.data, 200);
+      return result.error ? c.json({ message: result.error.message }, result.error.status) : c.json(result.data, 200);
     });
 };

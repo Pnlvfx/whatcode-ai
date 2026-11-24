@@ -1,4 +1,4 @@
-import { Service, type Endpoint } from '@opencode/client/service';
+import { Service } from '@opencode/client/service';
 import { execa } from 'execa';
 import { createWhatCodeClient } from './client.ts';
 import { parseError } from '../cli/utilities.ts';
@@ -23,7 +23,7 @@ export const createOpencode = async () => {
 const opencodeError = (message: string): Failure<OpencodeError> => ({ error: { type: 'opencode', message } });
 
 const ensureService = async () => {
-  const endpoint = await safeTryCatch<Endpoint, Error>(Service.ensure());
+  const endpoint = await safeTryCatch(Service.ensure());
   if (!endpoint.error) return endpoint;
   const { message } = parseError(endpoint.error);
   if (platform !== 'win32') return opencodeError(message);
@@ -36,7 +36,7 @@ const ensureService = async () => {
 const ensureInstalledService = async () => {
   const binary = await findInstalledBinary();
   if (binary.error) return binary;
-  const endpoint = await safeTryCatch<Endpoint, Error>(Service.ensure({ command: [binary.data, 'serve', '--service'] }));
+  const endpoint = await safeTryCatch(Service.ensure({ command: [binary.data, 'serve', '--service'] }));
   return endpoint.error ? opencodeError(parseError(endpoint.error).message) : endpoint;
 };
 
