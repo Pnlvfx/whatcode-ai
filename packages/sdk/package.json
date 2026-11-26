@@ -46,21 +46,21 @@
   "dependencies": {
     "@hono/node-server": "^2.1.11",
     "@hono/standard-validator": "^0.4.1",
-    "@opencode/client": "^2.4.1",
-    "@opentunnel/client": "^0.6.2",
+    "@opencode/client": "^2.4.2",
+    "@opentunnel/client": "^0.7.0",
     "execa": "^10.2.1",
     "exit-hook": "^5.1.0",
-    "hono": "^4.13.21",
+    "hono": "^4.13.22",
     "node-machine-id": "^1.1.12",
     "undici": "^8.13.1"
   },
   "devDependencies": {
     "@eslint/config-helpers": "^0.7.0",
     "@goatjs/dbz": "^2.104.0",
-    "@goatjs/node-monorepo-eslint": "^3.54.0",
+    "@goatjs/node-monorepo-eslint": "^3.55.0",
     "@goatjs/rimraf": "^2.15.0",
     "@goatjs/typescript-config": "^2.5.0",
-    "@types/node": "^26.6.6",
+    "@types/node": "^26.6.10",
     "eslint": "^10.15.0",
     "typescript": "^6.0.3",
     "zod": "^4.6.7"

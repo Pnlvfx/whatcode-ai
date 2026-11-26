@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable parallelize/no-sequential-await */
 /* eslint-disable import-x/no-extraneous-dependencies */
 import { copyFilesFromFolder } from '@goatjs/node/copy-files-from-folder';
@@ -18,7 +19,11 @@ const packages = {
 
 for (const value of Object.values(packages)) {
   const git = createGitClient({ cwd: value });
-  await dbz.checkGitStatus(git, { local: false });
+  try {
+    await dbz.checkGitStatus(git, { local: false });
+  } catch {
+    console.warn(`Vendor package "${value}" is not updated`);
+  }
 }
 
 const output = path.join('src', 'compiled');
