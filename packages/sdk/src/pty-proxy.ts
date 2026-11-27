@@ -2,7 +2,7 @@ import type { IncomingMessage, Server } from 'node:http';
 import type { Duplex } from 'node:stream';
 import net from 'node:net';
 import tls from 'node:tls';
-import { toNumber2 } from './compiled/core/number.ts';
+import { toNumber } from './compiled/core/number.ts';
 import { logger } from './logger.ts';
 
 interface UpgradeParams {
@@ -70,7 +70,7 @@ const openUpstream = ({ protocol, hostname, port }: Pick<URL, 'protocol' | 'host
 // URL drops default ports, so an empty port means 443 for https and 80 for http.
 const resolvePort = ({ protocol, port }: Pick<URL, 'protocol' | 'port'>) => {
   if (port !== '') {
-    const result = toNumber2(port);
+    const result = toNumber(port);
     if (result.data !== undefined) return result.data;
   }
 
