@@ -20,7 +20,7 @@ const packages = {
 for (const value of Object.values(packages)) {
   const git = createGitClient({ cwd: value });
   try {
-    await dbz.checkGitStatus(git, { local: false });
+    await dbz.checkGitStatus(git, { local: false, interactive: false });
   } catch {
     console.warn(`Vendor package "${value}" is not updated`);
   }

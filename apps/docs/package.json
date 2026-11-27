@@ -42,7 +42,7 @@
     "@docusaurus/types": "3.10.2",
     "@goatjs/dbz": "^2.104.0",
     "@goatjs/rimraf": "^2.15.0",
-    "@types/react": "^19.3.2",
+    "@types/react": "^19.3.3",
     "execa": "^10.2.1",
     "typescript": "^6.0.3",
     "wrangler": "^4.168.0"
